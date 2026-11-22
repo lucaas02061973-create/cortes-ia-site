@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Magia Cortes IA · Estúdio 9:16</title>
-<link rel="icon" type="image/png" href="./images/logos/logo-valley.png">
+<title>MAGIA IA v2.1 · Sua Principal Página de Cortes por IA</title>
+<link rel="icon" type="image/png" href="./images/logos/magia-ia-logo.png">
 <style>
 @font-face{
   font-family:"CortesPixel";
@@ -65,12 +65,12 @@
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#11131d;
-  --panel:#161926;
-  --in:#121521;
-  --line:#262b41;
+  --bg:#0d0f18;
+  --panel:#141826;
+  --in:#0f121d;
+  --line:#252b43;
   --tx:#ffffff;
-  --mut:#BCBCBB;
+  --mut:#b8bdd0;
   --acc:#ffc046;
   --cy:#4ac5f3;
   --y:#ffc046;
@@ -81,44 +81,51 @@
   --graffiti:"Skylight Graffiti",cursive;
 }
 :root[data-theme="light"]{
-  --bg:#151824;--panel:#1c2030;--in:#121521;--line:#2e344e;--tx:#ffffff;--mut:#d0d0d5;
+  --bg:#131724;--panel:#1a2032;--in:#101420;--line:#2f3756;--tx:#ffffff;--mut:#d0d5e8;
 }
-html{scroll-padding-top:100px;scroll-behavior:smooth}
+html{scroll-padding-top:105px;scroll-behavior:smooth}
 *{box-sizing:border-box}
-::-webkit-scrollbar{width:5px;height:5px;background:rgba(13,14,20,.3)}
-::-webkit-scrollbar-thumb{background:#52B6FF;border-radius:36px}
+::-webkit-scrollbar{width:5px;height:5px;background:rgba(13,15,24,.4)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ffc046,#4ac5f3);border-radius:36px}
 body{
   margin:0;
-  background:#11131d;
+  background:
+    radial-gradient(1100px 520px at 85% 18%,rgba(74,197,243,.08),transparent 70%),
+    radial-gradient(950px 480px at 12% 38%,rgba(255,192,70,.08),transparent 70%),
+    radial-gradient(1000px 550px at 50% 82%,rgba(74,37,209,.1),transparent 72%),
+    #0d0f18;
   color:var(--mut);
-  font:400 15px/1.45 "Europa Grotesk",system-ui,-apple-system,sans-serif;
+  font:400 15px/1.48 "Europa Grotesk",system-ui,-apple-system,sans-serif;
   overflow-x:hidden;
 }
-/* BARRA TOPO NPROGRESS OFICIAL CORTES·IA STUDIO */
+
+/* BARRA TOPO NEON V2.1 */
 .mc-top-stripe{
   position:fixed;
   top:0;left:0;right:0;
   height:5px;
-  background:#52B6FF;
-  box-shadow:0 0 10px #52B6FF,0 0 5px #52B6FF;
+  background:linear-gradient(90deg,#ffc046 0%,#4ac5f3 50%,#4a25d1 100%);
+  box-shadow:0 0 14px rgba(74,197,243,.85),0 0 6px rgba(255,192,70,.8);
   z-index:1031;
 }
-/* HEADER OFICIAL CORTES·IA STUDIO (90PX, BLUR 10PX, SEPARADORES #262B41, SUBLINHADO GRAFFITI #FFC046) */
+
+/* HEADER FLOATING GLASS DOCK V2.1 */
 header{
   width:100%;
-  min-height:90px;
-  background:rgba(13,14,20,.45);
-  backdrop-filter:blur(10px);
+  min-height:92px;
+  background:rgba(13,15,24,.62);
+  backdrop-filter:blur(16px);
   position:sticky;
   top:0;
   z-index:100;
-  border-bottom:1px solid rgba(38,43,65,.55);
+  border-bottom:1px solid rgba(255,192,70,.22);
+  box-shadow:0 12px 36px rgba(0,0,0,.55);
 }
 .mc-header-inner{
-  max-width:1410px;
-  min-height:90px;
+  max-width:1440px;
+  min-height:92px;
   margin:0 auto;
-  padding:10px 24px;
+  padding:10px 26px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -133,54 +140,78 @@ header{
 .logo{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:13px;
   color:#ffffff;
   font-family:"Europa Grotesk",sans-serif;
   font-weight:700;
-  font-size:15px;
-  letter-spacing:.12em;
+  font-size:16px;
+  letter-spacing:.14em;
   text-decoration:none;
   white-space:nowrap;
 }
 .logo img{
-  width:56px;
-  height:56px;
+  width:58px;
+  height:58px;
   object-fit:contain;
   display:block;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,.6));
+  border-radius:50%;
+  box-shadow:0 0 22px rgba(74,197,243,.42),0 0 10px rgba(255,192,70,.35);
+  transition:transform .28s cubic-bezier(.22,1,.36,1);
+}
+.logo:hover img{transform:scale(1.07) rotate(-4deg)}
+.logo-title-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.v21-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:2px 8px;
+  border-radius:4px;
+  background:linear-gradient(135deg,#ffc046,#ff9900);
+  color:#000000;
+  font:900 10px "Europa Grotesk",sans-serif;
+  letter-spacing:.14em;
+  box-shadow:0 0 14px rgba(255,192,70,.45);
 }
 .logo-sub{
   font-size:10px;
-  color:#ffc046;
-  letter-spacing:.22em;
+  color:#4ac5f3;
+  letter-spacing:.24em;
   display:block;
-  font-weight:500;
+  font-weight:700;
+  margin-top:2px;
 }
 nav{
   display:flex;
   align-items:center;
-  gap:0;
+  gap:2px;
   overflow-x:auto;
   max-width:100%;
   scrollbar-width:none;
+  padding:4px 8px;
+  border-radius:8px;
+  background:rgba(20,24,38,.72);
+  border:1px solid rgba(37,43,67,.9);
 }
 nav::-webkit-scrollbar{display:none}
 nav button{
   background:transparent;
   border:0;
-  border-right:1px solid #262b41;
-  color:#BCBCBB;
-  padding:8px 18px;
-  font:500 13.5px "Europa Grotesk",sans-serif;
-  letter-spacing:.1em;
+  border-right:1px solid rgba(37,43,67,.85);
+  color:#b8bdd0;
+  padding:9px 17px;
+  font:500 13px "Europa Grotesk",sans-serif;
+  letter-spacing:.12em;
   text-transform:uppercase;
   cursor:pointer;
   white-space:nowrap;
   position:relative;
-  transition:color .2s ease;
+  transition:color .22s ease,transform .22s ease;
 }
 nav button:last-child{border-right:0}
-nav button:hover{color:#ffffff}
+nav button:hover{color:#ffffff;transform:translateY(-1px)}
 nav button.on{
   color:#ffffff;
   font-weight:700;
@@ -189,11 +220,11 @@ nav button.on::after{
   content:"";
   position:absolute;
   left:50%;
-  bottom:-4px;
+  bottom:-3px;
   transform:translateX(-50%);
-  width:50px;
+  width:52px;
   height:11px;
-  background:url("data:image/svg+xml,%3Csvg width='53' height='12' viewBox='0 0 53 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M51.1636 1.5C35.091 1.72947 18.8878 3.21431 3.00018 5.65624C-0.556226 6.20286 3.55159 6.08532 5.42537 6.07786C15.9682 5.95027 26.5073 6.23537 37.0439 6.53564C39.261 6.59882 46.8492 6.80992 43.2259 7.36797C35.0398 8.62877 26.7438 9.24705 18.481 9.93948' stroke='%23FFC046' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  background:url("data:image/svg+xml,%3Csvg width='53' height='12' viewBox='0 0 53 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M51.1636 1.5C35.091 1.72947 18.8878 3.21431 3.00018 5.65624C-0.556226 6.20286 3.55159 6.08532 5.42537 6.07786C15.9682 5.95027 26.5073 6.23537 37.0439 6.53564C39.261 6.59882 46.8492 6.80992 43.2259 7.36797C35.0398 8.62877 26.7438 9.24705 18.481 9.93948' stroke='%23FFC046' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 .hdr-right{
   display:flex;
@@ -202,32 +233,32 @@ nav button.on::after{
   flex-wrap:wrap;
 }
 .mc-login-btn{
-  width:134px;
-  height:34px;
+  width:138px;
+  height:36px;
   background:url("./images/button-bg-01.svg") no-repeat center / contain;
   border:0;
   color:#ffc046;
-  font:700 13px "Europa Grotesk",sans-serif;
-  letter-spacing:.12em;
+  font:700 12.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.14em;
   text-transform:uppercase;
   cursor:pointer;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  transition:transform .2s ease,filter .2s ease;
+  transition:transform .22s ease,filter .22s ease;
 }
 .mc-login-btn:hover{
-  transform:scale(1.04);
-  filter:drop-shadow(0 0 10px rgba(255,192,70,.4));
+  transform:scale(1.05);
+  filter:drop-shadow(0 0 12px rgba(255,192,70,.5));
 }
 
-/* HERO OFICIAL CORTES·IA STUDIO (HERO-BG.PNG + H1 + SÍMBOLOS GRAFFITI + BOTÃO ENTRAR #FFC046) */
+/* HERO V2.1 FULL-BLEED COM GRAFITE MAGIA IA DESFOCADO ATRÁS DA PERSONAGEM */
 .mc-hero{
   width:100%;
-  max-width:1650px;
-  min-height:790px;
-  margin:-90px auto 0;
-  padding-top:90px;
+  max-width:1680px;
+  min-height:830px;
+  margin:-92px auto 0;
+  padding-top:92px;
   background:url("./images/hero-bg.png") no-repeat top center / cover;
   position:relative;
   overflow:hidden;
@@ -236,20 +267,20 @@ nav button.on::after{
   content:"";
   position:absolute;
   left:0;right:0;bottom:0;
-  height:170px;
-  background:linear-gradient(180deg,transparent,#11131d);
+  height:210px;
+  background:linear-gradient(180deg,transparent,#0d0f18);
   pointer-events:none;
 }
 @media(max-width:650px){
   .mc-hero{
-    min-height:660px;
+    min-height:710px;
     background-image:url("./images/hero-bg-mobile.png");
   }
 }
 .mc-hero-banner-inner{
   max-width:1410px;
   margin:0 auto;
-  padding:355px 20px 56px;
+  padding:335px 20px 44px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -257,7 +288,31 @@ nav button.on::after{
   z-index:2;
 }
 @media(max-width:650px){
-  .mc-hero-banner-inner{padding:265px 14px 40px}
+  .mc-hero-banner-inner{padding:248px 14px 32px}
+}
+.v21-hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:6px 16px;
+  border-radius:999px;
+  background:rgba(13,15,24,.78);
+  border:1px solid rgba(255,192,70,.55);
+  backdrop-filter:blur(8px);
+  color:#ffc046;
+  font:700 11.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.6);
+}
+.v21-hero-kicker b{
+  background:#4ac5f3;
+  color:#0d0f18;
+  padding:2px 7px;
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:.12em;
 }
 .mc-main-h1{
   margin:0 auto;
@@ -267,7 +322,7 @@ nav button.on::after{
   text-align:center;
   text-transform:uppercase;
   letter-spacing:.035em;
-  text-shadow:0 7px 18px rgba(0,0,0,.94);
+  text-shadow:0 8px 22px rgba(0,0,0,.95);
 }
 .mc-main-h1 .mc-h1-line{
   display:block;
@@ -345,42 +400,41 @@ nav button.on::after{
   .mc-h1-o::before{transform:translate(-50%,-52%) scale(.52)}
 }
 .mc-entrar-btn{
-  max-width:405px;
+  max-width:420px;
   width:100%;
-  height:45px;
-  margin:28px auto 16px;
-  background:#ffc046;
+  height:48px;
+  margin:26px auto 16px;
+  background:linear-gradient(90deg,#ffc046,#ffd26a,#ffc046);
   color:#000000;
   border:0;
-  border-radius:4px;
+  border-radius:5px;
   font:700 14px "Europa Grotesk",sans-serif;
-  letter-spacing:.8em;
-  text-indent:.8em;
+  letter-spacing:.75em;
+  text-indent:.75em;
   text-transform:uppercase;
   cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 10px 28px rgba(0,0,0,.55);
-  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+  box-shadow:0 12px 32px rgba(255,192,70,.35);
+  transition:transform .22s ease,box-shadow .22s ease;
 }
 .mc-entrar-btn:hover{
-  background:#ffd06b;
-  transform:translateY(-2px);
-  box-shadow:0 12px 32px rgba(255,192,70,.4);
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 16px 38px rgba(255,192,70,.55);
 }
 .mc-social-box{
-  max-width:405px;
+  max-width:420px;
   width:100%;
   border:1px solid #ffc046;
-  border-radius:5px;
+  border-radius:6px;
   padding:11px 18px;
   margin:0 auto;
   display:flex;
   justify-content:space-around;
   align-items:center;
-  background:rgba(17,19,29,.45);
-  backdrop-filter:blur(6px);
+  background:rgba(13,15,24,.65);
+  backdrop-filter:blur(8px);
 }
 .mc-social-box a,.mc-social-box button{
   background:transparent;
@@ -395,10 +449,10 @@ nav button.on::after{
 }
 .mc-social-box a:hover,.mc-social-box button:hover{
   color:#ffc046;
-  transform:scale(1.15);
+  transform:scale(1.16);
 }
 .mc-social-caption{
-  margin:24px 0 0;
+  margin:20px 0 0;
   color:#E3E3E6;
   font:400 11.5px "Europa Grotesk",sans-serif;
   letter-spacing:1.15em;
@@ -410,25 +464,112 @@ nav button.on::after{
   .mc-social-caption{letter-spacing:.45em;text-indent:.45em;font-size:10px}
 }
 
-/* SEÇÃO STARTER PACK / PERSONAGENS & LEGENDAS MAGIA CORTES */
+/* RIBBON DE TELEMETRIA V2.1 (4 PILARES CLICÁVEIS COM STEP-BORDER.SVG) */
+.v21-telemetry-strip{
+  max-width:1410px;
+  width:100%;
+  margin:28px auto 0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+@media(max-width:1024px){
+  .v21-telemetry-strip{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .v21-telemetry-strip{grid-template-columns:1fr}
+}
+.v21-tele-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:8px;
+  background:rgba(20,24,38,.88);
+  border:1px solid rgba(255,192,70,.3);
+  backdrop-filter:blur(10px);
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+  cursor:pointer;
+  transition:transform .26s cubic-bezier(.22,1,.36,1),border-color .26s ease,box-shadow .26s ease;
+}
+.v21-tele-card:hover{
+  transform:translateY(-4px);
+  border-color:#ffc046;
+  box-shadow:0 16px 34px rgba(255,192,70,.2);
+}
+.v21-tele-card b{
+  display:block;
+  color:#ffffff;
+  font:700 13.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.v21-tele-card > div > span{
+  display:block;
+  color:#b8bdd0;
+  font-size:11.5px;
+  margin-top:2px;
+}
+/* TICKER LIVE MARQUEE V2.1 */
+.v21-marquee{
+  width:100%;
+  overflow:hidden;
+  background:linear-gradient(90deg,#121625,#191528,#121625);
+  border-top:1px solid rgba(255,192,70,.35);
+  border-bottom:1px solid rgba(74,197,243,.35);
+  padding:10px 0;
+  position:relative;
+  z-index:4;
+}
+.v21-marquee-track{
+  display:flex;
+  align-items:center;
+  gap:36px;
+  width:max-content;
+  animation:v21Marquee 26s linear infinite;
+}
+.v21-marquee-track span{
+  font:700 12px "Europa Grotesk",sans-serif;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#e3e3e6;
+  white-space:nowrap;
+}
+.v21-marquee-track span b{color:#ffc046}
+.v21-marquee-track span em{color:#4ac5f3;font-style:normal}
+@keyframes v21Marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+@media(max-width:650px){
+  .mc-header-inner{padding:10px 14px;gap:10px}
+  nav button{padding:7px 11px;font-size:11.5px}
+  main{padding:16px 12px 54px}
+  .mc-starter-wrap{padding:24px 14px 20px}
+  .card{padding:18px 14px}
+  .v21-checkered-bar{margin:-18px -14px 14px}
+}
+
+/* SEÇÃO 1 V2.1 · MAGIA CORTES IA & ELENCO GTA 6 */
 .mc-starter-wrap{
   max-width:1410px;
-  margin:10px auto 0;
-  padding:32px 24px 26px;
-  border-radius:10px;
+  margin:18px auto 0;
+  padding:36px 26px 28px;
+  border-radius:12px;
   background:url("./images/starter-pack-bg.png") no-repeat center / cover;
-  border:1px solid #262b41;
+  border:1px solid #252b43;
+  box-shadow:0 20px 52px rgba(0,0,0,.55);
   position:relative;
   z-index:3;
 }
 .mc-section-head{
   text-align:center;
-  margin-bottom:24px;
+  margin-bottom:26px;
   position:relative;
 }
 .mc-section-title{
   margin:0;
-  font:700 64px/1.05 "Europa Grotesk",sans-serif;
+  font:700 66px/1.05 "Europa Grotesk",sans-serif;
   color:#e3e3e6;
   letter-spacing:.07em;
   text-transform:uppercase;
@@ -438,9 +579,7 @@ nav button.on::after{
 @media(max-width:780px){
   .mc-section-title{font-size:36px}
 }
-.mc-section-title .sym-up{
-  position:relative;
-}
+.mc-section-title .sym-up{position:relative}
 .mc-section-title .sym-up::before{
   content:"";
   position:absolute;
@@ -448,9 +587,7 @@ nav button.on::after{
   left:-32px;top:-22px;
   background:url("./images/symbols/big-arrow-up.svg") no-repeat center / contain;
 }
-.mc-section-title .sym-box{
-  position:relative;
-}
+.mc-section-title .sym-box{position:relative}
 .mc-section-title .sym-box::after{
   content:"";
   position:absolute;
@@ -475,14 +612,17 @@ nav button.on::after{
   letter-spacing:.04em;
   text-transform:none!important;
 }
-
 .mc-hero-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:12px;
   flex-wrap:wrap;
-  margin-bottom:16px;
+  margin-bottom:18px;
+  padding:12px 16px;
+  border-radius:8px;
+  background:rgba(13,15,24,.75);
+  border:1px solid #252b43;
 }
 .mc-tag-crown{
   display:inline-flex;
@@ -498,7 +638,7 @@ nav button.on::after{
 }
 .mc-stage-grid{
   display:grid;
-  grid-template-columns:320px 1fr;
+  grid-template-columns:340px 1fr;
   gap:18px;
   align-items:stretch;
 }
@@ -506,10 +646,10 @@ nav button.on::after{
   .mc-stage-grid{grid-template-columns:1fr}
 }
 .mc-spotlight{
-  border-radius:8px;
-  padding:18px;
-  border:1px solid #ffc046;
-  background:url("./images/starter-pack-bg/gold-bg.png") no-repeat center / cover,#161926;
+  border-radius:10px;
+  padding:20px;
+  border:1.5px solid #ffc046;
+  background:url("./images/starter-pack-bg/gold-bg.png") no-repeat center / cover,#141826;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -517,11 +657,11 @@ nav button.on::after{
   position:relative;
   overflow:hidden;
   text-align:center;
-  box-shadow:0 16px 40px rgba(0,0,0,.55);
+  box-shadow:0 18px 44px rgba(0,0,0,.62);
 }
 .mc-spotlight-art{
-  width:210px;
-  height:210px;
+  width:220px;
+  height:220px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -532,8 +672,8 @@ nav button.on::after{
   height:100%;
   object-fit:cover;
   border-radius:16px;
-  border:1.5px solid rgba(255,192,70,.55);
-  filter:drop-shadow(0 14px 28px rgba(0,0,0,.8));
+  border:1.5px solid rgba(255,192,70,.6);
+  filter:drop-shadow(0 14px 28px rgba(0,0,0,.85));
 }
 .mc-spotlight:hover .mc-spotlight-art{transform:scale(1.05) translateY(-4px)}
 .mc-char-roster{
@@ -546,9 +686,9 @@ nav button.on::after{
 }
 .mc-char-card{
   border-radius:10px;
-  padding:14px 12px;
-  border:1px solid #262b41;
-  background-color:#161926;
+  padding:15px 12px;
+  border:1px solid #252b43;
+  background-color:#141826;
   background-size:cover;
   background-position:center;
   cursor:pointer;
@@ -568,11 +708,11 @@ nav button.on::after{
 }
 .mc-char-card.on{
   border:2px solid #ffc046;
-  box-shadow:0 0 28px rgba(255,192,70,.32);
+  box-shadow:0 0 28px rgba(255,192,70,.35);
 }
 .mc-char-svg{
-  width:128px;
-  height:128px;
+  width:132px;
+  height:132px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -583,13 +723,13 @@ nav button.on::after{
   height:100%;
   object-fit:cover;
   border-radius:14px;
-  border:1px solid rgba(255,192,70,.38);
-  filter:drop-shadow(0 10px 20px rgba(0,0,0,.72));
+  border:1px solid rgba(255,192,70,.42);
+  filter:drop-shadow(0 10px 20px rgba(0,0,0,.75));
 }
 .mc-char-card:hover .mc-char-svg{transform:scale(1.07)}
 .mc-char-tier{
   font-family:"Skylight Graffiti",cursive;
-  font-size:26px;
+  font-size:27px;
   color:#ffc046;
   line-height:1;
   margin-top:4px;
@@ -597,14 +737,15 @@ nav button.on::after{
 .mc-sub-bar{
   margin-top:18px;
   padding:14px 18px;
-  border-radius:6px;
+  border-radius:8px;
   border:1px solid #ffc046;
-  background:rgba(17,19,29,.92);
+  background:rgba(13,15,24,.94);
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
   flex-wrap:wrap;
+  box-shadow:0 10px 28px rgba(0,0,0,.45);
 }
 .mc-karaoke-line{
   font:700 15.5px/1.35 "Europa Grotesk",system-ui,sans-serif;
@@ -629,44 +770,116 @@ nav button.on::after{
   box-shadow:0 4px 14px rgba(255,192,70,.5);
 }
 
-/* CONTAINER PRINCIPAL FULL-WIDTH ESTILO .DASH-CONTAINER CORTES·IA STUDIO (SEM SIDEBAR ESPREMENDO) */
+/* CONTAINER PRINCIPAL V2.1 */
 main{
   display:block;
   max-width:1410px;
   margin:0 auto;
-  padding:20px 24px 64px;
+  padding:24px 24px 68px;
 }
+
+/* DECK TÁTICO HORIZONTAL V2.1 (COM VIP-PRICING-BG.PNG) */
 .side{
   margin-bottom:28px;
-  padding:20px 24px;
-  background:#161926;
-  border:1px solid #262b41;
-  border-radius:8px;
+  padding:24px;
+  background:url("./images/vip-pricing-bg.png") no-repeat right center / cover,#141826;
+  border:1px solid #252b43;
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 18px 46px rgba(0,0,0,.5);
 }
 .mc-quick-grid{
   display:grid;
-  grid-template-columns:1.2fr 1.6fr 1fr;
+  grid-template-columns:1.25fr 1.55fr 1fr;
   gap:18px;
-  align-items:start;
+  align-items:stretch;
 }
 @media(max-width:980px){
   .mc-quick-grid{grid-template-columns:1fr}
 }
+.v21-quick-card{
+  background:rgba(13,15,24,.86);
+  border:1px solid rgba(255,192,70,.28);
+  border-radius:10px;
+  padding:16px 18px;
+  backdrop-filter:blur(10px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:10px;
+}
 .card{
-  background:#161926;
-  border:1px solid #262b41;
-  border-radius:8px;
-  padding:24px;
-  box-shadow:0 14px 36px rgba(0,0,0,.35);
+  background:#141826;
+  border:1px solid #252b43;
+  border-radius:12px;
+  padding:26px;
+  box-shadow:0 18px 44px rgba(0,0,0,.42);
+  position:relative;
+  overflow:hidden;
   transition:border-color .25s ease;
 }
-.card:hover{border-color:rgba(255,192,70,.45)}
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,#ffc046,#4ac5f3,#4a25d1);
+  opacity:.85;
+}
+.card:hover{border-color:rgba(255,192,70,.48)}
+
+/* LAYOUT BENTO 2 COLUNAS PARA A ABA CORTES V2.1 */
+.v21-setup-bento{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:22px;
+  align-items:start;
+  margin-top:14px;
+}
+@media(max-width:980px){
+  .v21-setup-bento{grid-template-columns:1fr}
+}
+.v21-bento-pane{
+  background:rgba(13,15,24,.82);
+  border:1px solid #252b43;
+  border-radius:10px;
+  padding:20px;
+}
+.v21-cockpit-grid{
+  display:grid;
+  grid-template-columns:1.45fr 1fr;
+  gap:18px;
+  align-items:stretch;
+  margin-top:14px;
+}
+@media(max-width:1040px){
+  .v21-cockpit-grid{grid-template-columns:1fr}
+}
+.v21-vault-chart-grid{
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  gap:18px;
+  align-items:stretch;
+  margin-top:16px;
+}
+@media(max-width:1040px){
+  .v21-vault-chart-grid{grid-template-columns:1fr}
+}
+.v21-checkered-bar{
+  height:10px;
+  margin:-26px -26px 18px;
+  background:
+    repeating-linear-gradient(90deg,#ffc046 0 14px,#0d0f18 14px 28px);
+  opacity:.9;
+}
+
 .hide{display:none!important}
 .btn{
-  background:#ffc046;
+  background:linear-gradient(135deg,#ffc046,#ffaa00);
   color:#000000;
   border:0;
-  border-radius:4px;
+  border-radius:5px;
   padding:12px 18px;
   font:700 13px "Europa Grotesk",sans-serif;
   letter-spacing:.12em;
@@ -677,17 +890,18 @@ main{
   justify-content:center;
   gap:8px;
   text-decoration:none;
-  transition:all .2s ease;
+  box-shadow:0 6px 18px rgba(255,192,70,.24);
+  transition:all .22s cubic-bezier(.22,1,.36,1);
 }
 .btn:hover{
-  background:#ffd06b;
-  transform:translateY(-1.5px);
-  box-shadow:0 8px 22px rgba(255,192,70,.35);
+  background:#ffd26a;
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(255,192,70,.42);
 }
 .btn.g{
-  background:#11131d;
+  background:#0d0f18;
   color:#ffffff;
-  border:1px solid #262b41;
+  border:1px solid #252b43;
   box-shadow:none;
 }
 .btn.g:hover{
@@ -696,44 +910,45 @@ main{
 }
 .btn.cy{
   background:#4ac5f3;
-  color:#11131d;
+  color:#0d0f18;
   border:1px solid #ddff82;
-  box-shadow:0 4px 16px rgba(74,197,243,.25);
+  box-shadow:0 6px 18px rgba(74,197,243,.28);
 }
 .btn.cy:hover{
-  background:#6ad0f7;
-  box-shadow:0 8px 22px rgba(74,197,243,.4);
+  background:#6ed2f8;
+  box-shadow:0 10px 24px rgba(74,197,243,.45);
 }
 .btn.sm{padding:8px 13px;font-size:12px;letter-spacing:.08em}
 .btn.w{width:100%}
 .side h4{
-  font:700 11.5px "Europa Grotesk",sans-serif;
+  font:700 12px "Europa Grotesk",sans-serif;
   letter-spacing:.16em;
   text-transform:uppercase;
   margin:0 0 10px;
   color:#ffc046;
 }
 .card h3{
-  font:700 22px/1.25 "Europa Grotesk",sans-serif;
+  font:700 24px/1.22 "Europa Grotesk",sans-serif;
   letter-spacing:.08em;
   text-transform:uppercase;
-  color:#e3e3e6;
-  margin:0 0 12px;
+  color:#ffffff;
+  margin:0 0 10px;
 }
 input[type=text],input[type=number],input[type=url],input[type=range],select,textarea{
   width:100%;
   padding:12px 14px;
-  border-radius:5px;
-  border:1px solid #262b41;
-  background:#11131d;
+  border-radius:6px;
+  border:1px solid #252b43;
+  background:#0d0f18;
   color:#d5dcff;
   font:400 14px "Europa Grotesk",sans-serif;
   margin-top:6px;
-  transition:border-color .2s;
+  transition:border-color .2s,box-shadow .2s;
 }
 input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,select:focus,textarea:focus{
   outline:none;
   border-color:#ffc046;
+  box-shadow:0 0 0 2px rgba(255,192,70,.16);
 }
 input[type=range]{padding:4px 0;accent-color:#ffc046}
 label{
@@ -742,9 +957,9 @@ label{
   letter-spacing:.12em;
   text-transform:uppercase;
   color:#8d96be;
-  margin-top:14px;
+  margin-top:12px;
 }
-.row{display:flex;gap:14px;flex-wrap:wrap}.row>*{flex:1;min-width:150px}
+.row{display:flex;gap:14px;flex-wrap:wrap}.row>*{flex:1;min-width:140px}
 .chk{
   display:flex;
   gap:10px;
@@ -763,19 +978,19 @@ label{
   align-items:center;
   gap:8px;
   padding:10px 12px;
-  border:1px solid #262b41;
-  background:#11131d;
+  border:1px solid #252b43;
+  background:#0d0f18;
   margin-bottom:6px;
   font-size:13px;
   cursor:pointer;
-  border-radius:5px;
+  border-radius:6px;
   transition:border-color .18s,background .18s;
 }
-.lv:hover{border-color:#ffc046;background:#1a1e2e}
+.lv:hover{border-color:#ffc046;background:#181c2c}
 .lv span{color:#ffc046;font-family:"Skylight Graffiti",cursive;font-size:16px}
-.mut{color:#BCBCBB;font-size:13.5px}
+.mut{color:#b8bdd0;font-size:13.5px}
 .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.dot{width:10px;height:10px;border-radius:50%;background:#ffc046;box-shadow:0 0 10px #ffc046;animation:bl 1.2s infinite}
+.dot{width:10px;height:10px;border-radius:50%;background:#ffc046;box-shadow:0 0 12px #ffc046;animation:bl 1.2s infinite}
 @keyframes bl{50%{opacity:.3}}
 .prev-bar{
   display:flex;
@@ -783,23 +998,22 @@ label{
   justify-content:space-between;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:14px;
   padding:10px 14px;
-  border-radius:6px 6px 0 0;
-  border:1px solid #262b41;
+  border-radius:8px 8px 0 0;
+  border:1px solid #252b43;
   border-bottom:0;
-  background:#11131d;
+  background:#0d0f18;
 }
 .prev{
   margin:0;
   aspect-ratio:16/9;
   min-height:260px;
-  max-height:520px;
+  max-height:480px;
   width:100%;
   position:relative;
   overflow:hidden;
-  background:#090b10;
-  border:1px solid #262b41;
+  background:#07080d;
+  border:1px solid #252b43;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -811,23 +1025,23 @@ label{
   font:700 11px "Europa Grotesk",sans-serif;
   letter-spacing:.12em;
   padding:4px 10px;
-  border-radius:3px;
+  border-radius:4px;
 }
 .prev-txt{font:500 12px "Europa Grotesk",sans-serif;letter-spacing:.08em;color:#ffc046;text-transform:uppercase}
-.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:14px}
+.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px}
 .clip{cursor:pointer;transition:transform .24s ease}
 .clip:hover{transform:translateY(-4px)}
 .vid{
   aspect-ratio:9/16;
-  border-radius:8px;
+  border-radius:10px;
   position:relative;
   overflow:hidden;
-  background:#11131d;
+  background:#0d0f18;
   border:1px solid #ffc046;
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 10px 28px rgba(0,0,0,.5);
+  box-shadow:0 12px 30px rgba(0,0,0,.55);
 }
 .cap{
   background:#ffc046;
@@ -841,24 +1055,24 @@ label{
 .clip b{display:block;margin-top:8px;color:#fff}
 details{margin-top:14px;color:var(--mut)}
 summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-#log{margin-top:8px;max-height:140px;overflow:auto;font:12px ui-monospace,Menlo,monospace;background:#11131d;padding:10px;border-radius:6px;border:1px solid #262b41}
-.film{height:44px;border-radius:6px;border:1px solid #ffc046;background:repeating-linear-gradient(-45deg,#ffc046 0 24px,#11131d 24px 48px,#4ac5f3 48px 60px,#11131d 60px 80px);animation:sl 6s linear infinite;background-size:112px 100%}
+#log{margin-top:8px;max-height:140px;overflow:auto;font:12px ui-monospace,Menlo,monospace;background:#0d0f18;padding:10px;border-radius:6px;border:1px solid #252b43}
+.film{height:44px;border-radius:6px;border:1px solid #ffc046;background:repeating-linear-gradient(-45deg,#ffc046 0 24px,#0d0f18 24px 48px,#4ac5f3 48px 60px,#0d0f18 60px 80px);animation:sl 6s linear infinite;background-size:112px 100%}
 @keyframes sl{to{background-position:-112px 0}}
 .stage{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:22px 0}
 .mas{text-align:center;max-width:150px}
-.mas img,.mas svg{width:84px;height:84px;object-fit:contain;animation:bo 1.8s ease-in-out infinite;filter:drop-shadow(0 8px 18px rgba(0,0,0,.6))}
+.mas img,.mas svg{width:92px;height:92px;object-fit:cover;border-radius:14px;border:1px solid #ffc046;animation:bo 1.8s ease-in-out infinite;filter:drop-shadow(0 8px 18px rgba(0,0,0,.6))}
 @keyframes bo{50%{transform:translateY(-6px)}}
 .bub{background:#ffc046;color:#000;font:700 11px "Europa Grotesk",sans-serif;letter-spacing:.06em;padding:8px 10px;border-radius:5px;margin-top:6px;min-height:32px}
-.tag{font:400 18px "Skylight Graffiti",cursive;color:#ffc046;display:inline-block;margin-top:6px}
-.thumb{width:160px;height:104px;border:1px solid #ffc046;border-radius:6px;background:url("./images/patchnote_1.png") no-repeat center / cover,#11131d;position:relative;display:flex;align-items:center;justify-content:center;font-size:32px}
-.thumb s{position:absolute;bottom:4px;left:6px;font:700 10px "Europa Grotesk",sans-serif;text-decoration:none;color:#ffc046;background:rgba(17,19,29,.85);padding:2px 6px;border-radius:3px}
+.tag{font:400 20px "Skylight Graffiti",cursive;color:#ffc046;display:inline-block;margin-top:6px}
+.thumb{width:160px;height:104px;border:1px solid #ffc046;border-radius:8px;background:url("./images/patchnote_1.png") no-repeat center / cover,#0d0f18;position:relative;display:flex;align-items:center;justify-content:center;font-size:32px}
+.thumb s{position:absolute;bottom:4px;left:6px;font:700 10px "Europa Grotesk",sans-serif;text-decoration:none;color:#ffc046;background:rgba(13,15,24,.88);padding:2px 6px;border-radius:3px}
 .lk{width:30px;border-top:2px dashed #ffc046}
-.phone{width:196px;aspect-ratio:9/16;border:2px solid #ffc046;border-radius:18px;background:#0d0e14;padding:6px;display:flex;flex-direction:column;gap:6px;overflow:hidden;box-shadow:0 0 32px rgba(255,192,70,.22);position:relative}
-.phone-video-box{flex:1;position:relative;border-radius:12px;overflow:hidden;background:#161926;display:flex;align-items:center;justify-content:center}
+.phone{width:200px;aspect-ratio:9/16;border:2px solid #ffc046;border-radius:20px;background:#090b10;padding:6px;display:flex;flex-direction:column;gap:6px;overflow:hidden;box-shadow:0 0 34px rgba(255,192,70,.26);position:relative}
+.phone-video-box{flex:1;position:relative;border-radius:12px;overflow:hidden;background:#141826;display:flex;align-items:center;justify-content:center}
 .phone-video-box video{width:100%;height:100%;object-fit:cover;display:block}
 .wave{position:relative;display:flex;align-items:center;gap:2px;height:66px;margin-top:8px}
 .wave i{flex:1;background:linear-gradient(180deg,#ffc046,#4ac5f3);border-radius:2px;min-width:2px;transition:height .18s}
-.pbar-wrap{height:8px;border-radius:4px;background:#11131d;border:1px solid #262b41;margin-top:6px;overflow:hidden}
+.pbar-wrap{height:8px;border-radius:4px;background:#0d0f18;border:1px solid #252b43;margin-top:6px;overflow:hidden}
 .pbar{height:100%;border-radius:4px;background:linear-gradient(90deg,#ffc046,#4ac5f3);width:0%;transition:width .15s}
 .mk{position:absolute;top:0;font:700 10px "Europa Grotesk",sans-serif;background:#ffc046;color:#000;padding:2px 6px;border-radius:3px;z-index:2}
 .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:14px}
@@ -866,14 +1080,14 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 .swarm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
 .item-card{
   padding:16px;
-  border:1px solid #262b41;
-  border-radius:6px;
-  background:#11131d;
+  border:1px solid #252b43;
+  border-radius:8px;
+  background:#0d0f18;
   transition:transform .22s ease,border-color .22s ease;
 }
 .item-card:hover{transform:translateY(-3px);border-color:#ffc046}
 .item-card.active{border-color:#ffc046;box-shadow:0 0 0 1px #ffc046}
-.agent-card{padding:10px 12px;border:1px solid #262b41;border-radius:6px;background:#11131d;font-size:12px}
+.agent-card{padding:10px 12px;border:1px solid #252b43;border-radius:8px;background:#0d0f18;font-size:12px}
 .agent-card.running{border-color:#ffc046}
 .agent-card.done{border-color:#4ac5f3}
 .pill{
@@ -891,13 +1105,13 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 .pill.pu{background:rgba(74,37,209,.35);color:#d5dcff;border:1px solid rgba(139,92,246,.4)}
 .pill.cy{background:rgba(74,197,243,.2);color:#4ac5f3}
 .pill.br{background:rgba(0,230,118,.18);color:#4ade80}
-.pill.intl{background:rgba(188,188,187,.15);color:#BCBCBB}
+.pill.intl{background:rgba(188,188,187,.15);color:#b8bdd0}
 .plat-btn{
   padding:7px 13px;
-  border-radius:4px;
-  border:1px solid #262b41;
-  background:#11131d;
-  color:#BCBCBB;
+  border-radius:5px;
+  border:1px solid #252b43;
+  background:#0d0f18;
+  color:#b8bdd0;
   font:700 12px "Europa Grotesk",sans-serif;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -910,48 +1124,47 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   color:#000000;
   border-color:#ffc046;
 }
-.sent-wrap{margin:14px 0;padding:16px;border-radius:6px;border:1px solid #262b41;background:#11131d}
+.sent-wrap{margin:0;padding:18px;border-radius:10px;border:1px solid #252b43;background:#0d0f18}
 .sent-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .sent-leg{display:flex;gap:14px;font-size:12px;flex-wrap:wrap}
 .sent-leg span{display:inline-flex;align-items:center;gap:6px}
 .sent-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
 #sentimentChart{width:100%;height:175px;display:block;cursor:pointer}
-.ts-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.ts-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 0}
 @media(max-width:600px){.ts-row{grid-template-columns:1fr}}
-.ts-box{padding:10px 14px;border-radius:6px;border:1px solid #262b41;background:#11131d;font-size:12px}
+.ts-box{padding:10px 14px;border-radius:8px;border:1px solid #252b43;background:#0d0f18;font-size:12px}
 .clip-card-lib{position:relative;display:flex;flex-direction:column;gap:6px}
-.clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(17,19,29,.9);padding:4px 8px;border-radius:4px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid #ffc046}
+.clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(13,15,24,.92);padding:4px 8px;border-radius:4px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid #ffc046}
 .clip-chk-label input{width:16px;height:16px;accent-color:#ffc046;margin:0}
-.studio-quick{margin-top:14px;padding:16px;border-radius:6px;border:1px solid #262b41;background:#11131d}
-.irony-box{margin:10px 0;padding:12px 14px;border-radius:6px;border:1px solid #4a25d1;background:linear-gradient(90deg,rgba(74,37,209,.25),rgba(255,192,70,.08))}
-.irony-bar-wrap{height:10px;border-radius:999px;background:#0d0e14;border:1px solid #4a25d1;margin-top:6px;overflow:hidden}
+.studio-quick{margin-top:14px;padding:16px;border-radius:8px;border:1px solid #252b43;background:#0d0f18}
+.irony-box{margin:10px 0;padding:12px 14px;border-radius:8px;border:1px solid #4a25d1;background:linear-gradient(90deg,rgba(74,37,209,.25),rgba(255,192,70,.08))}
+.irony-bar-wrap{height:10px;border-radius:999px;background:#090b10;border:1px solid #4a25d1;margin-top:6px;overflow:hidden}
 .irony-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#ffc046,#4ac5f3,#4a25d1);width:18%;transition:width .25s}
-.chat-mon{margin:14px 0;padding:16px;border-radius:6px;border:1px solid #262b41;background:#11131d}
-.chat-feed{margin-top:10px;max-height:210px;overflow-y:auto;padding:10px;border-radius:5px;background:#0d0e14;border:1px solid #262b41;font-size:12.5px;display:flex;flex-direction:column;gap:6px}
+.chat-mon{margin:0;padding:18px;border-radius:10px;border:1px solid #252b43;background:#0d0f18;display:flex;flex-direction:column;justify-content:space-between}
+.chat-feed{margin-top:10px;min-height:220px;max-height:285px;overflow-y:auto;padding:10px;border-radius:6px;background:#080a10;border:1px solid #252b43;font-size:12.5px;display:flex;flex-direction:column;gap:6px;flex:1}
 .chat-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:5px 8px;border-radius:4px;background:rgba(255,255,255,.02);border-left:3px solid transparent}
 .chat-row.irony{border-left-color:#ffc046;background:rgba(255,192,70,.1)}
 .chat-row.rage{border-left-color:#ff5500;background:rgba(255,85,0,.08)}
 .chat-row.funny{border-left-color:#4ac5f3}
 .quick-lives{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#161926;color:#fff;padding:12px 22px;border-radius:5px;border:2px solid #ffc046;font:700 13px "Europa Grotesk",sans-serif;letter-spacing:.06em;z-index:200;box-shadow:0 12px 36px rgba(0,0,0,.7)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#141826;color:#fff;padding:12px 22px;border-radius:6px;border:2px solid #ffc046;font:700 13px "Europa Grotesk",sans-serif;letter-spacing:.06em;z-index:200;box-shadow:0 12px 36px rgba(0,0,0,.7)}
 .mc-live-sub-hud{
   padding:10px 14px;
-  border-radius:0 0 6px 6px;
+  border-radius:0 0 8px 8px;
   border:1px solid #ffc046;
   border-top:0;
-  background:#11131d;
+  background:#0d0f18;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom:12px;
 }
 .phone-sub-overlay{
   position:absolute;bottom:14px;left:6px;right:6px;z-index:8;
   pointer-events:none;text-align:center;
   padding:6px;border-radius:5px;
-  background:rgba(13,14,20,.88);border:1px solid #ffc046;
+  background:rgba(13,15,24,.9);border:1px solid #ffc046;
   font:700 11px/1.25 "Europa Grotesk",sans-serif;text-transform:uppercase;color:#fff;
 }
 .mc-step-badge{
@@ -964,10 +1177,10 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 }
 .mc-footer{
   width:100%;
-  background:#151723;
-  border-top:1px solid #262b41;
-  padding:32px 24px;
-  margin-top:40px;
+  background:#10131e;
+  border-top:1px solid #252b43;
+  padding:36px 24px;
+  margin-top:48px;
 }
 .mc-footer-inner{
   max-width:1410px;
@@ -981,7 +1194,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 .mc-wipe-overlay{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
 .mc-wipe-blade{
   position:absolute;top:-20%;bottom:-20%;width:140%;left:-160%;
-  background:linear-gradient(90deg,transparent 0%,rgba(255,192,70,.92) 35%,#11131d 55%,rgba(74,197,243,.88) 78%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,rgba(255,192,70,.92) 35%,#0d0f18 55%,rgba(74,197,243,.88) 78%,transparent 100%);
   transform:skewX(-22deg);
 }
 .mc-wipe-blade.play{animation:mcSlashWipe .48s cubic-bezier(.22,1,.36,1) forwards}
@@ -995,10 +1208,10 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 .tab-panel:not(.hide){animation:mcPanelIn .48s cubic-bezier(.22,1,.36,1)}
-/* TRANSIÇÕES FLUIDAS DE QUEDA (SCROLL CASCADE DROP) */
+/* TRANSIÇÕES FLUIDAS DE QUEDA V2.1 (SCROLL CASCADE DROP) */
 .mc-fall-item{
   opacity:0;
-  transform:translate3d(0,-44px,0) scale(.965);
+  transform:translate3d(0,-46px,0) scale(.965);
   filter:blur(4px);
   transition:
     opacity .68s cubic-bezier(.22,1,.36,1),
@@ -1028,28 +1241,35 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 <div class="mc-top-stripe"></div>
 <div class="mc-wipe-overlay" id="mcWipeOverlay"><div class="mc-wipe-blade" id="mcWipeBlade"></div></div>
 
-<!-- HEADER NOVA IDENTIDADE VISUAL MAGIA IA -->
+<!-- HEADER FLOATING GLASS COMMAND DOCK V2.1 -->
 <header>
   <div class="mc-header-inner">
     <div class="hdr-left">
       <div class="logo">
-        <img src="./images/logos/magia-ia-logo.png" alt="Magia IA" style="border-radius:50%;box-shadow:0 0 18px rgba(74,197,243,.35)">
+        <img src="./images/logos/magia-ia-logo.png" alt="Magia IA">
         <div>
-          <span style="background:linear-gradient(90deg,#ffffff,#ffc046,#4ac5f3);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:17px;letter-spacing:.16em">MAGIA IA</span>
-          <span class="logo-sub">MAGIA CORTES·IA</span>
+          <div class="logo-title-row">
+            <span style="background:linear-gradient(90deg,#ffffff,#ffc046,#4ac5f3);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:18px;letter-spacing:.16em">MAGIA IA</span>
+            <span class="v21-chip">v2.1</span>
+          </div>
+          <span class="logo-sub">MAGIA CORTES·IA STUDIO</span>
         </div>
       </div>
     </div>
     <nav id="nav"></nav>
     <div class="hdr-right">
-      <button class="mc-login-btn" id="themeBtn" type="button">LOGIN</button>
+      <button class="mc-login-btn" id="themeBtn" type="button">V2.1 PRO</button>
     </div>
   </div>
 </header>
 
-<!-- HERO FULL-WIDTH OFICIAL CORTES·IA STUDIO (HERO-BG.PNG + SUA PRINCIPAL PÁGINA DE CORTES POR IA) -->
+<!-- HERO V2.1 FULL-WIDTH COM GRAFITE MAGIA IA DESFOCADO ATRÁS DA PERSONAGEM -->
 <section class="mc-hero" id="mcHeroBanner">
   <div class="mc-hero-banner-inner">
+    <div class="v21-hero-kicker">
+      <b>VERSÃO 2.1</b>
+      <span>MOTOR NEURAL 9:16 · 20 AGENTES IA · ZERO API KEY</span>
+    </div>
     <h1 class="mc-main-h1">
       <span class="mc-h1-line"><span class="mc-h1-up">S</span>UA PRINCIPAL <span class="mc-h1-crown">PÁGINA</span></span>
       <span class="mc-h1-line">DE CORTES <i class="mc-h1-arrow">POR</i> <span class="mc-h1-o">IA</span></span>
@@ -1065,28 +1285,78 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       <button type="button" title="Twitch Live" onclick="document.getElementById('goAoVivoBtn').click()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2L2 6v14h5v2h3l2-2h4l6-6V2H4zm16 11l-3 3h-4l-2 2v-2H7V4h13v9z"/></svg>
       </button>
-      <button type="button" title="Transição Estúdio" onclick="document.getElementById('mcTriggerWipeBtn').click()">
+      <button type="button" title="Transição Estúdio v2.1" onclick="document.getElementById('mcTriggerWipeBtn').click()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
       </button>
-      <a href="#fm" title="Magia IA Oficial">
+      <a href="#fm" title="Magia IA v2.1">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 17.9V18h-2v1.9A8 8 0 0 1 4.1 13H6v-2H4.1A8 8 0 0 1 11 4.1V6h2V4.1A8 8 0 0 1 19.9 11H18v2h1.9A8 8 0 0 1 13 19.9z"/></svg>
       </a>
     </div>
     <p class="mc-social-caption">SIGA NAS REDES SOCIAIS</p>
+
+    <!-- RIBBON DOS 4 PILARES CLICÁVEIS DA VERSÃO 2.1 -->
+    <div class="v21-telemetry-strip">
+      <div class="v21-tele-card" onclick="showTab('IA',true);document.getElementById('tab-IA').scrollIntoView({behavior:'smooth'})">
+        <span class="mc-step-badge">1</span>
+        <div>
+          <b>20 IAs Locais v2.1</b>
+          <span>Zero chave de API · Consenso acústico, visual & chat</span>
+        </div>
+      </div>
+      <div class="v21-tele-card" onclick="showTab('CORTES',true);document.getElementById('fm').scrollIntoView({behavior:'smooth'})">
+        <span class="mc-step-badge">2</span>
+        <div>
+          <b>Time-Shift Duplo</b>
+          <span>Varre 00:00 ← Ao Vivo → Fim simultaneamente</span>
+        </div>
+      </div>
+      <div class="v21-tele-card" onclick="showTab('CORTES',true);document.getElementById('ironyThermometerBox').scrollIntoView({behavior:'smooth'})">
+        <span class="mc-step-badge">3</span>
+        <div>
+          <b>Termômetro de Ironia 🤡</b>
+          <span>Diferencia humor sarcástico de raiva ou hype</span>
+        </div>
+      </div>
+      <div class="v21-tele-card" onclick="showTab('CORTES',true);document.getElementById('liveRecorderBox').scrollIntoView({behavior:'smooth'})">
+        <span class="mc-step-badge">4</span>
+        <div>
+          <b>Cofre da Live 9:16</b>
+          <span>Salva tudo o que passa na live em MP4/WebM</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- MAGIA CORTES IA · ELENCO DE PERSONAGENS GTA 6, TRANSIÇÕES & LEGENDAS -->
+<!-- TICKER LIVE MARQUEE V2.1 -->
+<div class="v21-marquee" aria-hidden="true">
+  <div class="v21-marquee-track">
+    <span>⚡ <b>MAGIA IA v2.1</b> · ESTÚDIO DE CORTES AUTOMÁTICOS 9:16</span>
+    <span>🟢 <em>KICK TV</em> · 🔴 <em>YOUTUBE LIVE</em> · 🟣 <em>TWITCH</em></span>
+    <span>🤖 <b>20 AGENTES NEURAIS LOCAIS</b> · ZERO API KEY</span>
+    <span>🤡 <b>TERMÔMETRO DE IRONIA</b> · SARCASMO VS RAIVA & HYPE</span>
+    <span>⏪ <em>TIME-SHIFT DUPLO</em> · 00:00 ← AO VIVO → FIM</span>
+    <span>💾 <b>COFRE DA LIVE</b> · SALVA TUDO O QUE PASSA NA LIVE</span>
+    <span>⚡ <b>MAGIA IA v2.1</b> · ESTÚDIO DE CORTES AUTOMÁTICOS 9:16</span>
+    <span>🟢 <em>KICK TV</em> · 🔴 <em>YOUTUBE LIVE</em> · 🟣 <em>TWITCH</em></span>
+    <span>🤖 <b>20 AGENTES NEURAIS LOCAIS</b> · ZERO API KEY</span>
+    <span>🤡 <b>TERMÔMETRO DE IRONIA</b> · SARCASMO VS RAIVA & HYPE</span>
+    <span>⏪ <em>TIME-SHIFT DUPLO</em> · 00:00 ← AO VIVO → FIM</span>
+    <span>💾 <b>COFRE DA LIVE</b> · SALVA TUDO O QUE PASSA NA LIVE</span>
+  </div>
+</div>
+
+<!-- SEÇÃO 1 V2.1 · MAGIA CORTES IA & ELENCO GTA 6 -->
 <section class="mc-starter-wrap">
   <div class="mc-section-head">
     <h2 class="mc-section-title"><span class="sym-up">M</span>AGIA CORTES <span class="sym-box">IA</span></h2>
-    <p class="mc-section-sub">O PONTA PÉ INICIAL QUE SUA HISTÓRIA MERECE!</p>
+    <p class="mc-section-sub">VERSÃO 2.1 · DIRETORES GTA VI, TRANSIÇÕES & LEGENDAS AO VIVO</p>
   </div>
 
   <div class="mc-hero-top">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <span class="mc-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> MAGIA CORTES IA</span>
-      <span class="pill warn" id="mcActiveCharHeaderBadge">👑 Diretora: Lucia · Vice Queen</span>
+      <span class="mc-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> MAGIA CORTES IA v2.1</span>
+      <span class="pill warn" id="mcActiveCharHeaderBadge">👑 Diretora: LUCIA · VICE QUEEN</span>
       <span class="pill cy" id="swarmBadge">20 IAs · Zero API Key</span>
       <span class="pill warn hide" id="modeBadge">Modo Web · Zero API</span>
     </div>
@@ -1112,21 +1382,21 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 
   <div class="mc-sub-bar" id="mcHeroSubBar">
     <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
-      <span class="pill warn" style="flex-shrink:0">💬 LEGENDA AO VIVO</span>
+      <span class="pill warn" style="flex-shrink:0">💬 LEGENDA v2.1</span>
       <div class="mc-karaoke-line" id="mcCharSubtitleStream"></div>
     </div>
-    <button type="button" class="btn cy sm" id="mcTriggerWipeBtn">⚡ Transição Estúdio</button>
+    <button type="button" class="btn cy sm" id="mcTriggerWipeBtn">⚡ Transição Estúdio v2.1</button>
   </div>
 </section>
 
 <main>
-  <!-- BARRA HORIZONTAL ESTILO DIAMANTES CORTES·IA STUDIO (ACESSO RÁPIDO SEM SIDEBAR ESPREMENDO) -->
+  <!-- DECK TÁTICO HORIZONTAL V2.1 (VIP-PRICING-BG.PNG + 3 CARDS GLASS) -->
   <aside class="card side">
     <div class="mc-quick-grid">
-      <div>
-        <h4><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Fama</span> ACESSO RÁPIDO & TRANSIÇÕES</h4>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-          <button class="btn" id="newBtn" type="button" style="flex:1">+ Novo Corte</button>
+      <div class="v21-quick-card">
+        <h4 style="margin-bottom:0"><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Magia</span> COMANDO RÁPIDO v2.1</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" id="newBtn" type="button" style="flex:1">+ Novo Corte 2.1</button>
           <button class="btn cy" id="goAoVivoBtn" type="button" style="flex:1">📡 Radar AO VIVO</button>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap" id="sideQuickTransBtns">
@@ -1136,216 +1406,261 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
           <button type="button" class="plat-btn" data-quick-fx="GLITCH">👾 Glitch</button>
         </div>
       </div>
-      <div>
-        <h4><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Valley</span> MONITORAR LIVE INSTANTÂNEA</h4>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input type="text" id="nn" placeholder="Nome (ex.: live-coringa-rp)" style="flex:1;margin-top:0">
-          <input type="text" id="nl" placeholder="Link Twitch, Kick, YouTube ou .m3u8" style="flex:1.4;margin-top:0">
-          <button class="btn" id="mk" type="button">Assistir & Cortar</button>
+
+      <div class="v21-quick-card">
+        <h4 style="margin-bottom:0"><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Live</span> CONEXÃO DIRETA v2.1</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <input type="text" id="nn" placeholder="Identificador (ex.: live-vice-rp)" style="flex:1;margin-top:0">
+          <input type="text" id="nl" placeholder="Cole link Kick TV, YouTube, Twitch ou .m3u8" style="flex:1.4;margin-top:0">
         </div>
+        <button class="btn w" id="mk" type="button">▶ Assistir & Cortar Instantaneamente</button>
       </div>
-      <div>
-        <h4><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Prime</span> LIVES & COFRE ATIVO</h4>
-        <div id="lives" style="max-height:92px;overflow-y:auto"><div class="mut">Carregando...</div></div>
+
+      <div class="v21-quick-card">
+        <h4 style="margin-bottom:0"><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Cofre</span> SESSÕES ATIVAS v2.1</h4>
+        <div id="lives" style="max-height:94px;overflow-y:auto"><div class="mut">Carregando...</div></div>
       </div>
     </div>
   </aside>
 
   <section style="min-width:0">
-    <!-- 1. ABA CORTES -->
+    <!-- 1. ABA CORTES V2.1 (ARQUITETURA BENTO 2 COLUNAS + COCKPIT LADO A LADO) -->
     <div id="tab-CORTES" class="tab-panel">
-      <div class="card" id="fm">
-        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
-          <span class="mc-step-badge">1</span>
-          <div>
-            <h3 style="margin:0">COMO CORTAR NO <span class="mc-graffiti-script" style="font-size:32px;text-transform:none">Magia IA?</span></h3>
-            <p class="mut" style="margin:2px 0 0">Cole o link ou escolha uma live abaixo da <b>Kick TV, YouTube Live, Twitch, .m3u8 ou .mp4</b> para assistir à <b>prévia ao vivo com som</b> e monitorar o <b>chat em tempo real + Termômetro de Ironia</b>.</p>
+      <div class="card" id="fm" style="background:linear-gradient(180deg,rgba(20,24,38,.92),rgba(13,15,24,.96)),url('./images/how-to-play-bg.png') no-repeat center / cover">
+        <div class="v21-checkered-bar"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span class="mc-step-badge">1</span>
+            <div>
+              <h3 style="margin:0">ESTÚDIO DE CAPTURA <span class="mc-graffiti-script" style="font-size:32px">Magia IA v2.1</span></h3>
+              <p class="mut" style="margin:2px 0 0">Assista à <b>prévia ao vivo com som</b> (Kick TV, YouTube Live, Twitch ou .m3u8/.mp4), monitore o <b>Chat em Tempo Real + Termômetro de Ironia</b> e salve tudo em 9:16.</p>
+            </div>
           </div>
+          <span class="pill cy">⚡ VARREDURA DUPLA 00:00 ↔ AO VIVO</span>
         </div>
-        <label>Link da live ou vídeo (.m3u8 / .mp4 / Kick TV / YouTube / Twitch)
-          <input type="text" id="lk" value="https://kick.com/surskity" placeholder="Cole aqui o link da Kick, YouTube, Twitch ou .m3u8…">
-        </label>
-        <div class="quick-lives" id="quickLivesBar">
-          <span class="mut" style="font-size:11.5px;font-weight:700">⚡ Testar Lives Ao Vivo Agora:</span>
-          <button type="button" class="plat-btn on" data-quick-url="https://kick.com/surskity" data-quick-name="surskity (Kick)">🟢 Kick TV: surskity</button>
-          <button type="button" class="plat-btn" data-quick-url="https://kick.com/ayellol" data-quick-name="Ayellol (Kick)">🟢 Kick TV: Ayellol</button>
-          <button type="button" class="plat-btn" data-quick-url="https://kick.com/daniels" data-quick-name="daniels (Kick)">🟢 Kick TV: daniels</button>
-          <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=FjivCxRWjvM" data-quick-name="CNN Brasil (YouTube)">🔴 YouTube: CNN Brasil</button>
-          <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=rFH6A49OI-8" data-quick-name="TV Canção Nova (YouTube)">🔴 YouTube: Canção Nova</button>
-          <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=X2U4Blbbpj8" data-quick-name="Dj Nenê Ao Vivo (YouTube)">🔴 YouTube: Dj Nenê</button>
-          <button type="button" class="plat-btn" data-quick-url="https://www.twitch.tv/ricfazeres" data-quick-name="RicFazeres (Twitch)">🟣 Twitch: RicFazeres</button>
-          <button type="button" class="plat-btn" data-quick-url="https://www.twitch.tv/alanzoka" data-quick-name="alanzoka (Twitch)">🟣 Twitch: alanzoka</button>
-        </div>
-        <div class="row">
-          <label>Exigência mínima (1–10)
-            <input type="number" id="mn" min="1" max="10" value="6">
-          </label>
-          <label>Máximo de cortes (≤30s cada)
-            <input type="number" id="mx" min="1" max="20" value="4">
-          </label>
-        </div>
-        <label>Foco dos agentes (opcional)
-          <input type="text" id="hint" value="ironia sarcástica, engraçados, frustrações, raiva, xingamentos e picos do chat">
-        </label>
-        <label>Nomes difíceis para legenda
-          <input type="text" id="names" placeholder="ex.: Dava Jones, Paulinho, Vice City">
-        </label>
-        <label class="chk"><input type="checkbox" id="dirBroll" checked> B-roll do diretor (sobrepor reação automática)</label>
-        <label class="chk"><input type="checkbox" id="ytBroll" checked> Buscar B-roll complementar se o banco local estiver vazio</label>
-        <div class="row">
-          <label>Auto-postar no YouTube (privado)
-            <select id="auto">
-              <option value="no">não, apenas gerar MP4</option>
-              <option value="yes">sim, enviar fila privada YT</option>
-            </select>
-          </label>
-          <label>Vídeos por dia
-            <input type="number" id="vpd" min="1" max="20" value="3">
-          </label>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-          <button class="btn" id="go" type="button">▶ Começar Varredura Dupla (00:00 ← Ao Vivo → Fim)</button>
-          <button class="btn g" id="previewNowBtn" type="button">📺 Atualizar Prévia Vídeo</button>
+
+        <div class="v21-setup-bento">
+          <!-- COLUNA ESQUERDA: FONTE DA LIVE + CANAIS RÁPIDOS + DISPARO IMEDIATO -->
+          <div class="v21-bento-pane">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+              <b style="color:#ffc046;letter-spacing:.1em;font-size:13px;text-transform:uppercase">📡 FONTE DA TRANSMISSÃO AO VIVO</b>
+              <span class="pill br">Kick TV · YouTube · Twitch · HLS</span>
+            </div>
+            <label>Link da live ou vídeo (.m3u8 / .mp4 / Kick TV / YouTube / Twitch)
+              <input type="text" id="lk" value="https://kick.com/surskity" placeholder="Cole aqui o link da Kick, YouTube, Twitch ou .m3u8…">
+            </label>
+            <div class="quick-lives" id="quickLivesBar">
+              <span class="mut" style="font-size:11.5px;font-weight:700">⚡ Canais Ao Vivo 1-Clique:</span>
+              <button type="button" class="plat-btn on" data-quick-url="https://kick.com/surskity" data-quick-name="surskity (Kick)">🟢 Kick TV: surskity</button>
+              <button type="button" class="plat-btn" data-quick-url="https://kick.com/ayellol" data-quick-name="Ayellol (Kick)">🟢 Kick TV: Ayellol</button>
+              <button type="button" class="plat-btn" data-quick-url="https://kick.com/daniels" data-quick-name="daniels (Kick)">🟢 Kick TV: daniels</button>
+              <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=FjivCxRWjvM" data-quick-name="CNN Brasil (YouTube)">🔴 YouTube: CNN Brasil</button>
+              <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=rFH6A49OI-8" data-quick-name="TV Canção Nova (YouTube)">🔴 YouTube: Canção Nova</button>
+              <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=X2U4Blbbpj8" data-quick-name="Dj Nenê Ao Vivo (YouTube)">🔴 YouTube: Dj Nenê</button>
+              <button type="button" class="plat-btn" data-quick-url="https://www.twitch.tv/ricfazeres" data-quick-name="RicFazeres (Twitch)">🟣 Twitch: RicFazeres</button>
+              <button type="button" class="plat-btn" data-quick-url="https://www.twitch.tv/alanzoka" data-quick-name="alanzoka (Twitch)">🟣 Twitch: alanzoka</button>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+              <button class="btn" id="go" type="button" style="flex:1.4">▶ Iniciar Varredura Dupla v2.1 (00:00 ← Ao Vivo → Fim)</button>
+              <button class="btn cy" id="previewNowBtn" type="button" style="flex:1">📺 Atualizar Prévia Vídeo</button>
+            </div>
+          </div>
+
+          <!-- COLUNA DIREITA: CALIBRAGEM TÁTICA DOS 20 AGENTES IA -->
+          <div class="v21-bento-pane">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+              <b style="color:#4ac5f3;letter-spacing:.1em;font-size:13px;text-transform:uppercase">🤖 CALIBRAGEM DOS 20 AGENTES v2.1</b>
+              <span class="pill warn">Cortes ≤ 30s</span>
+            </div>
+            <div class="row">
+              <label>Exigência mínima (1–10)
+                <input type="number" id="mn" min="1" max="10" value="6">
+              </label>
+              <label>Máximo de cortes (≤30s)
+                <input type="number" id="mx" min="1" max="20" value="4">
+              </label>
+            </div>
+            <label>Foco dos agentes (opcional)
+              <input type="text" id="hint" value="ironia sarcástica, engraçados, frustrações, raiva, xingamentos e picos do chat">
+            </label>
+            <label>Dicionário de nomes para legenda
+              <input type="text" id="names" placeholder="ex.: Lucia, Viper, Dexter, Vice City">
+            </label>
+            <div class="row" style="margin-top:4px">
+              <label class="chk"><input type="checkbox" id="dirBroll" checked> B-roll automático do diretor</label>
+              <label class="chk"><input type="checkbox" id="ytBroll" checked> B-roll complementar inteligente</label>
+            </div>
+            <div class="row">
+              <label>Fila privada YouTube
+                <select id="auto">
+                  <option value="no">não, apenas gerar MP4</option>
+                  <option value="yes">sim, enviar fila privada YT</option>
+                </select>
+              </label>
+              <label>Vídeos por dia
+                <input type="number" id="vpd" min="1" max="20" value="3">
+              </label>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="card" id="lv" style="margin-top:14px">
+      <!-- COCKPIT DE TRANSMISSÃO AO VIVO V2.1 (PLAYER + CHAT LADO A LADO + COFRE + TERMÔMETRO DE IRONIA) -->
+      <div class="card" id="lv" style="margin-top:20px;background:linear-gradient(180deg,rgba(20,24,38,.94),rgba(13,15,24,.98)),url('./images/patch-notes-bg.png') no-repeat right top / cover">
+        <div class="v21-checkered-bar"></div>
         <div class="head" id="lvStatusHeader">
+          <span class="mc-step-badge">2</span>
           <span class="dot" id="lvDot"></span>
-          <b id="ln">Prévia Instantânea Ao Vivo</b>
-          <span class="mut" id="st">cole o link acima para assistir com som</span>
+          <div>
+            <b id="ln" style="font-size:18px;color:#fff;letter-spacing:.06em;text-transform:uppercase">Cockpit Ao Vivo v2.1</b>
+            <span class="mut" id="st" style="display:block">cole o link acima para assistir com som</span>
+          </div>
+          <a class="mut" id="ll" target="_blank" rel="noopener" style="margin-left:8px"></a>
           <span style="flex:1"></span>
           <button class="btn g sm hide" id="stop" type="button">⏹ Parar</button>
         </div>
-        <a class="mut" id="ll" target="_blank" rel="noopener"></a>
-        <div class="prev-bar" id="prevBar">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <span class="prev-badge" id="prevPlatBadge">AO VIVO</span>
-            <span class="prev-txt" id="prevTxt">prévia pronta com som · reprodução simultânea</span>
-          </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn g sm" id="toggleHlsModeBtn" type="button">🎬 Modo: Player Oficial</button>
-            <button class="btn g sm" id="reloadPlayerBtn" type="button">🔄 Recarregar Player</button>
-            <a class="btn g sm" id="openOrigPlayer" target="_blank" rel="noopener">↗ Abrir original</a>
-          </div>
-        </div>
-        <div class="prev" id="livePlayerBox"></div>
-        <div class="mc-live-sub-hud" id="mcLiveSubHud">
-          <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
-            <span class="pill warn" id="mcLiveSubBadge">👑 LEGENDA AO VIVO</span>
-            <div class="mc-karaoke-line" id="mcLivePlayerSubStream" style="font-size:13.5px"></div>
-          </div>
-          <span class="mut" style="font-size:11px" id="mcLiveSubSpeakerLbl">🎙 Sincronizado c/ Chat & Áudio</span>
-        </div>
 
-        <!-- GRAVADOR & COFRE DA LIVE — SALVAR TUDO O QUE PASSA NA LIVE -->
-        <div class="sent-wrap" id="liveRecorderBox" style="margin-top:10px;border-color:rgba(255,184,0,.4);background:linear-gradient(180deg,rgba(255,184,0,.09),rgba(17,19,29,.96))">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <b style="font-size:13px;color:var(--y)">💾 Gravador & Cofre da Live — Salvar o que Passa na Live</b>
-              <span class="pill br" id="recLiveStatusBadge">💾 Auto-Save Ativo · 0 salvos</span>
-              <span class="pill err hide" id="recLiveTimerBadge">🔴 GRAVANDO 00:00</span>
+        <!-- GRID LADO A LADO: PLAYER DE VÍDEO AO VIVO (ESQUERDA) + MONITOR DE CHAT EM TEMPO REAL (DIREITA) -->
+        <div class="v21-cockpit-grid">
+          <div style="min-width:0;display:flex;flex-direction:column">
+            <div class="prev-bar" id="prevBar">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="prev-badge" id="prevPlatBadge">AO VIVO</span>
+                <span class="prev-txt" id="prevTxt">prévia pronta com som · reprodução simultânea</span>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn g sm" id="toggleHlsModeBtn" type="button">🎬 Modo: Player Oficial</button>
+                <button class="btn g sm" id="reloadPlayerBtn" type="button">🔄 Recarregar Player</button>
+                <a class="btn g sm" id="openOrigPlayer" target="_blank" rel="noopener">↗ Abrir original</a>
+              </div>
             </div>
-            <label class="chk" style="margin:0;font-size:11.5px">
-              <input type="checkbox" id="autoSaveLiveChk" checked>
-              Auto-salvar momentos, picos de ironia/hype e chat da live automaticamente
-            </label>
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-            <button type="button" class="btn sm" id="saveLast30sBtn">⏪ Salvar Últimos 30s da Live (Vídeo + Corte 9:16)</button>
-            <button type="button" class="btn sm cy" id="recLiveToggleBtn">⏺ Gravar Trecho Ao Vivo Agora</button>
-            <button type="button" class="btn g sm" id="saveSnapshotBtn">📸 Salvar Print/Frame da Live</button>
-            <button type="button" class="btn g sm" id="saveLiveArchiveBtn">📋 Baixar Histórico Completo da Live (.JSON)</button>
-            <button type="button" class="btn g sm" id="dlAllSavedLiveBtn">📦 Baixar Todos os Salvos</button>
-          </div>
-          <div class="mut" id="recLiveHint" style="margin-top:6px;font-size:11.5px">
-            Salva em tempo real o vídeo do que está passando na live (MP4/WebM + Corte Vertical 9:16), mensagens do chat e picos do Termômetro de Ironia no seu dispositivo e na aba VÍDEOS.
-          </div>
-          <div id="savedLiveList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:10px;margin-top:10px"></div>
-        </div>
-
-        <div class="sent-wrap" id="sentimentBox">
-          <div class="sent-head">
-            <b style="font-size:12.5px">📈 Sentimento do Chat + Termômetro de Ironia (Kick · Twitch · YouTube)</b>
-            <div class="sent-leg">
-              <span><i style="background:#00e676"></i>Positivo</span>
-              <span><i style="background:#ff5500"></i>Negativo (Raiva/Frustração/Xing.)</span>
-              <span><i style="background:#ffb800"></i>Hype Comum</span>
-              <span><i style="background:#c084fc;height:4px"></i>🤡 Ironia / Sarcasmo</span>
-              <span><i style="background:#00e5ff"></i>✂ Corte Gerado</span>
+            <div class="prev" id="livePlayerBox"></div>
+            <div class="mc-live-sub-hud" id="mcLiveSubHud">
+              <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
+                <span class="pill warn" id="mcLiveSubBadge">👑 LEGENDA AO VIVO</span>
+                <div class="mc-karaoke-line" id="mcLivePlayerSubStream" style="font-size:13.5px"></div>
+              </div>
+              <span class="mut" style="font-size:11px" id="mcLiveSubSpeakerLbl">🎙 Sincronizado c/ Chat & Áudio</span>
+            </div>
+            <div class="ts-row" id="tsRow">
+              <div class="ts-box">
+                <div style="display:flex;justify-content:space-between"><b>⏮ Time-Shift: Ao Vivo → Início (00:00)</b><span id="tsRetroPct">0%</span></div>
+                <div class="pbar-wrap"><div class="pbar" id="tsRetroBar" style="background:var(--y)"></div></div>
+              </div>
+              <div class="ts-box">
+                <div style="display:flex;justify-content:space-between"><b>⏭ Captura Contínua: Ao Vivo → Fim</b><span id="tsLivePct">0%</span></div>
+                <div class="pbar-wrap"><div class="pbar" id="tsLiveBar" style="background:var(--gr)"></div></div>
+              </div>
             </div>
           </div>
 
-          <div class="irony-box" id="ironyThermometerBox">
+          <!-- MONITOR DE CHAT EM TEMPO REAL AO LADO DO PLAYER -->
+          <div class="chat-mon" id="liveChatMonitor">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <b style="font-size:13px;color:#fff;letter-spacing:.06em">💬 CHAT EM TEMPO REAL v2.1</b>
+                  <span class="pill br" id="chatLiveStatusBadge">🟢 Monitorando Ao Vivo</span>
+                  <span class="pill pu" id="chatMsgCountBadge">0 msgs</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px" id="chatFilterBtns">
+                <button type="button" class="plat-btn on" data-chat-filter="ALL">Todos</button>
+                <button type="button" class="plat-btn" data-chat-filter="IRONIA">🤡 Só Ironia</button>
+                <button type="button" class="plat-btn" data-chat-filter="RAIVA">🤬 Raiva/Xing.</button>
+                <button type="button" class="plat-btn" data-chat-filter="HYPE">😂 Humor/Hype</button>
+              </div>
+            </div>
+            <div class="chat-feed" id="liveChatFeed"></div>
+            <div>
+              <div class="row" style="margin-top:8px;align-items:center">
+                <input type="text" id="chatTestInput" placeholder="Testar frase no chat (ex.: Joga muito confia kkkk 🤡)…" style="margin-top:0">
+                <button type="button" class="btn sm cy" id="chatTestSendBtn" style="flex:0 0 auto">💬 Testar Ironia</button>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px" id="chatQuickPresets">
+                <button type="button" class="btn g sm" data-sample-chat="Joga muito esse pro player confia kkkkk 🤡">🤡 "Joga muito confia"</button>
+                <button type="button" class="btn g sm" data-sample-chat="200 QI tudo calculado só que não hahaha">🤡 "200 QI só que não"</button>
+                <button type="button" class="btn g sm" data-sample-chat="QUE ROUBO ABSURDO ESSE JOGO LIXO PQP 🤬">🤬 "QUE ROUBO PQP"</button>
+                <button type="button" class="btn g sm" data-sample-chat="CLUTCH INSANO MITOU DEMAIS POGGERS 🔥">⚡ "CLUTCH INSANO 🔥"</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GRID DUPLO V2.1: GRAVADOR & COFRE DA LIVE + TERMÔMETRO DE IRONIA & SENTIMENTO -->
+        <div class="v21-vault-chart-grid">
+          <!-- GRAVADOR & COFRE DA LIVE -->
+          <div class="sent-wrap" id="liveRecorderBox" style="border-color:rgba(255,192,70,.42);background:linear-gradient(180deg,rgba(255,192,70,.08),rgba(13,15,24,.96))">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                <b style="font-size:12.5px;color:#e9d5ff">🤡 Termômetro de Ironia (Humor Sarcástico vs Raiva/Hype)</b>
-                <span class="pill pu" id="ironyLevelBadge">Ironia: 68% · Pico Sarcástico</span>
+                <b style="font-size:13.5px;color:var(--y)">💾 Gravador & Cofre da Live v2.1</b>
+                <span class="pill br" id="recLiveStatusBadge">💾 Auto-Save Ativo · 0 salvos</span>
+                <span class="pill err hide" id="recLiveTimerBadge">🔴 GRAVANDO 00:00</span>
               </div>
-              <span class="mut" id="ironyPeakCountLbl" style="font-size:11.5px">2 picos sarcásticos destacados (◆)</span>
+              <label class="chk" style="margin:0;font-size:11.5px">
+                <input type="checkbox" id="autoSaveLiveChk" checked>
+                Auto-salvar picos & chat da live
+              </label>
             </div>
-            <div class="irony-bar-wrap"><div class="irony-bar-fill" id="ironyGaugeFill" style="width:68%"></div></div>
-            <div class="mut" id="ironyDiffText" style="margin-top:5px;font-size:11.5px">IA-12 & IA-16: diferencia elogios irônicos ("joga muito confia / 200 QI / só que não + kkk/🤡") durante falhas de picos reais de Raiva ou Hype comum.</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <button type="button" class="btn sm" id="saveLast30sBtn">⏪ Salvar Últimos 30s (Vídeo + 9:16)</button>
+              <button type="button" class="btn sm cy" id="recLiveToggleBtn">⏺ Gravar Trecho Ao Vivo</button>
+              <button type="button" class="btn g sm" id="saveSnapshotBtn">📸 Salvar Print/Frame</button>
+              <button type="button" class="btn g sm" id="saveLiveArchiveBtn">📋 Histórico (.JSON)</button>
+              <button type="button" class="btn g sm" id="dlAllSavedLiveBtn">📦 Baixar Todos</button>
+            </div>
+            <div class="mut" id="recLiveHint" style="margin-top:8px;font-size:11.5px">
+              Salva em tempo real o vídeo do que está passando na live (MP4/WebM + Corte Vertical 9:16), mensagens do chat e picos do Termômetro de Ironia.
+            </div>
+            <div id="savedLiveList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px;margin-top:10px"></div>
           </div>
 
-          <canvas id="sentimentChart" width="760" height="180"></canvas>
-          <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse para ver Positivo, Negativo, Hype e o nível de Ironia/Sarcasmo ou clique em ✂ / 🤡 na linha do tempo.</div>
-          <div id="sentPeaks" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
-        </div>
-
-        <!-- MONITOR DE CHAT EM TEMPO REAL -->
-        <div class="chat-mon" id="liveChatMonitor">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <b style="font-size:12.5px">💬 Monitor de Chat em Tempo Real (Kick TV · YouTube · Twitch)</b>
-              <span class="pill br" id="chatLiveStatusBadge">🟢 Monitorando Ao Vivo</span>
-              <span class="pill pu" id="chatMsgCountBadge">0 msgs</span>
+          <!-- TERMÔMETRO DE IRONIA & CURVA DE SENTIMENTO -->
+          <div class="sent-wrap" id="sentimentBox">
+            <div class="sent-head">
+              <b style="font-size:13px;color:#fff">📈 Sentimento do Chat + Termômetro de Ironia v2.1</b>
+              <div class="sent-leg">
+                <span><i style="background:#00e676"></i>Positivo</span>
+                <span><i style="background:#ff5500"></i>Negativo (Raiva/Xing.)</span>
+                <span><i style="background:#ffb800"></i>Hype</span>
+                <span><i style="background:#c084fc;height:4px"></i>🤡 Ironia</span>
+                <span><i style="background:#00e5ff"></i>✂ Corte</span>
+              </div>
             </div>
-            <div style="display:flex;gap:5px;flex-wrap:wrap" id="chatFilterBtns">
-              <button type="button" class="plat-btn on" data-chat-filter="ALL">Todos</button>
-              <button type="button" class="plat-btn" data-chat-filter="IRONIA">🤡 Só Ironia/Sarcasmo</button>
-              <button type="button" class="plat-btn" data-chat-filter="RAIVA">🤬 Raiva/Xing.</button>
-              <button type="button" class="plat-btn" data-chat-filter="HYPE">😂 Humor/Hype</button>
-            </div>
-          </div>
-          <div class="chat-feed" id="liveChatFeed"></div>
-          <div class="row" style="margin-top:8px;align-items:center">
-            <input type="text" id="chatTestInput" placeholder="Testar frase no chat (ex.: Joga muito confia kkkk 🤡, 200 QI só que não, Que roubo pqp)…" style="margin-top:0">
-            <button type="button" class="btn sm cy" id="chatTestSendBtn" style="flex:0 0 auto">💬 Testar no Termômetro de Ironia</button>
-          </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px" id="chatQuickPresets">
-            <button type="button" class="btn g sm" data-sample-chat="Joga muito esse pro player confia kkkkk 🤡">🤡 "Joga muito confia kkk 🤡"</button>
-            <button type="button" class="btn g sm" data-sample-chat="200 QI tudo calculado só que não hahaha">🤡 "200 QI só que não haha"</button>
-            <button type="button" class="btn g sm" data-sample-chat="QUE ROUBO ABSURDO ESSE JOGO LIXO PQP 🤬">🤬 "QUE ROUBO ABSURDO PQP"</button>
-            <button type="button" class="btn g sm" data-sample-chat="CLUTCH INSANO MITOU DEMAIS POGGERS 🔥">⚡ "CLUTCH INSANO MITOU 🔥"</button>
-          </div>
-        </div>
 
-        <div class="ts-row" id="tsRow">
-          <div class="ts-box">
-            <div style="display:flex;justify-content:space-between"><b>⏮ Time-Shift: Ao Vivo → Início (00:00)</b><span id="tsRetroPct">0%</span></div>
-            <div class="pbar-wrap"><div class="pbar" id="tsRetroBar" style="background:var(--y)"></div></div>
-          </div>
-          <div class="ts-box">
-            <div style="display:flex;justify-content:space-between"><b>⏭ Captura Contínua: Ao Vivo → Fim</b><span id="tsLivePct">0%</span></div>
-            <div class="pbar-wrap"><div class="pbar" id="tsLiveBar" style="background:var(--gr)"></div></div>
+            <div class="irony-box" id="ironyThermometerBox">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <b style="font-size:12.5px;color:#e9d5ff">🤡 Termômetro de Ironia (Sarcasmo vs Raiva/Hype)</b>
+                  <span class="pill pu" id="ironyLevelBadge">Ironia: 68% · Pico Sarcástico</span>
+                </div>
+                <span class="mut" id="ironyPeakCountLbl" style="font-size:11.5px">2 picos sarcásticos destacados (◆)</span>
+              </div>
+              <div class="irony-bar-wrap"><div class="irony-bar-fill" id="ironyGaugeFill" style="width:68%"></div></div>
+              <div class="mut" id="ironyDiffText" style="margin-top:5px;font-size:11.5px">IA-12 & IA-16: diferencia elogios irônicos ("joga muito confia / 200 QI / só que não + kkk/🤡") durante falhas de picos reais de Raiva ou Hype comum.</div>
+            </div>
+
+            <canvas id="sentimentChart" width="760" height="180"></canvas>
+            <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse para inspecionar Positivo, Negativo, Hype e Ironia/Sarcasmo ou clique em ✂ / 🤡 na linha do tempo.</div>
+            <div id="sentPeaks" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
           </div>
         </div>
 
         <div class="clips" id="cl"></div>
 
-        <details open style="margin-top:14px" id="swarmDetails">
-          <summary>🤖 Enxame de Agentes Locais Ativos (Sem API Key) & Colaboração</summary>
+        <details open style="margin-top:16px" id="swarmDetails">
+          <summary>🤖 Enxame de 20 Agentes Locais v2.1 (Sem API Key) & Colaboração</summary>
           <div class="swarm-grid" id="swarmGrid"></div>
           <div id="handoffFeed" class="mut" style="margin-top:8px;max-height:110px;overflow:auto;font:11.5px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)"></div>
         </details>
 
-        <details open><summary>▶ Log de execução em tempo real</summary><div id="log"></div></details>
+        <details open><summary>▶ Log de execução em tempo real v2.1</summary><div id="log"></div></details>
       </div>
 
-      <!-- ESTÚDIO DE EDIÇÃO DO CORTE -->
-      <div class="card hide" id="ed" style="margin-top:14px">
-        <h3 id="et">ESTÚDIO 9:16 · VÍDEO 1 DE 1</h3>
+      <!-- ESTÚDIO DE EDIÇÃO DO CORTE 9:16 V2.1 -->
+      <div class="card hide" id="ed" style="margin-top:20px">
+        <div class="v21-checkered-bar"></div>
+        <h3 id="et">ESTÚDIO 9:16 v2.1 · VÍDEO 1 DE 1</h3>
         <div class="film"></div>
         <div class="stage">
           <div class="mas">
@@ -1368,7 +1683,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 
         <div class="studio-quick">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-            <b style="font-size:12.5px">🎬 Molde Rápido 9:16 & Edição de Headline</b>
+            <b style="font-size:12.5px">🎬 Molde Rápido 9:16 & Edição de Headline v2.1</b>
             <span class="pill pu" id="edMoldeBadge">SPLIT_BANNER</span>
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="edMoldeBtns">
@@ -1405,18 +1720,22 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 2. ABA AO VIVO -->
+    <!-- 2. ABA AO VIVO V2.1 -->
     <div id="tab-AO VIVO" class="tab-panel hide">
       <div class="card">
+        <div class="v21-checkered-bar"></div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <div>
-            <h3 style="margin:0">■ AO VIVO · KICK, TWITCH & YOUTUBE (BRASIL 1º · MAIOR CATEGORIA)</h3>
-            <div class="mut" id="radarMeta">Ordenado: Streamers Brasileiros primeiro · Categoria com mais espectadores primeiro · Mais pessoas na live</div>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span class="mc-step-badge">2</span>
+            <div>
+              <h3 style="margin:0">RADAR AO VIVO <span class="mc-graffiti-script" style="font-size:30px">Magia IA v2.1</span> · KICK, TWITCH & YOUTUBE</h3>
+              <div class="mut" id="radarMeta">Ordenado: Streamers Brasileiros primeiro · Categoria com mais espectadores primeiro · Mais pessoas na live</div>
+            </div>
           </div>
-          <button class="btn g sm" id="refreshRadarBtn" type="button">🔄 Atualizar Lives</button>
+          <button class="btn cy sm" id="refreshRadarBtn" type="button">🔄 Atualizar Lives</button>
         </div>
 
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center" id="radarPlatBtns">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;align-items:center" id="radarPlatBtns">
           <button class="plat-btn on" type="button" data-plat="ALL">Todas</button>
           <button class="plat-btn" type="button" data-plat="TWITCH">Twitch</button>
           <button class="plat-btn" type="button" data-plat="KICK">Kick</button>
@@ -1425,7 +1744,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
           <span class="pill br" id="radarCounts">0 ao vivo</span>
         </div>
 
-        <div class="row" style="margin-top:8px">
+        <div class="row" style="margin-top:10px">
           <label style="margin-top:4px">Categoria
             <select id="radarCat">
               <option value="ALL">Todas Categorias</option>
@@ -1447,10 +1766,10 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
           </label>
         </div>
 
-        <div class="sent-wrap" style="margin-top:14px">
+        <div class="sent-wrap" style="margin-top:16px">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
             <div>
-              <b style="font-size:13px">🚀 Analisar Todas as Lives · 20 Agentes Sem API + Controle de Banda</b>
+              <b style="font-size:13.5px;color:#ffc046">🚀 Analisar Todas as Lives v2.1 · 20 Agentes Sem API + Controle de Banda</b>
               <div class="mut" style="margin-top:2px">Gerenciador de filas evita sobrecarga no servidor, caçando <b>Engraçados, Frustrações, Raiva e Xingamentos</b> e baixando apenas os <b>30 melhores segundos por corte</b>.</div>
             </div>
             <span class="pill cy" id="queueStatusBadge">Banda: Máx 3 simultâneas · Ativas 0 · Fila 0</span>
@@ -1476,11 +1795,15 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 3. ABA VÍDEOS -->
+    <!-- 3. ABA VÍDEOS V2.1 -->
     <div id="tab-VÍDEOS" class="tab-panel hide">
       <div class="card">
+        <div class="v21-checkered-bar"></div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <h3 style="margin:0">■ BIBLIOTECA DE CORTES · FILTROS & EXPORTAÇÃO EM ZIP</h3>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span class="mc-step-badge">3</span>
+            <h3 style="margin:0">BIBLIOTECA DE CORTES <span class="mc-graffiti-script" style="font-size:30px">v2.1</span> · FILTROS & ZIP</h3>
+          </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
             <button class="btn g sm" id="selectAllClipsBtn" type="button">☑ Selecionar Todos</button>
             <button class="btn g sm" id="clearSelClipsBtn" type="button">☐ Limpar</button>
@@ -1537,8 +1860,8 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
         <div class="clips" id="clipsLibraryGrid"></div>
       </div>
 
-      <div class="card" style="margin-top:14px">
-        <h3>■ UPLOAD DE VÍDEO LOCAL & LIVES SALVAS</h3>
+      <div class="card" style="margin-top:16px">
+        <h3>■ UPLOAD DE VÍDEO LOCAL & LIVES SALVAS v2.1</h3>
         <p class="mut">Suba um vídeo MP4/MOV/WEBM direto do seu dispositivo para cortar os 30s mais virais.</p>
         <div class="row" style="align-items:flex-end">
           <label>Enviar vídeo do aparelho
@@ -1549,8 +1872,8 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
         <div class="grid-cards" id="videosGallery"></div>
       </div>
 
-      <div class="card" style="margin-top:14px">
-        <h3>■ CORTE MANUAL POR TEMPO</h3>
+      <div class="card" style="margin-top:16px">
+        <h3>■ CORTE MANUAL POR TEMPO v2.1</h3>
         <div class="row">
           <label>Live / Vídeo fonte
             <select id="manualLiveSelect"></select>
@@ -1573,10 +1896,11 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 4. ABA MOLDES -->
+    <!-- 4. ABA MOLDES V2.1 -->
     <div id="tab-MOLDES" class="tab-panel hide">
-      <div class="card">
-        <h3>■ MOLDES RÁPIDOS 9:16, TRANSIÇÕES, LEGENDAS & TRILHAS SONORAS</h3>
+      <div class="card" style="background:linear-gradient(180deg,rgba(20,24,38,.92),rgba(13,15,24,.96)),url('./images/vip-pricing-bg.png') no-repeat right center / cover">
+        <div class="v21-checkered-bar"></div>
+        <h3>■ MOLDES RÁPIDOS 9:16, TRANSIÇÕES, LEGENDAS & TRILHAS <span class="mc-graffiti-script" style="font-size:30px">v2.1</span></h3>
         <p class="mut">Selecione os presets padrão de enquadramento, transições, legendas e trilha sonora sintética local do FFmpeg (zero API externa).</p>
         <div class="grid-cards" id="moldesContainer"></div>
         <div class="row" style="margin-top:14px">
@@ -1604,7 +1928,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
             </select>
           </label>
         </div>
-        <button class="btn" id="saveMoldeSettingsBtn" type="button" style="margin-top:12px">Salvar Presets Padrão</button>
+        <button class="btn" id="saveMoldeSettingsBtn" type="button" style="margin-top:12px">Salvar Presets Padrão v2.1</button>
         <div class="row" style="margin-top:14px;align-items:flex-end;border-top:1px solid var(--line);padding-top:14px">
           <label>Enviar B-roll local (.mp4)
             <input type="file" id="uploadBrollInput" accept="video/mp4,video/webm" style="margin-top:6px">
@@ -1615,10 +1939,11 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 5. ABA IDEIAS -->
+    <!-- 5. ABA IDEIAS V2.1 -->
     <div id="tab-IDEIAS" class="tab-panel hide">
       <div class="card">
-        <h3>■ IDEIAS E GATILHOS PARA OS AGENTES</h3>
+        <div class="v21-checkered-bar"></div>
+        <h3>■ IDEIAS E GATILHOS PARA OS AGENTES <span class="mc-graffiti-script" style="font-size:30px">v2.1</span></h3>
         <p class="mut">Cadastre o que a IA deve priorizar nas lives e aplique em 1 clique na aba CORTES.</p>
         <div class="row">
           <label>Categoria / Tag<input type="text" id="ideaTag" value="GTA 6"></label>
@@ -1630,10 +1955,11 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 6. ABA ROTEIRO -->
+    <!-- 6. ABA ROTEIRO V2.1 -->
     <div id="tab-ROTEIRO" class="tab-panel hide">
       <div class="card">
-        <h3>■ EDITOR DE ROTEIRO E RE-RENDERIZAÇÃO MP4</h3>
+        <div class="v21-checkered-bar"></div>
+        <h3>■ EDITOR DE ROTEIRO E RE-RENDERIZAÇÃO MP4 <span class="mc-graffiti-script" style="font-size:30px">v2.1</span></h3>
         <p class="mut">Personalize headline, título, descrição, molde, transição e trilha sonora de qualquer corte gerado.</p>
         <div id="roteiroEmpty" class="mut">Selecione um corte em <b>CORTES</b>, no gráfico ✂ ou em <b>VÍDEOS</b> para abrir no Estúdio.</div>
         <div id="roteiroForm" class="hide">
@@ -1674,19 +2000,21 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 7. ABA UPLOADS -->
+    <!-- 7. ABA UPLOADS V2.1 -->
     <div id="tab-UPLOADS" class="tab-panel hide">
       <div class="card">
-        <h3>■ FILA DE PUBLICAÇÃO NO YOUTUBE (PRIVADO)</h3>
+        <div class="v21-checkered-bar"></div>
+        <h3>■ FILA DE PUBLICAÇÃO NO YOUTUBE (PRIVADO) <span class="mc-graffiti-script" style="font-size:30px">v2.1</span></h3>
         <p class="mut">Os cortes aprovados podem ser enfileirados para envio privado via YouTube Data API v3 quando <code>client_secret.json</code> estiver no servidor Python.</p>
         <div id="uploadsList" class="grid-cards"></div>
       </div>
     </div>
 
-    <!-- 8. ABA IA -->
+    <!-- 8. ABA IA V2.1 -->
     <div id="tab-IA" class="tab-panel hide">
       <div class="card">
-        <h3>■ SERVIDOR PYTHON LOCAL · ZERO API KEY</h3>
+        <div class="v21-checkered-bar"></div>
+        <h3>■ MOTOR NEURAL PYTHON LOCAL · 20 IAs ZERO API KEY <span class="mc-graffiti-script" style="font-size:30px">v2.1</span></h3>
         <p class="mut">Todos os agentes operam localmente (FFmpeg Acústico, Whisper Int8, OpenCV Facecam e Chat Collectors). Informe a URL do servidor Python caso acesse pelo site online:</p>
         <div class="row" style="align-items:flex-end">
           <label>URL do Servidor Python (opcional)
@@ -1758,7 +2086,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
             <input type="number" id="cfgMaxConc" min="1" max="8" value="3">
           </label>
         </div>
-        <button class="btn" id="saveIaCfgBtn" type="button" style="margin-top:12px">Aplicar Configurações do Motor</button>
+        <button class="btn" id="saveIaCfgBtn" type="button" style="margin-top:12px">Aplicar Configurações do Motor v2.1</button>
       </div>
     </div>
   </section>
@@ -1767,15 +2095,18 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 <footer class="mc-footer">
   <div class="mc-footer-inner">
     <div style="display:flex;align-items:center;gap:14px">
-      <img src="./images/logos/magia-ia-logo.png" alt="Magia IA" style="width:52px;height:52px;object-fit:contain;border-radius:50%;box-shadow:0 0 18px rgba(74,197,243,.35)">
+      <img src="./images/logos/magia-ia-logo.png" alt="Magia IA" style="width:54px;height:54px;object-fit:contain;border-radius:50%;box-shadow:0 0 20px rgba(74,197,243,.4)">
       <div>
-        <b style="background:linear-gradient(90deg,#ffffff,#ffc046,#4ac5f3);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.18em;font-size:17px;display:block">MAGIA IA</b>
-        <span style="font-size:11px;color:#ffc046;letter-spacing:.2em">MAGIA CORTES·IA · ESTÚDIO AUTOMÁTICO 9:16</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <b style="background:linear-gradient(90deg,#ffffff,#ffc046,#4ac5f3);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.18em;font-size:17px">MAGIA IA</b>
+          <span class="v21-chip">v2.1</span>
+        </div>
+        <span style="font-size:11px;color:#ffc046;letter-spacing:.2em;display:block;margin-top:2px">MAGIA CORTES·IA · ESTÚDIO AUTOMÁTICO 9:16</span>
       </div>
     </div>
-    <p style="margin:0;color:#BCBCBB;font-size:13px;text-align:center">Copyright © 2020-2026, Magia Cortes IA, All rights reserved</p>
+    <p style="margin:0;color:#b8bdd0;font-size:13px;text-align:center">Copyright © 2020-2026, Magia Cortes IA v2.1, All rights reserved</p>
     <div style="display:flex;gap:16px;align-items:center">
-      <a href="#fm" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">MAGIA CORTES·IA</a>
+      <a href="#fm" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">MAGIA CORTES·IA v2.1</a>
       <button type="button" class="mc-login-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOPO ↑</button>
     </div>
   </div>
@@ -2351,7 +2682,7 @@ $("mcHeroBanner").addEventListener("mouseleave",()=>{
 // Transições Fluidas de Queda (Scroll Cascade & Drop Inertia)
 let mcFallObserver=null;
 function initFluidFallScroll(){
-  const selectors=".mc-hero-banner-inner > *, .mc-starter-wrap, .mc-section-head, .mc-hero-top, .mc-spotlight, .mc-char-card, .mc-sub-bar, aside.side, .card, .sent-wrap, .chat-mon, .ts-box, .item-card, .clip, .mc-footer-inner";
+  const selectors=".mc-hero-banner-inner > *, .v21-tele-card, .mc-starter-wrap, .mc-section-head, .mc-hero-top, .mc-spotlight, .mc-char-card, .mc-sub-bar, aside.side, .v21-quick-card, .card, .v21-bento-pane, .sent-wrap, .chat-mon, .ts-box, .item-card, .clip, .mc-footer-inner";
   const nodes=document.querySelectorAll(selectors);
   if(typeof IntersectionObserver!=="undefined"){
     if(!mcFallObserver){
