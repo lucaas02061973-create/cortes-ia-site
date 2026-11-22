@@ -61,9 +61,11 @@ label{display:block;font-size:12px;color:var(--mut);margin-top:12px}
 .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .dot{width:10px;height:10px;border-radius:50%;background:#ef2b2b;animation:bl 1.2s infinite}
 @keyframes bl{50%{opacity:.3}}
-.prev{margin:12px 0;height:150px;border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(180deg,#2a2a6e,#c0467c 55%,#ff9a4a);border:1px solid var(--line)}
-.prev i{position:absolute;left:12px;bottom:10px;font:9px var(--px);color:var(--y);font-style:normal}
-.prev u{position:absolute;right:14px;top:14px;background:#ef2b2b;color:#fff;font:8px var(--px);padding:5px 7px;border-radius:4px;text-decoration:none}
+.prev-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px;padding:8px 10px;border-radius:10px 10px 0 0;border:1px solid var(--line);border-bottom:0;background:var(--in)}
+.prev{margin:0 0 12px;aspect-ratio:16/9;min-height:230px;max-height:460px;width:100%;border-radius:0 0 12px 12px;position:relative;overflow:hidden;background:#07070b linear-gradient(180deg,#181834,#0b0b12);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.prev-player{width:100%;height:100%;border:0;display:block;background:#000}
+.prev-badge{background:#ef2b2b;color:#fff;font:8px var(--px);padding:4px 7px;border-radius:4px}
+.prev-txt{font:9px var(--px);color:var(--y)}
 .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:10px}
 .clip{cursor:pointer}
 .vid{aspect-ratio:9/16;border-radius:10px;position:relative;overflow:hidden;background:#111;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
@@ -235,7 +237,17 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
           <button class="btn g sm" id="stop" type="button">parar</button>
         </div>
         <a class="mut" id="ll" target="_blank" rel="noopener"></a>
-        <div class="prev"><u>AO VIVO</u><i id="prevTxt">ouvindo…</i></div>
+        <div class="prev-bar" id="prevBar">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span class="prev-badge" id="prevPlatBadge">AO VIVO</span>
+            <span class="prev-txt" id="prevTxt">carregando player…</span>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn g sm" id="reloadPlayerBtn" type="button">🔄 Recarregar Player</button>
+            <a class="btn g sm" id="openOrigPlayer" target="_blank" rel="noopener">↗ Abrir na plataforma</a>
+          </div>
+        </div>
+        <div class="prev" id="livePlayerBox"></div>
 
         <div class="ts-row">
           <div class="ts-box">
@@ -578,12 +590,13 @@ const memDemoDiscovery=[
   {id:"tw_paulinho",platform:"TWITCH",login:"paulinhooloko",display_name:"Paulinho o LOKO",title:"GTA RP CIDADE ALTA AO VIVO · FUGA ABSURDA",category:"Grand Theft Auto V",viewer_count:32400,is_brazil:true,language:"pt",url:"https://www.twitch.tv/paulinhooloko"},
   {id:"tw_loud",platform:"TWITCH",login:"loud_coringa",display_name:"LOUD Coringa",title:"CORINGA AO VIVO NO GTA RP E RESENHA COM OS CRIA",category:"Grand Theft Auto V",viewer_count:24900,is_brazil:true,language:"pt",url:"https://www.twitch.tv/loud_coringa"},
   {id:"tw_alanzoka",platform:"TWITCH",login:"alanzoka",display_name:"alanzoka",title:"JOGOS DE TERROR E REAÇÃO AO VIVO (SUSTO GARANTIDO)",category:"Just Chatting",viewer_count:19800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/alanzoka"},
-  {id:"kk_jonvlogs",platform:"KICK",login:"jonvlogs",display_name:"JonVlogs",title:"IRL BRASIL AO VIVO · RESENHA NA RUA",category:"IRL",viewer_count:11400,is_brazil:true,language:"pt",url:"https://kick.com/jonvlogs"},
-  {id:"yt_gta6br",platform:"YOUTUBE",login:"flowgames",display_name:"Flow Games Brasil",title:"GTA 6 TRAILERS, SEGREDOS DE VICE CITY AO VIVO",category:"GTA 6",viewer_count:7250,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=QdBZY2fkU-0"},
-  {id:"tw_nobru",platform:"TWITCH",login:"nobru",display_name:"Nobru",title:"FREE FIRE E CLUTCH AO VIVO COM A LOUD",category:"FPS",viewer_count:6800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/nobru"},
+  {id:"kk_surskity",platform:"KICK",login:"surskity",display_name:"surskity",title:"KICK BRASIL AO VIVO · GAMEPLAY & RESENHA",category:"Grand Theft Auto V",viewer_count:5800,is_brazil:true,language:"pt",url:"https://kick.com/surskity"},
+  {id:"kk_jonvlogs",platform:"KICK",login:"jonvlogs",display_name:"JonVlogs",title:"IRL BRASIL AO VIVO · RESENHA NA RUA",category:"IRL",viewer_count:4900,is_brazil:true,language:"pt",url:"https://kick.com/jonvlogs"},
+  {id:"yt_cnnbr",platform:"YOUTUBE",login:"cnnbrasil",display_name:"CNN Brasil",title:"CNN BRASIL AO VIVO · NOTÍCIAS EM TEMPO REAL",category:"IRL",viewer_count:8600,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=kVj3PEECYks"},
+  {id:"yt_sbtbr",platform:"YOUTUBE",login:"sbtnews",display_name:"SBT News",title:"SBT NEWS AO VIVO BRASIL",category:"IRL",viewer_count:1300,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=XmN3ClDzQiI"},
   {id:"tw_kaicenat",platform:"TWITCH",login:"kaicenat",display_name:"KaiCenat",title:"MARATHON STREAM LIVE · BIGGEST GUESTS",category:"Just Chatting",viewer_count:78500,is_brazil:false,language:"en",url:"https://www.twitch.tv/kaicenat"},
-  {id:"kk_adin",platform:"KICK",login:"adinross",display_name:"AdinRoss",title:"KICK LIVE TONIGHT · IRL SHOW",category:"IRL",viewer_count:41200,is_brazil:false,language:"en",url:"https://kick.com/adinross"},
-  {id:"yt_speed",platform:"YOUTUBE",login:"ishowspeed",display_name:"IShowSpeed",title:"GTA 6 & IRL RAGE MOMENTS LIVE STREAM",category:"Grand Theft Auto V",viewer_count:36900,is_brazil:false,language:"en",url:"https://www.youtube.com/watch?v=live_demo"}
+  {id:"kk_westcol",platform:"KICK",login:"westcol",display_name:"Westcol",title:"KICK LIVE · IRL & GAMING",category:"IRL",viewer_count:41200,is_brazil:false,language:"es",url:"https://kick.com/westcol"},
+  {id:"yt_lofi",platform:"YOUTUBE",login:"lofigirl",display_name:"Lofi Girl",title:"lofi hip hop radio · 24/7 live stream",category:"IRL",viewer_count:28900,is_brazil:false,language:"en",url:"https://www.youtube.com/watch?v=jfKfPfyJRdk"}
 ];
 
 const nowTs=Math.floor(Date.now()/1000);
@@ -744,7 +757,42 @@ function classifyBrBrowser(s){
 
 async function browserDiscoverStreams(plat,cat,reg,q){
   let items=[];
-  let kickLive=0;
+  let twitchLive=0,kickLive=0;
+
+  if(plat==="ALL"||plat==="TWITCH"){
+    try{
+      const ctrl=new AbortController();
+      const tm=setTimeout(()=>ctrl.abort(),4200);
+      const gql='query { ptStreams: streams(first: 25, options: { sort: VIEWER_COUNT, languages: [PT] }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } globalStreams: streams(first: 20, options: { sort: VIEWER_COUNT }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } }';
+      const r=await fetch("https://gql.twitch.tv/gql",{
+        method:"POST",signal:ctrl.signal,
+        headers:{"Client-ID":"kimne78kx3ncx6brgo4mv6wki5h1ko","Content-Type":"application/json"},
+        body:JSON.stringify({query:gql})
+      });
+      clearTimeout(tm);
+      if(r.ok){
+        const j=await r.json();
+        const d=j.data||{};
+        const addEdges=(edges,defLang)=>{
+          (edges||[]).forEach(e=>{
+            const nd=e&&e.node;const bc=nd&&nd.broadcaster;const lg=bc&&bc.login;
+            if(!lg)return;
+            items.push({
+              id:"tw_"+lg.toLowerCase(),platform:"TWITCH",login:lg,
+              display_name:bc.displayName||lg,title:nd.title||"Ao vivo na Twitch",
+              category:(nd.game&&nd.game.name)||"Ao Vivo",viewer_count:Number(nd.viewersCount||0),
+              language:((bc.broadcastSettings&&bc.broadcastSettings.language)||defLang).toLowerCase(),
+              url:"https://www.twitch.tv/"+lg
+            });
+            twitchLive++;
+          });
+        };
+        addEdges(d.ptStreams&&d.ptStreams.edges,"pt");
+        addEdges(d.globalStreams&&d.globalStreams.edges,"en");
+      }
+    }catch(_){}
+  }
+
   if(plat==="ALL"||plat==="KICK"){
     try{
       const ctrl=new AbortController();
@@ -767,11 +815,14 @@ async function browserDiscoverStreams(plat,cat,reg,q){
       }
     }catch(_){}
   }
-  const seen=new Set(items.map(x=>x.platform+":"+x.login.toLowerCase()));
+
+  const dedup=new Map();
+  items.forEach(s=>{const k=s.platform+":"+s.login.toLowerCase();if(!dedup.has(k))dedup.set(k,s);});
   memDemoDiscovery.forEach(d=>{
-    if(!seen.has(d.platform+":"+d.login.toLowerCase())) items.push({...d});
+    const k=d.platform+":"+d.login.toLowerCase();
+    if(!dedup.has(k)&&(twitchLive===0||d.platform!=="TWITCH"))dedup.set(k,{...d});
   });
-  items=items.filter(s=>(plat==="ALL"||s.platform===plat));
+  items=[...dedup.values()].filter(s=>(plat==="ALL"||s.platform===plat));
   if(cat!=="ALL"){
     items=items.filter(s=>{
       const b=((s.category||"")+" "+(s.title||"")).toLowerCase();
@@ -789,11 +840,13 @@ async function browserDiscoverStreams(plat,cat,reg,q){
   else if(reg==="FOREIGN_ONLY")items=items.filter(s=>!s.is_brazil);
   items.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(b.viewer_count-a.viewer_count));
   const brCnt=items.filter(x=>x.is_brazil).length;
-  return {
-    streams:items,
-    counts:{total:items.length,brazil:brCnt,international:items.length-brCnt},
-    sourceNote:kickLive>0?`Kick ao vivo (${kickLive}) + lista exemplo (conecte servidor Python na aba IA para Twitch/YouTube ao vivo real)`:`Modo navegador offline (conecte o servidor Python na aba IA para Twitch, Kick e YouTube 100% ao vivo)`
-  };
+  const liveParts=[];
+  if(twitchLive>0)liveParts.push(`Twitch ao vivo (${twitchLive})`);
+  if(kickLive>0)liveParts.push(`Kick ao vivo (${kickLive})`);
+  const note=liveParts.length
+    ? `${liveParts.join(" + ")} direto no navegador · conecte servidor Python na aba IA para catálogo completo Kick/YouTube + FFmpeg`
+    : `Lista base (conecte servidor Python na aba IA para catálogo dinâmico Kick/YouTube + corte FFmpeg)`;
+  return {streams:items,counts:{total:items.length,brazil:brCnt,international:items.length-brCnt},sourceNote:note};
 }
 
 function buildZipBlob(files){
@@ -1015,14 +1068,14 @@ async function loadRadar(){
         <b style="display:block;margin-top:8px">${esc(s.display_name||s.login)}</b>
         <div class="mut" style="font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.title)}</div>
         <div class="mut" style="margin-top:4px;font-size:11px">Categoria: <b>${esc(s.category||"Ao Vivo")}</b></div>
-        <button class="btn sm w" type="button" style="margin-top:8px" data-radar-idx="${i}">▶ Analisar 00:00←Ao Vivo→Fim</button>
+        <button class="btn sm w" type="button" style="margin-top:8px" data-radar-idx="${i}">▶ Rodar Live & Cortar (20 IAs)</button>
       </div>
     `;
   }).join("");
   grid.querySelectorAll("[data-radar-idx]").forEach(btn=>{
     btn.onclick=()=>{
       const st=radarStreams[Number(btn.dataset.radarIdx)];
-      if(st)void startLive(st.url,st.display_name||st.login).catch(e=>notify(e.message));
+      if(st)void startLive(st.url,st.display_name||st.login,"LIVE").catch(e=>notify(e.message));
     };
   });
 }
@@ -1152,10 +1205,101 @@ async function refreshLives(){
   renderVideosTab();
 }
 
-async function startLive(link,name){
+let lastPlayerKey="";
+let lastLiveObj=null;
+
+function extractLiveTarget(rawLink,platHint){
+  const link=(rawLink||"").trim();
+  const upHint=(platHint||"").toUpperCase();
+  if(!link)return{platform:upHint||"LOCAL",channel:"",videoId:"",embedUrl:"",isLocal:true};
+  if(upHint==="LOCAL"||link.startsWith("blob:")||link.startsWith("./")||link.startsWith("/data/")||/\.(mp4|webm|mov|m3u8)(\?|$)/i.test(link)){
+    return{platform:upHint||"LOCAL",channel:"video",videoId:"",embedUrl:resolveMediaUrl(link),isLocal:true};
+  }
+  let u;
+  try{u=new URL(/^https?:\/\//i.test(link)?link:"https://"+link);}
+  catch(_){return{platform:upHint||"UNKNOWN",channel:link,videoId:"",embedUrl:"",isLocal:false};}
+  const host=u.hostname.replace(/^www\.|^m\./,"").toLowerCase();
+  const parts=u.pathname.split("/").filter(Boolean);
+  if(host.includes("twitch.tv")){
+    const chan=(parts[0]||"alanzoka").toLowerCase();
+    const pHost=location.hostname||"localhost";
+    const vodId=(parts[0]==="videos"&&parts[1])?parts[1]:"";
+    const embedUrl=vodId
+      ?`https://player.twitch.tv/?video=${encodeURIComponent(vodId)}&parent=${encodeURIComponent(pHost)}&autoplay=true&muted=false`
+      :`https://player.twitch.tv/?channel=${encodeURIComponent(chan)}&parent=${encodeURIComponent(pHost)}&autoplay=true&muted=false`;
+    return{platform:"TWITCH",channel:chan,videoId:vodId,embedUrl,isLocal:false};
+  }
+  if(host.includes("kick.com")){
+    const isVod=(parts[0]==="video"||parts[0]==="videos")&&parts[1];
+    const slug=(parts[0]||"surskity").replace(/[^A-Za-z0-9_.-]/g,"");
+    const embedUrl=isVod
+      ?`https://player.kick.com/video/${encodeURIComponent(parts[1])}`
+      :`https://player.kick.com/${encodeURIComponent(slug)}?autoplay=true`;
+    return{platform:"KICK",channel:slug,videoId:isVod?parts[1]:"",embedUrl,isLocal:false};
+  }
+  if(host.includes("youtube.com")||host.includes("youtu.be")){
+    let vid=u.searchParams.get("v")||"";
+    if(!vid&&host.includes("youtu.be")&&parts[0])vid=parts[0];
+    if(!vid){
+      const idx=parts.findIndex(x=>x==="live"||x==="shorts"||x==="embed");
+      if(idx>=0&&parts[idx+1])vid=parts[idx+1];
+    }
+    vid=vid.replace(/[^A-Za-z0-9_-]/g,"");
+    const embedUrl=vid?`https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0`:"";
+    return{platform:"YOUTUBE",channel:parts[0]||"youtube",videoId:vid,embedUrl,isLocal:false};
+  }
+  return{platform:upHint||"UNKNOWN",channel:parts[parts.length-1]||link,videoId:"",embedUrl:"",isLocal:false};
+}
+
+async function renderLivePlayer(l,forceReload=false){
+  if(!l)return;
+  lastLiveObj=l;
+  const box=$("livePlayerBox");
+  if(!box)return;
+  const key=`${l.id}|${l.link}|${l.platform||""}`;
+  if(!forceReload&&key===lastPlayerKey&&box.childElementCount>0)return;
+  lastPlayerKey=key;
+
+  const info=extractLiveTarget(l.link,l.platform);
+  $("prevPlatBadge").textContent=info.platform||l.platform||"LIVE";
+  const openEl=$("openOrigPlayer");
+  if(openEl){openEl.href=l.link||"#";openEl.style.display=info.isLocal?"none":"inline-flex";}
+
+  if(info.isLocal&&info.embedUrl){
+    box.innerHTML=`<video class="prev-player" src="${esc(info.embedUrl)}" controls autoplay playsinline></video>`;
+    return;
+  }
+
+  let embedUrl=info.embedUrl;
+  if(!embedUrl&&info.platform==="YOUTUBE"&&serverMode){
+    try{
+      const r=await fetch(`${serverBase}/api/stream/resolve?url=${encodeURIComponent(l.link)}&parent=${encodeURIComponent(location.hostname||"localhost")}`);
+      if(r.ok){const d=await r.json();if(d.embed_url)embedUrl=d.embed_url;}
+    }catch(_){}
+  }
+
+  if(embedUrl){
+    box.innerHTML=`<iframe class="prev-player" src="${esc(embedUrl)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    return;
+  }
+
+  box.innerHTML=`
+    <div style="text-align:center;padding:20px;max-width:440px">
+      <div class="pill warn" style="margin-bottom:8px">${esc(info.platform)} · @${esc(l.name||info.channel)}</div>
+      <div style="font-weight:700;margin-bottom:6px">Player incorporado requer o link direto do vídeo/live</div>
+      <div class="mut" style="margin-bottom:12px">Para links genéricos de canal do YouTube (@canal/live), conecte o servidor Python na aba IA ou cole o link direto com ?v=ID.</div>
+      <a class="btn sm" href="${esc(l.link)}" target="_blank" rel="noopener">▶ Abrir live em nova aba</a>
+    </div>
+  `;
+}
+
+$("reloadPlayerBtn").onclick=()=>{if(lastLiveObj)void renderLivePlayer(lastLiveObj,true);};
+
+async function startLive(link,name,kindOverride){
   if(!link){notify("Informe o link da live ou vídeo.");return;}
   const payload={
     link,name:name||"",
+    kind:kindOverride||null,
     min:+$("mn").value||6,max:+$("mx").value||3,
     hint:$("hint").value,names:$("names").value,
     director_broll:$("dirBroll").checked,youtube_broll:$("ytBroll").checked,
@@ -1168,7 +1312,7 @@ async function startLive(link,name){
 }
 
 function watchLive(id){
-  curLiveId=id;shownCount=0;
+  curLiveId=id;shownCount=0;lastPlayerKey="";
   $("cl").innerHTML="";
   $("fm").classList.add("hide");
   $("lv").classList.remove("hide");
@@ -1177,6 +1321,7 @@ function watchLive(id){
   clearInterval(pollTimer);
   pollTimer=setInterval(pollLive,1800);
   void pollLive();
+  $("lv").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 async function pollLive(){
@@ -1186,8 +1331,9 @@ async function pollLive(){
   $("ln").textContent=l.name;
   $("ll").textContent=l.link;$("ll").href=l.link;
   $("st").textContent=`${l.status} · ${hms(l.recorded)} · ${l.clips.length}/${l.max} cortes`;
-  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="analisando"?"20 IAs analisando…":"ao vivo · Time-Shift ativo…");
+  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="analisando"?"20 IAs analisando…":"ao vivo · player ativo + 20 IAs");
   $("lvDot").style.display=(l.status==="finalizado"||l.status==="erro")?"none":"inline-block";
+  void renderLivePlayer(l,false);
   $("log").innerHTML=(l.log||[]).map(x=>`<div>${esc(x)}</div>`).join("");
   const cov=l.timeline_coverage||{retro_pct:0,live_pct:0};
   $("tsRetroPct").textContent=(cov.retro_pct||0)+"%";$("tsRetroBar").style.width=(cov.retro_pct||0)+"%";
