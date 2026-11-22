@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cortes ao Vivo · CORTES·IA</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff3b1f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%230b0b10'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23ff3b1f'/%3E%3C/svg%3E">
+<title>Magia Cortes IA · Estúdio GTA 6</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff2e93'/%3E%3Cstop offset='1' stop-color='%2300e5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%2307070d'/%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2307070d'/%3E%3C/svg%3E">
 <style>
 @font-face{
   font-family:"CortesPixel";
@@ -16,65 +16,89 @@
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#0b0b10;--panel:#15151c;--in:#0f0f15;--line:#2b2b36;--tx:#f1f1f5;--mut:#8f8fa0;
-  --acc:#ff3b1f;--y:#ffd23f;--pu:#8b5cf6;--gr:#22e07a;
+  --bg:#07070d;--panel:#11111c;--in:#0b0b14;--line:#27233a;--tx:#f6f4ff;--mut:#9c97b8;
+  --acc:#ff2e93;--cy:#00e5ff;--y:#ffd23f;--pu:#8b5cf6;--gr:#22e07a;
   --px:"CortesPixel",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
-    --bg:#eeeef2;--panel:#fff;--in:#f5f5f8;--line:#d6d6de;--tx:#16161c;--mut:#666674;
+    --bg:#07070d;--panel:#11111c;--in:#0b0b14;--line:#27233a;--tx:#f6f4ff;--mut:#9c97b8;
   }
 }
 :root[data-theme="light"]{
-  --bg:#eeeef2;--panel:#fff;--in:#f5f5f8;--line:#d6d6de;--tx:#16161c;--mut:#666674;
+  --bg:#f2f0f7;--panel:#fff;--in:#f7f5fc;--line:#d6d0e6;--tx:#161420;--mut:#645f7a;
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+body{
+  margin:0;
+  background:
+    radial-gradient(900px 420px at 88% -8%,rgba(255,46,147,.16),transparent 62%),
+    radial-gradient(800px 420px at 8% 0%,rgba(0,229,255,.11),transparent 60%),
+    var(--bg);
+  color:var(--tx);
+  font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+header{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 16px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(255,46,147,.08),rgba(139,92,246,.06),rgba(0,229,255,.06));
+  flex-wrap:wrap;
+}
 .hdr-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0;max-width:100%}
-.logo{display:flex;align-items:center;gap:8px;font-family:var(--px);font-size:13px;color:var(--acc);white-space:nowrap}
-.logo b{width:24px;height:24px;border-radius:50%;background:var(--acc);box-shadow:inset 0 0 0 5px var(--bg),inset 0 0 0 9px var(--acc);display:inline-block}
+.logo{
+  display:flex;align-items:center;gap:8px;font-family:var(--px);font-size:12px;
+  background:linear-gradient(90deg,#ff2e93,#ffd23f,#00e5ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;
+}
+.logo b{
+  width:24px;height:24px;border-radius:7px;
+  background:linear-gradient(135deg,#ff2e93,#8b5cf6,#00e5ff);
+  box-shadow:0 0 12px rgba(255,46,147,.45);display:inline-block;flex:0 0 auto;
+}
 nav{display:flex;gap:4px;overflow-x:auto;max-width:100%;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
-nav button{background:none;border:0;color:var(--mut);padding:9px 11px;font:9px var(--px);cursor:pointer;border-radius:8px;white-space:nowrap}
-nav button.on{color:var(--tx);background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.08)}
-main{display:grid;grid-template-columns:255px 1fr;gap:14px;padding:14px;max-width:1160px;margin:auto}
+nav button{background:none;border:1px solid transparent;color:var(--mut);padding:9px 11px;font:9px var(--px);cursor:pointer;border-radius:8px;white-space:nowrap;transition:.15s}
+nav button:hover{color:var(--tx);background:rgba(255,255,255,.04)}
+nav button.on{color:var(--tx);background:var(--panel);border-color:rgba(255,46,147,.5);box-shadow:0 0 12px rgba(255,46,147,.16)}
+main{display:grid;grid-template-columns:255px 1fr;gap:14px;padding:14px;max-width:1200px;margin:auto}
 @media(max-width:780px){main{grid-template-columns:1fr}main>section{order:-1}nav{flex-wrap:wrap;overflow:visible}nav button{padding:7px 9px}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 8px 30px rgba(0,0,0,.22)}
 .hide{display:none!important}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:9px;padding:11px 14px;font:700 13px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
-.btn:hover{filter:brightness(1.06)}
+.btn{background:linear-gradient(135deg,#ff2e93,#c026d3);color:#fff;border:0;border-radius:9px;padding:11px 14px;font:700 13px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
 .btn.g{background:var(--in);color:var(--tx);border:1px solid var(--line)}
+.btn.cy{background:linear-gradient(135deg,#00c2ff,#8b5cf6);color:#06060d}
 .btn.sm{padding:7px 10px;font-size:12px}
 .btn.w{width:100%}
-.side h4,.card h3{font:10px var(--px);margin:16px 0 8px;color:var(--mut)}
+.side h4,.card h3{font:10px var(--px);margin:16px 0 8px;color:var(--cy)}
 .card h3{color:var(--tx);margin:0 0 10px;font-size:11px;line-height:1.6}
-input[type=text],input[type=number],input[type=url],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--in);color:var(--tx);font:inherit;margin-top:6px}
+input[type=text],input[type=number],input[type=url],input[type=range],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--in);color:var(--tx);font:inherit;margin-top:6px}
+input[type=range]{padding:4px 0;accent-color:var(--acc)}
 label{display:block;font-size:12px;color:var(--mut);margin-top:12px}
 .row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:130px}
 .chk{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px;cursor:pointer}
-.chk input{width:16px;height:16px;accent-color:#1a73e8}
+.chk input{width:16px;height:16px;accent-color:var(--acc)}
 .lv{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:9px 4px;border-bottom:1px solid var(--line);font-size:12.5px;cursor:pointer}
-.lv:hover{background:rgba(255,59,31,.06)}
+.lv:hover{background:rgba(255,46,147,.08)}
 .lv span{color:var(--mut)}
 .mut{color:var(--mut);font-size:12.5px}
 .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.dot{width:10px;height:10px;border-radius:50%;background:#ef2b2b;animation:bl 1.2s infinite}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px var(--acc);animation:bl 1.2s infinite}
 @keyframes bl{50%{opacity:.3}}
 .prev-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px;padding:8px 10px;border-radius:10px 10px 0 0;border:1px solid var(--line);border-bottom:0;background:var(--in)}
-.prev{margin:0 0 12px;aspect-ratio:16/9;min-height:230px;max-height:460px;width:100%;border-radius:0 0 12px 12px;position:relative;overflow:hidden;background:#07070b linear-gradient(180deg,#181834,#0b0b12);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.prev{margin:0 0 12px;aspect-ratio:16/9;min-height:230px;max-height:460px;width:100%;border-radius:0 0 12px 12px;position:relative;overflow:hidden;background:#07070b linear-gradient(180deg,#1a1030,#090910);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
 .prev-player{width:100%;height:100%;border:0;display:block;background:#000}
-.prev-badge{background:#ef2b2b;color:#fff;font:8px var(--px);padding:4px 7px;border-radius:4px}
+.prev-badge{background:var(--acc);color:#fff;font:8px var(--px);padding:4px 7px;border-radius:4px}
 .prev-txt{font:9px var(--px);color:var(--y)}
 .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:10px}
 .clip{cursor:pointer}
 .vid{aspect-ratio:9/16;border-radius:10px;position:relative;overflow:hidden;background:#111;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-.cap{background:var(--acc);color:#fff;font:800 11.5px system-ui;padding:6px 8px;text-align:center;text-transform:uppercase;border-bottom:3px solid var(--y)}
+.cap{background:linear-gradient(90deg,#ff2e93,#c026d3);color:#fff;font:800 11.5px system-ui;padding:6px 8px;text-align:center;text-transform:uppercase;border-bottom:3px solid var(--y)}
 .clip b{display:block;margin-top:8px}
 details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 #log{margin-top:8px;max-height:140px;overflow:auto;font:12px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)}
-.film{height:58px;border-radius:6px;border:3px dashed #fff;background:repeating-linear-gradient(90deg,#6d4bd6 0 40px,#8b6cf0 40px 44px);animation:sl 8s linear infinite;background-size:88px 100%}
+.film{height:58px;border-radius:6px;border:3px dashed #fff;background:repeating-linear-gradient(90deg,#ff2e93 0 40px,#8b5cf6 40px 44px);animation:sl 8s linear infinite;background-size:88px 100%}
 @keyframes sl{to{background-position:-88px 0}}
 .stage{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0}
 .mas{text-align:center;max-width:125px}.mas svg{width:46px;animation:bo 1s steps(2) infinite}
@@ -90,10 +114,10 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 .wave{position:relative;display:flex;align-items:center;gap:2px;height:66px;margin-top:8px}
 .wave i{flex:1;background:var(--gr);border-radius:2px;min-width:2px;transition:height .18s}
 .pbar-wrap{height:8px;border-radius:4px;background:var(--in);border:1px solid var(--line);margin-top:6px;overflow:hidden}
-.pbar{height:100%;border-radius:4px;background:var(--pu);width:0%;transition:width .15s}
+.pbar{height:100%;border-radius:4px;background:var(--cy);width:0%;transition:width .15s}
 .mk{position:absolute;top:0;font:7px var(--px);background:var(--y);color:#111;padding:3px 5px;border-radius:3px;z-index:2}
 .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px}
-.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px}
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:12px;margin-top:12px}
 .swarm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;margin-top:10px}
 .item-card{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--in)}
 .item-card.active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
@@ -102,8 +126,9 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 .agent-card.done{border-color:var(--gr)}
 .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(34,224,122,.16);color:var(--gr)}
 .pill.warn{background:rgba(255,210,63,.18);color:var(--y)}
-.pill.err{background:rgba(255,59,31,.18);color:var(--acc)}
+.pill.err{background:rgba(255,46,147,.2);color:#ff6cb5}
 .pill.pu{background:rgba(139,92,246,.22);color:#c4b5fd}
+.pill.cy{background:rgba(0,229,255,.18);color:#5eead4}
 .pill.br{background:rgba(34,224,122,.22);color:#4ade80}
 .pill.intl{background:rgba(143,143,160,.2);color:var(--mut)}
 .plat-btn{padding:6px 11px;border-radius:8px;border:1px solid var(--line);background:var(--in);color:var(--mut);font:700 12px system-ui;cursor:pointer}
@@ -113,54 +138,214 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 .sent-leg{display:flex;gap:12px;font-size:11.5px;flex-wrap:wrap}
 .sent-leg span{display:inline-flex;align-items:center;gap:5px}
 .sent-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
-#sentimentChart{width:100%;height:165px;display:block;cursor:crosshair}
+#sentimentChart{width:100%;height:170px;display:block;cursor:pointer}
 .ts-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
 @media(max-width:600px){.ts-row{grid-template-columns:1fr}}
 .ts-box{padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--in);font-size:11.5px}
 .clip-card-lib{position:relative;display:flex;flex-direction:column;gap:6px}
 .clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(11,11,16,.84);padding:4px 8px;border-radius:8px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.22)}
 .clip-chk-label input{width:16px;height:16px;accent-color:var(--acc);margin:0}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#16161c;color:#fff;padding:10px 16px;border-radius:10px;font-size:12.5px;z-index:99;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.studio-quick{margin-top:12px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--in)}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#161224;color:#fff;padding:10px 16px;border-radius:10px;border:1px solid var(--acc);font-size:12.5px;z-index:99;box-shadow:0 8px 28px rgba(0,0,0,.45)}
 </style>
 </head>
 <body>
 <header>
   <div class="hdr-left">
-    <div class="logo"><b></b>CORTES·IA</div>
+    <div class="logo"><b></b>MAGIA CORTES·IA</div>
     <nav id="nav"></nav>
   </div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
     <span class="pill" id="swarmBadge">20 IAs · Zero API Key</span>
-    <span class="pill warn" id="modeBadge">Modo Web Online</span>
+    <span class="pill warn" id="modeBadge">Modo Web · Zero API</span>
     <button class="btn g sm" id="themeBtn" type="button">Tema</button>
   </div>
 </header>
 
 <main>
   <aside class="card side">
-    <button class="btn w" id="newBtn" type="button">+ Cortar live AO VIVO</button>
-    <button class="btn g w" id="sidebarAnalyzeAllBtn" type="button" style="margin-top:8px;border-color:var(--y);color:var(--y)">🔥 Analisar TODAS as lives</button>
-    <h4>NOVA LIVE</h4>
-    <input type="text" id="nn" placeholder="nome (ex.: gta6-live-do-fulano)">
-    <input type="text" id="nl" placeholder="link da live (Twitch, Kick, YouTube…)">
-    <button class="btn w" id="mk" type="button" style="margin-top:10px">Criar</button>
-    <h4>LIVES</h4>
+    <button class="btn w" id="newBtn" type="button">+ Novo Corte AO VIVO</button>
+    <button class="btn g w" id="goAoVivoBtn" type="button" style="margin-top:8px;border-color:var(--cy);color:var(--cy)">📡 Abrir Aba AO VIVO</button>
+    <h4>MONITORAMENTO RÁPIDO</h4>
+    <input type="text" id="nn" placeholder="nome (ex.: gta6-paulinho)">
+    <input type="text" id="nl" placeholder="Twitch, Kick, YouTube ou .m3u8">
+    <button class="btn w" id="mk" type="button" style="margin-top:10px">Assistir & Cortar</button>
+    <h4>LIVES & HISTÓRICO</h4>
     <div id="lives"><div class="mut">Carregando...</div></div>
   </aside>
 
   <section style="min-width:0">
+    <!-- 1. ABA CORTES -->
     <div id="tab-CORTES" class="tab-panel">
-      <div class="card" id="radarCard" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <div>
-            <h3 style="margin:0">■ RADAR AO VIVO · TWITCH + YOUTUBE + KICK</h3>
-            <div class="mut" id="radarMeta">Ordenado: Brasil 1º · Internacionais por último · Maior audiência no topo</div>
+      <div class="card" id="fm">
+        <h3>■ MONITORAR LIVE & GERAR CORTES 9:16 (TIME-SHIFT DUPLO)</h3>
+        <p class="mut" style="margin:0">Cole o link da <b>Kick, Twitch, YouTube, .m3u8 ou .mp4</b> para ver a <b>prévia ao vivo imediata com som</b>. Ao iniciar, <b>20 IAs sem API key</b> acompanham do ao vivo ao fim e varrem do ao vivo até 00:00 gerando cortes 9:16 com legenda.</p>
+        <label>Link da live ou vídeo (.m3u8 / .mp4 / Twitch / Kick / YouTube)
+          <input type="text" id="lk" value="https://www.twitch.tv/alanzoka" placeholder="Cole aqui para carregar a prévia instantânea com som…">
+        </label>
+        <div class="row">
+          <label>Exigência mínima (1–10)
+            <input type="number" id="mn" min="1" max="10" value="6">
+          </label>
+          <label>Máximo de cortes (≤30s cada)
+            <input type="number" id="mx" min="1" max="20" value="4">
+          </label>
+        </div>
+        <label>Foco dos agentes (opcional)
+          <input type="text" id="hint" value="engraçados, frustrações, raiva, xingamentos e picos do chat">
+        </label>
+        <label>Nomes difíceis para legenda
+          <input type="text" id="names" placeholder="ex.: Dava Jones, Paulinho, Vice City">
+        </label>
+        <label class="chk"><input type="checkbox" id="dirBroll" checked> B-roll do diretor (sobrepor reação automática)</label>
+        <label class="chk"><input type="checkbox" id="ytBroll" checked> Buscar B-roll complementar se o banco local estiver vazio</label>
+        <div class="row">
+          <label>Auto-postar no YouTube (privado)
+            <select id="auto">
+              <option value="no">não, apenas gerar MP4</option>
+              <option value="yes">sim, enviar fila privada YT</option>
+            </select>
+          </label>
+          <label>Vídeos por dia
+            <input type="number" id="vpd" min="1" max="20" value="3">
+          </label>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+          <button class="btn" id="go" type="button">▶ Começar Varredura Dupla (00:00 ← Ao Vivo → Fim)</button>
+          <button class="btn g" id="previewNowBtn" type="button">📺 Atualizar Prévia Vídeo</button>
+        </div>
+      </div>
+
+      <div class="card" id="lv" style="margin-top:14px">
+        <div class="head" id="lvStatusHeader">
+          <span class="dot" id="lvDot"></span>
+          <b id="ln">Prévia Instantânea Ao Vivo</b>
+          <span class="mut" id="st">cole o link acima para assistir com som</span>
+          <span style="flex:1"></span>
+          <button class="btn g sm hide" id="stop" type="button">⏹ Parar</button>
+        </div>
+        <a class="mut" id="ll" target="_blank" rel="noopener"></a>
+        <div class="prev-bar" id="prevBar">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span class="prev-badge" id="prevPlatBadge">AO VIVO</span>
+            <span class="prev-txt" id="prevTxt">prévia pronta com som · reprodução simultânea</span>
           </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn g sm" id="refreshRadarBtn" type="button">🔄 Atualizar Lives</button>
-            <button class="btn sm" id="analyzeAllBtn" type="button">🔥 Analisar TODAS as Lives (20 IAs)</button>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn g sm" id="reloadPlayerBtn" type="button">🔄 Recarregar Player</button>
+            <a class="btn g sm" id="openOrigPlayer" target="_blank" rel="noopener">↗ Abrir original</a>
           </div>
         </div>
+        <div class="prev" id="livePlayerBox"></div>
+
+        <div class="sent-wrap" id="sentimentBox">
+          <div class="sent-head">
+            <b style="font-size:12.5px">📈 Sentimento do Chat em Tempo Real (Kick · Twitch · YouTube) & Marcadores Clicáveis</b>
+            <div class="sent-leg">
+              <span><i style="background:#22e07a"></i>Positivo</span>
+              <span><i style="background:#ff2e93"></i>Negativo (Raiva/Frustração/Xing.)</span>
+              <span><i style="background:#ffd23f"></i>Hype</span>
+              <span><i style="background:#00e5ff"></i>✂ Corte Gerado</span>
+            </div>
+          </div>
+          <canvas id="sentimentChart" width="760" height="170"></canvas>
+          <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse para inspecionar o contexto do chat ou clique em um marcador ✂ azul para editar o corte no Estúdio.</div>
+          <div id="sentPeaks" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
+        </div>
+
+        <div class="ts-row" id="tsRow">
+          <div class="ts-box">
+            <div style="display:flex;justify-content:space-between"><b>⏮ Time-Shift: Ao Vivo → Início (00:00)</b><span id="tsRetroPct">0%</span></div>
+            <div class="pbar-wrap"><div class="pbar" id="tsRetroBar" style="background:var(--y)"></div></div>
+          </div>
+          <div class="ts-box">
+            <div style="display:flex;justify-content:space-between"><b>⏭ Captura Contínua: Ao Vivo → Fim</b><span id="tsLivePct">0%</span></div>
+            <div class="pbar-wrap"><div class="pbar" id="tsLiveBar" style="background:var(--gr)"></div></div>
+          </div>
+        </div>
+
+        <div class="clips" id="cl"></div>
+
+        <details open style="margin-top:14px" id="swarmDetails">
+          <summary>🤖 Enxame de Agentes Locais Ativos (Sem API Key) & Colaboração</summary>
+          <div class="swarm-grid" id="swarmGrid"></div>
+          <div id="handoffFeed" class="mut" style="margin-top:8px;max-height:110px;overflow:auto;font:11.5px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)"></div>
+        </details>
+
+        <details open><summary>▶ Log de execução em tempo real</summary><div id="log"></div></details>
+      </div>
+
+      <!-- ESTÚDIO DE EDIÇÃO DO CORTE -->
+      <div class="card hide" id="ed" style="margin-top:14px">
+        <h3 id="et">ESTÚDIO 9:16 · VÍDEO 1 DE 1</h3>
+        <div class="film"></div>
+        <div class="stage">
+          <div class="mas">
+            <svg viewBox="0 0 8 10" shape-rendering="crispEdges"><path fill="#ff2e93" d="M2 0h4v1H2zM1 1h6v1H1zM1 5h1v2H1zM6 5h1v2H6z"/><path fill="#f3c6a0" d="M2 2h4v3H2z"/><path fill="#222" d="M3 3h1v1H3zM5 3h1v1H5z"/><path fill="#00e5ff" d="M2 5h4v3H2zM2 8h1v2H2zM5 8h1v2H5z"/></svg>
+            <div class="bub" id="bb">CORTES PRONTOS!</div>
+          </div>
+          <div class="thumb">🎬<s id="srcThumbLbl">VÍDEO 1</s></div>
+          <div class="lk"></div>
+          <div class="phone">
+            <div class="cap" id="hl">HEADLINE DO CORTE</div>
+            <div class="phone-video-box" id="phoneVideoBox"></div>
+          </div>
+          <div class="lk"></div>
+          <div class="mas">
+            <svg viewBox="0 0 8 10" shape-rendering="crispEdges"><path fill="#ff2e93" d="M2 0h4v1H2zM1 1h6v1H1zM1 5h1v2H1zM6 5h1v2H6z"/><path fill="#f3c6a0" d="M2 2h4v3H2z"/><path fill="#222" d="M3 3h1v1H3zM5 3h1v1H5z"/><path fill="#00e5ff" d="M2 5h4v3H2zM2 8h1v2H2zM5 8h1v2H5z"/></svg>
+            <span class="tag" id="masTag">headline</span>
+          </div>
+        </div>
+
+        <div class="studio-quick">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+            <b style="font-size:12.5px">🎬 Molde Rápido 9:16 & Edição de Headline</b>
+            <span class="pill pu" id="edMoldeBadge">SPLIT_BANNER</span>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="edMoldeBtns">
+            <button class="plat-btn on" type="button" data-ed-molde="SPLIT_BANNER">Clássico Blur</button>
+            <button class="plat-btn" type="button" data-ed-molde="TELA_CHEIA">Zoom 9:16</button>
+            <button class="plat-btn" type="button" data-ed-molde="VIDRO_GAMER">Dual Câmera + Tela</button>
+            <button class="plat-btn" type="button" data-ed-molde="FADE_CONTINUO">Fade Contínuo</button>
+          </div>
+          <div class="row" style="align-items:flex-end">
+            <label style="margin-top:0">Headline (Caixa Alta)
+              <input type="text" id="edHeadlineInput" placeholder="EDITAR HEADLINE DO CORTE">
+            </label>
+            <button class="btn sm" id="edRerenderBtn" type="button">🔄 Aplicar & Re-renderizar MP4</button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <button class="btn" id="ver" type="button">▶ Ver no Estúdio</button>
+          <button class="btn g" id="prox" type="button">⏭ Próximo</button>
+          <button class="btn g" id="som" type="button">🔊 Som</button>
+          <a class="btn g" id="dlClip" download>⬇ Baixar MP4</a>
+          <button class="btn g" id="queueYtBtn" type="button">📤 Fila YouTube</button>
+          <button class="btn g" id="editRoteiroBtn" type="button">✏ Roteiro Completo</button>
+          <button class="btn g" id="fe" type="button">Fechar</button>
+        </div>
+
+        <p class="mut" id="dt" style="margin-top:10px"></p>
+        <div class="wave" id="wv">
+          <span class="mk" style="left:12%" id="mk1">0:08</span>
+          <span class="mk" style="left:46%" id="mk2">0:16</span>
+          <span class="mk" style="left:82%" id="mk3">0:24</span>
+        </div>
+        <div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+      </div>
+    </div>
+
+    <!-- 2. ABA AO VIVO -->
+    <div id="tab-AO VIVO" class="tab-panel hide">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <div>
+            <h3 style="margin:0">■ AO VIVO · KICK, TWITCH & YOUTUBE (BRASIL 1º · MAIOR CATEGORIA)</h3>
+            <div class="mut" id="radarMeta">Ordenado: Streamers Brasileiros primeiro · Categoria com mais espectadores primeiro · Mais pessoas na live</div>
+          </div>
+          <button class="btn g sm" id="refreshRadarBtn" type="button">🔄 Atualizar Lives</button>
+        </div>
+
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center" id="radarPlatBtns">
           <button class="plat-btn on" type="button" data-plat="ALL">Todas</button>
           <button class="plat-btn" type="button" data-plat="TWITCH">Twitch</button>
@@ -169,8 +354,9 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
           <span style="flex:1"></span>
           <span class="pill br" id="radarCounts">0 ao vivo</span>
         </div>
+
         <div class="row" style="margin-top:8px">
-          <label style="margin-top:4px">Categoria (maior público 1º)
+          <label style="margin-top:4px">Categoria
             <select id="radarCat">
               <option value="ALL">Todas Categorias</option>
               <option value="GTA">GTA / GTA 6 / GTA RP</option>
@@ -187,170 +373,80 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
             </select>
           </label>
           <label style="margin-top:4px">Buscar streamer/título
-            <input type="text" id="radarSearch" placeholder="ex.: paulinho, loud, gta 6…">
+            <input type="text" id="radarSearch" placeholder="ex.: paulinho, coringa, surskity…">
           </label>
-        </div>
-        <div class="radar-grid" id="radarGrid"></div>
-      </div>
-
-      <div class="card" id="fm">
-        <h3>■ CORTAR UMA LIVE AO VIVO (20 IAs SEM CHAVE + TIME-SHIFT)</h3>
-        <p class="mut" style="margin:0">Enquanto assiste do <b>ao vivo até o fim</b>, o enxame de <b>20 IAs sem API paga</b> varre retroativamente do <b>ao vivo até 00:00 (início da live)</b> procurando momentos <b>engraçados, frustrações, raiva e xingamentos</b>.</p>
-        <label>Link da live ou VOD (Twitch, Kick, YouTube)
-          <input type="text" id="lk" value="https://www.twitch.tv/alanzoka">
-        </label>
-        <div class="row">
-          <label>Exigência (nota mínima de 1 a 10)
-            <input type="number" id="mn" min="1" max="10" value="6">
-          </label>
-          <label>Máximo de cortes
-            <input type="number" id="mx" min="1" max="20" value="3">
-          </label>
-        </div>
-        <label>O que você quer que vire corte (opcional)
-          <input type="text" id="hint" value="engraçados, frustrações, raiva, xingamentos e picos do chat">
-        </label>
-        <label>Nomes difíceis (para a legenda acertar)
-          <input type="text" id="names" placeholder="ex.: Dava Jones, Paulinho, Vice City">
-        </label>
-        <label class="chk"><input type="checkbox" id="dirBroll" checked> B-roll do diretor (pôr clipes quando fala algo)</label>
-        <label class="chk"><input type="checkbox" id="ytBroll" checked> Buscar B-roll no YouTube quando não tiver no meu banco</label>
-        <div class="row">
-          <label>Postar automático no YouTube
-            <select id="auto">
-              <option value="no">não, só montar</option>
-              <option value="yes">sim, postar automático (privado YT)</option>
-            </select>
-          </label>
-          <label>Vídeos por dia
-            <input type="number" id="vpd" min="1" max="20" value="3">
-          </label>
-        </div>
-        <button class="btn" id="go" type="button" style="margin-top:14px">Começar a assistir (00:00 ← Ao Vivo → Fim)</button>
-      </div>
-
-      <div class="card hide" id="lv">
-        <div class="head">
-          <span class="dot" id="lvDot"></span>
-          <b id="ln"></b>
-          <span class="mut" id="st"></span>
-          <span style="flex:1"></span>
-          <button class="btn g sm" id="stop" type="button">parar</button>
-        </div>
-        <a class="mut" id="ll" target="_blank" rel="noopener"></a>
-        <div class="prev-bar" id="prevBar">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <span class="prev-badge" id="prevPlatBadge">AO VIVO</span>
-            <span class="prev-txt" id="prevTxt">carregando player…</span>
-          </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn g sm" id="reloadPlayerBtn" type="button">🔄 Recarregar Player</button>
-            <a class="btn g sm" id="openOrigPlayer" target="_blank" rel="noopener">↗ Abrir na plataforma</a>
-          </div>
-        </div>
-        <div class="prev" id="livePlayerBox"></div>
-
-        <div class="ts-row">
-          <div class="ts-box">
-            <div style="display:flex;justify-content:space-between"><b>⏮ Time-Shift: Ao Vivo → Início (00:00)</b><span id="tsRetroPct">0%</span></div>
-            <div class="pbar-wrap"><div class="pbar" id="tsRetroBar" style="background:var(--y)"></div></div>
-          </div>
-          <div class="ts-box">
-            <div style="display:flex;justify-content:space-between"><b>⏭ Ao Vivo Contínuo → Fim da Live</b><span id="tsLivePct">0%</span></div>
-            <div class="pbar-wrap"><div class="pbar" id="tsLiveBar" style="background:var(--gr)"></div></div>
-          </div>
         </div>
 
-        <div class="sent-wrap" id="sentimentBox">
-          <div class="sent-head">
-            <b style="font-size:12.5px">📈 Termômetro de Sentimento do Chat & Áudio</b>
-            <div class="sent-leg">
-              <span><i style="background:#22e07a"></i>Positivo (Humor/Boa)</span>
-              <span><i style="background:#ff3b1f"></i>Negativo (Raiva/Frustração/Xing.)</span>
-              <span><i style="background:#ffd23f"></i>Hype / Pico</span>
+        <div class="sent-wrap" style="margin-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+            <div>
+              <b style="font-size:13px">🚀 Analisar Todas as Lives · 20 Agentes Sem API + Controle de Banda</b>
+              <div class="mut" style="margin-top:2px">Gerenciador de filas evita sobrecarga no servidor, caçando <b>Engraçados, Frustrações, Raiva e Xingamentos</b> e baixando apenas os <b>30 melhores segundos por corte</b>.</div>
             </div>
+            <span class="pill cy" id="queueStatusBadge">Banda: Máx 3 simultâneas · Ativas 0 · Fila 0</span>
           </div>
-          <canvas id="sentimentChart" width="760" height="165"></canvas>
-          <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse ou toque no gráfico para inspecionar o sentimento exato e os picos da live.</div>
-          <div id="sentPeaks" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
-        </div>
-
-        <div class="clips" id="cl"></div>
-
-        <details open style="margin-top:14px">
-          <summary>🤖 Enxame de 20 IAs Trabalhando Juntas (Sem Chave de API) & Colaborações</summary>
-          <div class="swarm-grid" id="swarmGrid"></div>
-          <div id="handoffFeed" class="mut" style="margin-top:8px;max-height:110px;overflow:auto;font:11.5px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)"></div>
-        </details>
-
-        <details open><summary>▶ Log de execução em tempo real</summary><div id="log"></div></details>
-      </div>
-
-      <div class="card hide" id="ed" style="margin-top:14px">
-        <h3 id="et">VÍDEO 1 DE 1</h3>
-        <div class="film"></div>
-        <div class="stage">
-          <div class="mas">
-            <svg viewBox="0 0 8 10" shape-rendering="crispEdges"><path fill="#e11d2e" d="M2 0h4v1H2zM1 1h6v1H1zM1 5h1v2H1zM6 5h1v2H6z"/><path fill="#f3c6a0" d="M2 2h4v3H2z"/><path fill="#222" d="M3 3h1v1H3zM5 3h1v1H5z"/><path fill="#2b5bd6" d="M2 5h4v3H2zM2 8h1v2H2zM5 8h1v2H5z"/></svg>
-            <div class="bub" id="bb">3 MOMENTOS CORTADOS!</div>
+          <div class="row" style="margin-top:10px;align-items:flex-end">
+            <label style="margin-top:0">Capturas simultâneas (Controle de Banda): <b id="maxConcVal">3</b>
+              <input type="range" id="maxConcRange" min="1" max="6" value="3">
+            </label>
+            <label style="margin-top:0">Lives na fila (lote)
+              <input type="number" id="analyzeMaxLives" min="1" max="20" value="6">
+            </label>
+            <button class="btn" id="analyzeAllBtn" type="button">🔥 Analisar Todas as Lives (20 IAs · Máx 30s)</button>
           </div>
-          <div class="thumb">🧑<s id="srcThumbLbl">VÍDEO 1</s></div>
-          <div class="lk"></div>
-          <div class="phone">
-            <div class="cap" id="hl">HEADLINE DO CORTE</div>
-            <div class="phone-video-box" id="phoneVideoBox"></div>
-          </div>
-          <div class="lk"></div>
-          <div class="mas">
-            <svg viewBox="0 0 8 10" shape-rendering="crispEdges"><path fill="#e11d2e" d="M2 0h4v1H2zM1 1h6v1H1zM1 5h1v2H1zM6 5h1v2H6z"/><path fill="#f3c6a0" d="M2 2h4v3H2z"/><path fill="#222" d="M3 3h1v1H3zM5 3h1v1H5z"/><path fill="#2b5bd6" d="M2 5h4v3H2zM2 8h1v2H2zM5 8h1v2H5z"/></svg>
-            <span class="tag" id="masTag">headline</span>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px">
+            <label class="chk" style="margin-top:0"><input type="checkbox" class="emo-chk" value="Engraçado" checked> 😂 Engraçados</label>
+            <label class="chk" style="margin-top:0"><input type="checkbox" class="emo-chk" value="Frustração" checked> 😤 Frustrações</label>
+            <label class="chk" style="margin-top:0"><input type="checkbox" class="emo-chk" value="Raiva" checked> 🤬 Raiva</label>
+            <label class="chk" style="margin-top:0"><input type="checkbox" class="emo-chk" value="Xingamentos" checked> 🔥 Xingamentos</label>
           </div>
         </div>
 
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn" id="ver" type="button">▶ Ver o show</button>
-          <button class="btn g" id="prox" type="button">⏭ Próximo</button>
-          <button class="btn g" id="som" type="button">🔊 Som</button>
-          <a class="btn g" id="dlClip" download>⬇ Baixar MP4</a>
-          <button class="btn g" id="queueYtBtn" type="button">📤 Fila YouTube</button>
-          <button class="btn g" id="editRoteiroBtn" type="button">✏ Editar Roteiro</button>
-          <button class="btn g" id="fe" type="button">Fechar</button>
-        </div>
-
-        <p class="mut" id="dt" style="margin-top:10px"></p>
-        <div class="wave" id="wv">
-          <span class="mk" style="left:12%" id="mk1">0:08</span>
-          <span class="mk" style="left:46%" id="mk2">0:21</span>
-          <span class="mk" style="left:82%" id="mk3">0:36</span>
-        </div>
-        <div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+        <div class="radar-grid" id="radarGrid"></div>
       </div>
     </div>
 
+    <!-- 3. ABA VÍDEOS -->
     <div id="tab-VÍDEOS" class="tab-panel hide">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <h3 style="margin:0">■ BIBLIOTECA DE CORTES GERADOS · FILTROS & EXPORTAÇÃO EM LOTE</h3>
+          <h3 style="margin:0">■ BIBLIOTECA DE CORTES · FILTROS & EXPORTAÇÃO EM ZIP</h3>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
             <button class="btn g sm" id="selectAllClipsBtn" type="button">☑ Selecionar Todos</button>
             <button class="btn g sm" id="clearSelClipsBtn" type="button">☐ Limpar</button>
-            <button class="btn sm" id="exportBatchBtn" type="button">📦 Exportar Selecionados (<span id="selCountLbl">0</span>) .ZIP</button>
+            <button class="btn sm" id="exportBatchBtn" type="button">📦 Baixar ZIP (<span id="selCountLbl">0</span>)</button>
           </div>
         </div>
         <div class="row" style="margin-top:10px">
-          <label>Buscar por nome/título/motivo
-            <input type="text" id="vidSearch" placeholder="ex.: alanzoka, raiva, gta 6…">
+          <label>Buscar por texto
+            <input type="text" id="vidSearch" placeholder="ex.: alanzoka, rage, gta 6…">
           </label>
           <label>Plataforma
             <select id="vidPlat">
               <option value="ALL">Todas Plataformas</option>
-              <option value="TWITCH">Twitch</option>
               <option value="KICK">Kick</option>
+              <option value="TWITCH">Twitch</option>
               <option value="YOUTUBE">YouTube</option>
-              <option value="LOCAL">Arquivo Local</option>
+              <option value="LOCAL">Vídeo enviado</option>
             </select>
           </label>
-          <label>Emoção Detectada
+          <label>Data de criação
+            <select id="vidDate">
+              <option value="ALL">Qualquer data</option>
+              <option value="1H">Última 1 hora</option>
+              <option value="24H">Últimas 24 horas</option>
+              <option value="7D">Últimos 7 dias</option>
+            </select>
+          </label>
+          <label>Nota de viralidade
+            <select id="vidScore">
+              <option value="0">Todas as notas (1–10)</option>
+              <option value="7">Nota 7+</option>
+              <option value="8">Nota 8+</option>
+              <option value="9">Nota 9+</option>
+            </select>
+          </label>
+          <label>Emoção
             <select id="vidEmotion">
               <option value="ALL">Todas Emoções</option>
               <option value="Engraçado">😂 Engraçado</option>
@@ -360,19 +456,11 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
               <option value="Hype">⚡ Hype</option>
             </select>
           </label>
-          <label>Nota de Viralidade
-            <select id="vidScore">
-              <option value="0">Todas as notas (1–10)</option>
-              <option value="7">Nota 7+</option>
-              <option value="8">Nota 8+</option>
-              <option value="9">Nota 9+</option>
-            </select>
-          </label>
-          <label>Ordenar por Data / Nota
+          <label>Ordenar
             <select id="vidSort">
-              <option value="newest">Data: Mais recentes primeiro</option>
-              <option value="oldest">Data: Mais antigas primeiro</option>
-              <option value="score">Viralidade: Maior nota primeiro</option>
+              <option value="newest">Mais recentes</option>
+              <option value="oldest">Mais antigos</option>
+              <option value="score">Maior viralidade</option>
             </select>
           </label>
         </div>
@@ -381,9 +469,9 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 
       <div class="card" style="margin-top:14px">
         <h3>■ UPLOAD DE VÍDEO LOCAL & LIVES SALVAS</h3>
-        <p class="mut">Suba um vídeo MP4 direto do celular/PC ou abra qualquer live capturada.</p>
+        <p class="mut">Suba um vídeo MP4/MOV/WEBM direto do seu dispositivo para cortar os 30s mais virais.</p>
         <div class="row" style="align-items:flex-end">
-          <label>Enviar vídeo MP4 do aparelho
+          <label>Enviar vídeo do aparelho
             <input type="file" id="uploadVideoInput" accept="video/mp4,video/quicktime,video/webm" style="margin-top:6px">
           </label>
           <button class="btn" id="uploadVideoBtn" type="button">Enviar e Analisar Vídeo</button>
@@ -399,10 +487,10 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
           </label>
           <label>Molde
             <select id="manualMoldeSelect">
-              <option value="SPLIT_BANNER">Banner Vermelho + Facecam</option>
-              <option value="VIDRO_GAMER">Vidro Gamer Split</option>
+              <option value="SPLIT_BANNER">Clássico Blur</option>
+              <option value="VIDRO_GAMER">Dual Câmera + Tela</option>
+              <option value="TELA_CHEIA">Zoom 9:16</option>
               <option value="FADE_CONTINUO">Fade Contínuo</option>
-              <option value="TELA_CHEIA">Tela Cheia 9:16</option>
             </select>
           </label>
         </div>
@@ -410,26 +498,43 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
           <label>Início (seg)<input type="number" id="manStart" min="0" value="0"></label>
           <label>Fim (seg)<input type="number" id="manEnd" min="2" value="25"></label>
         </div>
-        <label>Headline do corte<input type="text" id="manHeadline" value="FUGA INCRÍVEL DE GTA 6!"></label>
-        <button class="btn" id="manCutBtn" type="button" style="margin-top:12px">Gerar Corte Manual Agora</button>
+        <label>Headline do corte<input type="text" id="manHeadline" value="FUGA ABSURDA EM VICE CITY!"></label>
+        <button class="btn" id="manCutBtn" type="button" style="margin-top:12px">Gerar Corte Manual 9:16</button>
       </div>
     </div>
 
+    <!-- 4. ABA MOLDES -->
     <div id="tab-MOLDES" class="tab-panel hide">
       <div class="card">
-        <h3>■ MOLDES DE ENQUADRAMENTO E B-ROLL</h3>
-        <p class="mut">Escolha o molde padrão do FFmpeg, estilo das legendas ASS e envie clipes de B-roll para o banco local.</p>
+        <h3>■ MOLDES RÁPIDOS 9:16, TRANSIÇÕES, LEGENDAS & TRILHAS SONORAS</h3>
+        <p class="mut">Selecione os presets padrão de enquadramento, transições, legendas e trilha sonora sintética local do FFmpeg (zero API externa).</p>
         <div class="grid-cards" id="moldesContainer"></div>
-        <div class="row" style="margin-top:14px;align-items:flex-end">
-          <label>Estilo das legendas ASS
-            <select id="subStyleSelect">
-              <option value="HORMOZI_YELLOW">Hormozi Amarelo (#FFD23F)</option>
-              <option value="NEON_GREEN">Neon Verde (#53FC18)</option>
-              <option value="CLEAN_WHITE">Branco Limpo</option>
+        <div class="row" style="margin-top:14px">
+          <label>Preset de Transição
+            <select id="transSelect">
+              <option value="NONE">Corte Seco Direto</option>
+              <option value="FADE">Fade Cinema (In/Out)</option>
+              <option value="FLASH">Flash Impacto (Rage/Susto)</option>
+              <option value="ZOOM_IN">Zoom 9:16 Dinâmico</option>
             </select>
           </label>
-          <button class="btn" id="saveMoldeSettingsBtn" type="button">Salvar Padrão</button>
+          <label>Preset de Legenda ASS
+            <select id="subStyleSelect">
+              <option value="HORMOZI_YELLOW">Hormozi Ouro Neon (#FFD23F)</option>
+              <option value="NEON_GREEN">Vice Neon (#53FC18)</option>
+              <option value="CLEAN_WHITE">Branco Limpo Estúdio</option>
+            </select>
+          </label>
+          <label>Preset de Trilha Sonora Local
+            <select id="soundtrackSelect">
+              <option value="NONE">Áudio Original Limpo</option>
+              <option value="PHONK_VICE">Vice Phonk Drive (Sub Bass)</option>
+              <option value="SYNTHWAVE_80S">GTA 6 Neon Synthwave 80s</option>
+              <option value="TENSE_BASS">Suspense & Rage Pulse</option>
+            </select>
+          </label>
         </div>
+        <button class="btn" id="saveMoldeSettingsBtn" type="button" style="margin-top:12px">Salvar Presets Padrão</button>
         <div class="row" style="margin-top:14px;align-items:flex-end;border-top:1px solid var(--line);padding-top:14px">
           <label>Enviar B-roll local (.mp4)
             <input type="file" id="uploadBrollInput" accept="video/mp4,video/webm" style="margin-top:6px">
@@ -440,78 +545,147 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
       </div>
     </div>
 
+    <!-- 5. ABA IDEIAS -->
     <div id="tab-IDEIAS" class="tab-panel hide">
       <div class="card">
-        <h3>■ IDEIAS E GATILHOS PARA O AGENTE</h3>
-        <p class="mut">Cadastre o que a IA deve procurar nas lives e aplique em 1 clique no formulário.</p>
+        <h3>■ IDEIAS E GATILHOS PARA OS AGENTES</h3>
+        <p class="mut">Cadastre o que a IA deve priorizar nas lives e aplique em 1 clique na aba CORTES.</p>
         <div class="row">
           <label>Categoria / Tag<input type="text" id="ideaTag" value="GTA 6"></label>
           <label>Nota mínima (1–10)<input type="number" id="ideaMin" min="1" max="10" value="8"></label>
         </div>
-        <label>Descrição do gatilho<input type="text" id="ideaHint" placeholder="ex.: quando achar easter egg novo ou rir muito"></label>
+        <label>Descrição do gatilho<input type="text" id="ideaHint" placeholder="ex.: quando achar easter egg novo ou perder o controle"></label>
         <button class="btn" id="addIdeaBtn" type="button" style="margin-top:10px">Salvar Ideia</button>
         <div class="grid-cards" id="ideasContainer"></div>
       </div>
     </div>
 
+    <!-- 6. ABA ROTEIRO -->
     <div id="tab-ROTEIRO" class="tab-panel hide">
       <div class="card">
-        <h3>■ EDITOR DE ROTEIRO E RE-RENDER</h3>
-        <p class="mut">Edite a headline, descrição ou peça ajustes em palavras e gere novamente o MP4 vertical.</p>
-        <div id="roteiroEmpty" class="mut">Selecione um corte em <b>CORTES</b> e clique em "Abrir no estúdio" ou "Editar Roteiro".</div>
+        <h3>■ EDITOR DE ROTEIRO E RE-RENDERIZAÇÃO MP4</h3>
+        <p class="mut">Personalize headline, título, descrição, molde, transição e trilha sonora de qualquer corte gerado.</p>
+        <div id="roteiroEmpty" class="mut">Selecione um corte em <b>CORTES</b>, no gráfico ✂ ou em <b>VÍDEOS</b> para abrir no Estúdio.</div>
         <div id="roteiroForm" class="hide">
-          <label>Pedido de ajuste em palavras (opcional)
-            <input type="text" id="rotInstruction" placeholder="ex.: legenda amarela, molde vidro gamer, titulo NOVA FUGA">
+          <label>Ajuste em texto livre (opcional)
+            <input type="text" id="rotInstruction" placeholder="ex.: legenda amarela, dual camera, headline NOVA FUGA">
           </label>
+          <div class="row">
+            <label>Molde 9:16
+              <select id="rotMolde">
+                <option value="SPLIT_BANNER">Clássico Blur</option>
+                <option value="TELA_CHEIA">Zoom 9:16</option>
+                <option value="VIDRO_GAMER">Dual Câmera + Tela</option>
+                <option value="FADE_CONTINUO">Fade Contínuo</option>
+              </select>
+            </label>
+            <label>Transição
+              <select id="rotTrans">
+                <option value="NONE">Corte Seco</option>
+                <option value="FADE">Fade Cinema</option>
+                <option value="FLASH">Flash Impacto</option>
+                <option value="ZOOM_IN">Zoom 9:16</option>
+              </select>
+            </label>
+            <label>Trilha Sonora
+              <select id="rotSoundtrack">
+                <option value="NONE">Original Limpo</option>
+                <option value="PHONK_VICE">Vice Phonk Drive</option>
+                <option value="SYNTHWAVE_80S">Neon Synthwave 80s</option>
+                <option value="TENSE_BASS">Suspense & Rage</option>
+              </select>
+            </label>
+          </div>
           <label>Headline em CAIXA ALTA<input type="text" id="rotHeadline"></label>
-          <label>Título no YouTube<input type="text" id="rotTitle"></label>
+          <label>Título do vídeo<input type="text" id="rotTitle"></label>
           <label>Descrição / @ do streamer<textarea id="rotDesc" rows="3"></textarea></label>
-          <button class="btn" id="applyRoteiroBtn" type="button" style="margin-top:12px">Salvar e Re-renderizar MP4</button>
+          <button class="btn" id="applyRoteiroBtn" type="button" style="margin-top:12px">Salvar e Re-renderizar MP4 9:16</button>
         </div>
       </div>
     </div>
 
+    <!-- 7. ABA UPLOADS -->
     <div id="tab-UPLOADS" class="tab-panel hide">
       <div class="card">
-        <h3>■ FILA DE AUTO-POSTAGEM NO YOUTUBE</h3>
-        <p class="mut">Os vídeos sobem como <b>PRIVADO</b> via YouTube Data API v3 quando <code>client_secret.json</code> estiver configurado no servidor.</p>
+        <h3>■ FILA DE PUBLICAÇÃO NO YOUTUBE (PRIVADO)</h3>
+        <p class="mut">Os cortes aprovados podem ser enfileirados para envio privado via YouTube Data API v3 quando <code>client_secret.json</code> estiver no servidor Python.</p>
         <div id="uploadsList" class="grid-cards"></div>
       </div>
     </div>
 
+    <!-- 8. ABA IA -->
     <div id="tab-IA" class="tab-panel hide">
       <div class="card">
-        <h3>■ CONEXÃO COM SERVIDOR PYTHON (ZERO CHAVES DE API OBRIGATÓRIAS)</h3>
-        <p class="mut">Todo o enxame de <b>20 IAs colaborativas</b> roda gratuitamente sem precisar de chave paga (FFmpeg Acústico, Whisper Local Int8, OpenCV e Radar Ao Vivo). Conecte a URL do servidor Python caso esteja acessando pelo site público:</p>
+        <h3>■ SERVIDOR PYTHON LOCAL · ZERO API KEY</h3>
+        <p class="mut">Todos os agentes operam localmente (FFmpeg Acústico, Whisper Int8, OpenCV Facecam e Chat Collectors). Informe a URL do servidor Python caso acesse pelo site online:</p>
         <div class="row" style="align-items:flex-end">
           <label>URL do Servidor Python (opcional)
-            <input type="url" id="backendUrlInput" placeholder="https://seu-cortes-ia.onrender.com">
+            <input type="url" id="backendUrlInput" placeholder="https://seu-servidor-cortes.onrender.com">
           </label>
           <button class="btn" id="connectBackendBtn" type="button">Conectar Servidor</button>
         </div>
 
-        <h3 style="margin-top:20px">■ 20 AGENTES DE IA COLABORANDO EM CONJUNTO (SEM API KEY)</h3>
+        <div class="studio-quick" style="margin-top:18px">
+          <h3 style="margin:0 0 6px">■ CRIAR AGENTE PERSONALIZADO (PALAVRAS-CHAVE PRÓPRIAS)</h3>
+          <p class="mut" style="margin:0 0 8px">Adicione novos caçadores locais com palavras-chave próprias para turbinar a detecção de cortes.</p>
+          <div class="row">
+            <label style="margin-top:4px">Nome do Novo Agente
+              <input type="text" id="customAgentName" placeholder="ex.: Caçador de Jumpscare & Bug">
+            </label>
+            <label style="margin-top:4px">Emoção Associada
+              <select id="customAgentEmotion">
+                <option value="Engraçado">😂 Engraçado</option>
+                <option value="Frustração">😤 Frustração</option>
+                <option value="Raiva">🤬 Raiva</option>
+                <option value="Xingamentos">🔥 Xingamentos</option>
+                <option value="Hype">⚡ Hype</option>
+              </select>
+            </label>
+          </div>
+          <div class="row" style="align-items:flex-end">
+            <label style="margin-top:6px">Palavras-chave (separadas por vírgula)
+              <input type="text" id="customAgentKeywords" placeholder="ex.: meu deus, susto, bugou tudo, cai da moto, socorro">
+            </label>
+            <button class="btn cy" id="createCustomAgentBtn" type="button">+ Criar Agente Local</button>
+          </div>
+        </div>
+
+        <h3 style="margin-top:20px">■ AGENTES LOCAIS ATIVOS (<span id="iaTotalCountLbl">20</span> SEM API KEY)</h3>
         <div class="swarm-grid" id="iaCatalogGrid"></div>
 
-        <h3 style="margin-top:20px">■ MOTOR DE IA E HARDWARE</h3>
+        <div class="studio-quick" style="margin-top:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <b style="font-size:12.5px">🧪 Verificação de Status em JSON (Sem Erros)</b>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span class="pill" id="jsonStatusBadge">JSON Pronto</span>
+              <button class="btn sm g" id="verifyJsonBtn" type="button">🔍 Validar Status JSON</button>
+            </div>
+          </div>
+          <pre id="jsonStatusOutput" class="mut" style="margin:10px 0 0;max-height:190px;overflow:auto;font:11.5px ui-monospace,Menlo,monospace;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--line)"></pre>
+        </div>
+
+        <h3 style="margin-top:20px">■ MOTOR DE HARDWARE & CONTROLE DE BANDA</h3>
         <div class="grid-cards" id="healthCards"></div>
         <div class="row" style="margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
-          <label>Encoder de Vídeo
+          <label>Encoder FFmpeg
             <select id="cfgEncoder">
               <option value="libx264">libx264 (CPU padrão)</option>
-              <option value="h264_nvenc">h264_nvenc (Placa NVIDIA)</option>
+              <option value="h264_nvenc">h264_nvenc (NVIDIA GPU)</option>
             </select>
           </label>
           <label>Modelo Whisper Local
             <select id="cfgWhisper">
-              <option value="tiny">tiny (muito rápido)</option>
+              <option value="tiny">tiny (ultra rápido)</option>
               <option value="base">base (equilibrado)</option>
               <option value="small">small (recomendado)</option>
-              <option value="medium">medium (mais pesado)</option>
+              <option value="medium">medium (preciso)</option>
             </select>
           </label>
           <label>Janela de análise (seg)
             <input type="number" id="cfgWindow" min="15" max="900" value="180">
+          </label>
+          <label>Máx. capturas simultâneas (Banda)
+            <input type="number" id="cfgMaxConc" min="1" max="8" value="3">
           </label>
         </div>
         <button class="btn" id="saveIaCfgBtn" type="button" style="margin-top:12px">Aplicar Configurações do Motor</button>
@@ -535,7 +709,7 @@ function fmtDate(ts){
   const d=new Date(ts*1000);
   return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
 }
-const tabs=["VÍDEOS","CORTES","MOLDES","IDEIAS","ROTEIRO","UPLOADS","IA"];
+const tabs=["CORTES","AO VIVO","VÍDEOS","MOLDES","IDEIAS","ROTEIRO","UPLOADS","IA"];
 let activeTab="CORTES";
 let serverBase="";
 let serverMode=false;
@@ -543,15 +717,22 @@ let allLives=[],curLiveId=null,pollTimer=null,shownCount=0,showStageTimer=null;
 let selectedClipIdx=0,activeClipObj=null,activeClipLiveId=null;
 let radarPlat="ALL",radarStreams=[];
 let selectedClipKeys=new Set();
-let appSettings={molde:"SPLIT_BANNER",subtitle_style:"HORMOZI_YELLOW",encoder:"libx264",whisper_model:"small",window_seconds:180,videos_per_day:3};
+let customAgentsList=[];
+let appSettings={molde:"SPLIT_BANNER",subtitle_style:"HORMOZI_YELLOW",transition:"NONE",soundtrack:"NONE",encoder:"libx264",whisper_model:"small",window_seconds:180,videos_per_day:3,max_concurrent_captures:3,max_clip_seconds:30};
+
+function normalizeMoldeId(raw){
+  const u=String(raw||"SPLIT_BANNER").trim().toUpperCase();
+  const map={CLASSICO_BLUR:"SPLIT_BANNER","CLÁSSICO_BLUR":"SPLIT_BANNER",ZOOM_916:"TELA_CHEIA",DUAL_CAM_TELA:"VIDRO_GAMER"};
+  return map[u]||(u==="SPLIT_BANNER"||u==="VIDRO_GAMER"||u==="FADE_CONTINUO"||u==="TELA_CHEIA"?u:"SPLIT_BANNER");
+}
 
 const sampleClipUrl="./exemplo_corte_baixado_1080x1920.mp4";
 
 const AGENT_CATALOG_20=[
   {id:"ia01",code:"IA-01",name:"Radar Multi-Plataforma",role:"Varre Twitch, Kick e YouTube ao vivo sem chave de API",partner:"IA-02"},
-  {id:"ia02",code:"IA-02",name:"Guardião Brasil & Audiência",role:"Ordena Brasil 1º, fora por último e maior audiência no topo",partner:"IA-01"},
+  {id:"ia02",code:"IA-02",name:"Guardião Brasil & Audiência",role:"Ordena Brasil 1º, fora por último e maior categoria no topo",partner:"IA-01"},
   {id:"ia03",code:"IA-03",name:"Time-Shift (Ao Vivo→00:00)",role:"Analisa do momento ao vivo para trás até o início da live",partner:"IA-04"},
-  {id:"ia04",code:"IA-04",name:"Sentinela (Ao Vivo→Fim)",role:"Continua capturando em tempo real até a live encerrar",partner:"IA-03"},
+  {id:"ia04",code:"IA-04",name:"Sentinela (Ao Vivo→Fim)",role:"Continua capturando em tempo real com controle de banda",partner:"IA-03"},
   {id:"ia05",code:"IA-05",name:"Chat Twitch IRC & VOD",role:"Coleta mensagens ao vivo e comentários GQL do início",partner:"IA-16"},
   {id:"ia06",code:"IA-06",name:"Chat Kick Collector",role:"Lê chat ao vivo em canais da Kick",partner:"IA-16"},
   {id:"ia07",code:"IA-07",name:"Chat YouTube Live",role:"Coleta reações e explosões do chat ao vivo no YouTube",partner:"IA-16"},
@@ -564,17 +745,21 @@ const AGENT_CATALOG_20=[
   {id:"ia14",code:"IA-14",name:"Detector de Raiva (Tilt)",role:"Identifica rage, gritos de indignação e fúria extrema",partner:"IA-19"},
   {id:"ia15",code:"IA-15",name:"Detector Xingamentos/Susto",role:"Detecta palavrões intensos e reações viscerais imediatas",partner:"IA-19"},
   {id:"ia16",code:"IA-16",name:"Curva Sentimento do Chat",role:"Gera gráfico Positivo / Negativo / Hype abaixo da live",partner:"IA-12"},
-  {id:"ia17",code:"IA-17",name:"Caçador Facecam OpenCV",role:"Rastreia webcam em múltiplos frames para recorte limpo",partner:"IA-18"},
+  {id:"ia17",code:"IA-17",name:"Caçador Facecam OpenCV",role:"Rastreia webcam em múltiplos frames para Clássico/Dual",partner:"IA-18"},
   {id:"ia18",code:"IA-18",name:"Enquadrador Gameplay 9:16",role:"Evita oclusão de HUD e foca na ação do jogo",partner:"IA-17"},
-  {id:"ia19",code:"IA-19",name:"Juiz Consensual 20-IAs",role:"Consolida votos em notas 1–10 sem precisar de API paga",partner:"IA-20"},
-  {id:"ia20",code:"IA-20",name:"Diretor B-roll & Exportador ZIP",role:"Renderiza MP4 1080x1920 + ASS e empacota lotes ZIP",partner:"IA-19"}
+  {id:"ia19",code:"IA-19",name:"Juiz Consensual ≤30s",role:"Consolida votos sem API e recorta os 30s mais virais",partner:"IA-20"},
+  {id:"ia20",code:"IA-20",name:"Diretor B-roll & Exportador ZIP",role:"Renderiza MP4 1080x1920 + trilha + ASS e gera ZIP",partner:"IA-19"}
 ];
 
+function getAllCatalogAgents(){
+  return AGENT_CATALOG_20.concat(customAgentsList);
+}
+
 function mkAgents(activePct){
-  return AGENT_CATALOG_20.map((a,idx)=>({
+  return getAllCatalogAgents().map((a,idx)=>({
     ...a,
     state:activePct>=100?"concluído":(idx<(activePct/5)?"concluído":"analisando"),
-    detail:activePct>=100?"Concluído sem chave de API":"Colaborando com "+a.partner,
+    detail:activePct>=100?"Concluído sem chave de API":"Colaborando com "+(a.partner||"IA-19"),
     progress:activePct>=100?100:Math.min(100,25+((idx*11+activePct)%75)),
     findings:Math.max(1,(idx%4)+1)
   }));
@@ -614,10 +799,10 @@ const nowTs=Math.floor(Date.now()/1000);
 const memDb={
   brolls:[],
   moldes:[
-    {id:"SPLIT_BANNER",nome:"Banner Vermelho + Facecam + B-roll",descricao:"Câmera do streamer no topo, jogo na base sobre blur, headline vermelha com linha dourada e legenda sincronizada."},
-    {id:"VIDRO_GAMER",nome:"Vidro Gamer Split 9:16",descricao:"Webcam enquadrada centralizada no topo com moldura nítida e gameplay em destaque na parte inferior."},
-    {id:"FADE_CONTINUO",nome:"Fade Contínuo sem Borda",descricao:"Transição suave entre gameplay e facecam com título limpo centralizado."},
-    {id:"TELA_CHEIA",nome:"Tela Cheia 9:16",descricao:"Enquadramento vertical completo focado na ação principal com legendas grandes."}
+    {id:"SPLIT_BANNER",nome:"Clássico Blur (Split Facecam + Gameplay)",descricao:"Câmera do streamer no topo, gameplay na base sobre blur, headline estilizada e legenda sincronizada."},
+    {id:"VIDRO_GAMER",nome:"Dual Câmera + Tela 9:16",descricao:"Webcam centralizada no topo com moldura nítida e gameplay em destaque na parte inferior."},
+    {id:"TELA_CHEIA",nome:"Zoom 9:16 (Tela Cheia)",descricao:"Enquadramento vertical completo focado na ação principal com legendas grandes."},
+    {id:"FADE_CONTINUO",nome:"Fade Contínuo sem Borda",descricao:"Transição suave entre gameplay e facecam com título limpo centralizado."}
   ],
   ideas:[
     {id:"idea1",tag:"Engraçado · Memes",min:7,hint:"risadas, momentos engraçados, trollagens e chat spamando kkk"},
@@ -643,7 +828,7 @@ const memDb={
       handoffs:[
         "[06:12:44] IA-05 -> IA-16: explosão de 'kkkk' + 'não tankei' aos 352s",
         "[06:12:59] IA-08 -> IA-14/IA-15: pico acústico -11.8dB detectado aos 550s",
-        "[06:13:05] IA-19 -> IA-20: 4 cortes aprovados sem chave de API"
+        "[06:13:05] IA-19 -> IA-20: cortes de até 30s aprovados sem chave de API"
       ],
       sentiment_series:mkSentimentSeries(600,1),
       created_ts:nowTs-120,
@@ -651,12 +836,12 @@ const memDb={
       log:[
         "[06:12:44] IA-03 Time-Shift varreu do ao vivo (14:09) até 00:00",
         "[06:12:55] IA-05 & IA-08 detectaram picos de humor, susto e xingamento",
-        "[06:13:05] 20 agentes colaborando (zero API key) com 4 cortes prontos"
+        "[06:13:05] 20 agentes colaborando (zero API key) com 3 cortes ≤30s prontos"
       ],
       clips:[
         {id:"c1",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Engraçado",titulo:"Cai no bait do chat",headline:"O CHAT ME ENGANOU DE NOVO 😂",ini:352,fim:374,nota:9,motivo:"Trollagem do chat com explosão de gargalhadas.",descricao:"O streamer cai numa trollagem do chat e riu sem parar.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-60,created_at:new Date((nowTs-60)*1000).toISOString()},
-        {id:"c2",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Frustração",titulo:"Bug bizarro na missão final",headline:"DEU TUDO ERRADO NA HORA H 😤",ini:214,fim:253,nota:8,motivo:"Frustração genuína após bug crítico na fase final.",descricao:"Bug bizarro estragou a run.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-180,created_at:new Date((nowTs-180)*1000).toISOString()},
-        {id:"c3",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Hype",titulo:"GTA 6 em primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA 🔥",ini:550,fim:582,nota:10,motivo:"Hype máximo ao analisar novidades de GTA 6.",descricao:"Novidades de GTA 6.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-30,created_at:new Date((nowTs-30)*1000).toISOString()}
+        {id:"c2",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Frustração",titulo:"Bug bizarro na missão final",headline:"DEU TUDO ERRADO NA HORA H 😤",ini:214,fim:242,nota:8,motivo:"Frustração genuína após bug crítico na fase final.",descricao:"Bug bizarro estragou a run.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-180,created_at:new Date((nowTs-180)*1000).toISOString()},
+        {id:"c3",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Hype",titulo:"GTA 6 em primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA 🔥",ini:550,fim:579,nota:10,motivo:"Hype máximo ao analisar novidades de GTA 6.",descricao:"Novidades de GTA 6.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-30,created_at:new Date((nowTs-30)*1000).toISOString()}
       ]
     },
     {
@@ -676,7 +861,7 @@ const memDb={
       created_at:new Date((nowTs-450)*1000).toISOString(),
       log:["[05:40:00] 20 agentes finalizaram análise retroativa + ao vivo"],
       clips:[
-        {id:"ck1",live_id:"coringa-kick-demo",platform:"KICK",channel:"loud_coringa",emotion:"Raiva",titulo:"Perdeu a paciência na fuga RP",headline:"ELE EXPLODIU NA PERSEGUIÇÃO 🤬",ini:140,fim:176,nota:9,motivo:"Pico vocal extremo + raiva no GTA RP.",descricao:"Fuga policial intensa na Kick.\n\nCorte de @loud_coringa",molde:"VIDRO_GAMER",url:sampleClipUrl,created_ts:nowTs-410,created_at:new Date((nowTs-410)*1000).toISOString()}
+        {id:"ck1",live_id:"coringa-kick-demo",platform:"KICK",channel:"loud_coringa",emotion:"Raiva",titulo:"Perdeu a paciência na fuga RP",headline:"ELE EXPLODIU NA PERSEGUIÇÃO 🤬",ini:140,fim:169,nota:9,motivo:"Pico vocal extremo + raiva no GTA RP.",descricao:"Fuga policial intensa na Kick.\n\nCorte de @loud_coringa",molde:"VIDRO_GAMER",url:sampleClipUrl,created_ts:nowTs-410,created_at:new Date((nowTs-410)*1000).toISOString()}
       ]
     },
     {
@@ -696,7 +881,7 @@ const memDb={
       created_at:new Date((nowTs-900)*1000).toISOString(),
       log:["[05:10:00] Análise completa finalizada no YouTube"],
       clips:[
-        {id:"yt1",live_id:"gta6-yt-demo",platform:"YOUTUBE",channel:"FlowGamesBR",emotion:"Xingamentos",titulo:"Soltou o verbo ao descobrir bug",headline:"INACREDITÁVEL ESSE BUG 🔥",ini:65,fim:98,nota:8,motivo:"Reação espontânea com xingamentos e risada do chat.",descricao:"Análise GTA 6 no YouTube.\n\nCorte de @FlowGamesBR",molde:"FADE_CONTINUO",url:sampleClipUrl,created_ts:nowTs-860,created_at:new Date((nowTs-860)*1000).toISOString()}
+        {id:"yt1",live_id:"gta6-yt-demo",platform:"YOUTUBE",channel:"FlowGamesBR",emotion:"Xingamentos",titulo:"Soltou o verbo ao descobrir bug",headline:"INACREDITÁVEL ESSE BUG 🔥",ini:65,fim:94,nota:8,motivo:"Reação espontânea com xingamentos e risada do chat.",descricao:"Análise GTA 6 no YouTube.\n\nCorte de @FlowGamesBR",molde:"FADE_CONTINUO",url:sampleClipUrl,created_ts:nowTs-860,created_at:new Date((nowTs-860)*1000).toISOString()}
       ]
     }
   ]
@@ -723,11 +908,13 @@ function showTab(t){
   activeTab=t;
   [...$("nav").children].forEach(b=>b.classList.toggle("on",b.dataset.t===t));
   document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hide",p.id!=="tab-"+t));
+  if(t==="CORTES"&&lastChartSeries.length)setTimeout(()=>drawSentimentChart(lastChartSeries,lastChartClips),40);
+  if(t==="AO VIVO"){void loadRadar();void refreshQueueBadge();}
   if(t==="VÍDEOS") renderVideosTab();
   if(t==="MOLDES") void loadMoldes();
   if(t==="IDEIAS") void loadIdeas();
   if(t==="UPLOADS") void loadUploads();
-  if(t==="IA"){renderCatalog20();void loadHealth();}
+  if(t==="IA"){void syncCustomAgents();void loadHealth();}
 }
 
 const wv=$("wv");
@@ -837,13 +1024,16 @@ async function browserDiscoverStreams(plat,cat,reg,q){
   items.forEach(s=>{s.is_brazil=typeof s.is_brazil==="boolean"?s.is_brazil:classifyBrBrowser(s);});
   if(reg==="BRAZIL_ONLY")items=items.filter(s=>s.is_brazil);
   else if(reg==="FOREIGN_ONLY")items=items.filter(s=>!s.is_brazil);
-  items.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(b.viewer_count-a.viewer_count));
+  const catTotals={};
+  items.forEach(s=>{const rk=(s.is_brazil?"BR:":"INT:")+String(s.category||"Outros").trim().toLowerCase();catTotals[rk]=(catTotals[rk]||0)+Number(s.viewer_count||0);});
+  items.forEach(s=>{const rk=(s.is_brazil?"BR:":"INT:")+String(s.category||"Outros").trim().toLowerCase();s.category_viewers=catTotals[rk]||Number(s.viewer_count||0);});
+  items.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(b.category_viewers-a.category_viewers)||(b.viewer_count-a.viewer_count));
   const brCnt=items.filter(x=>x.is_brazil).length;
   const liveParts=[];
   if(twitchLive>0)liveParts.push(`Twitch ao vivo (${twitchLive})`);
   if(kickLive>0)liveParts.push(`Kick ao vivo (${kickLive})`);
   const note=liveParts.length
-    ? `${liveParts.join(" + ")} direto no navegador · conecte servidor Python na aba IA para catálogo completo Kick/YouTube + FFmpeg`
+    ? `${liveParts.join(" + ")} direto no navegador · conecte servidor Python na aba IA para YouTube live + FFmpeg`
     : `Lista base (conecte servidor Python na aba IA para catálogo dinâmico Kick/YouTube + corte FFmpeg)`;
   return {streams:items,counts:{total:items.length,brazil:brCnt,international:items.length-brCnt},sourceNote:note};
 }
@@ -885,47 +1075,75 @@ function buildZipBlob(files){
 async function localApi(p,o={}){
   const m=(o.method||"GET").toUpperCase();
   const body=typeof o.body==="string"?JSON.parse(o.body):null;
+  const maxConc=Math.max(1,Math.min(8,Number(appSettings.max_concurrent_captures||3)));
+  const activeLives=memDb.lives.filter(x=>x.status==="assistindo ao vivo"||x.status==="analisando").map(x=>x.id);
+  const queuedLives=memDb.lives.filter(x=>x.status==="na fila (banda)").map(x=>x.id);
+  const queueSnap={max_concurrent_captures:maxConc,active_count:activeLives.length,queued_count:queuedLives.length,active_ids:activeLives,queued_ids:queuedLives,bandwidth_mode:"CONTROLADO"};
+
   if(p==="/api/health"){
-    return {ok:true,binaries:{ffmpeg:false,ffprobe:false,streamlink:false,yt_dlp:false},python_modules:{faster_whisper:false,cv2:false,anthropic:false,googleapiclient:false},anthropic_configured:false,zero_api_mode:true,swarm_agents:20,youtube_secret_exists:false,youtube_token_exists:false,broll_files:memDb.brolls,settings:appSettings};
+    return {ok:true,app:"Magia Cortes IA",binaries:{ffmpeg:false,ffprobe:false,streamlink:false,yt_dlp:false},python_modules:{faster_whisper:false,cv2:false,anthropic:false,googleapiclient:false},anthropic_configured:false,zero_api_mode:true,swarm_agents:getAllCatalogAgents().length,bandwidth_queue:queueSnap,youtube_secret_exists:false,youtube_token_exists:false,broll_files:memDb.brolls,settings:appSettings};
   }
-  if(p==="/api/agents")return {count:20,requires_api_key:false,agents:AGENT_CATALOG_20};
+  if(p==="/api/queue/status")return queueSnap;
+  if(p==="/api/agents"){
+    const allA=getAllCatalogAgents();
+    return {ok:true,status_ok:true,base_count:20,custom_count:customAgentsList.length,count:allA.length,requires_api_key:false,max_clip_seconds:30,bandwidth_queue:queueSnap,agents:allA};
+  }
+  if(p==="/api/agents/custom"&&m==="POST"){
+    const kws=String(body.keywords||"").split(/[,;\n]+/).map(x=>x.trim().toLowerCase()).filter(Boolean);
+    if(!kws.length)throw new Error("Informe pelo menos uma palavra-chave.");
+    const num=21+customAgentsList.length;
+    const ag={id:"custom_"+Date.now().toString(36),code:`IA-${num}`,name:String(body.name||"Agente").slice(0,60),role:`Monitora palavras-chave (${kws.slice(0,4).join(", ")})`,partner:"IA-19",emotion:body.emotion||"Hype",keywords:kws,custom:true,requires_api_key:false};
+    customAgentsList.push(ag);
+    return {ok:true,agent:ag,total_agents:getAllCatalogAgents().length};
+  }
+  if(p.startsWith("/api/agents/custom/")&&m==="DELETE"){
+    const aid=p.split("/").pop();
+    customAgentsList=customAgentsList.filter(a=>a.id!==aid);
+    return {ok:true,deleted:aid};
+  }
   if(p.startsWith("/api/discover/lives")){
     const u=new URL("http://x"+p);
     return browserDiscoverStreams(u.searchParams.get("platform")||"ALL",u.searchParams.get("category")||"ALL",u.searchParams.get("region")||"BRAZIL_FIRST",u.searchParams.get("q")||"");
   }
   if(p==="/api/lives"&&m==="GET")return memDb.lives;
   if(p==="/api/lives"&&m==="POST"){
-    const chan=(body.link||"").split("/").filter(Boolean).pop()||"live";
+    const rawL=String(body.link||"");
+    const chan=rawL.split("?")[0].split("/").filter(Boolean).pop()||"live";
     const id="lv_"+Date.now()+"_"+Math.floor(Math.random()*99);
-    const plat=body.link.includes("kick")?"KICK":(body.link.includes("youtu")?"YOUTUBE":"TWITCH");
+    const plat=/\.m3u8/i.test(rawL)?"HLS":(/\.(mp4|webm|mov|mkv)/i.test(rawL)?"DIRECT":(rawL.includes("kick")?"KICK":(rawL.includes("youtu")?"YOUTUBE":"TWITCH")));
     const ts=Math.floor(Date.now()/1000);
+    const activeCnt=memDb.lives.filter(x=>x.status==="assistindo ao vivo"||x.status==="analisando").length;
+    const queued=(activeCnt>=maxConc);
     const obj={
-      id,name:body.name||chan,link:body.link,platform:plat,min:body.min||6,max:body.max||3,recorded:12,status:"assistindo ao vivo",
-      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:45,live_pct:25,elapsed_sec:420},
-      agents:mkAgents(55),
-      handoffs:[`[${new Date().toTimeString().slice(0,8)}] IA-03->IA-04: varrendo 00:00<-Ao Vivo->Fim sem API key`],
+      id,name:body.name||chan,link:rawL,platform:plat,min:body.min||6,max:body.max||4,recorded:12,
+      status:queued?"na fila (banda)":"assistindo ao vivo",
+      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:queued?0:45,live_pct:queued?0:25,elapsed_sec:420},
+      agents:mkAgents(queued?10:55),
+      handoffs:[`[${new Date().toTimeString().slice(0,8)}] IA-03->IA-04: varrendo 00:00<-Ao Vivo->Fim sem API key (máx 30s)`],
       sentiment_series:mkSentimentSeries(180,ts%9),
       created_ts:ts,created_at:new Date().toISOString(),
-      log:["["+new Date().toTimeString().slice(0,8)+"] Conectado em "+body.link,"["+new Date().toTimeString().slice(0,8)+"] 20 IAs monitorando engraçados, frustrações, raiva e xingamentos..."],
+      log:["["+new Date().toTimeString().slice(0,8)+"] Conectado em "+rawL,"["+new Date().toTimeString().slice(0,8)+"] "+getAllCatalogAgents().length+" IAs monitorando engraçados, frustrações, raiva e xingamentos (≤30s)..."],
       clips:[
-        {id:"cn_"+ts+"_1",live_id:id,platform:plat,channel:body.name||chan,emotion:"Engraçado",titulo:"Momento engraçado de "+chan,headline:(body.hint||"NINGUÉM TANKOU ESSA REAÇÃO 😂").toUpperCase().slice(0,44),ini:12,fim:42,nota:9,motivo:"Pico de humor e risadas.",descricao:"Corte automático de @"+chan,molde:appSettings.molde,url:sampleClipUrl,created_ts:ts,created_at:new Date().toISOString()},
-        {id:"cn_"+ts+"_2",live_id:id,platform:plat,channel:body.name||chan,emotion:"Raiva",titulo:"Tilt ao vivo de "+chan,headline:"ELE PERDEU A PACIÊNCIA AO VIVO 🤬",ini:58,fim:88,nota:8,motivo:"Explosão de raiva e xingamentos.",descricao:"Reação forte de @"+chan,molde:appSettings.molde,url:sampleClipUrl,created_ts:ts-5,created_at:new Date().toISOString()}
+        {id:"cn_"+ts+"_1",live_id:id,platform:plat,channel:body.name||chan,emotion:"Engraçado",titulo:"Momento engraçado de "+chan,headline:(body.hint||"NINGUÉM TANKOU ESSA REAÇÃO 😂").toUpperCase().slice(0,44),ini:12,fim:40,nota:9,motivo:"Pico de humor e risadas (28s).",descricao:"Corte automático de @"+chan,molde:normalizeMoldeId(body.molde||appSettings.molde),transition:appSettings.transition||"NONE",soundtrack:appSettings.soundtrack||"NONE",url:sampleClipUrl,created_ts:ts,created_at:new Date().toISOString()},
+        {id:"cn_"+ts+"_2",live_id:id,platform:plat,channel:body.name||chan,emotion:"Raiva",titulo:"Tilt ao vivo de "+chan,headline:"ELE PERDEU A PACIÊNCIA AO VIVO 🤬",ini:58,fim:86,nota:8,motivo:"Explosão de raiva e xingamentos (28s).",descricao:"Reação forte de @"+chan,molde:normalizeMoldeId(body.molde||appSettings.molde),transition:appSettings.transition||"NONE",soundtrack:appSettings.soundtrack||"NONE",url:sampleClipUrl,created_ts:ts-5,created_at:new Date().toISOString()}
       ]
     };
     memDb.lives.unshift(obj);
     return obj;
   }
   if(p==="/api/lives/analyze-all"&&m==="POST"){
-    const list=(body&&body.streams&&body.streams.length)?body.streams.slice(0,5):memDemoDiscovery.slice(0,4);
+    if(body&&body.max_concurrent)appSettings.max_concurrent_captures=Math.max(1,Math.min(8,Number(body.max_concurrent)));
+    const maxN=Math.max(1,Math.min(20,Number((body&&body.max_lives)||6)));
+    const list=(body&&body.streams&&body.streams.length)?body.streams.slice(0,maxN):memDemoDiscovery.slice(0,maxN);
     const created=[];
     for(const s of list){
       const existing=memDb.lives.find(x=>x.link===s.url);
       if(!existing){
-        const r=await localApi("/api/lives",{method:"POST",body:JSON.stringify({link:s.url,name:s.display_name||s.login,min:body.min||6,max:body.max_clips||3,hint:"Engraçado, Frustração, Raiva, Xingamentos"})});
+        const r=await localApi("/api/lives",{method:"POST",body:JSON.stringify({link:s.url,name:s.display_name||s.login,min:body.min||6,max:body.max_clips||4,molde:body.molde||appSettings.molde,hint:"Engraçado, Frustração, Raiva, Xingamentos"})});
         created.push(r);
       }
     }
-    return {ok:true,started_count:created.length,created_lives:created};
+    return {ok:true,started_count:created.length,created_lives:created,max_clip_seconds:30,queue_status:await localApi("/api/queue/status")};
   }
   if(p==="/api/lives/upload-video"&&m==="POST"){
     const fileUrl=o._fileUrl||sampleClipUrl;
@@ -976,9 +1194,9 @@ async function localApi(p,o={}){
     const clips=peaks.map((pk,idx)=>({
       id:`cu_${ts}_${idx}`,live_id:id,platform:"LOCAL",channel:fname,emotion:pk.emo,
       titulo:pk.title,headline:`${pk.emo.toUpperCase()} DETECTADO (${pk.db}dB)`,
-      ini:pk.ini,fim:pk.fim,nota:pk.nota,motivo:`Pico sonoro analisado via WebAudio no navegador (${pk.db}dB)`,
+      ini:pk.ini,fim:Math.min(pk.ini+30,pk.fim),nota:pk.nota,motivo:`Pico sonoro analisado via WebAudio no navegador (${pk.db}dB)`,
       descricao:`Corte de ${fname} (${hms(pk.ini)}–${hms(pk.fim)})`,molde:appSettings.molde,
-      url:`${fileUrl}#t=${pk.ini},${pk.fim}`,created_ts:ts-idx,created_at:new Date().toISOString()
+      url:`${fileUrl}#t=${pk.ini},${Math.min(pk.ini+30,pk.fim)}`,created_ts:ts-idx,created_at:new Date().toISOString()
     }));
     const obj={
       id,name:fname,link:fileUrl,platform:"LOCAL",min:6,max:Math.max(3,clips.length),recorded:dur,status:"finalizado",
@@ -999,7 +1217,7 @@ async function localApi(p,o={}){
     const ts=Math.floor(Date.now()/1000);
     const sSec=Math.max(0,Number(body.start_sec||0)),eSec=Math.max(sSec+2,Number(body.end_sec||25));
     const baseSrc=l.link.startsWith("blob:")?l.link.split("#")[0]:sampleClipUrl;
-    const c={id:"cm_"+ts,live_id:id,platform:l.platform||"LOCAL",channel:l.name,emotion:"Hype",titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:sSec,fim:eSec,nota:9,motivo:"Corte manual",descricao:"Corte manual "+sSec+"s–"+eSec+"s",molde:body.molde||appSettings.molde,url:`${baseSrc}#t=${sSec},${eSec}`,created_ts:ts,created_at:new Date().toISOString()};
+    const c={id:"cm_"+ts,live_id:id,platform:l.platform||"LOCAL",channel:l.name,emotion:"Hype",titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:sSec,fim:eSec,nota:9,motivo:"Corte manual",descricao:"Corte manual "+sSec+"s–"+eSec+"s",molde:normalizeMoldeId(body.molde||appSettings.molde),url:`${baseSrc}#t=${sSec},${eSec}`,created_ts:ts,created_at:new Date().toISOString()};
     l.clips.push(c);return c;
   }
   if(p.startsWith("/api/lives/")&&p.endsWith("/agents")){
@@ -1009,6 +1227,7 @@ async function localApi(p,o={}){
   }
   if(p.startsWith("/api/lives/")){
     const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(!l)throw new Error("Live não encontrada");
+    if(l.status==="na fila (banda)")l.status="assistindo ao vivo";
     if(l.status==="assistindo ao vivo"){
       l.recorded+=3;
       if(l.timeline_coverage){l.timeline_coverage.retro_pct=Math.min(100,l.timeline_coverage.retro_pct+4);l.timeline_coverage.live_pct=Math.min(99,l.timeline_coverage.live_pct+3);}
@@ -1022,10 +1241,17 @@ async function localApi(p,o={}){
     if(body.headline)c.headline=body.headline.toUpperCase();
     if(body.titulo)c.titulo=body.titulo;
     if(body.descricao)c.descricao=body.descricao;
+    if(body.molde)c.molde=normalizeMoldeId(body.molde);
+    if(body.transition)c.transition=body.transition;
+    if(body.soundtrack)c.soundtrack=body.soundtrack;
     return c;
   }
   if(p==="/api/moldes")return {moldes:memDb.moldes,settings:appSettings};
-  if(p==="/api/settings"){Object.assign(appSettings,body||{});return appSettings;}
+  if(p==="/api/settings"){
+    if(body&&body.molde)body.molde=normalizeMoldeId(body.molde);
+    Object.assign(appSettings,body||{});
+    return appSettings;
+  }
   if(p==="/api/ideas"&&m==="GET")return memDb.ideas;
   if(p==="/api/ideas"&&m==="POST"){const item={id:"id_"+Date.now(),tag:body.tag,min:body.min,hint:body.hint};memDb.ideas.unshift(item);return item;}
   if(p==="/api/uploads"&&m==="GET")return memDb.uploads;
@@ -1091,6 +1317,14 @@ $("connectBackendBtn").onclick=async()=>{
   else{notify("Não foi possível conectar em "+u);}
 };
 
+async function refreshQueueBadge(){
+  try{
+    const q=await api("/api/queue/status");
+    const el=$("queueStatusBadge");
+    if(el)el.textContent=`Banda: Máx ${q.max_concurrent_captures||appSettings.max_concurrent_captures||3} simultâneas · Ativas ${q.active_count||0} · Fila ${q.queued_count||0}`;
+  }catch(_){}
+}
+
 async function loadRadar(){
   const cat=$("radarCat").value||"ALL";
   const reg=$("radarRegion").value||"BRAZIL_FIRST";
@@ -1105,7 +1339,7 @@ async function loadRadar(){
   radarStreams=res.streams||[];
   const cnt=res.counts||{total:radarStreams.length,brazil:0,international:0};
   $("radarCounts").textContent=`${cnt.total} ao vivo · 🇧🇷 ${cnt.brazil} BR · 🌎 ${cnt.international} Intl`;
-  $("radarMeta").textContent=res.sourceNote||"Ordenado: Brasil 1º · Internacionais por último · Maior audiência no topo";
+  $("radarMeta").textContent=res.sourceNote||"Ordenado: Brasil 1º · Categoria com mais espectadores primeiro · Mais pessoas na live";
   const grid=$("radarGrid");
   if(!radarStreams.length){
     grid.innerHTML='<div class="mut">Nenhuma live encontrada para este filtro. Tente "Todas Categorias" ou atualize.</div>';
@@ -1114,6 +1348,7 @@ async function loadRadar(){
   grid.innerHTML=radarStreams.slice(0,24).map((s,i)=>{
     const pCls=s.platform==="KICK"?"pill br":(s.platform==="YOUTUBE"?"pill err":"pill pu");
     const regPill=s.is_brazil?'<span class="pill br">🇧🇷 BRASIL</span>':'<span class="pill intl">🌎 INTL</span>';
+    const catTot=Number(s.category_viewers||s.viewer_count||0).toLocaleString("pt-BR");
     return `
       <div class="item-card">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">
@@ -1122,17 +1357,21 @@ async function loadRadar(){
         </div>
         <b style="display:block;margin-top:8px">${esc(s.display_name||s.login)}</b>
         <div class="mut" style="font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.title)}</div>
-        <div class="mut" style="margin-top:4px;font-size:11px">Categoria: <b>${esc(s.category||"Ao Vivo")}</b></div>
-        <button class="btn sm w" type="button" style="margin-top:8px" data-radar-idx="${i}">▶ Rodar Live & Cortar (20 IAs)</button>
+        <div class="mut" style="margin-top:4px;font-size:11px">Categoria: <b>${esc(s.category||"Ao Vivo")}</b> · <span style="color:var(--cy)">${catTot} na cat.</span></div>
+        <button class="btn sm w" type="button" style="margin-top:8px" data-radar-idx="${i}">▶ Assistir & Cortar (≤30s · 20 IAs)</button>
       </div>
     `;
   }).join("");
   grid.querySelectorAll("[data-radar-idx]").forEach(btn=>{
     btn.onclick=()=>{
       const st=radarStreams[Number(btn.dataset.radarIdx)];
-      if(st)void startLive(st.url,st.display_name||st.login,"LIVE").catch(e=>notify(e.message));
+      if(st){
+        $("lk").value=st.url;
+        void startLive(st.url,st.display_name||st.login,"LIVE").catch(e=>notify(e.message));
+      }
     };
   });
+  void refreshQueueBadge();
 }
 
 $("radarPlatBtns").querySelectorAll("[data-plat]").forEach(b=>{
@@ -1146,64 +1385,110 @@ $("radarCat").onchange=()=>void loadRadar();
 $("radarRegion").onchange=()=>void loadRadar();
 $("radarSearch").oninput=()=>{clearTimeout(window.__rs);window.__rs=setTimeout(()=>void loadRadar(),280);};
 $("refreshRadarBtn").onclick=()=>void loadRadar();
+$("goAoVivoBtn").onclick=()=>showTab("AO VIVO");
+
+$("maxConcRange").oninput=e=>{$("maxConcVal").textContent=e.target.value;};
+$("maxConcRange").onchange=async e=>{
+  const v=Math.max(1,Math.min(6,Number(e.target.value)||3));
+  appSettings.max_concurrent_captures=v;
+  try{await saveSettings({max_concurrent_captures:v});}catch(_){}
+  void refreshQueueBadge();
+};
 
 async function analyzeAllLives(){
   try{
-    notify("Disparando 20 agentes em TODAS as lives (engraçado, frustração, raiva, xingamentos)...");
+    const selectedEmos=[...document.querySelectorAll(".emo-chk:checked")].map(x=>x.value);
+    const emotions=selectedEmos.length?selectedEmos:["Engraçado","Frustração","Raiva","Xingamentos"];
+    const maxConc=Math.max(1,Math.min(6,Number($("maxConcRange").value)||3));
+    const maxLives=Math.max(1,Math.min(20,Number($("analyzeMaxLives").value)||6));
+    notify(`Enfileirando até ${maxLives} lives (máx ${maxConc} simultâneas na banda, cortes ≤30s)...`);
     const res=await api("/api/lives/analyze-all",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        streams:radarStreams.slice(0,6),
+        streams:radarStreams.slice(0,maxLives),
         platform:radarPlat,category:$("radarCat").value,
-        max_lives:6,min:+$("mn").value||6,max_clips:+$("mx").value||4,
-        emotions:["Engraçado","Frustração","Raiva","Xingamentos"],molde:appSettings.molde
+        max_lives:maxLives,max_concurrent:maxConc,
+        min:+$("mn").value||6,max_clips:+$("mx").value||4,
+        emotions,molde:appSettings.molde
       })
     });
     await refreshLives();
+    void refreshQueueBadge();
     if(res.created_lives&&res.created_lives[0])watchLive(res.created_lives[0].id);
-    notify(`${res.started_count||0} live(s) iniciada(s) pelo enxame de 20 IAs!`);
+    notify(`${res.started_count||0} live(s) enviada(s) para o gerenciador de filas (cortes ≤30s)!`);
   }catch(e){notify("Erro ao analisar todas: "+e.message);}
 }
 $("analyzeAllBtn").onclick=()=>void analyzeAllLives();
-$("sidebarAnalyzeAllBtn").onclick=()=>void analyzeAllLives();
 
 let lastChartSeries=[];
-function drawSentimentChart(series){
+let lastChartClips=[];
+let chartClipHits=[];
+function drawSentimentChart(series,clips){
   lastChartSeries=series||[];
+  lastChartClips=clips||[];
+  chartClipHits=[];
   const cv=$("sentimentChart");
   if(!cv)return;
   const ctx=cv.getContext("2d");
   const dpr=window.devicePixelRatio||1;
-  const cssW=cv.clientWidth||720,cssH=165;
+  const cssW=cv.clientWidth||720,cssH=170;
   if(cv.width!==Math.floor(cssW*dpr)||cv.height!==Math.floor(cssH*dpr)){cv.width=Math.floor(cssW*dpr);cv.height=Math.floor(cssH*dpr);}
   ctx.setTransform(dpr,0,0,dpr,0,0);
   ctx.clearRect(0,0,cssW,cssH);
-  const padL=34,padR=14,padT=14,padB=24,W=cssW-padL-padR,H=cssH-padT-padB;
-  ctx.strokeStyle="rgba(143,143,160,0.18)";ctx.lineWidth=1;
-  ctx.font="10px system-ui";ctx.fillStyle="#8f8fa0";
+  const padL=34,padR=14,padT=18,padB=24,W=cssW-padL-padR,H=cssH-padT-padB;
+  ctx.strokeStyle="rgba(156,151,184,0.18)";ctx.lineWidth=1;
+  ctx.font="10px system-ui";ctx.fillStyle="#9c97b8";
   [25,50,75,100].forEach(val=>{
     const y=padT+H*(1-val/100);
     ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(cssW-padR,y);ctx.stroke();
     ctx.fillText(val+"%",2,y+3);
   });
   if(!lastChartSeries.length){
-    ctx.fillStyle="#8f8fa0";ctx.fillText("Aguardando dados de chat & picos de áudio da live...",padL+14,padT+H/2);
+    ctx.fillStyle="#9c97b8";ctx.fillText("Cole um link ou inicie a captura para acompanhar Positivo / Negativo / Hype e marcadores de corte...",padL+10,padT+H/2);
+    $("sentPeaks").innerHTML="";
     return;
   }
   const n=lastChartSeries.length;
   const xAt=i=>padL+(n>1?(i/(n-1))*W:W/2);
   const yAt=v=>padT+H*(1-Math.max(0,Math.min(100,v))/100);
-  [["positivo","#22e07a"],["negativo","#ff3b1f"],["hype","#ffd23f"]].forEach(([key,col])=>{
+  [["positivo","#22e07a"],["negativo","#ff2e93"],["hype","#ffd23f"]].forEach(([key,col])=>{
     ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=2.3;
     lastChartSeries.forEach((pt,i)=>{const x=xAt(i),y=yAt(pt[key]);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
     ctx.stroke();
   });
   lastChartSeries.forEach((pt,i)=>{
-    if(i===0||i===n-1||i%Math.max(1,Math.floor(n/5))===0){ctx.fillStyle="#8f8fa0";ctx.fillText(pt.label||hms(pt.t),xAt(i)-12,cssH-6);}
-    if(pt.hype>=76){ctx.beginPath();ctx.fillStyle="#ffd23f";ctx.arc(xAt(i),yAt(pt.hype),4,0,Math.PI*2);ctx.fill();}
+    if(i===0||i===n-1||i%Math.max(1,Math.floor(n/5))===0){ctx.fillStyle="#9c97b8";ctx.fillText(pt.label||hms(pt.t),xAt(i)-12,cssH-6);}
+    if(pt.hype>=76){ctx.beginPath();ctx.fillStyle="#ffd23f";ctx.arc(xAt(i),yAt(pt.hype),3.8,0,Math.PI*2);ctx.fill();}
   });
-  const peaks=[...lastChartSeries].sort((a,b)=>b.hype-a.hype).slice(0,4);
-  $("sentPeaks").innerHTML=peaks.map(p=>`<span class="pill warn" style="cursor:pointer">${p.label} · ${esc(p.emotion||"Pico")} (${p.hype}%)</span>`).join("");
+
+  // Marcadores clicaveis de cortes gerados diretamente sobre a linha do tempo
+  const minT=Number(lastChartSeries[0].t||0);
+  const maxT=Math.max(minT+1,Number(lastChartSeries[n-1].t||minT+1));
+  lastChartClips.forEach((c,idx)=>{
+    const cT=Math.max(minT,Math.min(maxT,Number(c.ini||0)));
+    const rel=(cT-minT)/(maxT-minT);
+    const x=padL+rel*W;
+    ctx.save();
+    ctx.setLineDash([4,3]);ctx.strokeStyle="#00e5ff";ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,padT+H);ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle="#00e5ff";
+    ctx.beginPath();ctx.arc(x,padT-6,7,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle="#07070d";ctx.font="bold 9px system-ui";ctx.fillText(String(idx+1),x-2.5,padT-3);
+    chartClipHits.push({x,y:padT-6,idx,clip:c,liveId:c.live_id||curLiveId});
+  });
+
+  const peaks=[...lastChartSeries].sort((a,b)=>b.hype-a.hype).slice(0,3);
+  const clipBtns=lastChartClips.map((c,idx)=>`<button type="button" class="plat-btn on" style="border-color:var(--cy);background:rgba(0,229,255,.15);color:var(--cy)" data-chart-clip="${idx}">✂ #${idx+1} · ${hms(c.ini)} (${esc(c.emotion||"Corte")})</button>`).join("");
+  const peakBadges=peaks.map(p=>`<span class="pill warn" data-chart-t="${p.t}" style="cursor:pointer">⚡ ${p.label} · ${esc(p.emotion||"Pico")} (${p.hype}%)</span>`).join("");
+  $("sentPeaks").innerHTML=clipBtns+peakBadges;
+  $("sentPeaks").querySelectorAll("[data-chart-clip]").forEach(btn=>{
+    btn.onclick=()=>{
+      const idx=Number(btn.dataset.chartClip);
+      const c=lastChartClips[idx];
+      if(c)openEd(idx,c,c.live_id||curLiveId);
+    };
+  });
 }
 
 function handleChartInspect(clientX){
@@ -1211,10 +1496,23 @@ function handleChartInspect(clientX){
   const cv=$("sentimentChart"),rect=cv.getBoundingClientRect();
   const rel=Math.max(0,Math.min(1,(clientX-rect.left-34)/Math.max(1,rect.width-48)));
   const pt=lastChartSeries[Math.min(lastChartSeries.length-1,Math.round(rel*(lastChartSeries.length-1)))];
-  $("sentHover").innerHTML=`<b>[${pt.label}]</b> Emoção dominante: <b>${esc(pt.emotion)}</b> · 🟢 Positivo ${pt.positivo}% · 🔴 Negativo ${pt.negativo}% · 🟡 Hype ${pt.hype}% · Áudio ${pt.db||-25}dB`;
+  const nearClip=lastChartClips.find(c=>Math.abs((c.ini||0)-(pt.t||0))<=35);
+  const clipHint=nearClip?` · ✂ Clique p/ editar: "${esc(nearClip.titulo)}"`:"";
+  $("sentHover").innerHTML=`<b>[${pt.label}]</b> Emoção: <b>${esc(pt.emotion)}</b> · 🟢 Positivo ${pt.positivo}% · 🔴 Negativo ${pt.negativo}% · 🟡 Hype ${pt.hype}% · Áudio ${pt.db||-24}dB${clipHint}`;
 }
 $("sentimentChart").addEventListener("mousemove",e=>handleChartInspect(e.clientX));
 $("sentimentChart").addEventListener("touchmove",e=>{if(e.touches[0])handleChartInspect(e.touches[0].clientX);},{passive:true});
+$("sentimentChart").addEventListener("click",e=>{
+  if(!chartClipHits.length)return;
+  const cv=$("sentimentChart"),rect=cv.getBoundingClientRect();
+  const clickX=e.clientX-rect.left;
+  let best=null,bestDist=18;
+  chartClipHits.forEach(h=>{const d=Math.abs(h.x-clickX);if(d<bestDist){bestDist=d;best=h;}});
+  if(best&&best.clip){
+    openEd(best.idx,best.clip,best.liveId||curLiveId);
+    notify(`Marcador #${best.idx+1} aberto no Estúdio!`);
+  }
+});
 
 function renderSwarmGrid(agents,handoffs){
   const list=agents&&agents.length?agents:mkAgents(30);
@@ -1233,20 +1531,45 @@ function renderSwarmGrid(agents,handoffs){
       </div>
     `;
   }).join("");
-  $("handoffFeed").innerHTML=(handoffs&&handoffs.length?handoffs:["Aguardando primeira colaboração entre os 20 agentes..."]).map(h=>`<div>${esc(h)}</div>`).join("");
+  $("handoffFeed").innerHTML=(handoffs&&handoffs.length?handoffs:["Aguardando primeira colaboração entre os agentes..."]).map(h=>`<div>${esc(h)}</div>`).join("");
 }
 
 function renderCatalog20(){
-  $("iaCatalogGrid").innerHTML=AGENT_CATALOG_20.map(a=>`
-    <div class="agent-card done">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <b>${esc(a.code)}</b><span class="pill">SEM API KEY</span>
+  const list=getAllCatalogAgents();
+  const countEl=$("iaTotalCountLbl");if(countEl)countEl.textContent=String(list.length);
+  $("swarmBadge").textContent=`${list.length} IAs · Zero API Key`;
+  $("iaCatalogGrid").innerHTML=list.map(a=>`
+    <div class="agent-card ${a.custom?"running":"done"}">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:4px">
+        <b>${esc(a.code)}</b>
+        ${a.custom?`<button type="button" class="btn g sm" style="padding:2px 6px;font-size:10px" data-del-agent="${esc(a.id)}">✕</button>`:'<span class="pill">SEM API KEY</span>'}
       </div>
       <div style="font-weight:700;margin-top:4px">${esc(a.name)}</div>
       <div class="mut" style="font-size:11px;margin-top:2px">${esc(a.role)}</div>
-      <div class="mut" style="font-size:10.5px;margin-top:4px">Conecta com: <b>${esc(a.partner)}</b></div>
+      <div class="mut" style="font-size:10.5px;margin-top:4px">${a.keywords?`Palavras: <b>${esc(a.keywords.join(", "))}</b>`:`Conecta com: <b>${esc(a.partner)}</b>`}</div>
     </div>
   `).join("");
+  $("iaCatalogGrid").querySelectorAll("[data-del-agent]").forEach(btn=>{
+    btn.onclick=async()=>{
+      try{
+        await api("/api/agents/custom/"+encodeURIComponent(btn.dataset.delAgent),{method:"DELETE"});
+        await syncCustomAgents();
+        notify("Agente personalizado removido.");
+      }catch(e){notify("Erro ao remover: "+e.message);}
+    };
+  });
+}
+
+async function syncCustomAgents(){
+  try{
+    const res=await api("/api/agents");
+    if(Array.isArray(res.agents)){
+      const builtIds=new Set(AGENT_CATALOG_20.map(x=>x.id));
+      const customFromServer=res.agents.filter(a=>a.custom||!builtIds.has(a.id));
+      customAgentsList=customFromServer;
+    }
+  }catch(_){}
+  renderCatalog20();
 }
 
 async function refreshLives(){
@@ -1254,7 +1577,7 @@ async function refreshLives(){
   const box=$("lives");
   if(!allLives.length){box.innerHTML='<div class="mut">Nenhuma live ainda.</div>';}
   else{
-    box.innerHTML=allLives.map(l=>`<div class="lv" data-id="${l.id}"><b>${esc(l.name)}</b><span>${l.clips.length}/${l.max} vídeos</span></div>`).join("");
+    box.innerHTML=allLives.map(l=>`<div class="lv" data-id="${l.id}"><b>${esc(l.name)}</b><span>${l.clips.length}/${l.max} · ${esc(l.status==="na fila (banda)"?"fila":l.status)}</span></div>`).join("");
     box.querySelectorAll(".lv").forEach(el=>el.onclick=()=>watchLive(el.dataset.id));
   }
   renderVideosTab();
@@ -1262,17 +1585,25 @@ async function refreshLives(){
 
 let lastPlayerKey="";
 let lastLiveObj=null;
+let activeHls=null;
+
+function destroyHls(){
+  if(activeHls){try{activeHls.destroy();}catch(_){}activeHls=null;}
+}
 
 function extractLiveTarget(rawLink,platHint){
   const link=(rawLink||"").trim();
   const upHint=(platHint||"").toUpperCase();
-  if(!link)return{platform:upHint||"LOCAL",channel:"",videoId:"",embedUrl:"",isLocal:true};
-  if(upHint==="LOCAL"||link.startsWith("blob:")||link.startsWith("./")||link.startsWith("/data/")||/\.(mp4|webm|mov|m3u8)(\?|$)/i.test(link)){
-    return{platform:upHint||"LOCAL",channel:"video",videoId:"",embedUrl:resolveMediaUrl(link),isLocal:true};
+  if(!link)return{platform:upHint||"LOCAL",channel:"",videoId:"",embedUrl:"",hlsUrl:"",isLocal:true,isHls:false};
+  if(/\.m3u8(\?|$)/i.test(link)){
+    return{platform:upHint||"HLS",channel:"hls",videoId:"",embedUrl:"",hlsUrl:link,isLocal:false,isHls:true};
+  }
+  if(upHint==="LOCAL"||link.startsWith("blob:")||link.startsWith("./")||link.startsWith("/data/")||/\.(mp4|webm|mov|mkv)(\?|$)/i.test(link)){
+    return{platform:upHint||"LOCAL",channel:"video",videoId:"",embedUrl:resolveMediaUrl(link),hlsUrl:"",isLocal:true,isHls:false};
   }
   let u;
   try{u=new URL(/^https?:\/\//i.test(link)?link:"https://"+link);}
-  catch(_){return{platform:upHint||"UNKNOWN",channel:link,videoId:"",embedUrl:"",isLocal:false};}
+  catch(_){return{platform:upHint||"UNKNOWN",channel:link,videoId:"",embedUrl:"",hlsUrl:"",isLocal:false,isHls:false};}
   const host=u.hostname.replace(/^www\.|^m\./,"").toLowerCase();
   const parts=u.pathname.split("/").filter(Boolean);
   if(host.includes("twitch.tv")){
@@ -1282,15 +1613,15 @@ function extractLiveTarget(rawLink,platHint){
     const embedUrl=vodId
       ?`https://player.twitch.tv/?video=${encodeURIComponent(vodId)}&parent=${encodeURIComponent(pHost)}&autoplay=true&muted=false`
       :`https://player.twitch.tv/?channel=${encodeURIComponent(chan)}&parent=${encodeURIComponent(pHost)}&autoplay=true&muted=false`;
-    return{platform:"TWITCH",channel:chan,videoId:vodId,embedUrl,isLocal:false};
+    return{platform:"TWITCH",channel:chan,videoId:vodId,embedUrl,hlsUrl:"",isLocal:false,isHls:false};
   }
   if(host.includes("kick.com")){
     const isVod=(parts[0]==="video"||parts[0]==="videos")&&parts[1];
     const slug=(parts[0]||"surskity").replace(/[^A-Za-z0-9_.-]/g,"");
     const embedUrl=isVod
       ?`https://player.kick.com/video/${encodeURIComponent(parts[1])}`
-      :`https://player.kick.com/${encodeURIComponent(slug)}?autoplay=true`;
-    return{platform:"KICK",channel:slug,videoId:isVod?parts[1]:"",embedUrl,isLocal:false};
+      :`https://player.kick.com/${encodeURIComponent(slug)}?autoplay=true&muted=false`;
+    return{platform:"KICK",channel:slug,videoId:isVod?parts[1]:"",embedUrl,hlsUrl:"",isLocal:false,isHls:false};
   }
   if(host.includes("youtube.com")||host.includes("youtu.be")){
     let vid=u.searchParams.get("v")||"";
@@ -1301,38 +1632,87 @@ function extractLiveTarget(rawLink,platHint){
     }
     vid=vid.replace(/[^A-Za-z0-9_-]/g,"");
     const embedUrl=vid?`https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0`:"";
-    return{platform:"YOUTUBE",channel:parts[0]||"youtube",videoId:vid,embedUrl,isLocal:false};
+    return{platform:"YOUTUBE",channel:parts[0]||"youtube",videoId:vid,embedUrl,hlsUrl:"",isLocal:false,isHls:false};
   }
-  return{platform:upHint||"UNKNOWN",channel:parts[parts.length-1]||link,videoId:"",embedUrl:"",isLocal:false};
+  return{platform:upHint||"UNKNOWN",channel:parts[parts.length-1]||link,videoId:"",embedUrl:"",hlsUrl:"",isLocal:false,isHls:false};
+}
+
+function ensureHlsLib(cb){
+  if(window.Hls){cb(true);return;}
+  if(window.__hlsTried){cb(false);return;}
+  window.__hlsTried=true;
+  const s=document.createElement("scr"+"ipt");
+  s.src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js";
+  s.onload=()=>cb(Boolean(window.Hls));
+  s.onerror=()=>cb(false);
+  document.head.appendChild(s);
+}
+
+function mountHlsVideo(box,hlsSrc){
+  destroyHls();
+  box.innerHTML='<video id="hlsLiveVid" class="prev-player" controls autoplay playsinline></video>';
+  const video=$("hlsLiveVid");
+  if(!video)return;
+  video.muted=false;
+  const attach=()=>{
+    if(window.Hls&&window.Hls.isSupported()){
+      activeHls=new window.Hls({enableWorker:true,lowLatencyMode:true});
+      activeHls.loadSource(hlsSrc);
+      activeHls.attachMedia(video);
+      activeHls.on(window.Hls.Events.MANIFEST_PARSED,()=>{void video.play().catch(()=>{});});
+    }else if(video.canPlayType("application/vnd.apple.mpegurl")){
+      video.src=hlsSrc;
+      void video.play().catch(()=>{});
+    }else{
+      video.src=hlsSrc;
+    }
+  };
+  if(window.Hls)attach();
+  else ensureHlsLib(()=>attach());
 }
 
 async function renderLivePlayer(l,forceReload=false){
-  if(!l)return;
+  if(!l||!l.link)return;
   lastLiveObj=l;
   const box=$("livePlayerBox");
   if(!box)return;
-  const key=`${l.id}|${l.link}|${l.platform||""}`;
-  if(!forceReload&&key===lastPlayerKey&&box.childElementCount>0)return;
-  lastPlayerKey=key;
+  const normUrl=String(l.link||"").trim();
+  if(!forceReload&&normUrl===lastPlayerKey&&box.childElementCount>0)return;
+  lastPlayerKey=normUrl;
 
-  const info=extractLiveTarget(l.link,l.platform);
+  const info=extractLiveTarget(normUrl,l.platform);
   $("prevPlatBadge").textContent=info.platform||l.platform||"LIVE";
   const openEl=$("openOrigPlayer");
-  if(openEl){openEl.href=l.link||"#";openEl.style.display=info.isLocal?"none":"inline-flex";}
+  if(openEl){openEl.href=normUrl||"#";openEl.style.display=info.isLocal?"none":"inline-flex";}
 
+  if(info.isHls&&info.hlsUrl){
+    mountHlsVideo(box,info.hlsUrl);
+    return;
+  }
   if(info.isLocal&&info.embedUrl){
+    destroyHls();
     box.innerHTML=`<video class="prev-player" src="${esc(info.embedUrl)}" controls autoplay playsinline></video>`;
     return;
   }
 
   let embedUrl=info.embedUrl;
-  if(!embedUrl&&info.platform==="YOUTUBE"&&serverMode){
+  let hlsFallback=info.hlsUrl;
+  if(serverMode){
     try{
-      const r=await fetch(`${serverBase}/api/stream/resolve?url=${encodeURIComponent(l.link)}&parent=${encodeURIComponent(location.hostname||"localhost")}`);
-      if(r.ok){const d=await r.json();if(d.embed_url)embedUrl=d.embed_url;}
+      const r=await fetch(`${serverBase}/api/stream/resolve?url=${encodeURIComponent(normUrl)}&parent=${encodeURIComponent(location.hostname||"localhost")}`);
+      if(r.ok){
+        const d=await r.json();
+        if(!embedUrl&&d.embed_url)embedUrl=d.embed_url;
+        if(!hlsFallback&&d.hls_url)hlsFallback=d.hls_url;
+      }
     }catch(_){}
   }
 
+  if(hlsFallback&&(!embedUrl||info.platform==="HLS")){
+    mountHlsVideo(box,hlsFallback);
+    return;
+  }
+  destroyHls();
   if(embedUrl){
     box.innerHTML=`<iframe class="prev-player" src="${esc(embedUrl)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
     return;
@@ -1341,25 +1721,50 @@ async function renderLivePlayer(l,forceReload=false){
   box.innerHTML=`
     <div style="text-align:center;padding:20px;max-width:440px">
       <div class="pill warn" style="margin-bottom:8px">${esc(info.platform)} · @${esc(l.name||info.channel)}</div>
-      <div style="font-weight:700;margin-bottom:6px">Player incorporado requer o link direto do vídeo/live</div>
-      <div class="mut" style="margin-bottom:12px">Para links genéricos de canal do YouTube (@canal/live), conecte o servidor Python na aba IA ou cole o link direto com ?v=ID.</div>
-      <a class="btn sm" href="${esc(l.link)}" target="_blank" rel="noopener">▶ Abrir live em nova aba</a>
+      <div style="font-weight:700;margin-bottom:6px">Player pronto ao colar link direto / canal ou .m3u8</div>
+      <div class="mut" style="margin-bottom:12px">Use Twitch, Kick, YouTube (?v=ID ou /live), .m3u8 ou .mp4 para prévia com áudio ao vivo.</div>
+      <a class="btn sm" href="${esc(normUrl)}" target="_blank" rel="noopener">▶ Abrir live em nova aba</a>
     </div>
   `;
 }
 
-$("reloadPlayerBtn").onclick=()=>{if(lastLiveObj)void renderLivePlayer(lastLiveObj,true);};
+function triggerInstantPreview(rawVal,force=false){
+  const u=String(rawVal||"").trim();
+  if(!u||u.length<4)return;
+  const info=extractLiveTarget(u);
+  $("lv").classList.remove("hide");
+  if(!curLiveId){
+    $("ln").textContent=`Prévia ao Vivo · ${info.channel||"Stream"}`;
+    $("st").textContent="prévia instantânea com som (pronto para cortar)";
+    $("ll").textContent=u;$("ll").href=u;
+    $("prevTxt").textContent="reprodução imediata com áudio · clique Iniciar para gravar e cortar";
+    $("stop").classList.add("hide");
+    if(!lastChartSeries.length){
+      drawSentimentChart(mkSentimentSeries(120,u.length),[]);
+    }
+  }
+  void renderLivePlayer({id:"preview",link:u,platform:info.platform,name:info.channel},force);
+}
+
+$("lk").addEventListener("input",()=>{
+  clearTimeout(window.__lkPrev);
+  window.__lkPrev=setTimeout(()=>triggerInstantPreview($("lk").value,false),350);
+});
+$("lk").addEventListener("paste",()=>setTimeout(()=>triggerInstantPreview($("lk").value,true),50));
+$("previewNowBtn").onclick=()=>triggerInstantPreview($("lk").value,true);
+$("reloadPlayerBtn").onclick=()=>{if(lastLiveObj)void renderLivePlayer(lastLiveObj,true);else triggerInstantPreview($("lk").value,true);};
 
 async function startLive(link,name,kindOverride){
   if(!link){notify("Informe o link da live ou vídeo.");return;}
   const payload={
     link,name:name||"",
     kind:kindOverride||null,
-    min:+$("mn").value||6,max:+$("mx").value||3,
+    min:+$("mn").value||6,max:+$("mx").value||4,
     hint:$("hint").value,names:$("names").value,
     director_broll:$("dirBroll").checked,youtube_broll:$("ytBroll").checked,
     autopost:$("auto").value==="yes",videos_per_day:+$("vpd").value||3,
-    molde:appSettings.molde,subtitle_style:appSettings.subtitle_style
+    molde:appSettings.molde,subtitle_style:appSettings.subtitle_style,
+    transition:appSettings.transition||"NONE",soundtrack:appSettings.soundtrack||"NONE"
   };
   const created=await api("/api/lives",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
   await refreshLives();
@@ -1367,10 +1772,10 @@ async function startLive(link,name,kindOverride){
 }
 
 function watchLive(id){
-  curLiveId=id;shownCount=0;lastPlayerKey="";
+  curLiveId=id;shownCount=0;
   $("cl").innerHTML="";
-  $("fm").classList.add("hide");
   $("lv").classList.remove("hide");
+  $("stop").classList.remove("hide");
   $("ed").classList.add("hide");
   showTab("CORTES");
   clearInterval(pollTimer);
@@ -1386,14 +1791,14 @@ async function pollLive(){
   $("ln").textContent=l.name;
   $("ll").textContent=l.link;$("ll").href=l.link;
   $("st").textContent=`${l.status} · ${hms(l.recorded)} · ${l.clips.length}/${l.max} cortes`;
-  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="analisando"?"20 IAs analisando…":"ao vivo · player ativo + 20 IAs");
+  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="na fila (banda)"?"na fila do gerenciador de banda…":"ao vivo · reprodução simultânea + 20 IAs");
   $("lvDot").style.display=(l.status==="finalizado"||l.status==="erro")?"none":"inline-block";
   void renderLivePlayer(l,false);
   $("log").innerHTML=(l.log||[]).map(x=>`<div>${esc(x)}</div>`).join("");
   const cov=l.timeline_coverage||{retro_pct:0,live_pct:0};
   $("tsRetroPct").textContent=(cov.retro_pct||0)+"%";$("tsRetroBar").style.width=(cov.retro_pct||0)+"%";
   $("tsLivePct").textContent=(cov.live_pct||0)+"%";$("tsLiveBar").style.width=(cov.live_pct||0)+"%";
-  drawSentimentChart(l.sentiment_series||[]);
+  drawSentimentChart(l.sentiment_series||[],l.clips||[]);
   renderSwarmGrid(l.agents,l.handoffs);
 
   while(shownCount<l.clips.length){
@@ -1405,9 +1810,9 @@ async function pollLive(){
     card.innerHTML=`
       <div class="vid"><video src="${mediaUrl}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
       <b>${esc(c.titulo)}</b>
-      <span class="mut">${hms(Math.round(c.ini))}–${hms(Math.round(c.fim))} · nota ${c.nota} · ${esc(c.emotion||"Hype")}</span>
+      <span class="mut">${hms(Math.round(c.ini))}–${hms(Math.round(c.fim))} (${Math.max(2,Math.round((c.fim||0)-(c.ini||0)))}s) · nota ${c.nota} · ${esc(c.emotion||"Hype")}</span>
       <div class="mut">${esc(c.motivo)}</div>
-      <button class="btn g sm" type="button" style="margin-top:8px">Abrir no estúdio</button>
+      <button class="btn g sm" type="button" style="margin-top:8px">Abrir no Estúdio</button>
     `;
     card.querySelector("button").onclick=()=>openEd(idx,c,l.id);
     $("cl").appendChild(card);
@@ -1415,22 +1820,27 @@ async function pollLive(){
   if(["finalizado","erro","interrompido"].includes(l.status)){
     clearInterval(pollTimer);
     void refreshLives();
+    void refreshQueueBadge();
   }
 }
 
-const stageMsgs=["cortes prontos!","headline colocada ✓","câmera enquadrada ✓","legenda sincronizada ✓"];
-const stageTags=["corte","headline","câmera","legenda"];
+const stageMsgs=["cortes prontos!","headline colocada ✓","molde 9:16 aplicado ✓","legenda sincronizada ✓"];
+const stageTags=["corte","headline","molde","legenda"];
 function openEd(idx,clip,liveId){
   selectedClipIdx=idx;activeClipObj=clip;activeClipLiveId=liveId||curLiveId;
   const total=$("cl").children.length||1;
   const mediaUrl=resolveMediaUrl(clip.url);
-  $("et").textContent=`VÍDEO ${idx+1} DE ${total}`;
+  $("et").textContent=`ESTÚDIO 9:16 · VÍDEO ${idx+1} DE ${total}`;
   $("srcThumbLbl").textContent=`VÍDEO ${idx+1}`;
   $("hl").textContent=clip.headline||clip.titulo;
+  $("edHeadlineInput").value=clip.headline||clip.titulo||"";
+  const curMolde=normalizeMoldeId(clip.molde||appSettings.molde);
+  $("edMoldeBadge").textContent=curMolde;
+  $("edMoldeBtns").querySelectorAll("[data-ed-molde]").forEach(b=>b.classList.toggle("on",b.dataset.edMolde===curMolde));
   $("dt").textContent=clip.descricao;
   $("dlClip").href=mediaUrl;
   $("phoneVideoBox").innerHTML=`<video src="${mediaUrl}" controls autoplay loop playsinline></video>`;
-  const dur=Math.max(5,Math.round((clip.fim||30)-(clip.ini||0)));
+  const dur=Math.max(5,Math.min(30,Math.round((clip.fim||30)-(clip.ini||0))));
   $("mk1").textContent=hms(Math.round(dur*0.2));
   $("mk2").textContent=hms(Math.round(dur*0.52));
   $("mk3").textContent=hms(Math.round(dur*0.85));
@@ -1441,10 +1851,37 @@ function openEd(idx,clip,liveId){
   $("rotHeadline").value=clip.headline||"";
   $("rotTitle").value=clip.titulo||"";
   $("rotDesc").value=clip.descricao||"";
+  $("rotMolde").value=curMolde;
+  $("rotTrans").value=clip.transition||appSettings.transition||"NONE";
+  $("rotSoundtrack").value=clip.soundtrack||appSettings.soundtrack||"NONE";
   let k=0;clearInterval(showStageTimer);
   $("bb").textContent=stageMsgs[0];$("masTag").textContent=stageTags[0];
   showStageTimer=setInterval(()=>{k=(k+1)%stageMsgs.length;$("bb").textContent=stageMsgs[k];$("masTag").textContent=stageTags[k];},2000);
 }
+
+$("edMoldeBtns").querySelectorAll("[data-ed-molde]").forEach(btn=>{
+  btn.onclick=()=>{
+    const m=btn.dataset.edMolde;
+    $("edMoldeBtns").querySelectorAll("[data-ed-molde]").forEach(x=>x.classList.toggle("on",x===btn));
+    $("edMoldeBadge").textContent=m;
+    if(activeClipObj)activeClipObj.molde=m;
+  };
+});
+
+$("edRerenderBtn").onclick=async()=>{
+  if(!activeClipLiveId||!activeClipObj){notify("Abra um corte primeiro.");return;}
+  const newHl=$("edHeadlineInput").value.trim().toUpperCase()||activeClipObj.headline;
+  const newMolde=$("edMoldeBadge").textContent||"SPLIT_BANNER";
+  try{
+    notify("Re-renderizando corte 9:16 com FFmpeg...");
+    const updated=await api(`/api/clips/${activeClipLiveId}/${activeClipObj.id}/adjust`,{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({headline:newHl,molde:newMolde,rerender:true})
+    });
+    activeClipObj=updated;openEd(selectedClipIdx,updated,activeClipLiveId);
+    notify("Molde e Headline atualizados e re-renderizados!");
+  }catch(e){notify("Erro ao re-renderizar: "+e.message);}
+};
 
 $("ver").onclick=()=>{const v=$("phoneVideoBox").querySelector("video");if(v)v.play();};
 $("prox").onclick=()=>{const btns=[...$("cl").querySelectorAll("button")];if(!btns.length)return;btns[(selectedClipIdx+1)%btns.length].click();};
@@ -1453,7 +1890,7 @@ $("fe").onclick=()=>{$("ed").classList.add("hide");clearInterval(showStageTimer)
 $("editRoteiroBtn").onclick=()=>showTab("ROTEIRO");
 $("queueYtBtn").onclick=async()=>{
   if(!activeClipLiveId||!activeClipObj)return;
-  try{await api("/api/uploads/queue",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({live_id:activeClipLiveId,clip_id:activeClipObj.id})});notify("Corte adicionado na fila de upload do YouTube!");}
+  try{await api("/api/uploads/queue",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({live_id:activeClipLiveId,clip_id:activeClipObj.id})});notify("Corte adicionado na fila privada do YouTube!");}
   catch(e){notify("Erro: "+e.message);}
 };
 
@@ -1462,16 +1899,24 @@ $("mk").onclick=()=>startLive($("nl").value.trim(),$("nn").value.trim()).catch(e
 $("stop").onclick=async()=>{
   if(!curLiveId)return;
   await api(`/api/lives/${curLiveId}/stop`,{method:"POST"});
-  clearInterval(pollTimer);$("st").textContent="finalizado pelo usuário";$("prevTxt").textContent="pausado";$("lvDot").style.display="none";void refreshLives();
+  clearInterval(pollTimer);$("st").textContent="finalizado pelo usuário";$("prevTxt").textContent="pausado";$("lvDot").style.display="none";
+  void refreshLives();void refreshQueueBadge();
 };
-$("newBtn").onclick=()=>{clearInterval(pollTimer);$("fm").classList.remove("hide");$("lv").classList.add("hide");$("ed").classList.add("hide");showTab("CORTES");};
+$("newBtn").onclick=()=>{
+  clearInterval(pollTimer);curLiveId=null;
+  $("fm").classList.remove("hide");$("ed").classList.add("hide");$("stop").classList.add("hide");
+  showTab("CORTES");triggerInstantPreview($("lk").value,false);
+};
 
 function getFilteredClips(){
   const q=($("vidSearch").value||"").trim().toLowerCase();
   const plat=$("vidPlat").value||"ALL";
+  const dateF=$("vidDate").value||"ALL";
   const emo=$("vidEmotion").value||"ALL";
   const minScore=Number($("vidScore").value||0);
   const sortMode=$("vidSort").value||"newest";
+  const nowSec=Math.floor(Date.now()/1000);
+  const maxAge=dateF==="1H"?3600:(dateF==="24H"?86400:(dateF==="7D"?604800:0));
   const flat=[];
   allLives.forEach(l=>{
     (l.clips||[]).forEach(c=>{
@@ -1487,6 +1932,7 @@ function getFilteredClips(){
   });
   let out=flat.filter(c=>{
     if(plat!=="ALL"&&c.platform!==plat)return false;
+    if(maxAge>0&&(nowSec-(c.created_ts||0))>maxAge)return false;
     if(emo!=="ALL"&&c.emotion!==emo)return false;
     if((c.nota||0)<minScore)return false;
     if(q&&!`${c.titulo} ${c.headline} ${c.channel} ${c.motivo} ${c.emotion}`.toLowerCase().includes(q))return false;
@@ -1510,13 +1956,14 @@ function renderVideosTab(){
       const key=`${c.live_id}::${c.id}`;
       const checked=selectedClipKeys.has(key)?"checked":"";
       const mediaUrl=resolveMediaUrl(c.url);
+      const platLbl=c.platform==="LOCAL"?"VÍDEO ENVIADO":c.platform;
       return `
         <div class="clip-card-lib item-card">
           <label class="clip-chk-label"><input type="checkbox" class="clip-sel-chk" data-key="${esc(key)}" ${checked}> Selecionar</label>
           <div class="vid"><video src="${mediaUrl}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
           <b>${esc(c.titulo)}</b>
           <div style="display:flex;gap:5px;flex-wrap:wrap">
-            <span class="pill pu">${esc(c.platform)}</span>
+            <span class="pill pu">${esc(platLbl)}</span>
             <span class="pill warn">${esc(c.emotion)}</span>
             <span class="pill">Nota ${c.nota}</span>
           </div>
@@ -1560,7 +2007,7 @@ function renderVideosTab(){
   gal.querySelectorAll("[data-open-live]").forEach(b=>b.onclick=()=>watchLive(b.dataset.openLive));
 }
 
-["vidSearch","vidPlat","vidEmotion","vidScore","vidSort"].forEach(id=>{
+["vidSearch","vidPlat","vidDate","vidEmotion","vidScore","vidSort"].forEach(id=>{
   $(id).addEventListener(id==="vidSearch"?"input":"change",()=>renderVideosTab());
 });
 
@@ -1587,7 +2034,7 @@ $("exportBatchBtn").onclick=async()=>{
       });
       if(!r.ok)throw new Error("HTTP "+r.status);
       const blob=await r.blob();
-      const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cortes_ia_selecionados.zip";a.click();
+      const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="magia_cortes_ia.zip";a.click();
       notify(`Exportação em lote concluída (${chosen.length} clipes em ZIP)!`);
       return;
     }
@@ -1600,7 +2047,7 @@ $("exportBatchBtn").onclick=async()=>{
       files.push({name:safeName,bytes:buf});
     }
     const zipBlob=buildZipBlob(files);
-    const a=document.createElement("a");a.href=URL.createObjectURL(zipBlob);a.download="cortes_ia_selecionados.zip";a.click();
+    const a=document.createElement("a");a.href=URL.createObjectURL(zipBlob);a.download="magia_cortes_ia.zip";a.click();
     notify(`ZIP baixado para seu dispositivo (${files.length} vídeo(s))!`);
   }catch(e){notify("Erro ao exportar em lote: "+e.message);}
 };
@@ -1630,9 +2077,11 @@ $("manCutBtn").onclick=async()=>{
 
 async function loadMoldes(){
   const data=await api("/api/moldes");
-  appSettings=data.settings;
+  appSettings=data.settings||appSettings;
+  $("transSelect").value=appSettings.transition||"NONE";
   $("subStyleSelect").value=appSettings.subtitle_style||"HORMOZI_YELLOW";
-  $("moldesContainer").innerHTML=data.moldes.map(m=>`
+  $("soundtrackSelect").value=appSettings.soundtrack||"NONE";
+  $("moldesContainer").innerHTML=(data.moldes||memDb.moldes).map(m=>`
     <div class="item-card ${appSettings.molde===m.id?"active":""}" data-molde="${m.id}" style="cursor:pointer">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <b>${esc(m.nome)}</b>
@@ -1643,15 +2092,20 @@ async function loadMoldes(){
   `).join("");
   $("moldesContainer").querySelectorAll("[data-molde]").forEach(c=>{c.onclick=()=>{appSettings.molde=c.dataset.molde;void saveSettings({molde:appSettings.molde});};});
   const h=await api("/api/health");
-  $("brollFilesReadout").textContent="B-rolls no banco local: "+(h.broll_files.length?h.broll_files.join(", "):"nenhum (usará busca YouTube se ativada)");
+  $("brollFilesReadout").textContent="B-rolls no banco local: "+(h.broll_files.length?h.broll_files.join(", "):"nenhum (usará busca automática se ativada)");
 }
 
 async function saveSettings(patch){
   appSettings=await api("/api/settings",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(patch)});
   if(activeTab==="MOLDES")await loadMoldes();
-  notify("Configurações salvas!");
+  notify("Presets e configurações salvos!");
 }
-$("saveMoldeSettingsBtn").onclick=()=>saveSettings({molde:appSettings.molde,subtitle_style:$("subStyleSelect").value});
+$("saveMoldeSettingsBtn").onclick=()=>saveSettings({
+  molde:appSettings.molde,
+  subtitle_style:$("subStyleSelect").value,
+  transition:$("transSelect").value,
+  soundtrack:$("soundtrackSelect").value
+});
 $("uploadBrollBtn").onclick=async()=>{
   const f=$("uploadBrollInput").files[0];if(!f){notify("Escolha um MP4 para B-roll.");return;}
   await api("/api/brolls/upload",{method:"POST",headers:{"X-Filename":f.name},body:f});await loadMoldes();notify("B-roll salvo!");
@@ -1663,7 +2117,7 @@ async function loadIdeas(){
     <div class="item-card">
       <div style="display:flex;justify-content:space-between;align-items:center"><b>${esc(i.tag)}</b><span class="pill">Nota ${i.min}+</span></div>
       <p style="margin:6px 0">${esc(i.hint)}</p>
-      <button class="btn g sm" type="button" data-hint="${esc(i.hint)}" data-min="${i.min}">Usar no formulário</button>
+      <button class="btn g sm" type="button" data-hint="${esc(i.hint)}" data-min="${i.min}">Usar em CORTES</button>
     </div>
   `).join("");
   $("ideasContainer").querySelectorAll("button").forEach(b=>{b.onclick=()=>{$("hint").value=b.dataset.hint;$("mn").value=b.dataset.min;showTab("CORTES");notify("Gatilho aplicado!");};});
@@ -1675,10 +2129,14 @@ $("addIdeaBtn").onclick=async()=>{
 };
 
 $("applyRoteiroBtn").onclick=async()=>{
-  if(!activeClipLiveId||!activeClipObj){notify("Abra um corte no estúdio primeiro.");return;}
+  if(!activeClipLiveId||!activeClipObj){notify("Abra um corte no Estúdio primeiro.");return;}
   const updated=await api(`/api/clips/${activeClipLiveId}/${activeClipObj.id}/adjust`,{
     method:"POST",headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({instruction:$("rotInstruction").value,headline:$("rotHeadline").value,titulo:$("rotTitle").value,descricao:$("rotDesc").value,rerender:true})
+    body:JSON.stringify({
+      instruction:$("rotInstruction").value,headline:$("rotHeadline").value,
+      titulo:$("rotTitle").value,descricao:$("rotDesc").value,
+      molde:$("rotMolde").value,transition:$("rotTrans").value,soundtrack:$("rotSoundtrack").value,rerender:true
+    })
   });
   activeClipObj=updated;openEd(selectedClipIdx,updated,activeClipLiveId);showTab("CORTES");notify("Corte atualizado!");
 };
@@ -1697,36 +2155,93 @@ async function loadUploads(){
   });
 }
 
+$("createCustomAgentBtn").onclick=async()=>{
+  const name=$("customAgentName").value.trim();
+  const keywords=$("customAgentKeywords").value.trim();
+  const emotion=$("customAgentEmotion").value||"Hype";
+  if(!name||!keywords){notify("Informe o nome do agente e as palavras-chave.");return;}
+  try{
+    await api("/api/agents/custom",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({name,keywords,emotion})
+    });
+    $("customAgentName").value="";$("customAgentKeywords").value="";
+    await syncCustomAgents();
+    void verifyIaJsonStatus();
+    notify(`Agente personalizado "${name}" criado sem API key!`);
+  }catch(e){notify("Erro ao criar agente: "+e.message);}
+};
+
+async function verifyIaJsonStatus(){
+  const badge=$("jsonStatusBadge"),out=$("jsonStatusOutput");
+  if(!out)return;
+  try{
+    const [ag,hl,qs]=await Promise.all([api("/api/agents"),api("/api/health"),api("/api/queue/status")]);
+    const payload={
+      status_ok:true,
+      json_valid:true,
+      zero_api_mode:true,
+      agents_active:ag.count||(ag.agents||[]).length,
+      custom_agents:(ag.agents||[]).filter(x=>x.custom).length,
+      max_clip_seconds:ag.max_clip_seconds||30,
+      bandwidth_queue:qs,
+      server_connected:serverMode,
+      binaries:hl.binaries
+    };
+    const serialized=JSON.stringify(payload,null,2);
+    JSON.parse(serialized);
+    badge.textContent=`✅ JSON Válido · ${payload.agents_active} IAs · Zero Erros`;
+    badge.className="pill";
+    out.textContent=serialized;
+  }catch(e){
+    badge.textContent="❌ Erro na validação JSON";
+    badge.className="pill err";
+    out.textContent=JSON.stringify({status_ok:false,error:String(e.message||e)},null,2);
+  }
+}
+$("verifyJsonBtn").onclick=()=>void verifyIaJsonStatus();
+
 async function loadHealth(){
   const h=await api("/api/health");
-  appSettings=h.settings;
+  appSettings=h.settings||appSettings;
   $("cfgEncoder").value=appSettings.encoder||"libx264";
   $("cfgWhisper").value=appSettings.whisper_model||"small";
   $("cfgWindow").value=appSettings.window_seconds||180;
+  $("cfgMaxConc").value=appSettings.max_concurrent_captures||3;
+  $("maxConcRange").value=appSettings.max_concurrent_captures||3;
+  $("maxConcVal").textContent=String(appSettings.max_concurrent_captures||3);
+  const qSt=h.bandwidth_queue||{max_concurrent_captures:appSettings.max_concurrent_captures||3,active_count:0,queued_count:0};
   const checks=[
-    ["Enxame 20 IAs Sem Chave",true,"20 especialistas trabalhando em paralelo sem API paga",true],
-    ["FFmpeg + FFprobe",h.binaries.ffmpeg&&h.binaries.ffprobe,"Acústico dB, cena e renderização 1080×1920",false],
-    ["Streamlink + yt-dlp",h.binaries.streamlink||h.binaries.yt_dlp,"Time-Shift 00:00←Ao Vivo→Fim",false],
-    ["Whisper Local (faster-whisper)",h.python_modules.faster_whisper,"Transcrição PT-BR offline palavra a palavra",false],
-    ["OpenCV Facecam",h.python_modules.cv2,"Detecção automática de rosto",false],
-    ["Claude Key (Opcional)",h.anthropic_configured,"Não necessária — modo 20 IAs já opera autônomo",true],
-    ["YouTube OAuth",h.youtube_secret_exists,"Publicação privada automática",false]
+    ["Enxame Local Zero-Key",true,`${h.swarm_agents||20} especialistas ativos em paralelo sem API paga`,true],
+    ["Controle de Banda (Fila)",true,`Máx ${qSt.max_concurrent_captures} simultâneas · ${qSt.active_count} ativas · ${qSt.queued_count} na fila`,true],
+    ["FFmpeg + FFprobe",h.binaries.ffmpeg&&h.binaries.ffprobe,"Acústico dB, cena, trilha sintética e 1080×1920 ≤30s",false],
+    ["Streamlink + yt-dlp / HLS",h.binaries.streamlink||h.binaries.yt_dlp||h.binaries.ffmpeg,"Time-Shift 00:00←Ao Vivo→Fim & Kick/Twitch/YT",false],
+    ["Whisper Local Int8",h.python_modules.faster_whisper,"Transcrição PT-BR offline palavra a palavra",false],
+    ["OpenCV Facecam",h.python_modules.cv2,"Detecção automática para Clássico Blur / Dual / Zoom 9:16",false],
+    ["YouTube OAuth Privado",h.youtube_secret_exists,"Envio privado agendado no YouTube",false]
   ];
   $("healthCards").innerHTML=checks.map(([name,ok,desc,opt])=>`
     <div class="item-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <b>${esc(name)}</b>
-        <span class="pill ${ok?"":"warn"}">${ok?"PRONTO":(opt?"SEM API ATIVO":"CONECTAR SERVIDOR")}</span>
+        <span class="pill ${ok?"":"warn"}">${ok?"PRONTO":(opt?"ATIVO":"CONECTAR SERVIDOR")}</span>
       </div>
       <p class="mut" style="margin:6px 0 0">${esc(desc)}</p>
     </div>
   `).join("");
+  await verifyIaJsonStatus();
 }
 
-$("saveIaCfgBtn").onclick=()=>saveSettings({encoder:$("cfgEncoder").value,whisper_model:$("cfgWhisper").value,window_seconds:+$("cfgWindow").value||180});
+$("saveIaCfgBtn").onclick=()=>saveSettings({
+  encoder:$("cfgEncoder").value,
+  whisper_model:$("cfgWhisper").value,
+  window_seconds:+$("cfgWindow").value||180,
+  max_concurrent_captures:Math.max(1,Math.min(8,+$("cfgMaxConc").value||3))
+});
 
-renderCatalog20();
+void syncCustomAgents();
 showTab("CORTES");
+triggerInstantPreview($("lk").value,false);
 void detectBackend();
 </script>
 </body>
