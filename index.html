@@ -1341,6 +1341,12 @@ $("themeBtn").onclick=()=>{
 // ============================================================================
 // ELENCO DE PERSONAGENS CIDADE ALTA (CIDADEALTA.GG), TRANSIÇÕES & LEGENDAS KARAOKE
 // ============================================================================
+let lastChartSeries=[];
+let lastChartClips=[];
+let lastThermoOverride=null;
+let chartClipHits=[];
+let liveChatMessages=[];
+
 const CDA_CHARACTER_CAST=[
   {
     id:"coringa",
@@ -2252,12 +2258,6 @@ async function analyzeAllLives(){
   }catch(e){notify("Erro ao analisar todas: "+e.message);}
 }
 $("analyzeAllBtn").onclick=()=>void analyzeAllLives();
-
-let lastChartSeries=[];
-let lastChartClips=[];
-let lastThermoOverride=null;
-let chartClipHits=[];
-let liveChatMessages=[];
 
 function updateIronyThermometerUI(series,thermoOverride){
   const pts=series||[];
