@@ -35,11 +35,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:14px;pa
 .hdr-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0;max-width:100%}
 .logo{display:flex;align-items:center;gap:8px;font-family:var(--px);font-size:13px;color:var(--acc);white-space:nowrap}
 .logo b{width:24px;height:24px;border-radius:50%;background:var(--acc);box-shadow:inset 0 0 0 5px var(--bg),inset 0 0 0 9px var(--acc);display:inline-block}
-nav{display:flex;gap:4px;overflow-x:auto;max-width:100%}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
 nav button{background:none;border:0;color:var(--mut);padding:9px 11px;font:9px var(--px);cursor:pointer;border-radius:8px;white-space:nowrap}
 nav button.on{color:var(--tx);background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 main{display:grid;grid-template-columns:255px 1fr;gap:14px;padding:14px;max-width:1160px;margin:auto}
-@media(max-width:780px){main{grid-template-columns:1fr}}
+@media(max-width:780px){main{grid-template-columns:1fr}main>section{order:-1}nav{flex-wrap:wrap;overflow:visible}nav button{padding:7px 9px}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
 .hide{display:none!important}
 .btn{background:var(--acc);color:#fff;border:0;border-radius:9px;padding:11px 14px;font:700 13px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
@@ -524,6 +525,16 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 <script>
 const $=id=>document.getElementById(id);
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+function hms(x){
+  const s=Math.max(0,Math.floor(x||0));
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),r=s%60;
+  return h>0?`${h}:${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`:`${m}:${String(r).padStart(2,"0")}`;
+}
+function fmtDate(ts){
+  if(!ts)return"Agora";
+  const d=new Date(ts*1000);
+  return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+}
 const tabs=["VÍDEOS","CORTES","MOLDES","IDEIAS","ROTEIRO","UPLOADS","IA"];
 let activeTab="CORTES";
 let serverBase="";
@@ -734,18 +745,6 @@ function updateWaveForVideo(v){
 }
 setInterval(()=>updateWaveForVideo($("phoneVideoBox").querySelector("video")),160);
 
-const hms=x=>{
-  const s=Math.max(0,Math.floor(x||0));
-  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),r=s%60;
-  return h>0?`${h}:${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`:`${m}:${String(r).padStart(2,"0")}`;
-};
-
-function fmtDate(ts){
-  if(!ts)return"Agora";
-  const d=new Date(ts*1000);
-  return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
-}
-
 function classifyBrBrowser(s){
   const top=["paulinhooloko","loud_coringa","luquet4","boca04","gabepeixe","jonvlogs","alanzoka","nobru","casimito","gaules","brino"];
   const lg=(s.login||"").toLowerCase();
@@ -933,13 +932,61 @@ async function localApi(p,o={}){
     const id="upv_"+Date.now();
     const ts=Math.floor(Date.now()/1000);
     const fname=(o.headers&&o.headers["X-Filename"])||"video.mp4";
+    let dur=32;
+    let peaks=[{ini:0,fim:18,emo:"Hype",nota:9,title:"Momento destaque local",db:-18}];
+    let series=mkSentimentSeries(32,2);
+    if(o.body&&typeof AudioContext!=="undefined"&&o.body.arrayBuffer){
+      try{
+        const vidEl=document.createElement("video");
+        vidEl.preload="metadata";vidEl.src=fileUrl;
+        await new Promise(res=>{vidEl.onloadedmetadata=res;vidEl.onerror=res;setTimeout(res,1500);});
+        if(vidEl.duration&&isFinite(vidEl.duration))dur=Math.max(4,Math.round(vidEl.duration));
+        if(o.body.size<=90*1024*1024){
+          const ctx=new AudioContext();
+          const ab=await o.body.arrayBuffer();
+          const audioBuf=await ctx.decodeAudioData(ab);
+          const ch0=audioBuf.getChannelData(0);
+          const sr=audioBuf.sampleRate;
+          const step=Math.max(2,Math.floor(audioBuf.duration/14));
+          const computed=[];
+          const loudSec=[];
+          for(let s=0;s<audioBuf.duration;s+=step){
+            const sIdx=Math.floor(s*sr),eIdx=Math.min(ch0.length,Math.floor((s+step)*sr));
+            let sum=0;for(let k=sIdx;k<eIdx;k+=16){const v=ch0[k];sum+=v*v;}
+            const rms=Math.sqrt(sum/Math.max(1,(eIdx-sIdx)/16));
+            const db=Math.max(-60,Math.round(20*Math.log10(Math.max(1e-5,rms))));
+            const eng=Math.max(15,Math.min(99,Math.round((db+55)*1.7)));
+            const emo=eng>72?"Raiva":(eng>55?"Engraçado":"Hype");
+            computed.push({t:Math.round(s),label:hms(Math.round(s)),positivo:Math.min(95,Math.round(eng*0.85)),negativo:Math.min(95,Math.round(eng*0.7)),hype:eng,emotion:emo,msgs:Math.round(eng*0.4),db});
+            loudSec.push({t:Math.round(s),eng,emo,db});
+          }
+          if(computed.length>=2){
+            series=computed;
+            loudSec.sort((a,b)=>b.eng-a.eng);
+            peaks=loudSec.slice(0,3).map((pk,idx)=>({
+              ini:Math.max(0,pk.t-3),fim:Math.min(dur,pk.t+Math.min(25,Math.max(8,dur-pk.t))),
+              emo:pk.emo,nota:Math.max(7,Math.min(10,Math.round(pk.eng/10))),
+              title:`Pico acústico #${idx+1} (${pk.db}dB)`,db:pk.db
+            }));
+          }
+          await ctx.close();
+        }
+      }catch(_){}
+    }
+    const clips=peaks.map((pk,idx)=>({
+      id:`cu_${ts}_${idx}`,live_id:id,platform:"LOCAL",channel:fname,emotion:pk.emo,
+      titulo:pk.title,headline:`${pk.emo.toUpperCase()} DETECTADO (${pk.db}dB)`,
+      ini:pk.ini,fim:pk.fim,nota:pk.nota,motivo:`Pico sonoro analisado via WebAudio no navegador (${pk.db}dB)`,
+      descricao:`Corte de ${fname} (${hms(pk.ini)}–${hms(pk.fim)})`,molde:appSettings.molde,
+      url:`${fileUrl}#t=${pk.ini},${pk.fim}`,created_ts:ts-idx,created_at:new Date().toISOString()
+    }));
     const obj={
-      id,name:fname,link:fileUrl,platform:"LOCAL",min:6,max:3,recorded:32,status:"finalizado",
-      timeline_coverage:{mode:"VOD_FULL",retro_pct:100,live_pct:100,elapsed_sec:32},
-      agents:mkAgents(100),handoffs:["[upload] 20 agentes finalizaram análise local sem API key"],
-      sentiment_series:mkSentimentSeries(32,2),created_ts:ts,created_at:new Date().toISOString(),
-      log:["[upload] Vídeo carregado direto no navegador."],
-      clips:[{id:"cu_"+ts,live_id:id,platform:"LOCAL",channel:fname,emotion:"Hype",titulo:"Corte automático do vídeo",headline:"CLUTCH INSANO LOCAL!",ini:0,fim:18,nota:9,motivo:"Análise automática local",descricao:"Corte local",molde:appSettings.molde,url:fileUrl,created_ts:ts,created_at:new Date().toISOString()}]
+      id,name:fname,link:fileUrl,platform:"LOCAL",min:6,max:Math.max(3,clips.length),recorded:dur,status:"finalizado",
+      timeline_coverage:{mode:"VOD_FULL",retro_pct:100,live_pct:100,elapsed_sec:dur},
+      agents:mkAgents(100),handoffs:[`[upload] 20 agentes analisaram ${dur}s de ${fname} via WebAudio no navegador`],
+      sentiment_series:series,created_ts:ts,created_at:new Date().toISOString(),
+      log:[`[${new Date().toTimeString().slice(0,8)}] Vídeo ${fname} (${dur}s) analisado direto no navegador com ${clips.length} corte(s).`],
+      clips
     };
     memDb.lives.unshift(obj);
     return obj;
@@ -950,7 +997,9 @@ async function localApi(p,o={}){
   if(p.startsWith("/api/lives/")&&p.endsWith("/manual-cut")){
     const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(!l)throw new Error("Live não encontrada");
     const ts=Math.floor(Date.now()/1000);
-    const c={id:"cm_"+ts,live_id:id,platform:l.platform||"LOCAL",channel:l.name,emotion:"Hype",titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:body.start_sec||0,fim:body.end_sec||25,nota:9,motivo:"Corte manual",descricao:"Corte manual "+body.start_sec+"s–"+body.end_sec+"s",molde:body.molde||appSettings.molde,url:l.link.startsWith("blob:")?l.link:sampleClipUrl,created_ts:ts,created_at:new Date().toISOString()};
+    const sSec=Math.max(0,Number(body.start_sec||0)),eSec=Math.max(sSec+2,Number(body.end_sec||25));
+    const baseSrc=l.link.startsWith("blob:")?l.link.split("#")[0]:sampleClipUrl;
+    const c={id:"cm_"+ts,live_id:id,platform:l.platform||"LOCAL",channel:l.name,emotion:"Hype",titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:sSec,fim:eSec,nota:9,motivo:"Corte manual",descricao:"Corte manual "+sSec+"s–"+eSec+"s",molde:body.molde||appSettings.molde,url:`${baseSrc}#t=${sSec},${eSec}`,created_ts:ts,created_at:new Date().toISOString()};
     l.clips.push(c);return c;
   }
   if(p.startsWith("/api/lives/")&&p.endsWith("/agents")){
@@ -1046,7 +1095,13 @@ async function loadRadar(){
   const cat=$("radarCat").value||"ALL";
   const reg=$("radarRegion").value||"BRAZIL_FIRST";
   const q=($("radarSearch").value||"").trim();
-  const res=await api(`/api/discover/lives?platform=${encodeURIComponent(radarPlat)}&category=${encodeURIComponent(cat)}&region=${encodeURIComponent(reg)}&q=${encodeURIComponent(q)}`);
+  $("radarCounts").textContent="buscando ao vivo…";
+  let res;
+  try{
+    res=await api(`/api/discover/lives?platform=${encodeURIComponent(radarPlat)}&category=${encodeURIComponent(cat)}&region=${encodeURIComponent(reg)}&q=${encodeURIComponent(q)}`);
+  }catch(_){
+    res=await browserDiscoverStreams(radarPlat,cat,reg,q);
+  }
   radarStreams=res.streams||[];
   const cnt=res.counts||{total:radarStreams.length,brazil:0,international:0};
   $("radarCounts").textContent=`${cnt.total} ao vivo · 🇧🇷 ${cnt.brazil} BR · 🌎 ${cnt.international} Intl`;
@@ -1539,7 +1594,7 @@ $("exportBatchBtn").onclick=async()=>{
     const files=[];
     for(let i=0;i<chosen.length;i++){
       const c=chosen[i];
-      const resp=await fetch(resolveMediaUrl(c.url));
+      const resp=await fetch(resolveMediaUrl(c.url).split("#")[0]);
       const buf=new Uint8Array(await resp.arrayBuffer());
       const safeName=String(`${i+1}_${c.channel}_${c.id}.mp4`).replace(/[^A-Za-z0-9._-]+/g,"_");
       files.push({name:safeName,bytes:buf});
