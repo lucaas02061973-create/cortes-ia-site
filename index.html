@@ -90,11 +90,33 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 .pbar{height:100%;border-radius:4px;background:var(--pu);width:0%;transition:width .15s}
 .mk{position:absolute;top:0;font:7px var(--px);background:var(--y);color:#111;padding:3px 5px;border-radius:3px;z-index:2}
 .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px}
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px}
+.swarm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;margin-top:10px}
 .item-card{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--in)}
 .item-card.active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.agent-card{padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--in);font-size:11.5px}
+.agent-card.running{border-color:var(--y)}
+.agent-card.done{border-color:var(--gr)}
 .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(34,224,122,.16);color:var(--gr)}
 .pill.warn{background:rgba(255,210,63,.18);color:var(--y)}
 .pill.err{background:rgba(255,59,31,.18);color:var(--acc)}
+.pill.pu{background:rgba(139,92,246,.22);color:#c4b5fd}
+.pill.br{background:rgba(34,224,122,.22);color:#4ade80}
+.pill.intl{background:rgba(143,143,160,.2);color:var(--mut)}
+.plat-btn{padding:6px 11px;border-radius:8px;border:1px solid var(--line);background:var(--in);color:var(--mut);font:700 12px system-ui;cursor:pointer}
+.plat-btn.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.sent-wrap{margin:10px 0 14px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--in)}
+.sent-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.sent-leg{display:flex;gap:12px;font-size:11.5px;flex-wrap:wrap}
+.sent-leg span{display:inline-flex;align-items:center;gap:5px}
+.sent-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
+#sentimentChart{width:100%;height:165px;display:block;cursor:crosshair}
+.ts-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+@media(max-width:600px){.ts-row{grid-template-columns:1fr}}
+.ts-box{padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--in);font-size:11.5px}
+.clip-card-lib{position:relative;display:flex;flex-direction:column;gap:6px}
+.clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(11,11,16,.84);padding:4px 8px;border-radius:8px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.22)}
+.clip-chk-label input{width:16px;height:16px;accent-color:var(--acc);margin:0}
 .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#16161c;color:#fff;padding:10px 16px;border-radius:10px;font-size:12.5px;z-index:99;box-shadow:0 8px 28px rgba(0,0,0,.35)}
 </style>
 </head>
@@ -104,7 +126,8 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
     <div class="logo"><b></b>CORTES·IA</div>
     <nav id="nav"></nav>
   </div>
-  <div style="display:flex;gap:8px;align-items:center">
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <span class="pill" id="swarmBadge">20 IAs · Zero API Key</span>
     <span class="pill warn" id="modeBadge">Modo Web Online</span>
     <button class="btn g sm" id="themeBtn" type="button">Tema</button>
   </div>
@@ -113,9 +136,10 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 <main>
   <aside class="card side">
     <button class="btn w" id="newBtn" type="button">+ Cortar live AO VIVO</button>
+    <button class="btn g w" id="sidebarAnalyzeAllBtn" type="button" style="margin-top:8px;border-color:var(--y);color:var(--y)">🔥 Analisar TODAS as lives</button>
     <h4>NOVA LIVE</h4>
     <input type="text" id="nn" placeholder="nome (ex.: gta6-live-do-fulano)">
-    <input type="text" id="nl" placeholder="link da live (YouTube, Twitch…)">
+    <input type="text" id="nl" placeholder="link da live (Twitch, Kick, YouTube…)">
     <button class="btn w" id="mk" type="button" style="margin-top:10px">Criar</button>
     <h4>LIVES</h4>
     <div id="lives"><div class="mut">Carregando...</div></div>
@@ -123,9 +147,52 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 
   <section style="min-width:0">
     <div id="tab-CORTES" class="tab-panel">
+      <div class="card" id="radarCard" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <div>
+            <h3 style="margin:0">■ RADAR AO VIVO · TWITCH + YOUTUBE + KICK</h3>
+            <div class="mut" id="radarMeta">Ordenado: Brasil 1º · Internacionais por último · Maior audiência no topo</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn g sm" id="refreshRadarBtn" type="button">🔄 Atualizar Lives</button>
+            <button class="btn sm" id="analyzeAllBtn" type="button">🔥 Analisar TODAS as Lives (20 IAs)</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center" id="radarPlatBtns">
+          <button class="plat-btn on" type="button" data-plat="ALL">Todas</button>
+          <button class="plat-btn" type="button" data-plat="TWITCH">Twitch</button>
+          <button class="plat-btn" type="button" data-plat="KICK">Kick</button>
+          <button class="plat-btn" type="button" data-plat="YOUTUBE">YouTube</button>
+          <span style="flex:1"></span>
+          <span class="pill br" id="radarCounts">0 ao vivo</span>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <label style="margin-top:4px">Categoria (maior público 1º)
+            <select id="radarCat">
+              <option value="ALL">Todas Categorias</option>
+              <option value="GTA">GTA / GTA 6 / GTA RP</option>
+              <option value="FPS">FPS (CS2, Valorant, Free Fire)</option>
+              <option value="MOBA">MOBA (LoL, Dota 2)</option>
+              <option value="IRL">IRL / Just Chatting / Talk</option>
+            </select>
+          </label>
+          <label style="margin-top:4px">Região
+            <select id="radarRegion">
+              <option value="BRAZIL_FIRST">Brasil Primeiro · Fora por Último</option>
+              <option value="BRAZIL_ONLY">Somente Brasil</option>
+              <option value="FOREIGN_ONLY">Somente Internacionais</option>
+            </select>
+          </label>
+          <label style="margin-top:4px">Buscar streamer/título
+            <input type="text" id="radarSearch" placeholder="ex.: paulinho, loud, gta 6…">
+          </label>
+        </div>
+        <div class="radar-grid" id="radarGrid"></div>
+      </div>
+
       <div class="card" id="fm">
-        <h3>■ CORTAR UMA LIVE AO VIVO</h3>
-        <p class="mut" style="margin:0">O agente entra na live ou vídeo, transcreve com Whisper, lê o chat da Twitch, escolhe os melhores cortes com o Claude e monta tudo em 9:16 com facecam e legenda.</p>
+        <h3>■ CORTAR UMA LIVE AO VIVO (20 IAs SEM CHAVE + TIME-SHIFT)</h3>
+        <p class="mut" style="margin:0">Enquanto assiste do <b>ao vivo até o fim</b>, o enxame de <b>20 IAs sem API paga</b> varre retroativamente do <b>ao vivo até 00:00 (início da live)</b> procurando momentos <b>engraçados, frustrações, raiva e xingamentos</b>.</p>
         <label>Link da live ou VOD (Twitch, Kick, YouTube)
           <input type="text" id="lk" value="https://www.twitch.tv/alanzoka">
         </label>
@@ -138,10 +205,10 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
           </label>
         </div>
         <label>O que você quer que vire corte (opcional)
-          <input type="text" id="hint" placeholder="ex.: quando ele reagir ao trailer, quando o chat explodir">
+          <input type="text" id="hint" value="engraçados, frustrações, raiva, xingamentos e picos do chat">
         </label>
         <label>Nomes difíceis (para a legenda acertar)
-          <input type="text" id="names" placeholder="ex.: Dava Jones, Lucia, Vice City">
+          <input type="text" id="names" placeholder="ex.: Dava Jones, Paulinho, Vice City">
         </label>
         <label class="chk"><input type="checkbox" id="dirBroll" checked> B-roll do diretor (pôr clipes quando fala algo)</label>
         <label class="chk"><input type="checkbox" id="ytBroll" checked> Buscar B-roll no YouTube quando não tiver no meu banco</label>
@@ -156,7 +223,7 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
             <input type="number" id="vpd" min="1" max="20" value="3">
           </label>
         </div>
-        <button class="btn" id="go" type="button" style="margin-top:14px">Começar a assistir</button>
+        <button class="btn" id="go" type="button" style="margin-top:14px">Começar a assistir (00:00 ← Ao Vivo → Fim)</button>
       </div>
 
       <div class="card hide" id="lv">
@@ -169,8 +236,41 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
         </div>
         <a class="mut" id="ll" target="_blank" rel="noopener"></a>
         <div class="prev"><u>AO VIVO</u><i id="prevTxt">ouvindo…</i></div>
+
+        <div class="ts-row">
+          <div class="ts-box">
+            <div style="display:flex;justify-content:space-between"><b>⏮ Time-Shift: Ao Vivo → Início (00:00)</b><span id="tsRetroPct">0%</span></div>
+            <div class="pbar-wrap"><div class="pbar" id="tsRetroBar" style="background:var(--y)"></div></div>
+          </div>
+          <div class="ts-box">
+            <div style="display:flex;justify-content:space-between"><b>⏭ Ao Vivo Contínuo → Fim da Live</b><span id="tsLivePct">0%</span></div>
+            <div class="pbar-wrap"><div class="pbar" id="tsLiveBar" style="background:var(--gr)"></div></div>
+          </div>
+        </div>
+
+        <div class="sent-wrap" id="sentimentBox">
+          <div class="sent-head">
+            <b style="font-size:12.5px">📈 Termômetro de Sentimento do Chat & Áudio</b>
+            <div class="sent-leg">
+              <span><i style="background:#22e07a"></i>Positivo (Humor/Boa)</span>
+              <span><i style="background:#ff3b1f"></i>Negativo (Raiva/Frustração/Xing.)</span>
+              <span><i style="background:#ffd23f"></i>Hype / Pico</span>
+            </div>
+          </div>
+          <canvas id="sentimentChart" width="760" height="165"></canvas>
+          <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse ou toque no gráfico para inspecionar o sentimento exato e os picos da live.</div>
+          <div id="sentPeaks" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
+        </div>
+
         <div class="clips" id="cl"></div>
-        <details open><summary>▶ o que o agente está fazendo</summary><div id="log"></div></details>
+
+        <details open style="margin-top:14px">
+          <summary>🤖 Enxame de 20 IAs Trabalhando Juntas (Sem Chave de API) & Colaborações</summary>
+          <div class="swarm-grid" id="swarmGrid"></div>
+          <div id="handoffFeed" class="mut" style="margin-top:8px;max-height:110px;overflow:auto;font:11.5px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)"></div>
+        </details>
+
+        <details open><summary>▶ Log de execução em tempo real</summary><div id="log"></div></details>
       </div>
 
       <div class="card hide" id="ed" style="margin-top:14px">
@@ -216,8 +316,59 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 
     <div id="tab-VÍDEOS" class="tab-panel hide">
       <div class="card">
-        <h3>■ VÍDEOS E UPLOAD LOCAL</h3>
-        <p class="mut">Suba um vídeo MP4 direto do celular/PC ou crie cortes manuais em qualquer live/VOD já gravada.</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <h3 style="margin:0">■ BIBLIOTECA DE CORTES GERADOS · FILTROS & EXPORTAÇÃO EM LOTE</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <button class="btn g sm" id="selectAllClipsBtn" type="button">☑ Selecionar Todos</button>
+            <button class="btn g sm" id="clearSelClipsBtn" type="button">☐ Limpar</button>
+            <button class="btn sm" id="exportBatchBtn" type="button">📦 Exportar Selecionados (<span id="selCountLbl">0</span>) .ZIP</button>
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <label>Buscar por nome/título/motivo
+            <input type="text" id="vidSearch" placeholder="ex.: alanzoka, raiva, gta 6…">
+          </label>
+          <label>Plataforma
+            <select id="vidPlat">
+              <option value="ALL">Todas Plataformas</option>
+              <option value="TWITCH">Twitch</option>
+              <option value="KICK">Kick</option>
+              <option value="YOUTUBE">YouTube</option>
+              <option value="LOCAL">Arquivo Local</option>
+            </select>
+          </label>
+          <label>Emoção Detectada
+            <select id="vidEmotion">
+              <option value="ALL">Todas Emoções</option>
+              <option value="Engraçado">😂 Engraçado</option>
+              <option value="Frustração">😤 Frustração</option>
+              <option value="Raiva">🤬 Raiva</option>
+              <option value="Xingamentos">🔥 Xingamentos</option>
+              <option value="Hype">⚡ Hype</option>
+            </select>
+          </label>
+          <label>Nota de Viralidade
+            <select id="vidScore">
+              <option value="0">Todas as notas (1–10)</option>
+              <option value="7">Nota 7+</option>
+              <option value="8">Nota 8+</option>
+              <option value="9">Nota 9+</option>
+            </select>
+          </label>
+          <label>Ordenar por Data / Nota
+            <select id="vidSort">
+              <option value="newest">Data: Mais recentes primeiro</option>
+              <option value="oldest">Data: Mais antigas primeiro</option>
+              <option value="score">Viralidade: Maior nota primeiro</option>
+            </select>
+          </label>
+        </div>
+        <div class="clips" id="clipsLibraryGrid"></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3>■ UPLOAD DE VÍDEO LOCAL & LIVES SALVAS</h3>
+        <p class="mut">Suba um vídeo MP4 direto do celular/PC ou abra qualquer live capturada.</p>
         <div class="row" style="align-items:flex-end">
           <label>Enviar vídeo MP4 do aparelho
             <input type="file" id="uploadVideoInput" accept="video/mp4,video/quicktime,video/webm" style="margin-top:6px">
@@ -317,14 +468,17 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 
     <div id="tab-IA" class="tab-panel hide">
       <div class="card">
-        <h3>■ CONEXÃO COM SERVIDOR PYTHON (FFmpeg + Whisper + Claude)</h3>
-        <p class="mut">Se você hospedou a pasta <code>cortes-ia-web/</code> no Render, Railway ou VPS, cole a URL HTTPS do servidor abaixo para processar vídeos e lives reais direto por este site.</p>
+        <h3>■ CONEXÃO COM SERVIDOR PYTHON (ZERO CHAVES DE API OBRIGATÓRIAS)</h3>
+        <p class="mut">Todo o enxame de <b>20 IAs colaborativas</b> roda gratuitamente sem precisar de chave paga (FFmpeg Acústico, Whisper Local Int8, OpenCV e Radar Ao Vivo). Conecte a URL do servidor Python caso esteja acessando pelo site público:</p>
         <div class="row" style="align-items:flex-end">
           <label>URL do Servidor Python (opcional)
             <input type="url" id="backendUrlInput" placeholder="https://seu-cortes-ia.onrender.com">
           </label>
           <button class="btn" id="connectBackendBtn" type="button">Conectar Servidor</button>
         </div>
+
+        <h3 style="margin-top:20px">■ 20 AGENTES DE IA COLABORANDO EM CONJUNTO (SEM API KEY)</h3>
+        <div class="swarm-grid" id="iaCatalogGrid"></div>
 
         <h3 style="margin-top:20px">■ MOTOR DE IA E HARDWARE</h3>
         <div class="grid-cards" id="healthCards"></div>
@@ -335,7 +489,7 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
               <option value="h264_nvenc">h264_nvenc (Placa NVIDIA)</option>
             </select>
           </label>
-          <label>Modelo Whisper
+          <label>Modelo Whisper Local
             <select id="cfgWhisper">
               <option value="tiny">tiny (muito rápido)</option>
               <option value="base">base (equilibrado)</option>
@@ -357,15 +511,82 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 
 <script>
 const $=id=>document.getElementById(id);
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 const tabs=["VÍDEOS","CORTES","MOLDES","IDEIAS","ROTEIRO","UPLOADS","IA"];
 let activeTab="CORTES";
 let serverBase="";
 let serverMode=false;
 let allLives=[],curLiveId=null,pollTimer=null,shownCount=0,showStageTimer=null;
 let selectedClipIdx=0,activeClipObj=null,activeClipLiveId=null;
+let radarPlat="ALL",radarStreams=[];
+let selectedClipKeys=new Set();
 let appSettings={molde:"SPLIT_BANNER",subtitle_style:"HORMOZI_YELLOW",encoder:"libx264",whisper_model:"small",window_seconds:180,videos_per_day:3};
 
 const sampleClipUrl="./exemplo_corte_baixado_1080x1920.mp4";
+
+const AGENT_CATALOG_20=[
+  {id:"ia01",code:"IA-01",name:"Radar Multi-Plataforma",role:"Varre Twitch, Kick e YouTube ao vivo sem chave de API",partner:"IA-02"},
+  {id:"ia02",code:"IA-02",name:"Guardião Brasil & Audiência",role:"Ordena Brasil 1º, fora por último e maior audiência no topo",partner:"IA-01"},
+  {id:"ia03",code:"IA-03",name:"Time-Shift (Ao Vivo→00:00)",role:"Analisa do momento ao vivo para trás até o início da live",partner:"IA-04"},
+  {id:"ia04",code:"IA-04",name:"Sentinela (Ao Vivo→Fim)",role:"Continua capturando em tempo real até a live encerrar",partner:"IA-03"},
+  {id:"ia05",code:"IA-05",name:"Chat Twitch IRC & VOD",role:"Coleta mensagens ao vivo e comentários GQL do início",partner:"IA-16"},
+  {id:"ia06",code:"IA-06",name:"Chat Kick Collector",role:"Lê chat ao vivo em canais da Kick",partner:"IA-16"},
+  {id:"ia07",code:"IA-07",name:"Chat YouTube Live",role:"Coleta reações e explosões do chat ao vivo no YouTube",partner:"IA-16"},
+  {id:"ia08",code:"IA-08",name:"Acústico FFmpeg dB/RMS",role:"Mede picos sonoros, gritos e risadas por segundo",partner:"IA-19"},
+  {id:"ia09",code:"IA-09",name:"Detector Visual de Cenas",role:"Localiza explosões, jump scares e cortes bruscos de tela",partner:"IA-18"},
+  {id:"ia10",code:"IA-10",name:"Whisper Local Int8",role:"Transcreve falas PT-BR offline sem chave paga",partner:"IA-11"},
+  {id:"ia11",code:"IA-11",name:"Normalizador de Nomes",role:"Corrige nomes difíceis e gírias RP/FPS nas legendas",partner:"IA-10"},
+  {id:"ia12",code:"IA-12",name:"Caçador Humor (Engraçados)",role:"Detecta risadas, piadas, trollagens e chat spamando kkk",partner:"IA-19"},
+  {id:"ia13",code:"IA-13",name:"Detector Frustração & Fail",role:"Detecta derrotas, bugs bizarros, azar e desespero",partner:"IA-19"},
+  {id:"ia14",code:"IA-14",name:"Detector de Raiva (Tilt)",role:"Identifica rage, gritos de indignação e fúria extrema",partner:"IA-19"},
+  {id:"ia15",code:"IA-15",name:"Detector Xingamentos/Susto",role:"Detecta palavrões intensos e reações viscerais imediatas",partner:"IA-19"},
+  {id:"ia16",code:"IA-16",name:"Curva Sentimento do Chat",role:"Gera gráfico Positivo / Negativo / Hype abaixo da live",partner:"IA-12"},
+  {id:"ia17",code:"IA-17",name:"Caçador Facecam OpenCV",role:"Rastreia webcam em múltiplos frames para recorte limpo",partner:"IA-18"},
+  {id:"ia18",code:"IA-18",name:"Enquadrador Gameplay 9:16",role:"Evita oclusão de HUD e foca na ação do jogo",partner:"IA-17"},
+  {id:"ia19",code:"IA-19",name:"Juiz Consensual 20-IAs",role:"Consolida votos em notas 1–10 sem precisar de API paga",partner:"IA-20"},
+  {id:"ia20",code:"IA-20",name:"Diretor B-roll & Exportador ZIP",role:"Renderiza MP4 1080x1920 + ASS e empacota lotes ZIP",partner:"IA-19"}
+];
+
+function mkAgents(activePct){
+  return AGENT_CATALOG_20.map((a,idx)=>({
+    ...a,
+    state:activePct>=100?"concluído":(idx<(activePct/5)?"concluído":"analisando"),
+    detail:activePct>=100?"Concluído sem chave de API":"Colaborando com "+a.partner,
+    progress:activePct>=100?100:Math.min(100,25+((idx*11+activePct)%75)),
+    findings:Math.max(1,(idx%4)+1)
+  }));
+}
+
+function mkSentimentSeries(durationSec,seed){
+  const total=Math.max(40,Number(durationSec)||120);
+  const steps=16;
+  const arr=[];
+  const emos=["Engraçado","Hype","Frustração","Raiva","Xingamentos","Engraçado","Raiva"];
+  for(let i=0;i<=steps;i++){
+    const t=Math.round((total/steps)*i);
+    const wave=Math.sin(i*0.85+(seed||1))*22;
+    const pos=Math.max(12,Math.min(96,Math.round(52+Math.cos(i*0.65+(seed||1))*28)));
+    const neg=Math.max(10,Math.min(97,Math.round(38+Math.sin(i*0.95+(seed||2))*34)));
+    const hype=Math.max(22,Math.min(100,Math.round(Math.max(pos,neg)*0.82+Math.abs(wave)*0.55)));
+    const emotion=(neg>pos&&neg>68)?emos[(i+2)%5]:((pos>68)?"Engraçado":"Hype");
+    arr.push({t,label:hms(t),positivo:pos,negativo:neg,hype,emotion,msgs:12+((i*7)%38),db:-28+((i*5)%18)});
+  }
+  return arr;
+}
+
+const memDemoDiscovery=[
+  {id:"tw_paulinho",platform:"TWITCH",login:"paulinhooloko",display_name:"Paulinho o LOKO",title:"GTA RP CIDADE ALTA AO VIVO · FUGA ABSURDA",category:"Grand Theft Auto V",viewer_count:32400,is_brazil:true,language:"pt",url:"https://www.twitch.tv/paulinhooloko"},
+  {id:"tw_loud",platform:"TWITCH",login:"loud_coringa",display_name:"LOUD Coringa",title:"CORINGA AO VIVO NO GTA RP E RESENHA COM OS CRIA",category:"Grand Theft Auto V",viewer_count:24900,is_brazil:true,language:"pt",url:"https://www.twitch.tv/loud_coringa"},
+  {id:"tw_alanzoka",platform:"TWITCH",login:"alanzoka",display_name:"alanzoka",title:"JOGOS DE TERROR E REAÇÃO AO VIVO (SUSTO GARANTIDO)",category:"Just Chatting",viewer_count:19800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/alanzoka"},
+  {id:"kk_jonvlogs",platform:"KICK",login:"jonvlogs",display_name:"JonVlogs",title:"IRL BRASIL AO VIVO · RESENHA NA RUA",category:"IRL",viewer_count:11400,is_brazil:true,language:"pt",url:"https://kick.com/jonvlogs"},
+  {id:"yt_gta6br",platform:"YOUTUBE",login:"flowgames",display_name:"Flow Games Brasil",title:"GTA 6 TRAILERS, SEGREDOS DE VICE CITY AO VIVO",category:"GTA 6",viewer_count:7250,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=QdBZY2fkU-0"},
+  {id:"tw_nobru",platform:"TWITCH",login:"nobru",display_name:"Nobru",title:"FREE FIRE E CLUTCH AO VIVO COM A LOUD",category:"FPS",viewer_count:6800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/nobru"},
+  {id:"tw_kaicenat",platform:"TWITCH",login:"kaicenat",display_name:"KaiCenat",title:"MARATHON STREAM LIVE · BIGGEST GUESTS",category:"Just Chatting",viewer_count:78500,is_brazil:false,language:"en",url:"https://www.twitch.tv/kaicenat"},
+  {id:"kk_adin",platform:"KICK",login:"adinross",display_name:"AdinRoss",title:"KICK LIVE TONIGHT · IRL SHOW",category:"IRL",viewer_count:41200,is_brazil:false,language:"en",url:"https://kick.com/adinross"},
+  {id:"yt_speed",platform:"YOUTUBE",login:"ishowspeed",display_name:"IShowSpeed",title:"GTA 6 & IRL RAGE MOMENTS LIVE STREAM",category:"Grand Theft Auto V",viewer_count:36900,is_brazil:false,language:"en",url:"https://www.youtube.com/watch?v=live_demo"}
+];
+
+const nowTs=Math.floor(Date.now()/1000);
 const memDb={
   brolls:[],
   moldes:[
@@ -375,10 +596,10 @@ const memDb={
     {id:"TELA_CHEIA",nome:"Tela Cheia 9:16",descricao:"Enquadramento vertical completo focado na ação principal com legendas grandes."}
   ],
   ideas:[
-    {id:"idea1",tag:"GTA 6 · Hype",min:8,hint:"quando ele reagir ao trailer de GTA 6 ou mapa de Leonida"},
-    {id:"idea2",tag:"GTA RP · Ação",min:7,hint:"perseguição policial, troca de tiro ou fuga em alta velocidade"},
-    {id:"idea3",tag:"Chat Explodindo",min:6,hint:"quando o chat trollar ou acontecer reação genuína e cômica"},
-    {id:"idea4",tag:"Curiosidades",min:7,hint:"easter egg secreto, bug bizarro ou revelação inesperada"}
+    {id:"idea1",tag:"Engraçado · Memes",min:7,hint:"risadas, momentos engraçados, trollagens e chat spamando kkk"},
+    {id:"idea2",tag:"Raiva & Xingamentos",min:7,hint:"raiva extrema, tilt, xingamentos, frustrações e microfone estourado"},
+    {id:"idea3",tag:"GTA RP · Ação & Susto",min:6,hint:"perseguição policial, fuga, susto inesperado ou reação forte"},
+    {id:"idea4",tag:"Curiosidades & Hype",min:7,hint:"clutch insano, easter egg secreto ou virada inacreditável"}
   ],
   uploads:[
     {id:"up1",titulo:"GTA 6 VAI TER PRIMEIRA PESSOA",descricao:"Corte de @alanzoka",status:"PENDENTE",error:null}
@@ -390,28 +611,76 @@ const memDb={
       link:"https://www.twitch.tv/alanzoka",
       platform:"TWITCH",
       min:6,
-      max:3,
+      max:4,
       recorded:849,
       status:"assistindo ao vivo",
+      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:78,live_pct:64,elapsed_sec:849},
+      agents:mkAgents(78),
+      handoffs:[
+        "[06:12:44] IA-05 -> IA-16: explosão de 'kkkk' + 'não tankei' aos 352s",
+        "[06:12:59] IA-08 -> IA-14/IA-15: pico acústico -11.8dB detectado aos 550s",
+        "[06:13:05] IA-19 -> IA-20: 4 cortes aprovados sem chave de API"
+      ],
+      sentiment_series:mkSentimentSeries(600,1),
+      created_ts:nowTs-120,
+      created_at:new Date((nowTs-120)*1000).toISOString(),
       log:[
-        "[06:12:44] Conectado no chat IRC da Twitch (#alanzoka)",
-        "[06:13:01] Whisper transcreveu janela de 180s com sucesso",
-        "[06:13:05] Claude avaliou 3 momentos virais acima da nota 6"
+        "[06:12:44] IA-03 Time-Shift varreu do ao vivo (14:09) até 00:00",
+        "[06:12:55] IA-05 & IA-08 detectaram picos de humor, susto e xingamento",
+        "[06:13:05] 20 agentes colaborando (zero API key) com 4 cortes prontos"
       ],
       clips:[
-        {id:"c1",titulo:"Cai no bait",headline:"O CHAT ME ENGANOU DE NOVO!",ini:352,fim:374,nota:8,motivo:"Trollagem do chat e reação genuína.",descricao:"O streamer cai numa trollagem do chat e tem uma reação cômica.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl},
-        {id:"c2",titulo:"violência gamer",headline:"JOGO VIOLENTO ONDE VOCÊ SÓ CUIDA DA CASA",ini:214,fim:253,nota:8,motivo:"Reflexão irônica sobre a rotina no jogo.",descricao:"Reflexão divertida sobre o jogo.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl},
-        {id:"c3",titulo:"GTA 6 vai ter primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA",ini:550,fim:582,nota:9,motivo:"Comenta o rumor da câmera em primeira pessoa e o chat explode.",descricao:"Rumor da câmera em primeira pessoa em GTA 6.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl}
+        {id:"c1",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Engraçado",titulo:"Cai no bait do chat",headline:"O CHAT ME ENGANOU DE NOVO 😂",ini:352,fim:374,nota:9,motivo:"Trollagem do chat com explosão de gargalhadas.",descricao:"O streamer cai numa trollagem do chat e riu sem parar.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-60,created_at:new Date((nowTs-60)*1000).toISOString()},
+        {id:"c2",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Frustração",titulo:"Bug bizarro na missão final",headline:"DEU TUDO ERRADO NA HORA H 😤",ini:214,fim:253,nota:8,motivo:"Frustração genuína após bug crítico na fase final.",descricao:"Bug bizarro estragou a run.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-180,created_at:new Date((nowTs-180)*1000).toISOString()},
+        {id:"c3",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Hype",titulo:"GTA 6 em primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA 🔥",ini:550,fim:582,nota:10,motivo:"Hype máximo ao analisar novidades de GTA 6.",descricao:"Novidades de GTA 6.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-30,created_at:new Date((nowTs-30)*1000).toISOString()}
       ]
     },
-    {id:"gta6-preview",name:"gta6-preview-aovivo",link:"https://www.youtube.com/watch?v=QdBZY2fkU-0",platform:"YOUTUBE",min:7,max:1,recorded:91,status:"finalizado",log:["[06:10:00] Trailer GTA 6 analisado"],clips:[]},
-    {id:"teste-dava",name:"teste-dava",link:"https://www.twitch.tv/davajonas",platform:"TWITCH",min:6,max:4,recorded:640,status:"finalizado",log:["[05:40:00] 4 cortes finalizados"],clips:[]}
+    {
+      id:"coringa-kick-demo",
+      name:"loud_coringa",
+      link:"https://kick.com/loud_coringa",
+      platform:"KICK",
+      min:6,
+      max:3,
+      recorded:640,
+      status:"finalizado",
+      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:100,live_pct:100,elapsed_sec:640},
+      agents:mkAgents(100),
+      handoffs:["[05:40:10] IA-06 -> IA-15: xingamentos e fuga policial insana"],
+      sentiment_series:mkSentimentSeries(640,3),
+      created_ts:nowTs-450,
+      created_at:new Date((nowTs-450)*1000).toISOString(),
+      log:["[05:40:00] 20 agentes finalizaram análise retroativa + ao vivo"],
+      clips:[
+        {id:"ck1",live_id:"coringa-kick-demo",platform:"KICK",channel:"loud_coringa",emotion:"Raiva",titulo:"Perdeu a paciência na fuga RP",headline:"ELE EXPLODIU NA PERSEGUIÇÃO 🤬",ini:140,fim:176,nota:9,motivo:"Pico vocal extremo + raiva no GTA RP.",descricao:"Fuga policial intensa na Kick.\n\nCorte de @loud_coringa",molde:"VIDRO_GAMER",url:sampleClipUrl,created_ts:nowTs-410,created_at:new Date((nowTs-410)*1000).toISOString()}
+      ]
+    },
+    {
+      id:"gta6-yt-demo",
+      name:"FlowGamesBR",
+      link:"https://www.youtube.com/watch?v=QdBZY2fkU-0",
+      platform:"YOUTUBE",
+      min:7,
+      max:2,
+      recorded:290,
+      status:"finalizado",
+      timeline_coverage:{mode:"VOD_FULL",retro_pct:100,live_pct:100,elapsed_sec:290},
+      agents:mkAgents(100),
+      handoffs:["[05:10:00] IA-07 -> IA-12: reação hilária e xingamentos ao bug do trailer"],
+      sentiment_series:mkSentimentSeries(290,5),
+      created_ts:nowTs-900,
+      created_at:new Date((nowTs-900)*1000).toISOString(),
+      log:["[05:10:00] Análise completa finalizada no YouTube"],
+      clips:[
+        {id:"yt1",live_id:"gta6-yt-demo",platform:"YOUTUBE",channel:"FlowGamesBR",emotion:"Xingamentos",titulo:"Soltou o verbo ao descobrir bug",headline:"INACREDITÁVEL ESSE BUG 🔥",ini:65,fim:98,nota:8,motivo:"Reação espontânea com xingamentos e risada do chat.",descricao:"Análise GTA 6 no YouTube.\n\nCorte de @FlowGamesBR",molde:"FADE_CONTINUO",url:sampleClipUrl,created_ts:nowTs-860,created_at:new Date((nowTs-860)*1000).toISOString()}
+      ]
+    }
   ]
 };
 
 function notify(msg){
   const t=$("toast");t.textContent=msg;t.classList.remove("hide");
-  clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.add("hide"),3200);
+  clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.add("hide"),3400);
 }
 
 $("themeBtn").onclick=()=>{
@@ -434,14 +703,14 @@ function showTab(t){
   if(t==="MOLDES") void loadMoldes();
   if(t==="IDEIAS") void loadIdeas();
   if(t==="UPLOADS") void loadUploads();
-  if(t==="IA") void loadHealth();
+  if(t==="IA"){renderCatalog20();void loadHealth();}
 }
 
 const wv=$("wv");
-for(let i=0;i<56;i++){wv.appendChild(document.createElement("i"))}
+for(let i=0;i<56;i++){wv.appendChild(document.createElement("i"));}
 function updateWaveForVideo(v){
   const bars=[...wv.querySelectorAll("i")];
-  if(!v||v.paused){return;}
+  if(!v||v.paused)return;
   const pct=v.duration>0?(v.currentTime/v.duration)*100:0;
   $("pbar").style.width=pct.toFixed(1)+"%";
   bars.forEach((b,idx)=>{
@@ -450,33 +719,175 @@ function updateWaveForVideo(v){
     b.style.opacity=(idx/bars.length)*100<=pct?"1":"0.45";
   });
 }
-setInterval(()=>{
-  const v=$("phoneVideoBox").querySelector("video");
-  updateWaveForVideo(v);
-},160);
+setInterval(()=>updateWaveForVideo($("phoneVideoBox").querySelector("video")),160);
 
-const hms=x=>Math.floor(x/60)+":"+String(Math.floor(x%60)).padStart(2,"0");
+const hms=x=>{
+  const s=Math.max(0,Math.floor(x||0));
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),r=s%60;
+  return h>0?`${h}:${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`:`${m}:${String(r).padStart(2,"0")}`;
+};
+
+function fmtDate(ts){
+  if(!ts)return"Agora";
+  const d=new Date(ts*1000);
+  return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+}
+
+function classifyBrBrowser(s){
+  const top=["paulinhooloko","loud_coringa","luquet4","boca04","gabepeixe","jonvlogs","alanzoka","nobru","casimito","gaules","brino"];
+  const lg=(s.login||"").toLowerCase();
+  if(top.includes(lg))return true;
+  if((s.language||"").toLowerCase().startsWith("pt"))return true;
+  const txt=((s.title||"")+" "+(s.display_name||"")).toLowerCase();
+  return /[ãõçêâôáéíóú]|\b(ao vivo|brasil|br|gta rp|cidade alta|complexo)\b/i.test(txt);
+}
+
+async function browserDiscoverStreams(plat,cat,reg,q){
+  let items=[];
+  let kickLive=0;
+  if(plat==="ALL"||plat==="KICK"){
+    try{
+      const ctrl=new AbortController();
+      const tm=setTimeout(()=>ctrl.abort(),3200);
+      const r=await fetch("https://kick.com/stream/featured-livestreams/pt?limit=15",{signal:ctrl.signal});
+      clearTimeout(tm);
+      if(r.ok){
+        const j=await r.json();
+        const rows=j.data||(Array.isArray(j)?j:[]);
+        rows.forEach(row=>{
+          const ch=row.channel||{};const slug=ch.slug||row.slug;if(!slug)return;
+          items.push({
+            id:"kk_"+slug,platform:"KICK",login:slug,display_name:(ch.user&&ch.user.username)||slug,
+            title:row.session_title||"Live Kick",category:(row.categories&&row.categories[0]&&row.categories[0].name)||"Kick Live",
+            viewer_count:Number(row.viewer_count||row.viewers||0),language:(row.language||"pt").toLowerCase(),
+            url:"https://kick.com/"+slug
+          });
+          kickLive++;
+        });
+      }
+    }catch(_){}
+  }
+  const seen=new Set(items.map(x=>x.platform+":"+x.login.toLowerCase()));
+  memDemoDiscovery.forEach(d=>{
+    if(!seen.has(d.platform+":"+d.login.toLowerCase())) items.push({...d});
+  });
+  items=items.filter(s=>(plat==="ALL"||s.platform===plat));
+  if(cat!=="ALL"){
+    items=items.filter(s=>{
+      const b=((s.category||"")+" "+(s.title||"")).toLowerCase();
+      if(cat==="GTA")return/gta|fivem|roleplay|vice city/.test(b);
+      if(cat==="FPS")return/fps|valorant|cs2|free fire|warzone/.test(b);
+      if(cat==="MOBA")return/moba|league of legends|dota|cblol/.test(b);
+      if(cat==="IRL")return/irl|just chatting|resenha|talk/.test(b);
+      return true;
+    });
+  }
+  const ql=(q||"").trim().toLowerCase();
+  if(ql)items=items.filter(s=>(s.title+" "+s.display_name+" "+s.login+" "+s.category).toLowerCase().includes(ql));
+  items.forEach(s=>{s.is_brazil=typeof s.is_brazil==="boolean"?s.is_brazil:classifyBrBrowser(s);});
+  if(reg==="BRAZIL_ONLY")items=items.filter(s=>s.is_brazil);
+  else if(reg==="FOREIGN_ONLY")items=items.filter(s=>!s.is_brazil);
+  items.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(b.viewer_count-a.viewer_count));
+  const brCnt=items.filter(x=>x.is_brazil).length;
+  return {
+    streams:items,
+    counts:{total:items.length,brazil:brCnt,international:items.length-brCnt},
+    sourceNote:kickLive>0?`Kick ao vivo (${kickLive}) + lista exemplo (conecte servidor Python na aba IA para Twitch/YouTube ao vivo real)`:`Modo navegador offline (conecte o servidor Python na aba IA para Twitch, Kick e YouTube 100% ao vivo)`
+  };
+}
+
+function buildZipBlob(files){
+  const crcTab=new Uint32Array(256);
+  for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xedb88320^(c>>>1)):(c>>>1);crcTab[n]=c>>>0;}
+  const crc32=u8=>{let c=0xffffffff;for(let i=0;i<u8.length;i++)c=crcTab[(c^u8[i])&0xff]^(c>>>8);return(c^0xffffffff)>>>0;};
+  const enc=new TextEncoder();
+  const chunks=[],central=[];
+  let offset=0;
+  for(const f of files){
+    const nb=enc.encode(f.name);
+    const d=f.bytes;
+    const crc=crc32(d);
+    const lh=new Uint8Array(30+nb.length);
+    const dv=new DataView(lh.buffer);
+    dv.setUint32(0,0x04034b50,true);dv.setUint16(4,20,true);dv.setUint16(8,0,true);
+    dv.setUint32(14,crc,true);dv.setUint32(18,d.length,true);dv.setUint32(22,d.length,true);
+    dv.setUint16(26,nb.length,true);lh.set(nb,30);
+    chunks.push(lh,d);
+    const ch=new Uint8Array(46+nb.length);
+    const cv=new DataView(ch.buffer);
+    cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);
+    cv.setUint32(16,crc,true);cv.setUint32(20,d.length,true);cv.setUint32(24,d.length,true);
+    cv.setUint16(28,nb.length,true);cv.setUint32(42,offset,true);ch.set(nb,46);
+    central.push(ch);
+    offset+=lh.length+d.length;
+  }
+  let cSize=0;central.forEach(c=>cSize+=c.length);
+  const eocd=new Uint8Array(22);
+  const ev=new DataView(eocd.buffer);
+  ev.setUint32(0,0x06054b50,true);
+  ev.setUint16(8,files.length,true);ev.setUint16(10,files.length,true);
+  ev.setUint32(12,cSize,true);ev.setUint32(16,offset,true);
+  return new Blob([...chunks,...central,eocd],{type:"application/zip"});
+}
 
 async function localApi(p,o={}){
   const m=(o.method||"GET").toUpperCase();
   const body=typeof o.body==="string"?JSON.parse(o.body):null;
   if(p==="/api/health"){
-    return {ok:true,binaries:{ffmpeg:false,ffprobe:false,streamlink:false,yt_dlp:false},python_modules:{faster_whisper:false,cv2:false,anthropic:false,googleapiclient:false},anthropic_configured:false,youtube_secret_exists:false,youtube_token_exists:false,broll_files:memDb.brolls,settings:appSettings};
+    return {ok:true,binaries:{ffmpeg:false,ffprobe:false,streamlink:false,yt_dlp:false},python_modules:{faster_whisper:false,cv2:false,anthropic:false,googleapiclient:false},anthropic_configured:false,zero_api_mode:true,swarm_agents:20,youtube_secret_exists:false,youtube_token_exists:false,broll_files:memDb.brolls,settings:appSettings};
   }
-  if(p==="/api/lives"&&m==="GET") return memDb.lives;
+  if(p==="/api/agents")return {count:20,requires_api_key:false,agents:AGENT_CATALOG_20};
+  if(p.startsWith("/api/discover/lives")){
+    const u=new URL("http://x"+p);
+    return browserDiscoverStreams(u.searchParams.get("platform")||"ALL",u.searchParams.get("category")||"ALL",u.searchParams.get("region")||"BRAZIL_FIRST",u.searchParams.get("q")||"");
+  }
+  if(p==="/api/lives"&&m==="GET")return memDb.lives;
   if(p==="/api/lives"&&m==="POST"){
     const chan=(body.link||"").split("/").filter(Boolean).pop()||"live";
-    const obj={id:"lv_"+Date.now(),name:body.name||chan,link:body.link,platform:body.link.includes("kick")?"KICK":(body.link.includes("youtu")?"YOUTUBE":"TWITCH"),min:body.min||6,max:body.max||3,recorded:12,status:"assistindo ao vivo",log:["["+new Date().toTimeString().slice(0,8)+"] Conectado em "+body.link,"["+new Date().toTimeString().slice(0,8)+"] Monitorando chat, fala e B-roll..."],clips:[
-      {id:"cn_"+Date.now(),titulo:"Momento viral de "+chan,headline:(body.hint||"MOMENTO VIRAL AO VIVO!").toUpperCase().slice(0,44),ini:12,fim:44,nota:9,motivo:"Pico detectado no chat e reação forte.",descricao:"Corte automático de @"+chan,molde:appSettings.molde,url:sampleClipUrl}
-    ]};
+    const id="lv_"+Date.now()+"_"+Math.floor(Math.random()*99);
+    const plat=body.link.includes("kick")?"KICK":(body.link.includes("youtu")?"YOUTUBE":"TWITCH");
+    const ts=Math.floor(Date.now()/1000);
+    const obj={
+      id,name:body.name||chan,link:body.link,platform:plat,min:body.min||6,max:body.max||3,recorded:12,status:"assistindo ao vivo",
+      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:45,live_pct:25,elapsed_sec:420},
+      agents:mkAgents(55),
+      handoffs:[`[${new Date().toTimeString().slice(0,8)}] IA-03->IA-04: varrendo 00:00<-Ao Vivo->Fim sem API key`],
+      sentiment_series:mkSentimentSeries(180,ts%9),
+      created_ts:ts,created_at:new Date().toISOString(),
+      log:["["+new Date().toTimeString().slice(0,8)+"] Conectado em "+body.link,"["+new Date().toTimeString().slice(0,8)+"] 20 IAs monitorando engraçados, frustrações, raiva e xingamentos..."],
+      clips:[
+        {id:"cn_"+ts+"_1",live_id:id,platform:plat,channel:body.name||chan,emotion:"Engraçado",titulo:"Momento engraçado de "+chan,headline:(body.hint||"NINGUÉM TANKOU ESSA REAÇÃO 😂").toUpperCase().slice(0,44),ini:12,fim:42,nota:9,motivo:"Pico de humor e risadas.",descricao:"Corte automático de @"+chan,molde:appSettings.molde,url:sampleClipUrl,created_ts:ts,created_at:new Date().toISOString()},
+        {id:"cn_"+ts+"_2",live_id:id,platform:plat,channel:body.name||chan,emotion:"Raiva",titulo:"Tilt ao vivo de "+chan,headline:"ELE PERDEU A PACIÊNCIA AO VIVO 🤬",ini:58,fim:88,nota:8,motivo:"Explosão de raiva e xingamentos.",descricao:"Reação forte de @"+chan,molde:appSettings.molde,url:sampleClipUrl,created_ts:ts-5,created_at:new Date().toISOString()}
+      ]
+    };
     memDb.lives.unshift(obj);
     return obj;
   }
+  if(p==="/api/lives/analyze-all"&&m==="POST"){
+    const list=(body&&body.streams&&body.streams.length)?body.streams.slice(0,5):memDemoDiscovery.slice(0,4);
+    const created=[];
+    for(const s of list){
+      const existing=memDb.lives.find(x=>x.link===s.url);
+      if(!existing){
+        const r=await localApi("/api/lives",{method:"POST",body:JSON.stringify({link:s.url,name:s.display_name||s.login,min:body.min||6,max:body.max_clips||3,hint:"Engraçado, Frustração, Raiva, Xingamentos"})});
+        created.push(r);
+      }
+    }
+    return {ok:true,started_count:created.length,created_lives:created};
+  }
   if(p==="/api/lives/upload-video"&&m==="POST"){
     const fileUrl=o._fileUrl||sampleClipUrl;
-    const obj={id:"upv_"+Date.now(),name:(o.headers&&o.headers["X-Filename"])||"video.mp4",link:fileUrl,platform:"LOCAL",min:6,max:3,recorded:32,status:"finalizado",log:["[upload] Vídeo carregado direto no navegador."],clips:[
-      {id:"cu_"+Date.now(),titulo:"Corte automático do vídeo",headline:"CLUTCH INSANO EM GTA!",ini:0,fim:18,nota:9,motivo:"Análise automática local",descricao:"Corte local",molde:appSettings.molde,url:fileUrl}
-    ]};
+    const id="upv_"+Date.now();
+    const ts=Math.floor(Date.now()/1000);
+    const fname=(o.headers&&o.headers["X-Filename"])||"video.mp4";
+    const obj={
+      id,name:fname,link:fileUrl,platform:"LOCAL",min:6,max:3,recorded:32,status:"finalizado",
+      timeline_coverage:{mode:"VOD_FULL",retro_pct:100,live_pct:100,elapsed_sec:32},
+      agents:mkAgents(100),handoffs:["[upload] 20 agentes finalizaram análise local sem API key"],
+      sentiment_series:mkSentimentSeries(32,2),created_ts:ts,created_at:new Date().toISOString(),
+      log:["[upload] Vídeo carregado direto no navegador."],
+      clips:[{id:"cu_"+ts,live_id:id,platform:"LOCAL",channel:fname,emotion:"Hype",titulo:"Corte automático do vídeo",headline:"CLUTCH INSANO LOCAL!",ini:0,fim:18,nota:9,motivo:"Análise automática local",descricao:"Corte local",molde:appSettings.molde,url:fileUrl,created_ts:ts,created_at:new Date().toISOString()}]
+    };
     memDb.lives.unshift(obj);
     return obj;
   }
@@ -485,12 +896,21 @@ async function localApi(p,o={}){
   }
   if(p.startsWith("/api/lives/")&&p.endsWith("/manual-cut")){
     const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(!l)throw new Error("Live não encontrada");
-    const c={id:"cm_"+Date.now(),titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:body.start_sec||0,fim:body.end_sec||25,nota:9,motivo:"Corte manual",descricao:"Corte manual "+body.start_sec+"s–"+body.end_sec+"s",molde:body.molde||appSettings.molde,url:l.link.startsWith("blob:")?l.link:sampleClipUrl};
+    const ts=Math.floor(Date.now()/1000);
+    const c={id:"cm_"+ts,live_id:id,platform:l.platform||"LOCAL",channel:l.name,emotion:"Hype",titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:body.start_sec||0,fim:body.end_sec||25,nota:9,motivo:"Corte manual",descricao:"Corte manual "+body.start_sec+"s–"+body.end_sec+"s",molde:body.molde||appSettings.molde,url:l.link.startsWith("blob:")?l.link:sampleClipUrl,created_ts:ts,created_at:new Date().toISOString()};
     l.clips.push(c);return c;
+  }
+  if(p.startsWith("/api/lives/")&&p.endsWith("/agents")){
+    const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);
+    if(!l)throw new Error("Live não encontrada");
+    return {live_id:id,agents:l.agents||mkAgents(60),handoffs:l.handoffs||[],sentiment_series:l.sentiment_series||[],timeline_coverage:l.timeline_coverage||{}};
   }
   if(p.startsWith("/api/lives/")){
     const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(!l)throw new Error("Live não encontrada");
-    if(l.status==="assistindo ao vivo") l.recorded+=2;
+    if(l.status==="assistindo ao vivo"){
+      l.recorded+=3;
+      if(l.timeline_coverage){l.timeline_coverage.retro_pct=Math.min(100,l.timeline_coverage.retro_pct+4);l.timeline_coverage.live_pct=Math.min(99,l.timeline_coverage.live_pct+3);}
+    }
     return l;
   }
   if(p.startsWith("/api/clips/")&&p.endsWith("/adjust")){
@@ -502,11 +922,11 @@ async function localApi(p,o={}){
     if(body.descricao)c.descricao=body.descricao;
     return c;
   }
-  if(p==="/api/moldes") return {moldes:memDb.moldes,settings:appSettings};
+  if(p==="/api/moldes")return {moldes:memDb.moldes,settings:appSettings};
   if(p==="/api/settings"){Object.assign(appSettings,body||{});return appSettings;}
-  if(p==="/api/ideas"&&m==="GET") return memDb.ideas;
+  if(p==="/api/ideas"&&m==="GET")return memDb.ideas;
   if(p==="/api/ideas"&&m==="POST"){const item={id:"id_"+Date.now(),tag:body.tag,min:body.min,hint:body.hint};memDb.ideas.unshift(item);return item;}
-  if(p==="/api/uploads"&&m==="GET") return memDb.uploads;
+  if(p==="/api/uploads"&&m==="GET")return memDb.uploads;
   if(p==="/api/uploads/queue"){const l=memDb.lives.find(x=>x.id===body.live_id);const c=l&&l.clips.find(x=>x.id===body.clip_id);const u={id:"uq_"+Date.now(),titulo:(c&&c.titulo)||"Corte",descricao:(c&&c.descricao)||"",status:"PENDENTE",error:null};memDb.uploads.unshift(u);return u;}
   if(p.startsWith("/api/uploads/")&&p.endsWith("/publish")){const id=p.split("/")[3];const u=memDb.uploads.find(x=>x.id===id);if(u){u.status="ERRO OAUTH";u.error="Conecte o servidor Python na aba IA com client_secret.json para publicar no YouTube.";}return u;}
   if(p==="/api/brolls/upload"){const n=(o.headers&&o.headers["X-Filename"])||"broll.mp4";memDb.brolls.push(n);return {name:n};}
@@ -514,16 +934,16 @@ async function localApi(p,o={}){
 }
 
 function resolveMediaUrl(u){
-  if(!u) return sampleClipUrl;
-  if(serverMode && u.startsWith("/")) return serverBase + u;
+  if(!u)return sampleClipUrl;
+  if(serverMode&&u.startsWith("/"))return serverBase+u;
   return u;
 }
 
 async function api(p,o){
   if(serverMode){
-    const r=await fetch(serverBase + p,o);
+    const r=await fetch(serverBase+p,o);
     const txt=await r.text();
-    let data=null;try{data=JSON.parse(txt)}catch(_){data=txt}
+    let data=null;try{data=JSON.parse(txt);}catch(_){data=txt;}
     if(!r.ok)throw new Error((data&&data.detail)||("HTTP "+r.status));
     return data;
   }
@@ -532,42 +952,203 @@ async function api(p,o){
 
 async function detectBackend(customUrl){
   const saved=(customUrl!==undefined?customUrl:(localStorage.getItem("cortes_backend_url")||"")).trim().replace(/\/+$/,"");
-  if(saved){
+  const candidates=[];
+  if(saved)candidates.push(saved);
+  else if(location.protocol.startsWith("http")&&!location.hostname.endsWith("github.io"))candidates.push(location.origin);
+
+  for(const cand of candidates){
     try{
-      const r=await fetch(saved+"/api/health");
+      const r=await fetch(cand+"/api/health");
       if(r.ok){
-        serverBase=saved;
+        serverBase=cand===location.origin?"":cand;
         serverMode=true;
-        localStorage.setItem("cortes_backend_url",saved);
-        $("backendUrlInput").value=saved;
-        $("modeBadge").textContent="Servidor Conectado";
+        if(saved)localStorage.setItem("cortes_backend_url",saved);
+        $("backendUrlInput").value=cand;
+        $("modeBadge").textContent="Servidor 20-IAs Conectado";
         $("modeBadge").className="pill";
         await refreshLives();
+        void loadRadar();
         return true;
       }
     }catch(_){}
   }
   serverMode=false;
-  $("modeBadge").textContent="Site Web Ativo";
+  serverBase="";
+  $("modeBadge").textContent="Modo Web · Zero API Key";
   $("modeBadge").className="pill warn";
   await refreshLives();
+  void loadRadar();
   return false;
 }
 
 $("connectBackendBtn").onclick=async()=>{
   const u=$("backendUrlInput").value.trim().replace(/\/+$/,"");
-  if(!u){localStorage.removeItem("cortes_backend_url");await detectBackend("");notify("Voltando ao modo navegador.");return;}
+  if(!u){localStorage.removeItem("cortes_backend_url");await detectBackend("");notify("Voltando ao modo web.");return;}
   const ok=await detectBackend(u);
   if(ok){notify("Conectado ao servidor Python!");void loadHealth();}
   else{notify("Não foi possível conectar em "+u);}
 };
 
+async function loadRadar(){
+  const cat=$("radarCat").value||"ALL";
+  const reg=$("radarRegion").value||"BRAZIL_FIRST";
+  const q=($("radarSearch").value||"").trim();
+  const res=await api(`/api/discover/lives?platform=${encodeURIComponent(radarPlat)}&category=${encodeURIComponent(cat)}&region=${encodeURIComponent(reg)}&q=${encodeURIComponent(q)}`);
+  radarStreams=res.streams||[];
+  const cnt=res.counts||{total:radarStreams.length,brazil:0,international:0};
+  $("radarCounts").textContent=`${cnt.total} ao vivo · 🇧🇷 ${cnt.brazil} BR · 🌎 ${cnt.international} Intl`;
+  $("radarMeta").textContent=res.sourceNote||"Ordenado: Brasil 1º · Internacionais por último · Maior audiência no topo";
+  const grid=$("radarGrid");
+  if(!radarStreams.length){
+    grid.innerHTML='<div class="mut">Nenhuma live encontrada para este filtro. Tente "Todas Categorias" ou atualize.</div>';
+    return;
+  }
+  grid.innerHTML=radarStreams.slice(0,24).map((s,i)=>{
+    const pCls=s.platform==="KICK"?"pill br":(s.platform==="YOUTUBE"?"pill err":"pill pu");
+    const regPill=s.is_brazil?'<span class="pill br">🇧🇷 BRASIL</span>':'<span class="pill intl">🌎 INTL</span>';
+    return `
+      <div class="item-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">
+          <div><span class="${pCls}">${esc(s.platform)}</span> ${regPill}</div>
+          <span class="pill warn">👥 ${Number(s.viewer_count||0).toLocaleString("pt-BR")}</span>
+        </div>
+        <b style="display:block;margin-top:8px">${esc(s.display_name||s.login)}</b>
+        <div class="mut" style="font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.title)}</div>
+        <div class="mut" style="margin-top:4px;font-size:11px">Categoria: <b>${esc(s.category||"Ao Vivo")}</b></div>
+        <button class="btn sm w" type="button" style="margin-top:8px" data-radar-idx="${i}">▶ Analisar 00:00←Ao Vivo→Fim</button>
+      </div>
+    `;
+  }).join("");
+  grid.querySelectorAll("[data-radar-idx]").forEach(btn=>{
+    btn.onclick=()=>{
+      const st=radarStreams[Number(btn.dataset.radarIdx)];
+      if(st)void startLive(st.url,st.display_name||st.login).catch(e=>notify(e.message));
+    };
+  });
+}
+
+$("radarPlatBtns").querySelectorAll("[data-plat]").forEach(b=>{
+  b.onclick=()=>{
+    radarPlat=b.dataset.plat;
+    $("radarPlatBtns").querySelectorAll(".plat-btn").forEach(x=>x.classList.toggle("on",x===b));
+    void loadRadar();
+  };
+});
+$("radarCat").onchange=()=>void loadRadar();
+$("radarRegion").onchange=()=>void loadRadar();
+$("radarSearch").oninput=()=>{clearTimeout(window.__rs);window.__rs=setTimeout(()=>void loadRadar(),280);};
+$("refreshRadarBtn").onclick=()=>void loadRadar();
+
+async function analyzeAllLives(){
+  try{
+    notify("Disparando 20 agentes em TODAS as lives (engraçado, frustração, raiva, xingamentos)...");
+    const res=await api("/api/lives/analyze-all",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        streams:radarStreams.slice(0,6),
+        platform:radarPlat,category:$("radarCat").value,
+        max_lives:6,min:+$("mn").value||6,max_clips:+$("mx").value||4,
+        emotions:["Engraçado","Frustração","Raiva","Xingamentos"],molde:appSettings.molde
+      })
+    });
+    await refreshLives();
+    if(res.created_lives&&res.created_lives[0])watchLive(res.created_lives[0].id);
+    notify(`${res.started_count||0} live(s) iniciada(s) pelo enxame de 20 IAs!`);
+  }catch(e){notify("Erro ao analisar todas: "+e.message);}
+}
+$("analyzeAllBtn").onclick=()=>void analyzeAllLives();
+$("sidebarAnalyzeAllBtn").onclick=()=>void analyzeAllLives();
+
+let lastChartSeries=[];
+function drawSentimentChart(series){
+  lastChartSeries=series||[];
+  const cv=$("sentimentChart");
+  if(!cv)return;
+  const ctx=cv.getContext("2d");
+  const dpr=window.devicePixelRatio||1;
+  const cssW=cv.clientWidth||720,cssH=165;
+  if(cv.width!==Math.floor(cssW*dpr)||cv.height!==Math.floor(cssH*dpr)){cv.width=Math.floor(cssW*dpr);cv.height=Math.floor(cssH*dpr);}
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,cssW,cssH);
+  const padL=34,padR=14,padT=14,padB=24,W=cssW-padL-padR,H=cssH-padT-padB;
+  ctx.strokeStyle="rgba(143,143,160,0.18)";ctx.lineWidth=1;
+  ctx.font="10px system-ui";ctx.fillStyle="#8f8fa0";
+  [25,50,75,100].forEach(val=>{
+    const y=padT+H*(1-val/100);
+    ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(cssW-padR,y);ctx.stroke();
+    ctx.fillText(val+"%",2,y+3);
+  });
+  if(!lastChartSeries.length){
+    ctx.fillStyle="#8f8fa0";ctx.fillText("Aguardando dados de chat & picos de áudio da live...",padL+14,padT+H/2);
+    return;
+  }
+  const n=lastChartSeries.length;
+  const xAt=i=>padL+(n>1?(i/(n-1))*W:W/2);
+  const yAt=v=>padT+H*(1-Math.max(0,Math.min(100,v))/100);
+  [["positivo","#22e07a"],["negativo","#ff3b1f"],["hype","#ffd23f"]].forEach(([key,col])=>{
+    ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=2.3;
+    lastChartSeries.forEach((pt,i)=>{const x=xAt(i),y=yAt(pt[key]);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+    ctx.stroke();
+  });
+  lastChartSeries.forEach((pt,i)=>{
+    if(i===0||i===n-1||i%Math.max(1,Math.floor(n/5))===0){ctx.fillStyle="#8f8fa0";ctx.fillText(pt.label||hms(pt.t),xAt(i)-12,cssH-6);}
+    if(pt.hype>=76){ctx.beginPath();ctx.fillStyle="#ffd23f";ctx.arc(xAt(i),yAt(pt.hype),4,0,Math.PI*2);ctx.fill();}
+  });
+  const peaks=[...lastChartSeries].sort((a,b)=>b.hype-a.hype).slice(0,4);
+  $("sentPeaks").innerHTML=peaks.map(p=>`<span class="pill warn" style="cursor:pointer">${p.label} · ${esc(p.emotion||"Pico")} (${p.hype}%)</span>`).join("");
+}
+
+function handleChartInspect(clientX){
+  if(!lastChartSeries.length)return;
+  const cv=$("sentimentChart"),rect=cv.getBoundingClientRect();
+  const rel=Math.max(0,Math.min(1,(clientX-rect.left-34)/Math.max(1,rect.width-48)));
+  const pt=lastChartSeries[Math.min(lastChartSeries.length-1,Math.round(rel*(lastChartSeries.length-1)))];
+  $("sentHover").innerHTML=`<b>[${pt.label}]</b> Emoção dominante: <b>${esc(pt.emotion)}</b> · 🟢 Positivo ${pt.positivo}% · 🔴 Negativo ${pt.negativo}% · 🟡 Hype ${pt.hype}% · Áudio ${pt.db||-25}dB`;
+}
+$("sentimentChart").addEventListener("mousemove",e=>handleChartInspect(e.clientX));
+$("sentimentChart").addEventListener("touchmove",e=>{if(e.touches[0])handleChartInspect(e.touches[0].clientX);},{passive:true});
+
+function renderSwarmGrid(agents,handoffs){
+  const list=agents&&agents.length?agents:mkAgents(30);
+  $("swarmGrid").innerHTML=list.map(a=>{
+    const cls=a.state==="concluído"?"done":(a.state==="analisando"||a.state==="ativo"?"running":"");
+    const stCol=a.state==="concluído"?"pill":(a.state==="erro"?"pill err":"pill warn");
+    return `
+      <div class="agent-card ${cls}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:4px">
+          <b>${esc(a.code)}</b>
+          <span class="${stCol}">${esc(a.state)}</span>
+        </div>
+        <div style="font-weight:700;margin-top:4px">${esc(a.name)}</div>
+        <div class="mut" style="font-size:11px;margin-top:2px">${esc(a.detail||a.role)}</div>
+        <div class="mut" style="font-size:10.5px;margin-top:4px">Parceiro: <b>${esc(a.partner)}</b> · ${a.progress||0}%</div>
+      </div>
+    `;
+  }).join("");
+  $("handoffFeed").innerHTML=(handoffs&&handoffs.length?handoffs:["Aguardando primeira colaboração entre os 20 agentes..."]).map(h=>`<div>${esc(h)}</div>`).join("");
+}
+
+function renderCatalog20(){
+  $("iaCatalogGrid").innerHTML=AGENT_CATALOG_20.map(a=>`
+    <div class="agent-card done">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b>${esc(a.code)}</b><span class="pill">SEM API KEY</span>
+      </div>
+      <div style="font-weight:700;margin-top:4px">${esc(a.name)}</div>
+      <div class="mut" style="font-size:11px;margin-top:2px">${esc(a.role)}</div>
+      <div class="mut" style="font-size:10.5px;margin-top:4px">Conecta com: <b>${esc(a.partner)}</b></div>
+    </div>
+  `).join("");
+}
+
 async function refreshLives(){
   allLives=await api("/api/lives");
   const box=$("lives");
-  if(!allLives.length){box.innerHTML='<div class="mut">Nenhuma live ainda.</div>';return;}
-  box.innerHTML=allLives.map(l=>`<div class="lv" data-id="${l.id}"><b>${l.name}</b><span>${l.clips.length}/${l.max} vídeos</span></div>`).join("");
-  box.querySelectorAll(".lv").forEach(el=>el.onclick=()=>watchLive(el.dataset.id));
+  if(!allLives.length){box.innerHTML='<div class="mut">Nenhuma live ainda.</div>';}
+  else{
+    box.innerHTML=allLives.map(l=>`<div class="lv" data-id="${l.id}"><b>${esc(l.name)}</b><span>${l.clips.length}/${l.max} vídeos</span></div>`).join("");
+    box.querySelectorAll(".lv").forEach(el=>el.onclick=()=>watchLive(el.dataset.id));
+  }
   renderVideosTab();
 }
 
@@ -601,13 +1182,19 @@ function watchLive(id){
 async function pollLive(){
   if(!curLiveId)return;
   let l;
-  try{l=await api("/api/lives/"+curLiveId)}catch(_){return;}
+  try{l=await api("/api/lives/"+curLiveId);}catch(_){return;}
   $("ln").textContent=l.name;
   $("ll").textContent=l.link;$("ll").href=l.link;
   $("st").textContent=`${l.status} · ${hms(l.recorded)} · ${l.clips.length}/${l.max} cortes`;
-  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="analisando"?"analisando com IA…":"ouvindo…");
+  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="analisando"?"20 IAs analisando…":"ao vivo · Time-Shift ativo…");
   $("lvDot").style.display=(l.status==="finalizado"||l.status==="erro")?"none":"inline-block";
-  $("log").innerHTML=l.log.map(x=>`<div>${x}</div>`).join("");
+  $("log").innerHTML=(l.log||[]).map(x=>`<div>${esc(x)}</div>`).join("");
+  const cov=l.timeline_coverage||{retro_pct:0,live_pct:0};
+  $("tsRetroPct").textContent=(cov.retro_pct||0)+"%";$("tsRetroBar").style.width=(cov.retro_pct||0)+"%";
+  $("tsLivePct").textContent=(cov.live_pct||0)+"%";$("tsLiveBar").style.width=(cov.live_pct||0)+"%";
+  drawSentimentChart(l.sentiment_series||[]);
+  renderSwarmGrid(l.agents,l.handoffs);
+
   while(shownCount<l.clips.length){
     const idx=shownCount;
     const c=l.clips[shownCount++];
@@ -616,9 +1203,9 @@ async function pollLive(){
     card.className="clip";
     card.innerHTML=`
       <div class="vid"><video src="${mediaUrl}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
-      <b>${c.titulo}</b>
-      <span class="mut">${hms(Math.round(c.ini))}–${hms(Math.round(c.fim))} · nota ${c.nota}</span>
-      <div class="mut">${c.motivo}</div>
+      <b>${esc(c.titulo)}</b>
+      <span class="mut">${hms(Math.round(c.ini))}–${hms(Math.round(c.fim))} · nota ${c.nota} · ${esc(c.emotion||"Hype")}</span>
+      <div class="mut">${esc(c.motivo)}</div>
       <button class="btn g sm" type="button" style="margin-top:8px">Abrir no estúdio</button>
     `;
     card.querySelector("button").onclick=()=>openEd(idx,c,l.id);
@@ -648,43 +1235,25 @@ function openEd(idx,clip,liveId){
   $("mk3").textContent=hms(Math.round(dur*0.85));
   $("ed").classList.remove("hide");
   $("ed").scrollIntoView({behavior:"smooth"});
-
   $("roteiroEmpty").classList.add("hide");
   $("roteiroForm").classList.remove("hide");
   $("rotHeadline").value=clip.headline||"";
   $("rotTitle").value=clip.titulo||"";
   $("rotDesc").value=clip.descricao||"";
-
   let k=0;clearInterval(showStageTimer);
   $("bb").textContent=stageMsgs[0];$("masTag").textContent=stageTags[0];
-  showStageTimer=setInterval(()=>{
-    k=(k+1)%stageMsgs.length;
-    $("bb").textContent=stageMsgs[k];
-    $("masTag").textContent=stageTags[k];
-  },2000);
+  showStageTimer=setInterval(()=>{k=(k+1)%stageMsgs.length;$("bb").textContent=stageMsgs[k];$("masTag").textContent=stageTags[k];},2000);
 }
 
 $("ver").onclick=()=>{const v=$("phoneVideoBox").querySelector("video");if(v)v.play();};
-$("prox").onclick=()=>{
-  const btns=[...$("cl").querySelectorAll("button")];
-  if(!btns.length)return;
-  const nextIdx=(selectedClipIdx+1)%btns.length;
-  btns[nextIdx].click();
-};
-$("som").onclick=e=>{
-  const v=$("phoneVideoBox").querySelector("video");
-  if(!v)return;
-  v.muted=!v.muted;
-  e.target.textContent=v.muted?"🔇 Som":"🔊 Som";
-};
+$("prox").onclick=()=>{const btns=[...$("cl").querySelectorAll("button")];if(!btns.length)return;btns[(selectedClipIdx+1)%btns.length].click();};
+$("som").onclick=e=>{const v=$("phoneVideoBox").querySelector("video");if(!v)return;v.muted=!v.muted;e.target.textContent=v.muted?"🔇 Som":"🔊 Som";};
 $("fe").onclick=()=>{$("ed").classList.add("hide");clearInterval(showStageTimer);};
 $("editRoteiroBtn").onclick=()=>showTab("ROTEIRO");
 $("queueYtBtn").onclick=async()=>{
   if(!activeClipLiveId||!activeClipObj)return;
-  try{
-    await api("/api/uploads/queue",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({live_id:activeClipLiveId,clip_id:activeClipObj.id})});
-    notify("Corte adicionado na fila de upload do YouTube!");
-  }catch(e){notify("Erro: "+e.message);}
+  try{await api("/api/uploads/queue",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({live_id:activeClipLiveId,clip_id:activeClipObj.id})});notify("Corte adicionado na fila de upload do YouTube!");}
+  catch(e){notify("Erro: "+e.message);}
 };
 
 $("go").onclick=()=>startLive($("lk").value.trim(),"").catch(e=>notify(e.message));
@@ -692,36 +1261,148 @@ $("mk").onclick=()=>startLive($("nl").value.trim(),$("nn").value.trim()).catch(e
 $("stop").onclick=async()=>{
   if(!curLiveId)return;
   await api(`/api/lives/${curLiveId}/stop`,{method:"POST"});
-  clearInterval(pollTimer);
-  $("st").textContent="finalizado pelo usuário";
-  $("prevTxt").textContent="pausado";
-  $("lvDot").style.display="none";
-  void refreshLives();
+  clearInterval(pollTimer);$("st").textContent="finalizado pelo usuário";$("prevTxt").textContent="pausado";$("lvDot").style.display="none";void refreshLives();
 };
-$("newBtn").onclick=()=>{
-  clearInterval(pollTimer);
-  $("fm").classList.remove("hide");
-  $("lv").classList.add("hide");
-  $("ed").classList.add("hide");
-  showTab("CORTES");
-};
+$("newBtn").onclick=()=>{clearInterval(pollTimer);$("fm").classList.remove("hide");$("lv").classList.add("hide");$("ed").classList.add("hide");showTab("CORTES");};
+
+function getFilteredClips(){
+  const q=($("vidSearch").value||"").trim().toLowerCase();
+  const plat=$("vidPlat").value||"ALL";
+  const emo=$("vidEmotion").value||"ALL";
+  const minScore=Number($("vidScore").value||0);
+  const sortMode=$("vidSort").value||"newest";
+  const flat=[];
+  allLives.forEach(l=>{
+    (l.clips||[]).forEach(c=>{
+      flat.push({
+        ...c,
+        live_id:c.live_id||l.id,
+        platform:(c.platform||l.platform||"TWITCH").toUpperCase(),
+        channel:c.channel||l.name,
+        emotion:c.emotion||"Hype",
+        created_ts:c.created_ts||l.created_ts||0
+      });
+    });
+  });
+  let out=flat.filter(c=>{
+    if(plat!=="ALL"&&c.platform!==plat)return false;
+    if(emo!=="ALL"&&c.emotion!==emo)return false;
+    if((c.nota||0)<minScore)return false;
+    if(q&&!`${c.titulo} ${c.headline} ${c.channel} ${c.motivo} ${c.emotion}`.toLowerCase().includes(q))return false;
+    return true;
+  });
+  if(sortMode==="oldest")out.sort((a,b)=>(a.created_ts||0)-(b.created_ts||0));
+  else if(sortMode==="score")out.sort((a,b)=>(b.nota||0)-(a.nota||0)||(b.created_ts||0)-(a.created_ts||0));
+  else out.sort((a,b)=>(b.created_ts||0)-(a.created_ts||0));
+  return out;
+}
+
+function updateSelCount(){$("selCountLbl").textContent=String(selectedClipKeys.size);}
 
 function renderVideosTab(){
+  const clips=getFilteredClips();
+  const grid=$("clipsLibraryGrid");
+  if(!clips.length){
+    grid.innerHTML='<div class="mut" style="padding:12px 0">Nenhum corte encontrado para os filtros aplicados.</div>';
+  }else{
+    grid.innerHTML=clips.map((c,i)=>{
+      const key=`${c.live_id}::${c.id}`;
+      const checked=selectedClipKeys.has(key)?"checked":"";
+      const mediaUrl=resolveMediaUrl(c.url);
+      return `
+        <div class="clip-card-lib item-card">
+          <label class="clip-chk-label"><input type="checkbox" class="clip-sel-chk" data-key="${esc(key)}" ${checked}> Selecionar</label>
+          <div class="vid"><video src="${mediaUrl}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
+          <b>${esc(c.titulo)}</b>
+          <div style="display:flex;gap:5px;flex-wrap:wrap">
+            <span class="pill pu">${esc(c.platform)}</span>
+            <span class="pill warn">${esc(c.emotion)}</span>
+            <span class="pill">Nota ${c.nota}</span>
+          </div>
+          <div class="mut" style="font-size:11.5px">@${esc(c.channel)} · ${fmtDate(c.created_ts)}</div>
+          <div style="display:flex;gap:6px;margin-top:4px">
+            <button class="btn g sm" type="button" data-open-lib="${i}">Estúdio</button>
+            <a class="btn g sm" href="${mediaUrl}" download="${esc((c.channel||"corte")+"_"+c.id+".mp4")}">⬇ MP4</a>
+          </div>
+        </div>
+      `;
+    }).join("");
+    grid.querySelectorAll(".clip-sel-chk").forEach(ch=>{
+      ch.onchange=()=>{
+        if(ch.checked)selectedClipKeys.add(ch.dataset.key);
+        else selectedClipKeys.delete(ch.dataset.key);
+        updateSelCount();
+      };
+    });
+    grid.querySelectorAll("[data-open-lib]").forEach(btn=>{
+      btn.onclick=()=>{
+        const c=clips[Number(btn.dataset.openLib)];
+        if(c){openEd(0,c,c.live_id);showTab("CORTES");}
+      };
+    });
+  }
+  updateSelCount();
+
   const sel=$("manualLiveSelect");
-  sel.innerHTML=allLives.map(l=>`<option value="${l.id}">${l.name} (${l.clips.length} cortes)</option>`).join("")||'<option value="">Nenhuma live carregada</option>';
+  sel.innerHTML=allLives.map(l=>`<option value="${l.id}">${esc(l.name)} (${l.clips.length} cortes)</option>`).join("")||'<option value="">Nenhuma live carregada</option>';
   const gal=$("videosGallery");
   gal.innerHTML=allLives.map(l=>`
     <div class="item-card">
       <div style="display:flex;justify-content:space-between;gap:6px">
-        <b>${l.name}</b>
-        <span class="pill">${l.platform||"LIVE"}</span>
+        <b>${esc(l.name)}</b>
+        <span class="pill">${esc(l.platform||"LIVE")}</span>
       </div>
-      <div class="mut" style="margin-top:4px">${l.status} · ${l.clips.length} corte(s)</div>
+      <div class="mut" style="margin-top:4px">${esc(l.status)} · ${l.clips.length} corte(s)</div>
       <button class="btn g sm" type="button" style="margin-top:8px" data-open-live="${l.id}">Abrir Live</button>
     </div>
   `).join("")||'<div class="mut">Nenhuma live ou vídeo salvo ainda.</div>';
   gal.querySelectorAll("[data-open-live]").forEach(b=>b.onclick=()=>watchLive(b.dataset.openLive));
 }
+
+["vidSearch","vidPlat","vidEmotion","vidScore","vidSort"].forEach(id=>{
+  $(id).addEventListener(id==="vidSearch"?"input":"change",()=>renderVideosTab());
+});
+
+$("selectAllClipsBtn").onclick=()=>{
+  getFilteredClips().forEach(c=>selectedClipKeys.add(`${c.live_id}::${c.id}`));
+  renderVideosTab();
+};
+$("clearSelClipsBtn").onclick=()=>{selectedClipKeys.clear();renderVideosTab();};
+
+$("exportBatchBtn").onclick=async()=>{
+  if(!selectedClipKeys.size){notify("Marque pelo menos 1 clipe na lista primeiro.");return;}
+  const chosen=[];
+  allLives.forEach(l=>(l.clips||[]).forEach(c=>{
+    const key=`${c.live_id||l.id}::${c.id}`;
+    if(selectedClipKeys.has(key))chosen.push({...c,live_id:c.live_id||l.id,channel:c.channel||l.name});
+  }));
+  if(!chosen.length){notify("Nenhum clipe válido selecionado.");return;}
+  try{
+    notify(`Preparando pacote ZIP com ${chosen.length} clipe(s)...`);
+    if(serverMode){
+      const r=await fetch(serverBase+"/api/clips/export-zip",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({items:chosen.map(c=>({live_id:c.live_id,clip_id:c.id}))})
+      });
+      if(!r.ok)throw new Error("HTTP "+r.status);
+      const blob=await r.blob();
+      const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cortes_ia_selecionados.zip";a.click();
+      notify(`Exportação em lote concluída (${chosen.length} clipes em ZIP)!`);
+      return;
+    }
+    const files=[];
+    for(let i=0;i<chosen.length;i++){
+      const c=chosen[i];
+      const resp=await fetch(resolveMediaUrl(c.url));
+      const buf=new Uint8Array(await resp.arrayBuffer());
+      const safeName=String(`${i+1}_${c.channel}_${c.id}.mp4`).replace(/[^A-Za-z0-9._-]+/g,"_");
+      files.push({name:safeName,bytes:buf});
+    }
+    const zipBlob=buildZipBlob(files);
+    const a=document.createElement("a");a.href=URL.createObjectURL(zipBlob);a.download="cortes_ia_selecionados.zip";a.click();
+    notify(`ZIP baixado para seu dispositivo (${files.length} vídeo(s))!`);
+  }catch(e){notify("Erro ao exportar em lote: "+e.message);}
+};
 
 $("uploadVideoBtn").onclick=async()=>{
   const file=$("uploadVideoInput").files[0];
@@ -730,9 +1411,7 @@ $("uploadVideoBtn").onclick=async()=>{
     notify("Enviando vídeo...");
     const fileUrl=URL.createObjectURL(file);
     const created=await api("/api/lives/upload-video",{method:"POST",headers:{"X-Filename":file.name},body:file,_fileUrl:fileUrl});
-    await refreshLives();
-    watchLive(created.id);
-    notify("Vídeo carregado!");
+    await refreshLives();watchLive(created.id);notify("Vídeo carregado!");
   }catch(e){notify("Falha no upload: "+e.message);}
 };
 
@@ -744,8 +1423,7 @@ $("manCutBtn").onclick=async()=>{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({start_sec:+$("manStart").value||0,end_sec:+$("manEnd").value||25,headline:$("manHeadline").value,molde:$("manualMoldeSelect").value})
     });
-    watchLive(liveId);
-    notify("Corte manual gerado: "+clip.titulo);
+    watchLive(liveId);notify("Corte manual gerado: "+clip.titulo);
   }catch(e){notify("Erro no corte manual: "+e.message);}
 };
 
@@ -756,56 +1434,43 @@ async function loadMoldes(){
   $("moldesContainer").innerHTML=data.moldes.map(m=>`
     <div class="item-card ${appSettings.molde===m.id?"active":""}" data-molde="${m.id}" style="cursor:pointer">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <b>${m.nome}</b>
+        <b>${esc(m.nome)}</b>
         <span class="pill ${appSettings.molde===m.id?"":"warn"}">${appSettings.molde===m.id?"ATIVO":"Usar"}</span>
       </div>
-      <p class="mut" style="margin:6px 0 0">${m.descricao}</p>
+      <p class="mut" style="margin:6px 0 0">${esc(m.descricao)}</p>
     </div>
   `).join("");
-  $("moldesContainer").querySelectorAll("[data-molde]").forEach(c=>{
-    c.onclick=()=>{appSettings.molde=c.dataset.molde;void saveSettings({molde:appSettings.molde});};
-  });
+  $("moldesContainer").querySelectorAll("[data-molde]").forEach(c=>{c.onclick=()=>{appSettings.molde=c.dataset.molde;void saveSettings({molde:appSettings.molde});};});
   const h=await api("/api/health");
   $("brollFilesReadout").textContent="B-rolls no banco local: "+(h.broll_files.length?h.broll_files.join(", "):"nenhum (usará busca YouTube se ativada)");
 }
 
 async function saveSettings(patch){
   appSettings=await api("/api/settings",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(patch)});
-  if(activeTab==="MOLDES") await loadMoldes();
+  if(activeTab==="MOLDES")await loadMoldes();
   notify("Configurações salvas!");
 }
 $("saveMoldeSettingsBtn").onclick=()=>saveSettings({molde:appSettings.molde,subtitle_style:$("subStyleSelect").value});
-
 $("uploadBrollBtn").onclick=async()=>{
-  const f=$("uploadBrollInput").files[0];
-  if(!f){notify("Escolha um MP4 para B-roll.");return;}
-  await api("/api/brolls/upload",{method:"POST",headers:{"X-Filename":f.name},body:f});
-  await loadMoldes();
-  notify("B-roll salvo no banco local!");
+  const f=$("uploadBrollInput").files[0];if(!f){notify("Escolha um MP4 para B-roll.");return;}
+  await api("/api/brolls/upload",{method:"POST",headers:{"X-Filename":f.name},body:f});await loadMoldes();notify("B-roll salvo!");
 };
 
 async function loadIdeas(){
   const list=await api("/api/ideas");
   $("ideasContainer").innerHTML=list.map(i=>`
     <div class="item-card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <b>${i.tag}</b><span class="pill">Nota ${i.min}+</span>
-      </div>
-      <p style="margin:6px 0">${i.hint}</p>
-      <button class="btn g sm" type="button" data-hint="${i.hint.replace(/"/g,"&quot;")}" data-min="${i.min}">Usar no formulário</button>
+      <div style="display:flex;justify-content:space-between;align-items:center"><b>${esc(i.tag)}</b><span class="pill">Nota ${i.min}+</span></div>
+      <p style="margin:6px 0">${esc(i.hint)}</p>
+      <button class="btn g sm" type="button" data-hint="${esc(i.hint)}" data-min="${i.min}">Usar no formulário</button>
     </div>
   `).join("");
-  $("ideasContainer").querySelectorAll("button").forEach(b=>{
-    b.onclick=()=>{$("hint").value=b.dataset.hint;$("mn").value=b.dataset.min;showTab("CORTES");notify("Gatilho aplicado!");};
-  });
+  $("ideasContainer").querySelectorAll("button").forEach(b=>{b.onclick=()=>{$("hint").value=b.dataset.hint;$("mn").value=b.dataset.min;showTab("CORTES");notify("Gatilho aplicado!");};});
 }
 $("addIdeaBtn").onclick=async()=>{
-  const hint=$("ideaHint").value.trim();
-  if(!hint){notify("Escreva o gatilho da ideia.");return;}
+  const hint=$("ideaHint").value.trim();if(!hint){notify("Escreva o gatilho.");return;}
   await api("/api/ideas",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tag:$("ideaTag").value,min:+$("ideaMin").value||7,hint})});
-  $("ideaHint").value="";
-  await loadIdeas();
-  notify("Ideia salva!");
+  $("ideaHint").value="";await loadIdeas();notify("Ideia salva!");
 };
 
 $("applyRoteiroBtn").onclick=async()=>{
@@ -814,30 +1479,20 @@ $("applyRoteiroBtn").onclick=async()=>{
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({instruction:$("rotInstruction").value,headline:$("rotHeadline").value,titulo:$("rotTitle").value,descricao:$("rotDesc").value,rerender:true})
   });
-  activeClipObj=updated;
-  openEd(selectedClipIdx,updated,activeClipLiveId);
-  showTab("CORTES");
-  notify("Corte atualizado!");
+  activeClipObj=updated;openEd(selectedClipIdx,updated,activeClipLiveId);showTab("CORTES");notify("Corte atualizado!");
 };
 
 async function loadUploads(){
   const list=await api("/api/uploads");
   $("uploadsList").innerHTML=list.map(u=>`
     <div class="item-card">
-      <div style="display:flex;justify-content:space-between;gap:6px">
-        <b>${u.titulo}</b>
-        <span class="pill ${u.status.includes("ERRO")?"err":(u.status==="PENDENTE"?"warn":"")}">${u.status}</span>
-      </div>
-      <div class="mut" style="margin-top:4px">${u.error||u.descricao}</div>
+      <div style="display:flex;justify-content:space-between;gap:6px"><b>${esc(u.titulo)}</b><span class="pill ${u.status.includes("ERRO")?"err":(u.status==="PENDENTE"?"warn":"")}">${esc(u.status)}</span></div>
+      <div class="mut" style="margin-top:4px">${esc(u.error||u.descricao)}</div>
       <button class="btn sm" type="button" style="margin-top:8px" data-pub="${u.id}">Publicar no YouTube</button>
     </div>
   `).join("")||'<div class="mut">Nenhum vídeo na fila ainda.</div>';
   $("uploadsList").querySelectorAll("[data-pub]").forEach(b=>{
-    b.onclick=async()=>{
-      const res=await api(`/api/uploads/${b.dataset.pub}/publish`,{method:"POST"});
-      await loadUploads();
-      notify(res.error?("YouTube: "+res.error):"Upload concluído!");
-    };
+    b.onclick=async()=>{const res=await api(`/api/uploads/${b.dataset.pub}/publish`,{method:"POST"});await loadUploads();notify(res.error?("YouTube: "+res.error):"Upload concluído!");};
   });
 }
 
@@ -848,28 +1503,28 @@ async function loadHealth(){
   $("cfgWhisper").value=appSettings.whisper_model||"small";
   $("cfgWindow").value=appSettings.window_seconds||180;
   const checks=[
-    ["FFmpeg + FFprobe",h.binaries.ffmpeg&&h.binaries.ffprobe,"Renderização 1080×1920"],
-    ["Streamlink + yt-dlp",h.binaries.streamlink||h.binaries.yt_dlp,"Captura Live e VOD"],
-    ["Whisper (faster-whisper)",h.python_modules.faster_whisper,"Transcrição PT-BR palavra a palavra"],
-    ["OpenCV Facecam",h.python_modules.cv2,"Detecção automática de rosto"],
-    ["Claude AI Key",h.anthropic_configured,"Curadoria semântica + notas"],
-    ["YouTube OAuth",h.youtube_secret_exists,"Publicação privada automática"]
+    ["Enxame 20 IAs Sem Chave",true,"20 especialistas trabalhando em paralelo sem API paga",true],
+    ["FFmpeg + FFprobe",h.binaries.ffmpeg&&h.binaries.ffprobe,"Acústico dB, cena e renderização 1080×1920",false],
+    ["Streamlink + yt-dlp",h.binaries.streamlink||h.binaries.yt_dlp,"Time-Shift 00:00←Ao Vivo→Fim",false],
+    ["Whisper Local (faster-whisper)",h.python_modules.faster_whisper,"Transcrição PT-BR offline palavra a palavra",false],
+    ["OpenCV Facecam",h.python_modules.cv2,"Detecção automática de rosto",false],
+    ["Claude Key (Opcional)",h.anthropic_configured,"Não necessária — modo 20 IAs já opera autônomo",true],
+    ["YouTube OAuth",h.youtube_secret_exists,"Publicação privada automática",false]
   ];
-  $("healthCards").innerHTML=checks.map(([name,ok,desc])=>`
+  $("healthCards").innerHTML=checks.map(([name,ok,desc,opt])=>`
     <div class="item-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <b>${name}</b>
-        <span class="pill ${ok?"":"warn"}">${ok?"PRONTO":"CONECTAR SERVIDOR"}</span>
+        <b>${esc(name)}</b>
+        <span class="pill ${ok?"":"warn"}">${ok?"PRONTO":(opt?"SEM API ATIVO":"CONECTAR SERVIDOR")}</span>
       </div>
-      <p class="mut" style="margin:6px 0 0">${desc}</p>
+      <p class="mut" style="margin:6px 0 0">${esc(desc)}</p>
     </div>
   `).join("");
 }
 
-$("saveIaCfgBtn").onclick=()=>saveSettings({
-  encoder:$("cfgEncoder").value,whisper_model:$("cfgWhisper").value,window_seconds:+$("cfgWindow").value||180
-});
+$("saveIaCfgBtn").onclick=()=>saveSettings({encoder:$("cfgEncoder").value,whisper_model:$("cfgWhisper").value,window_seconds:+$("cfgWindow").value||180});
 
+renderCatalog20();
 showTab("CORTES");
 void detectBackend();
 </script>
