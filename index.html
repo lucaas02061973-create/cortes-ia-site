@@ -257,34 +257,55 @@ nav button.on::after{
   z-index:2;
 }
 @media(max-width:650px){
-  .mc-hero-banner-inner{padding:260px 16px 40px}
+  .mc-hero-banner-inner{padding:265px 14px 40px}
 }
 .mc-main-h1{
-  margin:0;
+  margin:0 auto;
+  max-width:1160px;
   color:#ffffff;
-  font:700 78px/1.04 "Europa Grotesk",sans-serif;
+  font:700 72px/1.08 "Europa Grotesk",sans-serif;
   text-align:center;
   text-transform:uppercase;
-  letter-spacing:.03em;
-  text-shadow:0 7px 17px rgba(0,0,0,.92);
+  letter-spacing:.035em;
+  text-shadow:0 7px 18px rgba(0,0,0,.94);
 }
-@media(max-width:960px){
-  .mc-main-h1{font-size:46px}
+.mc-main-h1 .mc-h1-line{
+  display:block;
+  white-space:nowrap;
+}
+@media(max-width:980px){
+  .mc-main-h1{font-size:44px}
 }
 @media(max-width:560px){
-  .mc-main-h1{font-size:30px}
+  .mc-main-h1{font-size:26px;line-height:1.15;letter-spacing:.025em}
+}
+.mc-h1-up{
+  position:relative;
+  display:inline-block;
+}
+.mc-h1-up::before{
+  content:"";
+  position:absolute;
+  width:42px;
+  height:68px;
+  left:-32px;
+  top:-18px;
+  background:url("./images/symbols/big-arrow-up.svg") no-repeat center / contain;
+  pointer-events:none;
 }
 .mc-h1-o{
   position:relative;
   display:inline-block;
+  padding:0 6px;
 }
 .mc-h1-o::before{
   content:"";
   position:absolute;
-  width:76px;
-  height:76px;
-  left:-16px;
-  top:-6px;
+  width:88px;
+  height:84px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-52%);
   background:url("./images/symbols/o.svg") no-repeat center / contain;
   pointer-events:none;
 }
@@ -297,8 +318,8 @@ nav button.on::after{
   position:absolute;
   width:72px;
   height:72px;
-  right:-54px;
-  top:-42px;
+  right:-52px;
+  top:-40px;
   background:url("./images/symbols/crown.svg") no-repeat center / contain;
   pointer-events:none;
 }
@@ -312,13 +333,16 @@ nav button.on::after{
   position:absolute;
   width:155px;
   height:48px;
-  left:-24px;
+  left:-14px;
   top:14px;
   background:url("./images/symbols/arrow-right.svg") no-repeat center / contain;
   pointer-events:none;
 }
 @media(max-width:760px){
-  .mc-h1-o::before,.mc-h1-crown::after,.mc-h1-arrow::before{transform:scale(.55)}
+  .mc-h1-up::before{left:-20px;top:-12px;transform:scale(.55)}
+  .mc-h1-crown::after{right:-34px;top:-28px;transform:scale(.55)}
+  .mc-h1-arrow::before{left:-28px;top:4px;transform:scale(.55)}
+  .mc-h1-o::before{transform:translate(-50%,-52%) scale(.52)}
 }
 .mc-entrar-btn{
   max-width:405px;
@@ -1002,12 +1026,12 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   </div>
 </header>
 
-<!-- HERO FULL-WIDTH OFICIAL CORTES·IA STUDIO (HERO-BG.PNG + O SERVIDOR REFERÊNCIA EM GTA RP NO BRASIL) -->
+<!-- HERO FULL-WIDTH OFICIAL CORTES·IA STUDIO (HERO-BG.PNG + SUA PRINCIPAL PÁGINA DE CORTES POR IA) -->
 <section class="mc-hero" id="mcHeroBanner">
   <div class="mc-hero-banner-inner">
     <h1 class="mc-main-h1">
-      <span class="mc-h1-o">O</span> <span class="mc-h1-crown">SERVIDOR REFERÊNCIA</span><br>
-      <span>EM GTA RP <i class="mc-h1-arrow">NO</i> BRASIL</span>
+      <span class="mc-h1-line"><span class="mc-h1-up">S</span>UA PRINCIPAL <span class="mc-h1-crown">PÁGINA</span></span>
+      <span class="mc-h1-line">DE CORTES <i class="mc-h1-arrow">POR</i> <span class="mc-h1-o">IA</span></span>
     </h1>
     <button type="button" class="mc-entrar-btn" id="mcHeroEntrarBtn" onclick="document.getElementById('fm').scrollIntoView({behavior:'smooth'})">ENTRAR</button>
     <div class="mc-social-box">
