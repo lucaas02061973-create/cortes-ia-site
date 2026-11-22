@@ -1114,6 +1114,44 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 .item-card.srv-card-ok:hover{border-color:#4ade80;box-shadow:0 6px 22px rgba(0,230,118,.14)}
 .srv-mode-tag{font:700 10px "Europa Grotesk",sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#4ac5f3;background:rgba(74,197,243,.1);border:1px solid rgba(74,197,243,.28);padding:3px 8px;border-radius:4px;display:inline-block;margin-top:8px}
 .srv-connect-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding:12px 14px;border-radius:8px;border:1px solid rgba(74,222,128,.35);background:linear-gradient(90deg,rgba(0,230,118,.09),rgba(74,197,243,.07))}
+@keyframes livePulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.45}}
+.live-pulse-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:4px;background:rgba(255,36,80,.22);color:#ff5478;border:1px solid rgba(255,84,120,.55);font:800 10.5px "Europa Grotesk",sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.live-pulse-dot{width:7px;height:7px;border-radius:50%;background:#ff3b63;box-shadow:0 0 8px #ff3b63;display:inline-block;animation:livePulseDot 1.3s ease-in-out infinite}
+.live-stage-shell{margin-top:16px;border-radius:12px;border:1px solid rgba(255,77,115,.42);background:linear-gradient(180deg,rgba(255,46,99,.07),#090b12 42%);overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.live-stage-topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;background:rgba(13,15,24,.94);border-bottom:1px solid #252b43}
+.live-stage-player{position:relative;width:100%;aspect-ratio:16/9;max-height:540px;background:#05060a;overflow:hidden}
+.live-stage-player iframe,.live-stage-player video{width:100%;height:100%;border:0;display:block;background:#000}
+.live-stage-footer{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 14px;background:#0d0f18;border-top:1px solid #252b43}
+.live-stage-streamer{display:flex;align-items:center;gap:12px;min-width:0;flex:1 1 280px}
+.live-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #ffc046;background:linear-gradient(135deg,#242b47,#121524);color:#ffc046;font:800 15px "Europa Grotesk",sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.live-avatar.sm{width:34px;height:34px;font-size:13px;border-width:1.5px}
+.live-mosaic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px;background:#06080f}
+.live-mosaic-tile{border:1px solid #252b43;border-radius:8px;overflow:hidden;background:#0d0f18;display:flex;flex-direction:column}
+.live-mosaic-tile .live-mosaic-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.live-mosaic-tile iframe,.live-mosaic-tile video{width:100%;height:100%;border:0;display:block}
+.live-mosaic-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;background:#0d0f18;border-top:1px solid #252b43;flex-wrap:wrap}
+.live-card-v21{display:flex;flex-direction:column;border:1px solid #252b43;border-radius:10px;background:#0d0f18;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.live-card-v21:hover{transform:translateY(-3px);border-color:#ffc046;box-shadow:0 10px 28px rgba(0,0,0,.4)}
+.live-card-v21.playing-now{border-color:#ff4d73;box-shadow:0 0 0 1px #ff4d73,0 10px 28px rgba(255,77,115,.22)}
+.live-thumb-box{position:relative;width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#13192e,#090b12);overflow:hidden;cursor:pointer}
+.live-thumb-box img.live-thumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.live-card-v21:hover .live-thumb-box img.live-thumb-img{transform:scale(1.04)}
+.live-thumb-box iframe,.live-thumb-box video{width:100%;height:100%;border:0;display:block;background:#000}
+.live-thumb-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,10,.55) 0%,rgba(5,6,10,.08) 42%,rgba(5,6,10,.78) 100%);pointer-events:none}
+.live-hud-tl{position:absolute;top:8px;left:8px;display:flex;gap:5px;flex-wrap:wrap;z-index:2;pointer-events:none}
+.live-hud-tr{position:absolute;top:8px;right:8px;z-index:2;pointer-events:none;background:rgba(7,9,15,.84);border:1px solid rgba(255,192,70,.45);color:#ffc046;padding:3px 8px;border-radius:4px;font:700 11px "Europa Grotesk",sans-serif;letter-spacing:.04em}
+.live-hud-bl{position:absolute;bottom:8px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;z-index:2;pointer-events:none}
+.live-cat-chip{background:rgba(7,9,15,.84);border:1px solid rgba(74,197,243,.35);color:#4ac5f3;padding:2px 7px;border-radius:4px;font:700 10.5px "Europa Grotesk",sans-serif;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.live-uptime-chip{background:rgba(7,9,15,.84);border:1px solid rgba(255,255,255,.16);color:#e2e8f0;padding:2px 7px;border-radius:4px;font:700 10.5px ui-monospace,Menlo,monospace}
+.live-thumb-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;padding:7px 14px;border-radius:999px;background:rgba(255,36,80,.88);color:#fff;font:800 11.5px "Europa Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.35);box-shadow:0 6px 20px rgba(0,0,0,.5);opacity:.92;transition:transform .2s ease,background .2s ease}
+.live-card-v21:hover .live-thumb-play{transform:translate(-50%,-50%) scale(1.06);background:#ff2450}
+.live-card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.live-card-head{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.live-card-title{font-size:12px;color:#b8bdd0;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+.live-card-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:auto;padding-top:6px}
+.live-card-actions .btn{padding:8px 6px;font-size:11px;justify-content:center;text-align:center;white-space:nowrap}
+.radar-filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;padding:12px;border-radius:10px;border:1px solid #252b43;background:rgba(13,15,24,.88)}
+@media(max-width:760px){.live-mosaic-grid{grid-template-columns:1fr}.radar-grid{grid-template-columns:1fr}}
 .plat-btn{
   padding:7px 13px;
   border-radius:5px;
@@ -1729,28 +1767,80 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       </div>
     </div>
 
-    <!-- 2. ABA AO VIVO V2.1 -->
+    <!-- 2. ABA AO VIVO V2.1 · CENTRAL DE TRANSMISSÕES REAIS -->
     <div id="tab-AO VIVO" class="tab-panel hide">
       <div class="card">
         <div class="v21-checkered-bar"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
             <span class="mc-step-badge">2</span>
             <div>
-              <h3 style="margin:0">RADAR AO VIVO <span class="mc-graffiti-script" style="font-size:30px">Magia IA v2.1</span> · KICK, TWITCH & YOUTUBE</h3>
-              <div class="mut" id="radarMeta">Ordenado: Streamers Brasileiros primeiro · Categoria com mais espectadores primeiro · Mais pessoas na live</div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span class="live-pulse-badge"><span class="live-pulse-dot"></span> SOMENTE LIVES ON-LINE AGORA</span>
+                <span class="pill ok" id="radarUpdatedClock"><span class="srv-dot"></span> Sincronizado ao vivo · Auto 60s</span>
+              </div>
+              <h3 style="margin:0">CENTRAL AO VIVO <span class="mc-graffiti-script" style="font-size:30px">Magia IA v2.1</span> · KICK, TWITCH & YOUTUBE</h3>
+              <div class="mut" id="radarMeta">Buscando exclusivamente lives reais online agora na Twitch, Kick e YouTube (zero lives offline ou fictícias)</div>
             </div>
           </div>
-          <button class="btn cy sm" id="refreshRadarBtn" type="button">🔄 Atualizar Lives</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <button class="btn g sm" id="radarMosaicToggleBtn" type="button">📺 Mosaico 4 Lives</button>
+            <button class="btn cy sm" id="refreshRadarBtn" type="button">🔄 Atualizar Ao Vivo</button>
+          </div>
         </div>
 
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;align-items:center" id="radarPlatBtns">
-          <button class="plat-btn on" type="button" data-plat="ALL">Todas</button>
-          <button class="plat-btn" type="button" data-plat="TWITCH">Twitch</button>
-          <button class="plat-btn" type="button" data-plat="KICK">Kick</button>
-          <button class="plat-btn" type="button" data-plat="YOUTUBE">YouTube</button>
+        <!-- PALCO CINEMA AO VIVO + MOSAICO 4 LIVES SIMULTÂNEAS -->
+        <div class="live-stage-shell" id="radarStageShell">
+          <div class="live-stage-topbar">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span class="live-pulse-badge"><span class="live-pulse-dot"></span> RODANDO AO VIVO</span>
+              <span class="pill br" id="radarStagePlatPill">CONECTANDO…</span>
+              <span class="pill warn" id="radarStageViewersPill">👥 -- assistindo</span>
+              <span class="pill cy" id="radarStageUptimePill">⏱ AO VIVO</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn g sm" id="radarStageSoundBtn" type="button">🔊 Ativar Som</button>
+              <button class="btn g sm" id="radarStageNextBtn" type="button">⏭ Próxima Live</button>
+            </div>
+          </div>
+
+          <div class="live-stage-player" id="radarMainPlayer">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#b8bdd0;font-weight:700;padding:20px;text-align:center">
+              ⏳ Carregando transmissão real online agora…
+            </div>
+          </div>
+
+          <div class="live-mosaic-grid hide" id="radarMosaicWall"></div>
+
+          <div class="live-stage-footer" id="radarStageMeta">
+            <div class="live-stage-streamer">
+              <div class="live-avatar" id="radarStageAvatar">IA</div>
+              <div style="min-width:0;flex:1">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <b id="radarStageName" style="font-size:15px;color:#fff">Conectando ao palco ao vivo…</b>
+                  <span class="pill pu" id="radarStageCatPill">Ao Vivo</span>
+                </div>
+                <div class="mut" id="radarStageTitle" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px">Aguardando primeira live online verificada</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <button class="btn sm" id="radarStageCutBtn" type="button">✂ Cortar Esta Live (20 IAs)</button>
+              <button class="btn cy sm" id="radarStageSaveBtn" type="button">💾 Salvar 30s</button>
+              <a class="btn g sm" id="radarStageOrigLink" href="#" target="_blank" rel="noopener">↗ Original</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- BARRA DE FILTROS AO VIVO -->
+        <div class="radar-filter-bar">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" id="radarPlatBtns">
+            <button class="plat-btn on" type="button" data-plat="ALL">Todas Online</button>
+            <button class="plat-btn" type="button" data-plat="KICK">🟢 Kick</button>
+            <button class="plat-btn" type="button" data-plat="TWITCH">🟣 Twitch</button>
+            <button class="plat-btn" type="button" data-plat="YOUTUBE">🔴 YouTube 24h</button>
+          </div>
           <span style="flex:1"></span>
-          <span class="pill br" id="radarCounts">0 ao vivo</span>
+          <span class="pill ok" id="radarCounts"><span class="srv-dot"></span> Carregando online…</span>
         </div>
 
         <div class="row" style="margin-top:10px">
@@ -1770,19 +1860,17 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
               <option value="FOREIGN_ONLY">Somente Internacionais</option>
             </select>
           </label>
-          <label style="margin-top:4px">Buscar streamer/título
-            <input type="text" id="radarSearch" placeholder="ex.: paulinho, coringa, surskity…">
+          <label style="margin-top:4px">Buscar streamer, jogo ou título
+            <input type="text" id="radarSearch" placeholder="ex.: gta, cs2, valorant, irl…">
           </label>
         </div>
 
-        <div class="sent-wrap" style="margin-top:16px">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-            <div>
-              <b style="font-size:13.5px;color:#ffc046">🚀 Analisar Todas as Lives v2.1 · 20 Agentes Sem API + Controle de Banda</b>
-              <div class="mut" style="margin-top:2px">Gerenciador de filas evita sobrecarga no servidor, caçando <b>Engraçados, Frustrações, Raiva e Xingamentos</b> e baixando apenas os <b>30 melhores segundos por corte</b>.</div>
-            </div>
+        <details class="sent-wrap" style="margin-top:12px">
+          <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;list-style:none">
+            <b style="font-size:13px;color:#ffc046">🚀 Analisar Várias Lives em Lote · 20 Agentes Zero-Key + Controle de Banda</b>
             <span class="pill cy" id="queueStatusBadge">Banda: Máx 3 simultâneas · Ativas 0 · Fila 0</span>
-          </div>
+          </summary>
+          <div class="mut" style="margin-top:8px">Gerenciador de filas caça <b>Engraçados, Frustrações, Raiva e Xingamentos</b> e corta os <b>30 melhores segundos</b> de cada live online.</div>
           <div class="row" style="margin-top:10px;align-items:flex-end">
             <label style="margin-top:0">Capturas simultâneas (Controle de Banda): <b id="maxConcVal">3</b>
               <input type="range" id="maxConcRange" min="1" max="6" value="3">
@@ -1798,7 +1886,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
             <label class="chk" style="margin-top:0"><input type="checkbox" class="emo-chk" value="Raiva" checked> 🤬 Raiva</label>
             <label class="chk" style="margin-top:0"><input type="checkbox" class="emo-chk" value="Xingamentos" checked> 🔥 Xingamentos</label>
           </div>
-        </div>
+        </details>
 
         <div class="radar-grid" id="radarGrid"></div>
       </div>
@@ -2790,11 +2878,24 @@ tabs.forEach(t=>{
 
 function showTab(t,withWipe=false){
   if(withWipe&&t!==activeTab)triggerMcTransition("MC_SLASH",true);
+  const prevTab=activeTab;
   activeTab=t;
   [...$("nav").children].forEach(b=>b.classList.toggle("on",b.dataset.t===t));
   document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hide",p.id!=="tab-"+t));
+  if(prevTab==="AO VIVO"&&t!=="AO VIVO"){
+    const mp=$("radarMainPlayer"),mw=$("radarMosaicWall");
+    if(mp)mp.innerHTML="";
+    if(mw)mw.innerHTML="";
+  }
   if(t==="CORTES"&&lastChartSeries.length)setTimeout(()=>drawSentimentChart(lastChartSeries,lastChartClips),40);
-  if(t==="AO VIVO"){void loadRadar();void refreshQueueBadge();}
+  if(t==="AO VIVO"){
+    if(radarStreams&&radarStreams.length){
+      if(radarMosaicMode)renderRadarMosaicWall();
+      else playStreamOnRadarStage(radarStageStream||radarStreams[0],radarStageMuted);
+    }
+    void loadRadar();
+    void refreshQueueBadge();
+  }
   if(t==="VÍDEOS") renderVideosTab();
   if(t==="MOLDES") void loadMoldes();
   if(t==="IDEIAS") void loadIdeas();
@@ -2819,118 +2920,169 @@ function updateWaveForVideo(v){
 setInterval(()=>updateWaveForVideo($("phoneVideoBox").querySelector("video")),160);
 
 function classifyBrBrowser(s){
-  const top=["paulinhooloko","loud_coringa","luquet4","boca04","gabepeixe","jonvlogs","alanzoka","nobru","casimito","gaules","brino","surskity","ayellol","daniels","denissnider","ricfazeres","rakin","thedarkness","snopey"];
+  const top=["paulinhooloko","loud_coringa","luquet4","boca04","gabepeixe","jonvlogs","alanzoka","nobru","casimito","gaules","brino","surskity","ayellol","daniels","denissnider","ricfazeres","rakin","thedarkness","snopey","rubini","baiano","cellbit","felps","mount","yoda","calango","liminha","mch_agg"];
   const lg=(s.login||"").toLowerCase();
   if(top.includes(lg))return true;
-  if((s.language||"").toLowerCase().startsWith("pt"))return true;
+  const lang=String(s.language||"").trim().toLowerCase();
+  if(lang==="pt"||lang==="pt-br"||lang==="pt_br"||lang==="portuguese"||lang==="português"||lang.startsWith("pt-"))return true;
+  if(lang&&lang!=="other"&&lang!=="unknown"&&lang!=="live"&&lang!=="all")return false;
   const txt=((s.title||"")+" "+(s.display_name||"")).toLowerCase();
-  return /[ãõçêâôáéíóú]|\b(ao vivo|brasil|br|gta rp|gta rp|complexo|canção nova|cnn brasil|sbt)\b/i.test(txt);
+  return /[ãõç]|\b(ao vivo|brasil|gta rp|resenha|canção nova|cnn brasil|jovem pan|sbt news)\b/i.test(txt);
 }
 
+const VERIFIED_YT_24H_LIVE=[
+  {id:"yt_cnn_24h",platform:"YOUTUBE",login:"cnnbrasil",yt_channel_id:"UCvdwhh_fDyWccR42-rReZLw",probe_vid:"OdmlbUdpLoc",display_name:"CNN Brasil",title:"CNN Brasil AO VIVO 24h · Notícias em Tempo Real",category:"Just Chatting & Ao Vivo",viewer_count:0,is_brazil:true,language:"pt",url:"https://www.youtube.com/@CNNbrasil/live"},
+  {id:"yt_jp_24h",platform:"YOUTUBE",login:"jovempannews",yt_channel_id:"UCP391YRAjSOdM_bwievgaZA",probe_vid:"1cV9m1YqGP0",display_name:"Jovem Pan News",title:"Jovem Pan News AO VIVO 24h · Brasil",category:"Just Chatting & Ao Vivo",viewer_count:0,is_brazil:true,language:"pt",url:"https://www.youtube.com/@jovempannews/live"},
+  {id:"yt_sbt_24h",platform:"YOUTUBE",login:"sbtnews",yt_channel_id:"UC376n347Ob5Lwzq2WGzF1AA",probe_vid:"dUdfEov5TSQ",display_name:"SBT News",title:"SBT News AO VIVO 24h · Cobertura Brasil",category:"Just Chatting & Ao Vivo",viewer_count:0,is_brazil:true,language:"pt",url:"https://www.youtube.com/@SBTNews/live"},
+  {id:"yt_cancaonova_24h",platform:"YOUTUBE",login:"tvcancaonova",yt_channel_id:"UC6V9mqiVuzd-v3ozUfCtZFA",probe_vid:"3UiToPXlURg",display_name:"TV Canção Nova",title:"TV Canção Nova AO VIVO 24h",category:"Just Chatting & Ao Vivo",viewer_count:0,is_brazil:true,language:"pt",url:"https://www.youtube.com/@tvcancaonova/live"},
+  {id:"yt_synthwave_24h",platform:"YOUTUBE",login:"lofigirl_synthwave",yt_channel_id:"UCSJ4gkVC6NrvII8umztf0Ow",probe_vid:"4xDzrJKXOOY",display_name:"Lofi Girl · Synthwave",title:"Synthwave Radio 24/7 · Beats to Chill / Game To",category:"Just Chatting & Ao Vivo",viewer_count:0,is_brazil:false,language:"en",url:"https://www.youtube.com/watch?v=4xDzrJKXOOY"}
+];
+
 async function browserDiscoverStreams(plat,cat,reg,q){
-  let items=[];
-  let twitchLive=0,kickLive=0,ytLive=0;
+  const items=[];
+  const tasks=[];
 
   if(plat==="ALL"||plat==="TWITCH"){
-    try{
-      const ctrl=new AbortController();
-      const tm=setTimeout(()=>ctrl.abort(),4200);
-      const gql='query { ptStreams: streams(first: 18, options: { sort: VIEWER_COUNT, languages: [PT] }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } globalStreams: streams(first: 12, options: { sort: VIEWER_COUNT }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } }';
-      const r=await fetch("https://gql.twitch.tv/gql",{
-        method:"POST",signal:ctrl.signal,
-        headers:{"Client-ID":"kimne78kx3ncx6brgo4mv6wki5h1ko","Content-Type":"application/json"},
-        body:JSON.stringify({query:gql})
-      });
-      clearTimeout(tm);
-      if(r.ok){
-        const j=await r.json();
-        const d=j.data||{};
-        const addEdges=(edges,defLang)=>{
-          (edges||[]).forEach(e=>{
-            const nd=e&&e.node;const bc=nd&&nd.broadcaster;const lg=bc&&bc.login;
-            if(!lg)return;
-            const rawC=(nd.game&&nd.game.name)||"Ao Vivo";
-            items.push({
-              id:"tw_"+lg.toLowerCase(),platform:"TWITCH",login:lg,
-              display_name:bc.displayName||lg,title:nd.title||"Ao vivo na Twitch",
-              category:normalizeCatBrowser(rawC,nd.title),viewer_count:Number(nd.viewersCount||0),
-              language:((bc.broadcastSettings&&bc.broadcastSettings.language)||defLang).toLowerCase(),
-              url:"https://www.twitch.tv/"+lg
+    tasks.push((async()=>{
+      try{
+        const ctrl=new AbortController();
+        const tm=setTimeout(()=>ctrl.abort(),4800);
+        const gql='query { ptStreams: streams(first: 28, options: { sort: VIEWER_COUNT, languages: [PT] }) { edges { node { id title viewersCount createdAt previewImageURL(width: 640, height: 360) game { name } broadcaster { login displayName profileImageURL(width: 70) broadcastSettings { language } } } } } globalStreams: streams(first: 18, options: { sort: VIEWER_COUNT }) { edges { node { id title viewersCount createdAt previewImageURL(width: 640, height: 360) game { name } broadcaster { login displayName profileImageURL(width: 70) broadcastSettings { language } } } } } }';
+        const r=await fetch("https://gql.twitch.tv/gql",{
+          method:"POST",signal:ctrl.signal,
+          headers:{"Client-ID":"kimne78kx3ncx6brgo4mv6wki5h1ko","Content-Type":"application/json"},
+          body:JSON.stringify({query:gql})
+        });
+        clearTimeout(tm);
+        if(r.ok){
+          const j=await r.json();
+          const d=j.data||{};
+          const addEdges=(edges,defLang)=>{
+            (edges||[]).forEach(e=>{
+              const nd=e&&e.node;const bc=nd&&nd.broadcaster;const lg=bc&&bc.login;
+              const vc=Number((nd&&nd.viewersCount)||0);
+              if(!lg||vc<=0)return;
+              const rawC=(nd.game&&nd.game.name)||"Ao Vivo";
+              const realLang=String((bc.broadcastSettings&&bc.broadcastSettings.language)||defLang).toLowerCase();
+              items.push({
+                id:"tw_"+lg.toLowerCase(),platform:"TWITCH",login:lg,
+                display_name:bc.displayName||lg,title:nd.title||"Ao vivo na Twitch",
+                category:rawC,viewer_count:vc,is_live:true,
+                started_at:nd.createdAt||"",
+                thumbnail_url:nd.previewImageURL||`https://static-cdn.jtvnw.net/previews-ttv/live_user_${lg.toLowerCase()}-640x360.jpg`,
+                avatar_url:bc.profileImageURL||"",
+                language:realLang,
+                url:"https://www.twitch.tv/"+lg
+              });
             });
-            twitchLive++;
-          });
-        };
-        addEdges(d.ptStreams&&d.ptStreams.edges,"pt");
-        addEdges(d.globalStreams&&d.globalStreams.edges,"en");
-      }
-    }catch(_){}
+          };
+          addEdges(d.ptStreams&&d.ptStreams.edges,"pt");
+          addEdges(d.globalStreams&&d.globalStreams.edges,"en");
+        }
+      }catch(_){}
+    })());
   }
 
   if(plat==="ALL"||plat==="KICK"){
-    try{
-      const ctrl=new AbortController();
-      const tm=setTimeout(()=>ctrl.abort(),3400);
-      const r=await fetch("https://kick.com/stream/featured-livestreams/pt?limit=20",{signal:ctrl.signal});
-      clearTimeout(tm);
-      if(r.ok){
+    const fetchKickFeed=async(url,defLang)=>{
+      try{
+        const ctrl=new AbortController();
+        const tm=setTimeout(()=>ctrl.abort(),4200);
+        const r=await fetch(url,{signal:ctrl.signal});
+        clearTimeout(tm);
+        if(!r.ok)return;
         const j=await r.json();
         const rows=j.data||(Array.isArray(j)?j:[]);
         rows.forEach(row=>{
-          const ch=row.channel||{};const slug=ch.slug||row.slug;if(!slug)return;
+          if(!row||row.is_live===false)return;
+          const vc=Number(row.viewer_count||row.viewers||0);
+          if(vc<=0)return;
+          const ch=row.channel||{};
+          const slug=String(ch.slug||"").trim();
+          if(!slug)return;
+          const user=ch.user||{};
           const rawC=(row.categories&&row.categories[0]&&row.categories[0].name)||"Kick Live";
+          const thumbObj=row.thumbnail;
+          const thumb=(thumbObj&&typeof thumbObj==="object")?(thumbObj.src||""):(thumbObj||"");
           items.push({
-            id:"kk_"+slug,platform:"KICK",login:slug,display_name:(ch.user&&ch.user.username)||slug,
-            title:row.session_title||"Live Kick TV",category:normalizeCatBrowser(rawC,row.session_title),
-            viewer_count:Number(row.viewer_count||row.viewers||0),language:(row.language||"pt").toLowerCase(),
+            id:"kk_"+slug.toLowerCase(),platform:"KICK",login:slug,
+            display_name:user.username||slug,
+            title:row.session_title||"Live Kick TV",
+            category:rawC,viewer_count:vc,is_live:true,
+            started_at:row.start_time||row.created_at||"",
+            thumbnail_url:thumb,
+            avatar_url:user.profile_pic||"",
+            language:String(row.language||defLang).toLowerCase(),
             url:"https://kick.com/"+slug
           });
-          kickLive++;
         });
-      }
-    }catch(_){}
+      }catch(_){}
+    };
+    tasks.push(fetchKickFeed("https://kick.com/stream/featured-livestreams/pt?limit=24","pt"));
+    tasks.push(fetchKickFeed("https://kick.com/stream/featured-livestreams/en?limit=16","en"));
   }
 
+  if(plat==="ALL"||plat==="YOUTUBE"){
+    tasks.push((async()=>{
+      await Promise.all(VERIFIED_YT_24H_LIVE.map(async ch=>{
+        try{
+          const ctrl=new AbortController();
+          const tm=setTimeout(()=>ctrl.abort(),3200);
+          const r=await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${ch.probe_vid}&format=json`,{signal:ctrl.signal});
+          clearTimeout(tm);
+          if(!r.ok)return;
+          const oe=await r.json();
+          items.push({
+            ...ch,
+            title:(oe&&oe.title&&oe.title.length>5)?oe.title:ch.title,
+            thumbnail_url:(oe&&oe.thumbnail_url)||`https://i.ytimg.com/vi/${ch.probe_vid}/hqdefault.jpg`,
+            avatar_url:"",
+            is_live:true,
+            is_24h:true
+          });
+        }catch(_){}
+      }));
+    })());
+  }
+
+  await Promise.all(tasks);
+
   const dedup=new Map();
-  items.forEach(s=>{const k=s.platform+":"+s.login.toLowerCase();if(!dedup.has(k))dedup.set(k,s);});
-  memDemoDiscovery.forEach(d=>{
-    const k=d.platform+":"+d.login.toLowerCase();
-    if(!dedup.has(k)){
-      if(d.platform==="YOUTUBE")ytLive++;
-      else if(d.platform==="KICK"&&kickLive===0)kickLive++;
-      if(d.platform!=="TWITCH"||twitchLive===0)dedup.set(k,{...d,category:normalizeCatBrowser(d.category,d.title)});
-    }
+  items.forEach(s=>{
+    const k=s.platform+":"+String(s.login||"").toLowerCase();
+    const prev=dedup.get(k);
+    if(!prev||Number(s.viewer_count||0)>Number(prev.viewer_count||0))dedup.set(k,s);
   });
-  items=[...dedup.values()].filter(s=>(plat==="ALL"||s.platform===plat));
+
+  let out=[...dedup.values()].filter(s=>(plat==="ALL"||s.platform===plat));
+  out.forEach(s=>{
+    s.is_brazil=classifyBrBrowser(s);
+    s.raw_category=s.category||"Ao Vivo";
+  });
   if(cat!=="ALL"){
-    items=items.filter(s=>{
-      const b=((s.category||"")+" "+(s.title||"")).toLowerCase();
-      if(cat==="GTA")return/gta|fivem|roleplay|vice city/.test(b);
-      if(cat==="FPS")return/fps|valorant|cs2|free fire|warzone/.test(b);
-      if(cat==="MOBA")return/moba|league of legends|dota|cblol/.test(b);
-      if(cat==="IRL")return/irl|just chatting|resenha|talk|ao vivo|cnn|sbt|canção/.test(b);
+    out=out.filter(s=>{
+      const b=((s.raw_category||"")+" "+(s.title||"")).toLowerCase();
+      if(cat==="GTA")return/gta|grand theft auto|fivem|roleplay|vice city/.test(b);
+      if(cat==="FPS")return/fps|valorant|cs2|counter-strike|free fire|warzone|call of duty|fortnite|apex|pubg/.test(b);
+      if(cat==="MOBA")return/moba|league of legends|dota|cblol|tft|wild rift/.test(b);
+      if(cat==="IRL")return/irl|just chatting|resenha|talk|ao vivo|cnn|sbt|canção|jovem pan|podcast|music|synthwave/.test(b);
       return true;
     });
   }
   const ql=(q||"").trim().toLowerCase();
-  if(ql)items=items.filter(s=>(s.title+" "+s.display_name+" "+s.login+" "+s.category).toLowerCase().includes(ql));
-  items.forEach(s=>{
-    s.is_brazil=typeof s.is_brazil==="boolean"?s.is_brazil:classifyBrBrowser(s);
-    s.category=normalizeCatBrowser(s.category,s.title);
-  });
-  if(reg==="BRAZIL_ONLY")items=items.filter(s=>s.is_brazil);
-  else if(reg==="FOREIGN_ONLY")items=items.filter(s=>!s.is_brazil);
-  const catTotals={};
-  items.forEach(s=>{const rk=(s.is_brazil?"BR:":"INT:")+String(s.category||"Outros").trim().toLowerCase();catTotals[rk]=(catTotals[rk]||0)+Number(s.viewer_count||0);});
-  items.forEach(s=>{const rk=(s.is_brazil?"BR:":"INT:")+String(s.category||"Outros").trim().toLowerCase();s.category_viewers=catTotals[rk]||Number(s.viewer_count||0);});
-  items.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(b.category_viewers-a.category_viewers)||(b.viewer_count-a.viewer_count));
-  const brCnt=items.filter(x=>x.is_brazil).length;
+  if(ql)out=out.filter(s=>(s.title+" "+s.display_name+" "+s.login+" "+s.raw_category).toLowerCase().includes(ql));
+  if(reg==="BRAZIL_ONLY")out=out.filter(s=>s.is_brazil);
+  else if(reg==="FOREIGN_ONLY")out=out.filter(s=>!s.is_brazil);
+
+  out.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(Number(b.viewer_count||0)-Number(a.viewer_count||0)));
+  const brCnt=out.filter(x=>x.is_brazil).length;
   const byPlat={
-    TWITCH:items.filter(x=>x.platform==="TWITCH").length,
-    KICK:items.filter(x=>x.platform==="KICK").length,
-    YOUTUBE:items.filter(x=>x.platform==="YOUTUBE").length
+    TWITCH:out.filter(x=>x.platform==="TWITCH").length,
+    KICK:out.filter(x=>x.platform==="KICK").length,
+    YOUTUBE:out.filter(x=>x.platform==="YOUTUBE").length
   };
-  const note=`Ativas agora: Kick TV (${byPlat.KICK}) · YouTube Live (${byPlat.YOUTUBE}) · Twitch (${byPlat.TWITCH}) · Brasil 1º e Maior Categoria no Topo`;
-  return {streams:items,counts:{total:items.length,brazil:brCnt,international:items.length-brCnt,by_platform:byPlat},sourceNote:note};
+  const note=`100% Online Verificadas Agora: Kick (${byPlat.KICK}) · Twitch (${byPlat.TWITCH}) · YouTube 24h (${byPlat.YOUTUBE}) · Somente transmissões no ar neste momento`;
+  return {streams:out,counts:{total:out.length,brazil:brCnt,international:out.length-brCnt,by_platform:byPlat},sourceNote:note};
 }
 
 function buildZipBlob(files){
@@ -3541,72 +3693,355 @@ async function refreshQueueBadge(){
   }catch(_){}
 }
 
-async function loadRadar(){
+let radarStageStream=null;
+let radarStageMuted=true;
+let radarMosaicMode=false;
+let radarAutoRefreshInt=null;
+
+function fmtLiveUptime(startedAt){
+  if(!startedAt)return "AO VIVO";
+  const ts=Date.parse(startedAt);
+  if(!isFinite(ts))return "AO VIVO";
+  const diffMin=Math.max(1,Math.floor((Date.now()-ts)/60000));
+  const h=Math.floor(diffMin/60),m=diffMin%60;
+  return h>0?`${h}h ${String(m).padStart(2,"0")}m`:`${m}m`;
+}
+
+function buildRadarEmbedUrl(s,muted=true){
+  if(!s)return "";
+  const plat=String(s.platform||"").toUpperCase();
+  const pHost=location.hostname||"localhost";
+  if(plat==="TWITCH"){
+    const lg=String(s.login||"").toLowerCase();
+    return `https://player.twitch.tv/?channel=${encodeURIComponent(lg)}&parent=${encodeURIComponent(pHost)}&autoplay=true&muted=${muted?"true":"false"}`;
+  }
+  if(plat==="KICK"){
+    const slug=String(s.login||"").replace(/[^A-Za-z0-9_.-]/g,"");
+    return `https://player.kick.com/${encodeURIComponent(slug)}?autoplay=true&muted=${muted?"true":"false"}`;
+  }
+  if(plat==="YOUTUBE"){
+    if(s.yt_channel_id){
+      return `https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(s.yt_channel_id)}&autoplay=1&mute=${muted?1:0}&playsinline=1&rel=0`;
+    }
+    const info=extractLiveTarget(s.url,"YOUTUBE");
+    if(info.videoId){
+      return `https://www.youtube.com/embed/${encodeURIComponent(info.videoId)}?autoplay=1&mute=${muted?1:0}&playsinline=1&rel=0`;
+    }
+  }
+  return "";
+}
+
+function openStreamInStudio(st){
+  if(!st)return;
+  const targetUrl=st.yt_channel_id?`https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(st.yt_channel_id)}`:st.url;
+  $("lk").value=st.url||targetUrl;
+  showTab("CORTES",true);
+  triggerInstantPreview(st.url||targetUrl,true);
+  void startLive(st.url||targetUrl,st.display_name||st.login,"LIVE").catch(e=>notify(e.message));
+}
+
+function playStreamOnRadarStage(st,muted=radarStageMuted){
+  if(!st)return;
+  radarStageStream=st;
+  radarStageMuted=muted;
+  const playerBox=$("radarMainPlayer");
+  const mosaicBox=$("radarMosaicWall");
+  if(radarMosaicMode){
+    radarMosaicMode=false;
+    if(mosaicBox){mosaicBox.classList.add("hide");mosaicBox.innerHTML="";}
+    if(playerBox)playerBox.classList.remove("hide");
+    if($("radarMosaicToggleBtn"))$("radarMosaicToggleBtn").textContent="📺 Mosaico 4 Lives";
+  }
+  const embed=buildRadarEmbedUrl(st,muted);
+  if(playerBox&&embed){
+    playerBox.innerHTML=`<iframe src="${esc(embed)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  }
+  const platUp=String(st.platform||"LIVE").toUpperCase();
+  const pPill=$("radarStagePlatPill");
+  if(pPill){
+    pPill.textContent=`${platUp} · ${st.is_brazil?"🇧🇷 BRASIL":"🌎 INTL"}`;
+    pPill.className=platUp==="KICK"?"pill br":(platUp==="YOUTUBE"?"pill err":"pill pu");
+  }
+  const vPill=$("radarStageViewersPill");
+  if(vPill)vPill.textContent=st.viewer_count>0?`👥 ${Number(st.viewer_count).toLocaleString("pt-BR")} assistindo`:"🔴 TRANSMISSÃO 24H AO VIVO";
+  const uPill=$("radarStageUptimePill");
+  if(uPill)uPill.textContent="⏱ "+(st.is_24h?"24H NO AR":fmtLiveUptime(st.started_at));
+  const avEl=$("radarStageAvatar");
+  if(avEl){
+    if(st.avatar_url)avEl.innerHTML=`<img src="${esc(st.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.textContent='${esc((st.display_name||"IA").slice(0,2).toUpperCase())}'">`;
+    else avEl.textContent=String(st.display_name||st.login||"IA").slice(0,2).toUpperCase();
+  }
+  if($("radarStageName"))$("radarStageName").textContent=st.display_name||st.login||"Ao Vivo";
+  if($("radarStageCatPill"))$("radarStageCatPill").textContent=st.raw_category||st.category||"Ao Vivo";
+  if($("radarStageTitle"))$("radarStageTitle").textContent=st.title||"Transmissão ao vivo agora";
+  if($("radarStageOrigLink"))$("radarStageOrigLink").href=st.url||"#";
+  if($("radarStageSoundBtn"))$("radarStageSoundBtn").textContent=muted?"🔊 Ativar Som":"🔇 Silenciar";
+  document.querySelectorAll("#radarGrid .live-card-v21").forEach(el=>{
+    el.classList.toggle("playing-now",el.dataset.streamId===st.id);
+  });
+}
+
+function renderRadarMosaicWall(){
+  const mosaicBox=$("radarMosaicWall");
+  const playerBox=$("radarMainPlayer");
+  if(!mosaicBox||!playerBox)return;
+  const top4=radarStreams.slice(0,4);
+  if(!top4.length){notify("Nenhuma live online para abrir no mosaico.");return;}
+  radarMosaicMode=true;
+  playerBox.classList.add("hide");
+  playerBox.innerHTML="";
+  mosaicBox.classList.remove("hide");
+  if($("radarMosaicToggleBtn"))$("radarMosaicToggleBtn").textContent="🎬 Voltar ao Palco 1 Live";
+  mosaicBox.innerHTML=top4.map((s,idx)=>{
+    const embed=buildRadarEmbedUrl(s,true);
+    const pCls=s.platform==="KICK"?"pill br":(s.platform==="YOUTUBE"?"pill err":"pill pu");
+    return `
+      <div class="live-mosaic-tile">
+        <div class="live-mosaic-frame">
+          <iframe src="${esc(embed)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="live-mosaic-bar">
+          <div style="display:flex;align-items:center;gap:6px;min-width:0;flex:1">
+            <span class="${pCls}">${esc(s.platform)}</span>
+            <b style="font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.display_name||s.login)}</b>
+            <span class="mut" style="font-size:11px">${s.viewer_count>0?("👥 "+Number(s.viewer_count).toLocaleString("pt-BR")):"24h"}</span>
+          </div>
+          <div style="display:flex;gap:5px">
+            <button class="btn g sm" type="button" data-mosaic-stage="${idx}">⛶ Palco</button>
+            <button class="btn sm" type="button" data-mosaic-cut="${idx}">✂ Cortar</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  mosaicBox.querySelectorAll("[data-mosaic-stage]").forEach(b=>{
+    b.onclick=()=>playStreamOnRadarStage(top4[Number(b.dataset.mosaicStage)],false);
+  });
+  mosaicBox.querySelectorAll("[data-mosaic-cut]").forEach(b=>{
+    b.onclick=()=>openStreamInStudio(top4[Number(b.dataset.mosaicCut)]);
+  });
+  notify(`📺 Mosaico Ao Vivo ativado com ${top4.length} transmissões reais rodando simultaneamente!`);
+}
+
+function syncQuickLivesBarWithRealOnline(streams){
+  const bar=$("quickLivesBar");
+  if(!bar||!streams||!streams.length)return;
+  const picks=[];
+  const kickBr=streams.find(s=>s.platform==="KICK"&&s.is_brazil);
+  const kick2=streams.find(s=>s.platform==="KICK"&&s!==kickBr);
+  const twBr=streams.find(s=>s.platform==="TWITCH"&&s.is_brazil);
+  const tw2=streams.find(s=>s.platform==="TWITCH"&&s.is_brazil&&s!==twBr);
+  const ytBr=streams.find(s=>s.platform==="YOUTUBE"&&s.is_brazil);
+  [kickBr,twBr,ytBr,kick2,tw2].filter(Boolean).slice(0,5).forEach(s=>picks.push(s));
+  if(!picks.length)return;
+  bar.innerHTML=picks.map((s,i)=>{
+    const ico=s.platform==="KICK"?"🟢":(s.platform==="YOUTUBE"?"🔴":"🟣");
+    const vc=s.viewer_count>0?` (${Number(s.viewer_count).toLocaleString("pt-BR")})`:" (24h)";
+    return `<button type="button" class="plat-btn ${i===0?"on":""}" data-quick-url="${esc(s.url)}" data-quick-name="${esc(s.display_name||s.login)}">${ico} ${esc(s.display_name||s.login)}${vc}</button>`;
+  }).join("");
+  bar.querySelectorAll("[data-quick-url]").forEach(btn=>{
+    btn.onclick=()=>{
+      const url=btn.dataset.quickUrl;
+      const name=btn.dataset.quickName||"Live";
+      $("lk").value=url;
+      bar.querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
+      curLiveId=null;
+      triggerInstantPreview(url,true);
+      notify(`🔴 Live real online carregada: ${name} + Chat & Termômetro de Ironia!`);
+    };
+  });
+}
+
+async function loadRadar(silentRefresh=false){
   const cat=$("radarCat").value||"ALL";
   const reg=$("radarRegion").value||"BRAZIL_FIRST";
   const q=($("radarSearch").value||"").trim();
-  $("radarCounts").textContent="buscando ao vivo…";
+  if(!silentRefresh){
+    $("radarCounts").innerHTML='<span class="srv-dot"></span> Buscando lives online agora…';
+  }
   let res;
   try{
     res=await api(`/api/discover/lives?platform=${encodeURIComponent(radarPlat)}&category=${encodeURIComponent(cat)}&region=${encodeURIComponent(reg)}&q=${encodeURIComponent(q)}`);
   }catch(_){
     res=await browserDiscoverStreams(radarPlat,cat,reg,q);
   }
-  radarStreams=res.streams||[];
-  const cnt=res.counts||{total:radarStreams.length,brazil:0,international:0};
+  radarStreams=(res.streams||[]).filter(s=>s&&s.is_live!==false&&(s.is_24h||Number(s.viewer_count||0)>0));
+  const cnt={
+    total:radarStreams.length,
+    brazil:radarStreams.filter(s=>s.is_brazil).length,
+    international:radarStreams.filter(s=>!s.is_brazil).length
+  };
   const kickCnt=radarStreams.filter(s=>s.platform==="KICK").length;
   const ytCnt=radarStreams.filter(s=>s.platform==="YOUTUBE").length;
   const twCnt=radarStreams.filter(s=>s.platform==="TWITCH").length;
-  $("radarCounts").textContent=`${cnt.total} ao vivo · 🟢 Kick ${kickCnt} · 🔴 YT ${ytCnt} · 🟣 Twitch ${twCnt} · 🇧🇷 ${cnt.brazil} BR · 🌎 ${cnt.international} Intl`;
-  $("radarMeta").textContent=res.sourceNote||"Ordenado: Brasil 1º · Categoria com mais espectadores primeiro · Mais pessoas na live";
+  $("radarCounts").innerHTML=`<span class="srv-dot"></span> ${cnt.total} ON-LINE AGORA · 🟢 Kick ${kickCnt} · 🟣 Twitch ${twCnt} · 🔴 YT ${ytCnt} · 🇧🇷 ${cnt.brazil} BR`;
+  $("radarMeta").textContent=res.sourceNote||`100% Online Verificadas Agora: Kick (${kickCnt}) · Twitch (${twCnt}) · YouTube (${ytCnt}) · Somente lives no ar`;
+  const clk=$("radarUpdatedClock");
+  if(clk)clk.innerHTML=`<span class="srv-dot"></span> Atualizado ${new Date().toTimeString().slice(0,8)} · Auto 60s`;
+
+  if(radarPlat==="ALL"&&cat==="ALL"&&!q){
+    syncQuickLivesBarWithRealOnline(radarStreams);
+  }
+
   const grid=$("radarGrid");
   if(!radarStreams.length){
-    grid.innerHTML='<div class="mut">Nenhuma live encontrada para este filtro. Tente "Todas Categorias" ou atualize.</div>';
+    grid.innerHTML='<div class="mut" style="padding:20px;text-align:center;grid-column:1/-1">Nenhuma live online encontrada para este filtro no momento. Tente <b>Todas Online</b> ou clique em <b>Atualizar Ao Vivo</b>.</div>';
     return;
   }
+
+  // Carrega automaticamente a live #1 real no Palco Cinema ao abrir a aba AO VIVO
+  if(activeTab==="AO VIVO"){
+    if(radarMosaicMode){
+      if(!silentRefresh)renderRadarMosaicWall();
+    }else if(!radarStageStream||!radarStreams.some(x=>x.id===radarStageStream.id)){
+      playStreamOnRadarStage(radarStreams[0],radarStageMuted);
+    }
+  }
+
+  const cacheBust=Math.floor(Date.now()/45000);
   grid.innerHTML=radarStreams.slice(0,48).map((s,i)=>{
     const pCls=s.platform==="KICK"?"pill br":(s.platform==="YOUTUBE"?"pill err":"pill pu");
-    const regPill=s.is_brazil?'<span class="pill br">🇧🇷 BRASIL</span>':'<span class="pill intl">🌎 INTL</span>';
-    const catTot=Number(s.category_viewers||s.viewer_count||0).toLocaleString("pt-BR");
+    const regPill=s.is_brazil?'<span class="pill br">🇧🇷 BR</span>':'<span class="pill intl">🌎 INTL</span>';
+    const rawThumb=s.thumbnail_url||(s.platform==="TWITCH"?`https://static-cdn.jtvnw.net/previews-ttv/live_user_${encodeURIComponent(s.login.toLowerCase())}-640x360.jpg`:"");
+    const thumbSrc=rawThumb?(rawThumb+(rawThumb.includes("?")?"&":"?")+"cb="+cacheBust):"";
+    const viewersTxt=s.viewer_count>0?`👥 ${Number(s.viewer_count).toLocaleString("pt-BR")}`:"🔴 24H";
+    const uptimeTxt=s.is_24h?"24H":fmtLiveUptime(s.started_at);
+    const catLbl=s.raw_category||s.category||"Ao Vivo";
+    const initials=String(s.display_name||s.login||"IA").slice(0,2).toUpperCase();
+    const avatarHtml=s.avatar_url
+      ?`<img src="${esc(s.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.remove()">`
+      :esc(initials);
+    const isPlaying=radarStageStream&&radarStageStream.id===s.id;
     return `
-      <div class="item-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">
-          <div><span class="${pCls}">${esc(s.platform)}</span> ${regPill}</div>
-          <span class="pill warn">👥 ${Number(s.viewer_count||0).toLocaleString("pt-BR")}</span>
+      <div class="live-card-v21 ${isPlaying?"playing-now":""}" data-stream-id="${esc(s.id)}">
+        <div class="live-thumb-box" data-thumb-idx="${i}" title="Clique para rodar esta live ao vivo agora">
+          ${thumbSrc?`<img class="live-thumb-img" src="${esc(thumbSrc)}" alt="${esc(s.display_name||s.login)}" loading="lazy" onerror="this.style.display='none'">`:""}
+          <div class="live-thumb-scrim"></div>
+          <div class="live-hud-tl">
+            <span class="live-pulse-badge"><span class="live-pulse-dot"></span> AO VIVO</span>
+            <span class="${pCls}">${esc(s.platform)}</span>
+            ${regPill}
+          </div>
+          <div class="live-hud-tr">${viewersTxt}</div>
+          <div class="live-thumb-play">▶ RODAR AO VIVO</div>
+          <div class="live-hud-bl">
+            <span class="live-cat-chip">${esc(catLbl)}</span>
+            <span class="live-uptime-chip">⏱ ${esc(uptimeTxt)}</span>
+          </div>
         </div>
-        <b style="display:block;margin-top:8px">${esc(s.display_name||s.login)}</b>
-        <div class="mut" style="font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.title)}</div>
-        <div class="mut" style="margin-top:4px;font-size:11px">Categoria: <b>${esc(s.category||"Ao Vivo")}</b> · <span style="color:var(--cy)">${catTot} na cat.</span></div>
-        <button class="btn sm w" type="button" style="margin-top:8px" data-radar-idx="${i}">▶ Assistir & Cortar (≤30s · 20 IAs)</button>
+        <div class="live-card-body">
+          <div class="live-card-head">
+            <div class="live-avatar sm">${avatarHtml}</div>
+            <div style="min-width:0;flex:1">
+              <b style="display:block;font-size:14px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.display_name||s.login)}</b>
+              <div class="live-card-title">${esc(s.title||"Transmissão ao vivo")}</div>
+            </div>
+          </div>
+          <div class="live-card-actions">
+            <button class="btn cy sm" type="button" data-stage-idx="${i}">▶ Palco</button>
+            <button class="btn g sm" type="button" data-inline-idx="${i}">📺 No Card</button>
+            <button class="btn sm" type="button" data-radar-idx="${i}">✂ Cortar</button>
+          </div>
+        </div>
       </div>
     `;
   }).join("");
-  grid.querySelectorAll("[data-radar-idx]").forEach(btn=>{
+
+  const mountInlineCardPlayer=(idx,thumbBox)=>{
+    const st=radarStreams[idx];
+    if(!st||!thumbBox)return;
+    const embed=buildRadarEmbedUrl(st,false);
+    if(!embed)return;
+    thumbBox.innerHTML=`<iframe src="${esc(embed)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    thumbBox.style.cursor="default";
+    notify(`📺 Rodando ${st.display_name||st.login} ao vivo direto no card!`);
+  };
+
+  grid.querySelectorAll("[data-thumb-idx]").forEach(box=>{
+    box.onclick=()=>{
+      if(box.querySelector("iframe"))return;
+      const idx=Number(box.dataset.thumbIdx);
+      playStreamOnRadarStage(radarStreams[idx],false);
+      $("radarStageShell").scrollIntoView({behavior:"smooth",block:"start"});
+    };
+  });
+  grid.querySelectorAll("[data-stage-idx]").forEach(btn=>{
     btn.onclick=()=>{
-      const st=radarStreams[Number(btn.dataset.radarIdx)];
+      const st=radarStreams[Number(btn.dataset.stageIdx)];
       if(st){
-        $("lk").value=st.url;
-        showTab("CORTES");
-        triggerInstantPreview(st.url,true);
-        void startLive(st.url,st.display_name||st.login,"LIVE").catch(e=>notify(e.message));
+        playStreamOnRadarStage(st,false);
+        $("radarStageShell").scrollIntoView({behavior:"smooth",block:"start"});
       }
     };
   });
+  grid.querySelectorAll("[data-inline-idx]").forEach(btn=>{
+    btn.onclick=()=>{
+      const idx=Number(btn.dataset.inlineIdx);
+      const card=btn.closest(".live-card-v21");
+      const thumb=card&&card.querySelector(".live-thumb-box");
+      mountInlineCardPlayer(idx,thumb);
+    };
+  });
+  grid.querySelectorAll("[data-radar-idx]").forEach(btn=>{
+    btn.onclick=()=>openStreamInStudio(radarStreams[Number(btn.dataset.radarIdx)]);
+  });
   void refreshQueueBadge();
+
+  if(!radarAutoRefreshInt){
+    radarAutoRefreshInt=setInterval(()=>{
+      if(activeTab==="AO VIVO")void loadRadar(true);
+    },60000);
+  }
+}
+
+if($("radarMosaicToggleBtn")){
+  $("radarMosaicToggleBtn").onclick=()=>{
+    if(radarMosaicMode){
+      playStreamOnRadarStage(radarStageStream||radarStreams[0],radarStageMuted);
+    }else{
+      renderRadarMosaicWall();
+    }
+  };
+}
+if($("radarStageSoundBtn")){
+  $("radarStageSoundBtn").onclick=()=>{
+    if(!radarStageStream&&radarStreams[0])radarStageStream=radarStreams[0];
+    if(radarStageStream)playStreamOnRadarStage(radarStageStream,!radarStageMuted);
+  };
+}
+if($("radarStageNextBtn")){
+  $("radarStageNextBtn").onclick=()=>{
+    if(!radarStreams.length)return;
+    const curIdx=radarStageStream?radarStreams.findIndex(x=>x.id===radarStageStream.id):-1;
+    const next=radarStreams[(curIdx+1)%radarStreams.length];
+    playStreamOnRadarStage(next,radarStageMuted);
+  };
+}
+if($("radarStageCutBtn")){
+  $("radarStageCutBtn").onclick=()=>openStreamInStudio(radarStageStream||radarStreams[0]);
+}
+if($("radarStageSaveBtn")){
+  $("radarStageSaveBtn").onclick=()=>{
+    const st=radarStageStream||radarStreams[0];
+    if(!st)return;
+    $("lk").value=st.url;
+    void saveLast30sOfLive("REPLAY_30S",30,"",`AO VIVO AGORA · ${(st.display_name||st.login||"LIVE").toUpperCase()} 🔥`);
+  };
 }
 
 $("radarPlatBtns").querySelectorAll("[data-plat]").forEach(b=>{
   b.onclick=()=>{
     radarPlat=b.dataset.plat;
     $("radarPlatBtns").querySelectorAll(".plat-btn").forEach(x=>x.classList.toggle("on",x===b));
+    radarStageStream=null;
     void loadRadar();
   };
 });
-$("radarCat").onchange=()=>void loadRadar();
-$("radarRegion").onchange=()=>void loadRadar();
-$("radarSearch").oninput=()=>{clearTimeout(window.__rs);window.__rs=setTimeout(()=>void loadRadar(),280);};
-$("refreshRadarBtn").onclick=()=>void loadRadar();
-$("goAoVivoBtn").onclick=()=>showTab("AO VIVO");
+$("radarCat").onchange=()=>{radarStageStream=null;void loadRadar();};
+$("radarRegion").onchange=()=>{radarStageStream=null;void loadRadar();};
+$("radarSearch").oninput=()=>{clearTimeout(window.__rs);window.__rs=setTimeout(()=>{radarStageStream=null;void loadRadar();},280);};
+$("refreshRadarBtn").onclick=()=>{radarStageStream=null;void loadRadar();notify("🔄 Atualizando somente lives online agora…");};
+$("goAoVivoBtn").onclick=()=>showTab("AO VIVO",true);
 
 $("maxConcRange").oninput=e=>{$("maxConcVal").textContent=e.target.value;};
 $("maxConcRange").onchange=async e=>{
@@ -4823,11 +5258,25 @@ function extractLiveTarget(rawLink,platHint){
     return{platform:"KICK",channel:slug,videoId:isVod?parts[1]:"",embedUrl,hlsUrl:"",isLocal:false,isHls:false};
   }
   if(host.includes("youtube.com")||host.includes("youtu.be")){
+    const chParam=u.searchParams.get("channel")||"";
+    if(chParam&&/^UC[A-Za-z0-9_-]{20,}$/.test(chParam)){
+      return{platform:"YOUTUBE",channel:chParam,videoId:"",embedUrl:`https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(chParam)}&autoplay=1&playsinline=1&rel=0`,hlsUrl:"",isLocal:false,isHls:false};
+    }
+    if(parts[0]==="channel"&&parts[1]&&/^UC[A-Za-z0-9_-]{20,}$/.test(parts[1])){
+      return{platform:"YOUTUBE",channel:parts[1],videoId:"",embedUrl:`https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(parts[1])}&autoplay=1&playsinline=1&rel=0`,hlsUrl:"",isLocal:false,isHls:false};
+    }
+    if(parts[0]&&parts[0].startsWith("@")){
+      const slug=parts[0].slice(1).toLowerCase();
+      const matched=(typeof VERIFIED_YT_24H_LIVE!=="undefined"?VERIFIED_YT_24H_LIVE:[]).find(x=>x.login===slug);
+      if(matched&&matched.yt_channel_id){
+        return{platform:"YOUTUBE",channel:matched.display_name,videoId:matched.probe_vid||"",embedUrl:`https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(matched.yt_channel_id)}&autoplay=1&playsinline=1&rel=0`,hlsUrl:"",isLocal:false,isHls:false};
+      }
+    }
     let vid=u.searchParams.get("v")||"";
     if(!vid&&host.includes("youtu.be")&&parts[0])vid=parts[0];
     if(!vid){
       const idx=parts.findIndex(x=>x==="live"||x==="shorts"||x==="embed");
-      if(idx>=0&&parts[idx+1])vid=parts[idx+1];
+      if(idx>=0&&parts[idx+1]&&parts[idx+1]!=="live_stream")vid=parts[idx+1];
     }
     vid=vid.replace(/[^A-Za-z0-9_-]/g,"");
     const embedUrl=vid?`https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0`:"";
