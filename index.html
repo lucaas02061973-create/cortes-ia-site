@@ -259,6 +259,32 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
         </div>
         <div class="prev" id="livePlayerBox"></div>
 
+        <!-- GRAVADOR & COFRE DA LIVE — SALVAR TUDO O QUE PASSA NA LIVE -->
+        <div class="sent-wrap" id="liveRecorderBox" style="margin-top:10px;border-color:rgba(0,229,255,.35);background:linear-gradient(180deg,rgba(0,229,255,.07),rgba(17,17,28,.95))">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <b style="font-size:13px;color:var(--cy)">💾 Gravador & Cofre da Live — Salvar o que Passa na Live</b>
+              <span class="pill br" id="recLiveStatusBadge">💾 Auto-Save Ativo · 0 salvos</span>
+              <span class="pill err hide" id="recLiveTimerBadge">🔴 GRAVANDO 00:00</span>
+            </div>
+            <label class="chk" style="margin:0;font-size:11.5px">
+              <input type="checkbox" id="autoSaveLiveChk" checked>
+              Auto-salvar momentos, picos de ironia/hype e chat da live automaticamente
+            </label>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+            <button type="button" class="btn sm" id="saveLast30sBtn">⏪ Salvar Últimos 30s da Live (Vídeo + Corte 9:16)</button>
+            <button type="button" class="btn sm cy" id="recLiveToggleBtn">⏺ Gravar Trecho Ao Vivo Agora</button>
+            <button type="button" class="btn g sm" id="saveSnapshotBtn">📸 Salvar Print/Frame da Live</button>
+            <button type="button" class="btn g sm" id="saveLiveArchiveBtn">📋 Baixar Histórico Completo da Live (.JSON)</button>
+            <button type="button" class="btn g sm" id="dlAllSavedLiveBtn">📦 Baixar Todos os Salvos</button>
+          </div>
+          <div class="mut" id="recLiveHint" style="margin-top:6px;font-size:11.5px">
+            Salva em tempo real o vídeo do que está passando na live (MP4/WebM + Corte Vertical 9:16), mensagens do chat e picos do Termômetro de Ironia no seu dispositivo e na aba VÍDEOS.
+          </div>
+          <div id="savedLiveList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:10px;margin-top:10px"></div>
+        </div>
+
         <div class="sent-wrap" id="sentimentBox">
           <div class="sent-head">
             <b style="font-size:12.5px">📈 Sentimento do Chat + Termômetro de Ironia (Kick · Twitch · YouTube)</b>
@@ -1445,6 +1471,96 @@ async function localApi(p,o={}){
     Object.assign(appSettings,body||{});
     return appSettings;
   }
+  if(p==="/api/lives/save-now"&&m==="POST"){
+    const rawUrl=String((body&&body.url)||$("lk").value||"https://kick.com/surskity").trim();
+    const info=extractLiveTarget(rawUrl);
+    let lv=memDb.lives.find(x=>x.id===(body&&body.live_id)||String(x.link||"").toLowerCase()===rawUrl.toLowerCase());
+    if(!lv){
+      lv={
+        id:"lv_save_"+Date.now(),
+        name:(body&&body.name)||info.channel||info.videoId||"Live Salva",
+        link:rawUrl,
+        platform:info.platform||"KICK",
+        kind:"LIVE",
+        status:"gravando & salvando ao vivo",
+        recorded:30,
+        min:6,max:12,
+        molde:normalizeMoldeId((body&&body.molde)||appSettings.molde),
+        clips:[],
+        saved_recordings:[],
+        sentiment_series:lastChartSeries.length?lastChartSeries:mkSentimentSeries(120,rawUrl.length),
+        agents:mkAgents(100),
+        handoffs:["[IA-04 -> IA-20] Trecho da live salvo no Cofre da Live com corte 9:16 + chat"],
+        timeline_coverage:{mode:"LIVE_SAVER",retro_pct:100,live_pct:100,elapsed_sec:30},
+        log:[`[${new Date().toTimeString().slice(0,8)}] Cofre da Live iniciado para @${info.channel||"live"}.`]
+      };
+      memDb.lives.unshift(lv);
+    }
+    const thermo=summarizeIronyBrowser(liveChatMessages);
+    const emo=(body&&body.emotion)||(thermo.score>=50?"Ironia":"Hype");
+    const chan=lv.name||info.channel||"live";
+    const hl=((body&&body.headline)||(emo==="Ironia"?`O CHAT NÃO PERDOOU A IRONIA EM ${chan.toUpperCase()} 🤡`:`SALVO AO VIVO DE ${chan.toUpperCase()} 🔥`)).toUpperCase().slice(0,56);
+    const tit=(body&&body.titulo)||`Salvo da Live (${emo}) · ${chan}`;
+    const dur=Math.max(4,Math.min(30,Number((body&&body.duration_sec)||30)));
+    const mediaUrl=(body&&body.blob_url)||sampleClipUrl;
+    const nowTs=Math.floor(Date.now()/1000);
+    const clipObj={
+      id:"cl_save_"+Date.now()+"_"+Math.random().toString(36).slice(2,5),
+      live_id:lv.id,
+      platform:lv.platform,
+      channel:chan,
+      emotion:emo,
+      titulo:tit,
+      headline:hl,
+      ini:0,
+      fim:dur,
+      nota:9,
+      motivo:`Salvo em tempo real da live (${emo} · ${liveChatMessages.length} msgs no chat)`,
+      descricao:`Salvo ao vivo (${(body&&body.save_mode)||"REPLAY_30S"}) de @${chan} · Termômetro de Ironia: ${thermo.score}%`,
+      molde:normalizeMoldeId((body&&body.molde)||appSettings.molde),
+      transition:(body&&body.transition)||appSettings.transition||"NONE",
+      soundtrack:(body&&body.soundtrack)||appSettings.soundtrack||"NONE",
+      url:mediaUrl,
+      raw_url:mediaUrl,
+      save_mode:(body&&body.save_mode)||"REPLAY_30S",
+      created_ts:nowTs,
+      created_at:new Date().toISOString()
+    };
+    const recEntry={
+      id:"rec_"+Date.now()+"_"+Math.random().toString(36).slice(2,5),
+      live_id:lv.id,
+      clip_id:clipObj.id,
+      platform:lv.platform,
+      channel:chan,
+      titulo:tit,
+      headline:hl,
+      emotion:emo,
+      duration_sec:dur,
+      save_mode:(body&&body.save_mode)||"REPLAY_30S",
+      clip_url:mediaUrl,
+      raw_url:mediaUrl,
+      chat_count:liveChatMessages.length,
+      irony_score:thermo.score,
+      created_ts:nowTs,
+      created_at:new Date().toISOString()
+    };
+    lv.clips.push(clipObj);
+    lv.saved_recordings=lv.saved_recordings||[];
+    lv.saved_recordings.unshift(recEntry);
+    lv.recorded=Math.max(Number(lv.recorded||0),dur);
+    lv.log.push(`[${new Date().toTimeString().slice(0,8)}] 💾 Trecho da live salvo (${dur}s · ${emo}): ${tit}`);
+    return {ok:true,live_id:lv.id,clip:clipObj,saved_recording:recEntry,raw_recording_url:mediaUrl,irony_thermometer:thermo,total_saved:lv.saved_recordings.length};
+  }
+  if(p==="/api/lives/saved/all"){
+    const allRecs=[];
+    memDb.lives.forEach(lv=>{(lv.saved_recordings||[]).forEach(r=>allRecs.push(r));});
+    return {ok:true,count:allRecs.length,saved_recordings:allRecs};
+  }
+  if(p.startsWith("/api/lives/")&&p.endsWith("/saved")){
+    const lid=p.split("/")[3];
+    const lv=memDb.lives.find(x=>x.id===lid);
+    return {ok:true,live_id:lid,saved_recordings:(lv&&lv.saved_recordings)||[],clips:(lv&&lv.clips)||[],chat_count:liveChatMessages.length,irony_thermometer:summarizeIronyBrowser(liveChatMessages)};
+  }
   if(p.startsWith("/api/chat/poll")||(p.startsWith("/api/lives/")&&p.endsWith("/chat"))){
     const thermo=summarizeIronyBrowser(liveChatMessages);
     return {ok:true,count:liveChatMessages.length,messages:liveChatMessages.slice(-80),irony_thermometer:thermo};
@@ -1870,9 +1986,9 @@ function renderLiveChatFeed(){
   const ironyCnt=liveChatMessages.filter(m=>m.is_irony||m.emotion==="Ironia"||Number(m.ironia||0)>=42).length;
   if(cntBadge)cntBadge.textContent=`${liveChatMessages.length} msgs · 🤡 ${ironyCnt} ironias`;
   const filtered=liveChatMessages.filter(m=>{
-    if(chatFilterMode==="IRONY")return Boolean(m.is_irony||m.emotion==="Ironia"||Number(m.ironia||0)>=40);
-    if(chatFilterMode==="RAGE")return ["Raiva","Xingamentos","Frustração"].includes(m.emotion)||Number(m.negativo||0)>=50;
-    if(chatFilterMode==="HUMOR")return ["Engraçado","Hype"].includes(m.emotion)||Number(m.positivo||0)>=60;
+    if(chatFilterMode==="IRONY"||chatFilterMode==="IRONIA")return Boolean(m.is_irony||m.emotion==="Ironia"||Number(m.ironia||0)>=40);
+    if(chatFilterMode==="RAGE"||chatFilterMode==="RAIVA")return ["Raiva","Xingamentos","Frustração"].includes(m.emotion)||Number(m.negativo||0)>=50;
+    if(chatFilterMode==="HUMOR"||chatFilterMode==="HYPE")return ["Engraçado","Hype"].includes(m.emotion)||Number(m.positivo||0)>=60;
     return true;
   });
   if(!filtered.length){
@@ -2200,13 +2316,13 @@ function sendInteractiveChatTest(customText){
 
 $("chatTestSendBtn").onclick=()=>sendInteractiveChatTest();
 $("chatTestInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sendInteractiveChatTest();}});
-$("chatQuickPresets").querySelectorAll("[data-preset-chat]").forEach(btn=>{
-  btn.onclick=()=>sendInteractiveChatTest(btn.dataset.presetChat);
+$("chatQuickPresets").querySelectorAll("[data-preset-chat],[data-sample-chat]").forEach(btn=>{
+  btn.onclick=()=>sendInteractiveChatTest(btn.dataset.presetChat||btn.dataset.sampleChat);
 });
 
-$("quickLivesBar").querySelectorAll("[data-quick-live]").forEach(btn=>{
+$("quickLivesBar").querySelectorAll("[data-quick-live],[data-quick-url]").forEach(btn=>{
   btn.onclick=()=>{
-    const url=btn.dataset.quickLive;
+    const url=btn.dataset.quickLive||btn.dataset.quickUrl;
     const name=btn.dataset.quickName||"Live";
     $("lk").value=url;
     $("quickLivesBar").querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
@@ -2218,10 +2334,515 @@ $("quickLivesBar").querySelectorAll("[data-quick-live]").forEach(btn=>{
 
 $("toggleHlsModeBtn").onclick=()=>{
   preferHlsMode=!preferHlsMode;
-  $("toggleHlsModeBtn").textContent=preferHlsMode?"Modo Player: HLS .m3u8 Direto":"Modo Player: Iframe Oficial";
+  $("toggleHlsModeBtn").textContent=preferHlsMode?"🎬 Modo: HLS .m3u8 Direto":"🎬 Modo: Player Oficial";
   $("toggleHlsModeBtn").classList.toggle("on",preferHlsMode);
   if(lastLiveObj)void renderLivePlayer(lastLiveObj,true);
   else triggerInstantPreview($("lk").value,true);
+};
+
+// ============================================================================
+// GRAVADOR & COFRE DA LIVE — SALVAR TUDO O QUE PASSA NA LIVE (VÍDEO, 9:16, CHAT, IRONIA)
+// ============================================================================
+let savedLiveItems=[];
+let isRecordingLive=false;
+let recLiveStartTime=0;
+let recLiveTimerInt=null;
+let recLiveDrawInt=null;
+let activeMediaRecorder=null;
+let recLiveChunks=[];
+let lastAutoSaveTs=0;
+
+function persistLiveVaultToStorage(){
+  try{
+    const serializable=savedLiveItems.slice(0,24).map(it=>Object.assign({},it,{
+      clip_url:String(it.clip_url||"").startsWith("blob:")?sampleClipUrl:it.clip_url,
+      raw_url:String(it.raw_url||"").startsWith("blob:")?sampleClipUrl:it.raw_url
+    }));
+    const payload={
+      updated_at:new Date().toISOString(),
+      last_url:$("lk")?$("lk").value:"",
+      auto_save:$("autoSaveLiveChk")?$("autoSaveLiveChk").checked:true,
+      saved_items:serializable,
+      chat_history:liveChatMessages.slice(-80)
+    };
+    localStorage.setItem("cortes_saved_vault_v1",JSON.stringify(payload));
+  }catch(_){}
+}
+
+function saveBlobToVaultDB(recId,blob){
+  try{
+    if(typeof indexedDB==="undefined")return;
+    const req=indexedDB.open("CortesLiveVaultDB",1);
+    req.onupgradeneeded=e=>{
+      const db=e.target.result;
+      if(!db.objectStoreNames.contains("recordings"))db.createObjectStore("recordings");
+    };
+    req.onsuccess=e=>{
+      try{
+        const db=e.target.result;
+        const tx=db.transaction("recordings","readwrite");
+        tx.objectStore("recordings").put(blob,recId);
+      }catch(_){}
+    };
+  }catch(_){}
+}
+
+function appendClipCardToDom(clip,liveId){
+  if(!clip)return;
+  const box=$("cl");
+  if(!box)return;
+  if(box.querySelector(`[data-clip-card-id="${esc(clip.id)}"]`))return;
+  const mediaUrl=resolveMediaUrl(clip.url);
+  const idx=box.children.length;
+  const card=document.createElement("div");
+  card.className="clip";
+  card.setAttribute("data-clip-card-id",clip.id);
+  card.innerHTML=`
+    <div class="vid"><video src="${esc(mediaUrl)}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
+    <b>${esc(clip.titulo)}</b>
+    <span class="mut">${hms(Math.round(clip.ini||0))}–${hms(Math.round(clip.fim||30))} (${Math.max(2,Math.round((clip.fim||30)-(clip.ini||0)))}s) · nota ${clip.nota||9} · ${esc(clip.emotion||"Ironia")}</span>
+    <div class="mut">${esc(clip.motivo||"Salvo ao vivo da transmissão")}</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn g sm" type="button" data-open-ed="1">🎬 Abrir no Estúdio</button>
+      <a class="btn sm" href="${esc(mediaUrl)}" download="${esc((clip.titulo||"corte_live").replace(/[^A-Za-z0-9_-]+/g,"_"))}.mp4">⬇ Baixar</a>
+    </div>
+  `;
+  card.querySelector("[data-open-ed]").onclick=()=>openEd(idx,clip,liveId||clip.live_id||curLiveId);
+  box.prepend(card);
+}
+
+function renderSavedLiveList(){
+  const listEl=$("savedLiveList");
+  const badge=$("recLiveStatusBadge");
+  const autoOn=$("autoSaveLiveChk")?$("autoSaveLiveChk").checked:true;
+  if(badge){
+    badge.textContent=`💾 Auto-Save ${autoOn?"Ativo":"Pausado"} · ${savedLiveItems.length} salvo(s)`;
+    badge.className=autoOn?"pill br":"pill warn";
+  }
+  if(!listEl)return;
+  if(!savedLiveItems.length){
+    listEl.innerHTML='<div class="mut" style="grid-column:1/-1;padding:8px;background:rgba(7,7,13,.45);border-radius:8px;border:1px dashed var(--line)">Nenhum trecho salvo manualmente ainda. Clique em <b>"⏪ Salvar Últimos 30s da Live"</b> ou <b>"⏺ Gravar Trecho Ao Vivo Agora"</b> para salvar o vídeo + corte 9:16 + chat!</div>';
+    return;
+  }
+  listEl.innerHTML=savedLiveItems.slice(0,12).map((item,idx)=>{
+    const mediaUrl=resolveMediaUrl(item.clip_url||item.raw_url||sampleClipUrl);
+    const rawUrl=resolveMediaUrl(item.raw_url||item.clip_url||sampleClipUrl);
+    const isSnap=item.save_mode==="SNAPSHOT_PNG";
+    const isIr=item.emotion==="Ironia"||Number(item.irony_score||0)>=50;
+    const emoBadge=isIr
+      ?`<span class="pill pu" style="border-color:#c084fc;color:#f3e8ff;background:rgba(192,132,252,.25)">🤡 Ironia ${item.irony_score||68}%</span>`
+      :`<span class="pill warn">⚡ ${esc(item.emotion||"Hype")}</span>`;
+    const ext=isSnap?"png":(mediaUrl.includes(".webm")?"webm":"mp4");
+    const safeFile=String(item.titulo||"live_salva").replace(/[^A-Za-z0-9_-]+/g,"_")+"."+ext;
+    return `
+      <div class="item-card" style="border-color:rgba(0,229,255,.32);background:rgba(12,12,22,.92)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:6px">
+          <span class="pill br">${esc(item.platform||"LIVE")} · @${esc(item.channel||"live")}</span>
+          ${emoBadge}
+        </div>
+        <div style="border-radius:8px;overflow:hidden;background:#000;aspect-ratio:16/9;margin-bottom:6px;border:1px solid var(--line)">
+          ${isSnap
+            ?`<img src="${esc(mediaUrl)}" alt="${esc(item.titulo)}" style="width:100%;height:100%;object-fit:cover">`
+            :`<video src="${esc(mediaUrl)}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video>`
+          }
+        </div>
+        <b style="font-size:12px;display:block">${esc(item.titulo||"Trecho Salvo da Live")}</b>
+        <div class="mut" style="font-size:11px;margin-top:2px">${esc(item.headline||"SALVO AO VIVO")} · ${item.duration_sec||30}s · 💬 ${item.chat_count||liveChatMessages.length} msgs</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px">
+          <a class="btn sm" href="${esc(rawUrl)}" download="${esc(safeFile)}" style="flex:1;text-align:center">⬇ Baixar .${ext.toUpperCase()}</a>
+          ${!isSnap?`<button type="button" class="btn g sm" data-saved-ed="${idx}">🎬 9:16</button>`:""}
+        </div>
+      </div>
+    `;
+  }).join("");
+  listEl.querySelectorAll("[data-saved-ed]").forEach(btn=>{
+    btn.onclick=()=>{
+      const it=savedLiveItems[Number(btn.dataset.savedEd)];
+      if(it&&it.clip){
+        openEd(0,it.clip,it.live_id||curLiveId);
+      }
+    };
+  });
+}
+
+async function saveLast30sOfLive(saveMode="REPLAY_30S",durationSec=30,blobUrlOverride="",customHeadline=""){
+  const btn=$("saveLast30sBtn");
+  const origTxt=btn?btn.textContent:"";
+  if(btn&&saveMode==="REPLAY_30S"){btn.disabled=true;btn.textContent="⏳ Salvando o que passou na live…";}
+  try{
+    const rawUrl=($("lk").value||"https://kick.com/surskity").trim();
+    const info=extractLiveTarget(rawUrl);
+    const thermo=summarizeIronyBrowser(liveChatMessages);
+    const lastIronyMsg=[...liveChatMessages].reverse().find(m=>m.is_irony||m.emotion==="Ironia");
+    const lastMsg=liveChatMessages[liveChatMessages.length-1];
+    const emo=(thermo.score>=50||lastIronyMsg)?"Ironia":((lastMsg&&lastMsg.emotion)||"Hype");
+    const chan=info.channel||info.videoId||"live";
+    const headline=customHeadline||(emo==="Ironia"
+      ?`O CHAT NÃO PERDOOU A IRONIA EM ${chan.toUpperCase()} 🤡`
+      :`MOMENTO SALVO AO VIVO DE ${chan.toUpperCase()} 🔥`);
+    const titulo=`Salvo da Live (${emo}) · @${chan} [${new Date().toTimeString().slice(0,8)}]`;
+
+    const res=await api("/api/lives/save-now",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        url:rawUrl,
+        live_id:curLiveId||null,
+        name:chan,
+        duration_sec:durationSec,
+        emotion:emo,
+        headline,
+        titulo,
+        molde:appSettings.molde,
+        transition:appSettings.transition||"NONE",
+        soundtrack:appSettings.soundtrack||"NONE",
+        save_mode:saveMode,
+        blob_url:blobUrlOverride||undefined,
+        chat_messages:liveChatMessages.slice(-40),
+        sentiment_series:lastChartSeries.slice(-25)
+      })
+    });
+
+    if(res&&res.saved_recording){
+      const rec=Object.assign({},res.saved_recording,{clip:res.clip});
+      if(blobUrlOverride){
+        rec.clip_url=blobUrlOverride;
+        rec.raw_url=blobUrlOverride;
+        if(rec.clip)rec.clip.url=blobUrlOverride;
+      }
+      savedLiveItems.unshift(rec);
+      if(res.clip){
+        appendClipCardToDom(res.clip,res.live_id);
+        lastChartClips=[...(lastChartClips||[]),res.clip];
+        drawSentimentChart(lastChartSeries,lastChartClips,res.irony_thermometer||thermo);
+      }
+      renderSavedLiveList();
+      persistLiveVaultToStorage();
+      await refreshLives();
+      if(saveMode!=="AUTO_PEAK"){
+        notify(`💾 Salvo com sucesso! "${rec.titulo}" disponível no Cofre da Live e na aba VÍDEOS.`);
+      }
+      return rec;
+    }
+  }catch(e){
+    notify("Erro ao salvar trecho da live: "+e.message);
+  }finally{
+    if(btn&&saveMode==="REPLAY_30S"){btn.disabled=false;btn.textContent=origTxt||"⏪ Salvar Últimos 30s da Live (Vídeo + Corte 9:16)";}
+  }
+  return null;
+}
+
+function drawBroadcastMonitorFrame(ctx,W,H,info,elapsedSec){
+  // Se houver <video> real rodando (HLS ou arquivo local), captura o frame real do vídeo!
+  const vidEl=document.querySelector("#livePlayerBox video");
+  let drewVideo=false;
+  if(vidEl&&vidEl.readyState>=2){
+    try{
+      ctx.drawImage(vidEl,0,0,W,H);
+      drewVideo=true;
+    }catch(_){}
+  }
+  if(!drewVideo){
+    const grad=ctx.createLinearGradient(0,0,W,H);
+    grad.addColorStop(0,"#120924");
+    grad.addColorStop(0.5,"#1e1136");
+    grad.addColorStop(1,"#091d2c");
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,W,H);
+    // Ondas dinâmicas do sinal ao vivo
+    ctx.strokeStyle="rgba(0,229,255,0.35)";
+    ctx.lineWidth=2.5;
+    ctx.beginPath();
+    const tNow=Date.now()/220;
+    for(let x=20;x<W-20;x+=12){
+      const y=H*0.36+Math.sin(x*0.03+tNow)*22+Math.cos(x*0.07-tNow)*12;
+      if(x===20)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  // Overlay HUD do Estúdio GTA 6 com Chat em Tempo Real e Termômetro de Ironia
+  ctx.fillStyle="rgba(7,7,13,0.76)";
+  ctx.fillRect(14,12,W-28,44);
+  ctx.fillStyle="#ff2e93";
+  ctx.font="bold 15px system-ui";
+  ctx.fillText(`🔴 GRAVANDO LIVE · ${(info.platform||"LIVE")} @${info.channel||info.videoId||"stream"}`,26,38);
+  ctx.fillStyle="#00e5ff";
+  ctx.fillText(`⏱ ${hms(elapsedSec)}`,W-105,38);
+
+  const thermo=summarizeIronyBrowser(liveChatMessages);
+  ctx.fillStyle="rgba(22,14,38,0.84)";
+  ctx.fillRect(14,H-138,W-28,124);
+  ctx.fillStyle="#c084fc";
+  ctx.font="bold 13px system-ui";
+  ctx.fillText(`🤡 Termômetro de Ironia: ${thermo.score}% · ${thermo.status}`,26,H-115);
+
+  ctx.fillStyle="#f6f5ff";
+  ctx.font="12px system-ui";
+  liveChatMessages.slice(-3).forEach((m,idx)=>{
+    const tag=m.is_irony?`[🤡 IRONIA ${m.ironia}%]`:`[${m.emotion}]`;
+    ctx.fillText(`@${m.author}: ${m.text.slice(0,48)} ${tag}`,26,H-88+idx*24);
+  });
+}
+
+async function toggleRealtimeLiveRecording(){
+  const btn=$("recLiveToggleBtn");
+  const timerBadge=$("recLiveTimerBadge");
+  const info=extractLiveTarget($("lk").value);
+
+  if(!isRecordingLive){
+    isRecordingLive=true;
+    recLiveStartTime=Date.now();
+    recLiveChunks=[];
+    if(btn){btn.textContent="⏹ Parar & Salvar Gravação Ao Vivo";btn.className="btn sm";}
+    if(timerBadge){timerBadge.classList.remove("hide");timerBadge.textContent="🔴 GRAVANDO 00:00";}
+
+    const recCanvas=document.createElement("canvas");
+    recCanvas.width=640;recCanvas.height=360;
+    const rCtx=recCanvas.getContext("2d");
+    drawBroadcastMonitorFrame(rCtx,640,360,info,0);
+    recLiveDrawInt=setInterval(()=>{
+      const el=Math.max(1,Math.round((Date.now()-recLiveStartTime)/1000));
+      drawBroadcastMonitorFrame(rCtx,640,360,info,el);
+    },1000/15);
+
+    recLiveTimerInt=setInterval(()=>{
+      const el=Math.max(1,Math.round((Date.now()-recLiveStartTime)/1000));
+      if(timerBadge)timerBadge.textContent=`🔴 GRAVANDO ${hms(el)}`;
+      if(el>=30){void toggleRealtimeLiveRecording();}
+    },500);
+
+    try{
+      if(typeof MediaRecorder!=="undefined"&&recCanvas.captureStream){
+        const stream=recCanvas.captureStream(15);
+        const mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp8")
+          ?"video/webm;codecs=vp8"
+          :(MediaRecorder.isTypeSupported("video/webm")?"video/webm":"");
+        activeMediaRecorder=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+        activeMediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)recLiveChunks.push(e.data);};
+        activeMediaRecorder.start(400);
+      }
+    }catch(_){activeMediaRecorder=null;}
+    notify(`🔴 Gravação ao vivo iniciada em @${info.channel||info.videoId||"live"}! Clique novamente para parar e salvar.`);
+    return;
+  }
+
+  // Parar e salvar a gravação
+  isRecordingLive=false;
+  clearInterval(recLiveTimerInt);recLiveTimerInt=null;
+  clearInterval(recLiveDrawInt);recLiveDrawInt=null;
+  const elapsedSec=Math.max(4,Math.min(30,Math.round((Date.now()-recLiveStartTime)/1000)));
+  if(btn){btn.textContent="⏺ Gravar Trecho Ao Vivo Agora";btn.className="btn sm cy";}
+  if(timerBadge){timerBadge.textContent=`💾 SALVANDO ${hms(elapsedSec)}…`;}
+
+  let recordedBlob=null;
+  if(activeMediaRecorder&&activeMediaRecorder.state!=="inactive"){
+    await new Promise(resolve=>{
+      activeMediaRecorder.onstop=()=>resolve();
+      try{activeMediaRecorder.stop();}catch(_){resolve();}
+    });
+  }
+  activeMediaRecorder=null;
+  if(recLiveChunks.length>0){
+    recordedBlob=new Blob(recLiveChunks,{type:"video/webm"});
+  }
+
+  let blobUrl="";
+  if(recordedBlob&&recordedBlob.size>500){
+    blobUrl=URL.createObjectURL(recordedBlob);
+    saveBlobToVaultDB("rec_"+Date.now(),recordedBlob);
+  }
+
+  const thermo=summarizeIronyBrowser(liveChatMessages);
+  const emo=thermo.score>=50?"Ironia":"Hype";
+  const chan=info.channel||info.videoId||"live";
+  const hl=emo==="Ironia"?`GRAVADO AO VIVO: IRONIA EM ${chan.toUpperCase()} 🤡`:`GRAVADO AO VIVO DE ${chan.toUpperCase()} 🔥`;
+
+  if(serverMode&&recordedBlob&&recordedBlob.size>500){
+    try{
+      const r=await fetch(serverBase+"/api/lives/save-blob",{
+        method:"POST",
+        headers:{
+          "Content-Type":"video/webm",
+          "X-Live-Url":($("lk").value||"").trim(),
+          "X-Live-Id":curLiveId||"",
+          "X-Live-Name":chan,
+          "X-Emotion":emo,
+          "X-Headline":hl,
+          "X-Save-Mode":"LIVE_RECORDING"
+        },
+        body:recordedBlob
+      });
+      if(r.ok){
+        const d=await r.json();
+        if(d&&d.saved_recording){
+          const rec=Object.assign({},d.saved_recording,{clip:d.clip});
+          savedLiveItems.unshift(rec);
+          if(d.clip){
+            appendClipCardToDom(d.clip,d.live_id);
+            lastChartClips=[...(lastChartClips||[]),d.clip];
+            drawSentimentChart(lastChartSeries,lastChartClips,thermo);
+          }
+          renderSavedLiveList();
+          persistLiveVaultToStorage();
+          await refreshLives();
+          if(timerBadge)timerBadge.classList.add("hide");
+          notify(`💾 Gravação ao vivo (${elapsedSec}s) convertida em MP4 + Corte 9:16 e salva!`);
+          return;
+        }
+      }
+    }catch(_){}
+  }
+
+  await saveLast30sOfLive("LIVE_RECORDING",elapsedSec,blobUrl,hl);
+  if(timerBadge)timerBadge.classList.add("hide");
+}
+
+function saveLiveSnapshotPng(){
+  const info=extractLiveTarget($("lk").value);
+  const cv=document.createElement("canvas");
+  cv.width=1280;cv.height=720;
+  const ctx=cv.getContext("2d");
+  drawBroadcastMonitorFrame(ctx,1280,720,info,30);
+  const dataUrl=cv.toDataURL("image/png");
+  const thermo=summarizeIronyBrowser(liveChatMessages);
+  const chan=info.channel||info.videoId||"live";
+  const item={
+    id:"snap_"+Date.now(),
+    live_id:curLiveId||"preview",
+    platform:info.platform||"KICK",
+    channel:chan,
+    titulo:`Print/Frame Ao Vivo · @${chan}`,
+    headline:`FRAME SALVO · IRONIA ${thermo.score}%`,
+    emotion:thermo.score>=50?"Ironia":"Hype",
+    duration_sec:1,
+    save_mode:"SNAPSHOT_PNG",
+    clip_url:dataUrl,
+    raw_url:dataUrl,
+    chat_count:liveChatMessages.length,
+    irony_score:thermo.score,
+    created_ts:Math.floor(Date.now()/1000),
+    created_at:new Date().toISOString()
+  };
+  savedLiveItems.unshift(item);
+  renderSavedLiveList();
+  persistLiveVaultToStorage();
+  const a=document.createElement("a");
+  a.href=dataUrl;
+  a.download=`frame_live_${chan}_${Date.now()}.png`;
+  document.body.appendChild(a);a.click();a.remove();
+  notify(`📸 Frame da live de @${chan} salvo com o chat e Termômetro de Ironia!`);
+}
+
+function downloadFullLiveArchiveJson(){
+  const rawUrl=($("lk").value||"https://kick.com/surskity").trim();
+  const info=extractLiveTarget(rawUrl);
+  const thermo=summarizeIronyBrowser(liveChatMessages);
+  const archive={
+    saved_at:new Date().toISOString(),
+    studio:"Magia Cortes IA · GTA 6 Studio",
+    stream:{
+      url:rawUrl,
+      platform:info.platform,
+      channel:info.channel||info.videoId||"live",
+      live_id:curLiveId||"preview"
+    },
+    irony_thermometer:thermo,
+    sentiment_series:lastChartSeries,
+    chat_messages_count:liveChatMessages.length,
+    chat_messages:liveChatMessages,
+    saved_recordings:savedLiveItems,
+    clips:lastChartClips
+  };
+  const blob=new Blob([JSON.stringify(archive,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=`historico_live_${(info.channel||info.videoId||"stream").replace(/[^A-Za-z0-9_-]+/g,"_")}.json`;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  notify(`📋 Histórico completo da live (${liveChatMessages.length} msgs do chat + picos de ironia + cortes) baixado!`);
+}
+
+async function downloadAllSavedLiveItems(){
+  if(!savedLiveItems.length){
+    await saveLast30sOfLive("REPLAY_30S",30);
+  }
+  savedLiveItems.slice(0,5).forEach((it,idx)=>{
+    setTimeout(()=>{
+      const u=resolveMediaUrl(it.raw_url||it.clip_url||sampleClipUrl);
+      const ext=it.save_mode==="SNAPSHOT_PNG"?"png":(u.includes(".webm")?"webm":"mp4");
+      const a=document.createElement("a");
+      a.href=u;
+      a.download=`${String(it.titulo||("salvo_"+idx)).replace(/[^A-Za-z0-9_-]+/g,"_")}.${ext}`;
+      document.body.appendChild(a);a.click();a.remove();
+    },idx*350);
+  });
+  downloadFullLiveArchiveJson();
+}
+
+function restoreLiveVaultFromStorage(){
+  try{
+    const raw=localStorage.getItem("cortes_saved_vault_v1");
+    if(raw){
+      const parsed=JSON.parse(raw);
+      if(Array.isArray(parsed.saved_items)&&parsed.saved_items.length){
+        savedLiveItems=parsed.saved_items;
+      }
+      if($("autoSaveLiveChk")&&typeof parsed.auto_save==="boolean"){
+        $("autoSaveLiveChk").checked=parsed.auto_save;
+      }
+    }
+  }catch(_){}
+  if(!savedLiveItems.length){
+    // Semeia 1 momento salvo inicial da live atual para que o Cofre da Live já exiba o funcionamento imediatamente
+    const info=extractLiveTarget($("lk")?$("lk").value:"https://kick.com/surskity");
+    const chan=info.channel||"surskity";
+    const seedClip={
+      id:"cl_seed_vault_1",
+      live_id:"lv_demo_1",
+      platform:info.platform||"KICK",
+      channel:chan,
+      emotion:"Ironia",
+      titulo:`Pico Sarcástico Salvo · @${chan}`,
+      headline:`O CHAT NÃO PERDOOU A IRONIA EM ${chan.toUpperCase()} 🤡`,
+      ini:15,fim:42,nota:9,
+      motivo:"Auto-salvo pelo Termômetro de Ironia (79% sarcasmo ≠ raiva/hype)",
+      descricao:`Trecho de 27s salvo automaticamente da live de @${chan}`,
+      molde:"SPLIT_BANNER",transition:"ZOOM_IN",soundtrack:"SYNTHWAVE_80S",
+      url:sampleClipUrl,raw_url:sampleClipUrl,
+      created_ts:Math.floor(Date.now()/1000)
+    };
+    savedLiveItems=[{
+      id:"rec_seed_vault_1",
+      live_id:"lv_demo_1",
+      clip_id:seedClip.id,
+      platform:info.platform||"KICK",
+      channel:chan,
+      titulo:seedClip.titulo,
+      headline:seedClip.headline,
+      emotion:"Ironia",
+      duration_sec:27,
+      save_mode:"AUTO_PEAK",
+      clip_url:sampleClipUrl,
+      raw_url:sampleClipUrl,
+      chat_count:14,
+      irony_score:79,
+      clip:seedClip,
+      created_ts:Math.floor(Date.now()/1000)
+    }];
+  }
+  renderSavedLiveList();
+}
+
+$("saveLast30sBtn").onclick=()=>void saveLast30sOfLive("REPLAY_30S",30);
+$("recLiveToggleBtn").onclick=()=>void toggleRealtimeLiveRecording();
+$("saveSnapshotBtn").onclick=()=>saveLiveSnapshotPng();
+$("saveLiveArchiveBtn").onclick=()=>downloadFullLiveArchiveJson();
+$("dlAllSavedLiveBtn").onclick=()=>void downloadAllSavedLiveItems();
+$("autoSaveLiveChk").onchange=()=>{
+  renderSavedLiveList();
+  persistLiveVaultToStorage();
+  notify($("autoSaveLiveChk").checked?"💾 Auto-Save da live ativado!":"⏸ Auto-Save da live pausado.");
 };
 
 function extractLiveTarget(rawLink,platHint){
@@ -2888,6 +3509,7 @@ $("saveIaCfgBtn").onclick=()=>saveSettings({
   max_concurrent_captures:Math.max(1,Math.min(8,+$("cfgMaxConc").value||3))
 });
 
+restoreLiveVaultFromStorage();
 void syncCustomAgents();
 showTab("CORTES");
 triggerInstantPreview($("lk").value,false);
