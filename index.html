@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cortes ao Vivo · CORTES·IA</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff3b1f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%230b0b10'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23ff3b1f'/%3E%3C/svg%3E">
+<style>
+@font-face{
+  font-family:"CortesPixel";
+  src:url("./fonts/cortes_pixel.ttf") format("truetype");
+  font-weight:400 700;
+  font-display:swap;
+}
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#0b0b10;--panel:#15151c;--in:#0f0f15;--line:#2b2b36;--tx:#f1f1f5;--mut:#8f8fa0;
+  --acc:#ff3b1f;--y:#ffd23f;--pu:#8b5cf6;--gr:#22e07a;
+  --px:"CortesPixel",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#eeeef2;--panel:#fff;--in:#f5f5f8;--line:#d6d6de;--tx:#16161c;--mut:#666674;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#eeeef2;--panel:#fff;--in:#f5f5f8;--line:#d6d6de;--tx:#16161c;--mut:#666674;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.hdr-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0;max-width:100%}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--px);font-size:13px;color:var(--acc);white-space:nowrap}
+.logo b{width:24px;height:24px;border-radius:50%;background:var(--acc);box-shadow:inset 0 0 0 5px var(--bg),inset 0 0 0 9px var(--acc);display:inline-block}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%}
+nav button{background:none;border:0;color:var(--mut);padding:9px 11px;font:9px var(--px);cursor:pointer;border-radius:8px;white-space:nowrap}
+nav button.on{color:var(--tx);background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+main{display:grid;grid-template-columns:255px 1fr;gap:14px;padding:14px;max-width:1160px;margin:auto}
+@media(max-width:780px){main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.hide{display:none!important}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:9px;padding:11px 14px;font:700 13px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+.btn:hover{filter:brightness(1.06)}
+.btn.g{background:var(--in);color:var(--tx);border:1px solid var(--line)}
+.btn.sm{padding:7px 10px;font-size:12px}
+.btn.w{width:100%}
+.side h4,.card h3{font:10px var(--px);margin:16px 0 8px;color:var(--mut)}
+.card h3{color:var(--tx);margin:0 0 10px;font-size:11px;line-height:1.6}
+input[type=text],input[type=number],input[type=url],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--in);color:var(--tx);font:inherit;margin-top:6px}
+label{display:block;font-size:12px;color:var(--mut);margin-top:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:130px}
+.chk{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px;cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:#1a73e8}
+.lv{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:9px 4px;border-bottom:1px solid var(--line);font-size:12.5px;cursor:pointer}
+.lv:hover{background:rgba(255,59,31,.06)}
+.lv span{color:var(--mut)}
+.mut{color:var(--mut);font-size:12.5px}
+.head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dot{width:10px;height:10px;border-radius:50%;background:#ef2b2b;animation:bl 1.2s infinite}
+@keyframes bl{50%{opacity:.3}}
+.prev{margin:12px 0;height:150px;border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(180deg,#2a2a6e,#c0467c 55%,#ff9a4a);border:1px solid var(--line)}
+.prev i{position:absolute;left:12px;bottom:10px;font:9px var(--px);color:var(--y);font-style:normal}
+.prev u{position:absolute;right:14px;top:14px;background:#ef2b2b;color:#fff;font:8px var(--px);padding:5px 7px;border-radius:4px;text-decoration:none}
+.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:10px}
+.clip{cursor:pointer}
+.vid{aspect-ratio:9/16;border-radius:10px;position:relative;overflow:hidden;background:#111;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.cap{background:var(--acc);color:#fff;font:800 11.5px system-ui;padding:6px 8px;text-align:center;text-transform:uppercase;border-bottom:3px solid var(--y)}
+.clip b{display:block;margin-top:8px}
+details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
+#log{margin-top:8px;max-height:140px;overflow:auto;font:12px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)}
+.film{height:58px;border-radius:6px;border:3px dashed #fff;background:repeating-linear-gradient(90deg,#6d4bd6 0 40px,#8b6cf0 40px 44px);animation:sl 8s linear infinite;background-size:88px 100%}
+@keyframes sl{to{background-position:-88px 0}}
+.stage{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0}
+.mas{text-align:center;max-width:125px}.mas svg{width:46px;animation:bo 1s steps(2) infinite}
+@keyframes bo{50%{transform:translateY(-5px)}}
+.bub{background:#fff;color:#111;font:700 10px system-ui;padding:7px 9px;border-radius:6px;margin-top:6px;min-height:30px;border:1px solid #e2e4e9}
+.tag{font:8px var(--px);background:var(--y);color:#111;padding:5px 6px;border-radius:4px;display:inline-block;margin-top:6px}
+.thumb{width:150px;height:96px;border:2px solid var(--pu);border-radius:6px;background:linear-gradient(135deg,#40306e,#2a2a40);position:relative;display:flex;align-items:center;justify-content:center;font-size:32px}
+.thumb s{position:absolute;bottom:4px;left:6px;font:7px var(--px);text-decoration:none;color:var(--y)}
+.lk{width:30px;border-top:2px dashed var(--y)}
+.phone{width:168px;aspect-ratio:9/16;border:3px solid #444;border-radius:18px;background:#0d0d16;padding:6px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.phone-video-box{flex:1;position:relative;border-radius:10px;overflow:hidden;background:#161622;display:flex;align-items:center;justify-content:center}
+.phone-video-box video{width:100%;height:100%;object-fit:cover;display:block}
+.wave{position:relative;display:flex;align-items:center;gap:2px;height:66px;margin-top:8px}
+.wave i{flex:1;background:var(--gr);border-radius:2px;min-width:2px;transition:height .18s}
+.pbar-wrap{height:8px;border-radius:4px;background:var(--in);border:1px solid var(--line);margin-top:6px;overflow:hidden}
+.pbar{height:100%;border-radius:4px;background:var(--pu);width:0%;transition:width .15s}
+.mk{position:absolute;top:0;font:7px var(--px);background:var(--y);color:#111;padding:3px 5px;border-radius:3px;z-index:2}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px}
+.item-card{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--in)}
+.item-card.active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(34,224,122,.16);color:var(--gr)}
+.pill.warn{background:rgba(255,210,63,.18);color:var(--y)}
+.pill.err{background:rgba(255,59,31,.18);color:var(--acc)}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#16161c;color:#fff;padding:10px 16px;border-radius:10px;font-size:12.5px;z-index:99;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-left">
+    <div class="logo"><b></b>CORTES·IA</div>
+    <nav id="nav"></nav>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span class="pill warn" id="modeBadge">Modo Web Online</span>
+    <button class="btn g sm" id="themeBtn" type="button">Tema</button>
+  </div>
+</header>
+
+<main>
+  <aside class="card side">
+    <button class="btn w" id="newBtn" type="button">+ Cortar live AO VIVO</button>
+    <h4>NOVA LIVE</h4>
+    <input type="text" id="nn" placeholder="nome (ex.: gta6-live-do-fulano)">
+    <input type="text" id="nl" placeholder="link da live (YouTube, Twitch…)">
+    <button class="btn w" id="mk" type="button" style="margin-top:10px">Criar</button>
+    <h4>LIVES</h4>
+    <div id="lives"><div class="mut">Carregando...</div></div>
+  </aside>
+
+  <section style="min-width:0">
+    <div id="tab-CORTES" class="tab-panel">
+      <div class="card" id="fm">
+        <h3>■ CORTAR UMA LIVE AO VIVO</h3>
+        <p class="mut" style="margin:0">O agente entra na live ou vídeo, transcreve com Whisper, lê o chat da Twitch, escolhe os melhores cortes com o Claude e monta tudo em 9:16 com facecam e legenda.</p>
+        <label>Link da live ou VOD (Twitch, Kick, YouTube)
+          <input type="text" id="lk" value="https://www.twitch.tv/alanzoka">
+        </label>
+        <div class="row">
+          <label>Exigência (nota mínima de 1 a 10)
+            <input type="number" id="mn" min="1" max="10" value="6">
+          </label>
+          <label>Máximo de cortes
+            <input type="number" id="mx" min="1" max="20" value="3">
+          </label>
+        </div>
+        <label>O que você quer que vire corte (opcional)
+          <input type="text" id="hint" placeholder="ex.: quando ele reagir ao trailer, quando o chat explodir">
+        </label>
+        <label>Nomes difíceis (para a legenda acertar)
+          <input type="text" id="names" placeholder="ex.: Dava Jones, Lucia, Vice City">
+        </label>
+        <label class="chk"><input type="checkbox" id="dirBroll" checked> B-roll do diretor (pôr clipes quando fala algo)</label>
+        <label class="chk"><input type="checkbox" id="ytBroll" checked> Buscar B-roll no YouTube quando não tiver no meu banco</label>
+        <div class="row">
+          <label>Postar automático no YouTube
+            <select id="auto">
+              <option value="no">não, só montar</option>
+              <option value="yes">sim, postar automático (privado YT)</option>
+            </select>
+          </label>
+          <label>Vídeos por dia
+            <input type="number" id="vpd" min="1" max="20" value="3">
+          </label>
+        </div>
+        <button class="btn" id="go" type="button" style="margin-top:14px">Começar a assistir</button>
+      </div>
+
+      <div class="card hide" id="lv">
+        <div class="head">
+          <span class="dot" id="lvDot"></span>
+          <b id="ln"></b>
+          <span class="mut" id="st"></span>
+          <span style="flex:1"></span>
+          <button class="btn g sm" id="stop" type="button">parar</button>
+        </div>
+        <a class="mut" id="ll" target="_blank" rel="noopener"></a>
+        <div class="prev"><u>AO VIVO</u><i id="prevTxt">ouvindo…</i></div>
+        <div class="clips" id="cl"></div>
+        <details open><summary>▶ o que o agente está fazendo</summary><div id="log"></div></details>
+      </div>
+
+      <div class="card hide" id="ed" style="margin-top:14px">
+        <h3 id="et">VÍDEO 1 DE 1</h3>
+        <div class="film"></div>
+        <div class="stage">
+          <div class="mas">
+            <svg viewBox="0 0 8 10" shape-rendering="crispEdges"><path fill="#e11d2e" d="M2 0h4v1H2zM1 1h6v1H1zM1 5h1v2H1zM6 5h1v2H6z"/><path fill="#f3c6a0" d="M2 2h4v3H2z"/><path fill="#222" d="M3 3h1v1H3zM5 3h1v1H5z"/><path fill="#2b5bd6" d="M2 5h4v3H2zM2 8h1v2H2zM5 8h1v2H5z"/></svg>
+            <div class="bub" id="bb">3 MOMENTOS CORTADOS!</div>
+          </div>
+          <div class="thumb">🧑<s id="srcThumbLbl">VÍDEO 1</s></div>
+          <div class="lk"></div>
+          <div class="phone">
+            <div class="cap" id="hl">HEADLINE DO CORTE</div>
+            <div class="phone-video-box" id="phoneVideoBox"></div>
+          </div>
+          <div class="lk"></div>
+          <div class="mas">
+            <svg viewBox="0 0 8 10" shape-rendering="crispEdges"><path fill="#e11d2e" d="M2 0h4v1H2zM1 1h6v1H1zM1 5h1v2H1zM6 5h1v2H6z"/><path fill="#f3c6a0" d="M2 2h4v3H2z"/><path fill="#222" d="M3 3h1v1H3zM5 3h1v1H5z"/><path fill="#2b5bd6" d="M2 5h4v3H2zM2 8h1v2H2zM5 8h1v2H5z"/></svg>
+            <span class="tag" id="masTag">headline</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" id="ver" type="button">▶ Ver o show</button>
+          <button class="btn g" id="prox" type="button">⏭ Próximo</button>
+          <button class="btn g" id="som" type="button">🔊 Som</button>
+          <a class="btn g" id="dlClip" download>⬇ Baixar MP4</a>
+          <button class="btn g" id="queueYtBtn" type="button">📤 Fila YouTube</button>
+          <button class="btn g" id="editRoteiroBtn" type="button">✏ Editar Roteiro</button>
+          <button class="btn g" id="fe" type="button">Fechar</button>
+        </div>
+
+        <p class="mut" id="dt" style="margin-top:10px"></p>
+        <div class="wave" id="wv">
+          <span class="mk" style="left:12%" id="mk1">0:08</span>
+          <span class="mk" style="left:46%" id="mk2">0:21</span>
+          <span class="mk" style="left:82%" id="mk3">0:36</span>
+        </div>
+        <div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+      </div>
+    </div>
+
+    <div id="tab-VÍDEOS" class="tab-panel hide">
+      <div class="card">
+        <h3>■ VÍDEOS E UPLOAD LOCAL</h3>
+        <p class="mut">Suba um vídeo MP4 direto do celular/PC ou crie cortes manuais em qualquer live/VOD já gravada.</p>
+        <div class="row" style="align-items:flex-end">
+          <label>Enviar vídeo MP4 do aparelho
+            <input type="file" id="uploadVideoInput" accept="video/mp4,video/quicktime,video/webm" style="margin-top:6px">
+          </label>
+          <button class="btn" id="uploadVideoBtn" type="button">Enviar e Analisar Vídeo</button>
+        </div>
+        <div class="grid-cards" id="videosGallery"></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3>■ CORTE MANUAL POR TEMPO</h3>
+        <div class="row">
+          <label>Live / Vídeo fonte
+            <select id="manualLiveSelect"></select>
+          </label>
+          <label>Molde
+            <select id="manualMoldeSelect">
+              <option value="SPLIT_BANNER">Banner Vermelho + Facecam</option>
+              <option value="VIDRO_GAMER">Vidro Gamer Split</option>
+              <option value="FADE_CONTINUO">Fade Contínuo</option>
+              <option value="TELA_CHEIA">Tela Cheia 9:16</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <label>Início (seg)<input type="number" id="manStart" min="0" value="0"></label>
+          <label>Fim (seg)<input type="number" id="manEnd" min="2" value="25"></label>
+        </div>
+        <label>Headline do corte<input type="text" id="manHeadline" value="FUGA INCRÍVEL DE GTA 6!"></label>
+        <button class="btn" id="manCutBtn" type="button" style="margin-top:12px">Gerar Corte Manual Agora</button>
+      </div>
+    </div>
+
+    <div id="tab-MOLDES" class="tab-panel hide">
+      <div class="card">
+        <h3>■ MOLDES DE ENQUADRAMENTO E B-ROLL</h3>
+        <p class="mut">Escolha o molde padrão do FFmpeg, estilo das legendas ASS e envie clipes de B-roll para o banco local.</p>
+        <div class="grid-cards" id="moldesContainer"></div>
+        <div class="row" style="margin-top:14px;align-items:flex-end">
+          <label>Estilo das legendas ASS
+            <select id="subStyleSelect">
+              <option value="HORMOZI_YELLOW">Hormozi Amarelo (#FFD23F)</option>
+              <option value="NEON_GREEN">Neon Verde (#53FC18)</option>
+              <option value="CLEAN_WHITE">Branco Limpo</option>
+            </select>
+          </label>
+          <button class="btn" id="saveMoldeSettingsBtn" type="button">Salvar Padrão</button>
+        </div>
+        <div class="row" style="margin-top:14px;align-items:flex-end;border-top:1px solid var(--line);padding-top:14px">
+          <label>Enviar B-roll local (.mp4)
+            <input type="file" id="uploadBrollInput" accept="video/mp4,video/webm" style="margin-top:6px">
+          </label>
+          <button class="btn g" id="uploadBrollBtn" type="button">Adicionar ao Banco B-roll</button>
+        </div>
+        <div class="mut" id="brollFilesReadout" style="margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div id="tab-IDEIAS" class="tab-panel hide">
+      <div class="card">
+        <h3>■ IDEIAS E GATILHOS PARA O AGENTE</h3>
+        <p class="mut">Cadastre o que a IA deve procurar nas lives e aplique em 1 clique no formulário.</p>
+        <div class="row">
+          <label>Categoria / Tag<input type="text" id="ideaTag" value="GTA 6"></label>
+          <label>Nota mínima (1–10)<input type="number" id="ideaMin" min="1" max="10" value="8"></label>
+        </div>
+        <label>Descrição do gatilho<input type="text" id="ideaHint" placeholder="ex.: quando achar easter egg novo ou rir muito"></label>
+        <button class="btn" id="addIdeaBtn" type="button" style="margin-top:10px">Salvar Ideia</button>
+        <div class="grid-cards" id="ideasContainer"></div>
+      </div>
+    </div>
+
+    <div id="tab-ROTEIRO" class="tab-panel hide">
+      <div class="card">
+        <h3>■ EDITOR DE ROTEIRO E RE-RENDER</h3>
+        <p class="mut">Edite a headline, descrição ou peça ajustes em palavras e gere novamente o MP4 vertical.</p>
+        <div id="roteiroEmpty" class="mut">Selecione um corte em <b>CORTES</b> e clique em "Abrir no estúdio" ou "Editar Roteiro".</div>
+        <div id="roteiroForm" class="hide">
+          <label>Pedido de ajuste em palavras (opcional)
+            <input type="text" id="rotInstruction" placeholder="ex.: legenda amarela, molde vidro gamer, titulo NOVA FUGA">
+          </label>
+          <label>Headline em CAIXA ALTA<input type="text" id="rotHeadline"></label>
+          <label>Título no YouTube<input type="text" id="rotTitle"></label>
+          <label>Descrição / @ do streamer<textarea id="rotDesc" rows="3"></textarea></label>
+          <button class="btn" id="applyRoteiroBtn" type="button" style="margin-top:12px">Salvar e Re-renderizar MP4</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-UPLOADS" class="tab-panel hide">
+      <div class="card">
+        <h3>■ FILA DE AUTO-POSTAGEM NO YOUTUBE</h3>
+        <p class="mut">Os vídeos sobem como <b>PRIVADO</b> via YouTube Data API v3 quando <code>client_secret.json</code> estiver configurado no servidor.</p>
+        <div id="uploadsList" class="grid-cards"></div>
+      </div>
+    </div>
+
+    <div id="tab-IA" class="tab-panel hide">
+      <div class="card">
+        <h3>■ CONEXÃO COM SERVIDOR PYTHON (FFmpeg + Whisper + Claude)</h3>
+        <p class="mut">Se você hospedou a pasta <code>cortes-ia-web/</code> no Render, Railway ou VPS, cole a URL HTTPS do servidor abaixo para processar vídeos e lives reais direto por este site.</p>
+        <div class="row" style="align-items:flex-end">
+          <label>URL do Servidor Python (opcional)
+            <input type="url" id="backendUrlInput" placeholder="https://seu-cortes-ia.onrender.com">
+          </label>
+          <button class="btn" id="connectBackendBtn" type="button">Conectar Servidor</button>
+        </div>
+
+        <h3 style="margin-top:20px">■ MOTOR DE IA E HARDWARE</h3>
+        <div class="grid-cards" id="healthCards"></div>
+        <div class="row" style="margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
+          <label>Encoder de Vídeo
+            <select id="cfgEncoder">
+              <option value="libx264">libx264 (CPU padrão)</option>
+              <option value="h264_nvenc">h264_nvenc (Placa NVIDIA)</option>
+            </select>
+          </label>
+          <label>Modelo Whisper
+            <select id="cfgWhisper">
+              <option value="tiny">tiny (muito rápido)</option>
+              <option value="base">base (equilibrado)</option>
+              <option value="small">small (recomendado)</option>
+              <option value="medium">medium (mais pesado)</option>
+            </select>
+          </label>
+          <label>Janela de análise (seg)
+            <input type="number" id="cfgWindow" min="15" max="900" value="180">
+          </label>
+        </div>
+        <button class="btn" id="saveIaCfgBtn" type="button" style="margin-top:12px">Aplicar Configurações do Motor</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast hide" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const tabs=["VÍDEOS","CORTES","MOLDES","IDEIAS","ROTEIRO","UPLOADS","IA"];
+let activeTab="CORTES";
+let serverBase="";
+let serverMode=false;
+let allLives=[],curLiveId=null,pollTimer=null,shownCount=0,showStageTimer=null;
+let selectedClipIdx=0,activeClipObj=null,activeClipLiveId=null;
+let appSettings={molde:"SPLIT_BANNER",subtitle_style:"HORMOZI_YELLOW",encoder:"libx264",whisper_model:"small",window_seconds:180,videos_per_day:3};
+
+const sampleClipUrl="./exemplo_corte_baixado_1080x1920.mp4";
+const memDb={
+  brolls:[],
+  moldes:[
+    {id:"SPLIT_BANNER",nome:"Banner Vermelho + Facecam + B-roll",descricao:"Câmera do streamer no topo, jogo na base sobre blur, headline vermelha com linha dourada e legenda sincronizada."},
+    {id:"VIDRO_GAMER",nome:"Vidro Gamer Split 9:16",descricao:"Webcam enquadrada centralizada no topo com moldura nítida e gameplay em destaque na parte inferior."},
+    {id:"FADE_CONTINUO",nome:"Fade Contínuo sem Borda",descricao:"Transição suave entre gameplay e facecam com título limpo centralizado."},
+    {id:"TELA_CHEIA",nome:"Tela Cheia 9:16",descricao:"Enquadramento vertical completo focado na ação principal com legendas grandes."}
+  ],
+  ideas:[
+    {id:"idea1",tag:"GTA 6 · Hype",min:8,hint:"quando ele reagir ao trailer de GTA 6 ou mapa de Leonida"},
+    {id:"idea2",tag:"GTA RP · Ação",min:7,hint:"perseguição policial, troca de tiro ou fuga em alta velocidade"},
+    {id:"idea3",tag:"Chat Explodindo",min:6,hint:"quando o chat trollar ou acontecer reação genuína e cômica"},
+    {id:"idea4",tag:"Curiosidades",min:7,hint:"easter egg secreto, bug bizarro ou revelação inesperada"}
+  ],
+  uploads:[
+    {id:"up1",titulo:"GTA 6 VAI TER PRIMEIRA PESSOA",descricao:"Corte de @alanzoka",status:"PENDENTE",error:null}
+  ],
+  lives:[
+    {
+      id:"alanzoka-demo",
+      name:"alanzoka",
+      link:"https://www.twitch.tv/alanzoka",
+      platform:"TWITCH",
+      min:6,
+      max:3,
+      recorded:849,
+      status:"assistindo ao vivo",
+      log:[
+        "[06:12:44] Conectado no chat IRC da Twitch (#alanzoka)",
+        "[06:13:01] Whisper transcreveu janela de 180s com sucesso",
+        "[06:13:05] Claude avaliou 3 momentos virais acima da nota 6"
+      ],
+      clips:[
+        {id:"c1",titulo:"Cai no bait",headline:"O CHAT ME ENGANOU DE NOVO!",ini:352,fim:374,nota:8,motivo:"Trollagem do chat e reação genuína.",descricao:"O streamer cai numa trollagem do chat e tem uma reação cômica.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl},
+        {id:"c2",titulo:"violência gamer",headline:"JOGO VIOLENTO ONDE VOCÊ SÓ CUIDA DA CASA",ini:214,fim:253,nota:8,motivo:"Reflexão irônica sobre a rotina no jogo.",descricao:"Reflexão divertida sobre o jogo.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl},
+        {id:"c3",titulo:"GTA 6 vai ter primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA",ini:550,fim:582,nota:9,motivo:"Comenta o rumor da câmera em primeira pessoa e o chat explode.",descricao:"Rumor da câmera em primeira pessoa em GTA 6.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl}
+      ]
+    },
+    {id:"gta6-preview",name:"gta6-preview-aovivo",link:"https://www.youtube.com/watch?v=QdBZY2fkU-0",platform:"YOUTUBE",min:7,max:1,recorded:91,status:"finalizado",log:["[06:10:00] Trailer GTA 6 analisado"],clips:[]},
+    {id:"teste-dava",name:"teste-dava",link:"https://www.twitch.tv/davajonas",platform:"TWITCH",min:6,max:4,recorded:640,status:"finalizado",log:["[05:40:00] 4 cortes finalizados"],clips:[]}
+  ]
+};
+
+function notify(msg){
+  const t=$("toast");t.textContent=msg;t.classList.remove("hide");
+  clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.add("hide"),3200);
+}
+
+$("themeBtn").onclick=()=>{
+  const cur=document.documentElement.getAttribute("data-theme");
+  document.documentElement.setAttribute("data-theme",cur==="light"?"dark":"light");
+};
+
+tabs.forEach(t=>{
+  const b=document.createElement("button");
+  b.type="button";b.textContent=t;b.dataset.t=t;
+  b.onclick=()=>showTab(t);
+  $("nav").appendChild(b);
+});
+
+function showTab(t){
+  activeTab=t;
+  [...$("nav").children].forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hide",p.id!=="tab-"+t));
+  if(t==="VÍDEOS") renderVideosTab();
+  if(t==="MOLDES") void loadMoldes();
+  if(t==="IDEIAS") void loadIdeas();
+  if(t==="UPLOADS") void loadUploads();
+  if(t==="IA") void loadHealth();
+}
+
+const wv=$("wv");
+for(let i=0;i<56;i++){wv.appendChild(document.createElement("i"))}
+function updateWaveForVideo(v){
+  const bars=[...wv.querySelectorAll("i")];
+  if(!v||v.paused){return;}
+  const pct=v.duration>0?(v.currentTime/v.duration)*100:0;
+  $("pbar").style.width=pct.toFixed(1)+"%";
+  bars.forEach((b,idx)=>{
+    const h=12+Math.abs(Math.sin(idx*.55+v.currentTime*5))*42;
+    b.style.height=h+"px";
+    b.style.opacity=(idx/bars.length)*100<=pct?"1":"0.45";
+  });
+}
+setInterval(()=>{
+  const v=$("phoneVideoBox").querySelector("video");
+  updateWaveForVideo(v);
+},160);
+
+const hms=x=>Math.floor(x/60)+":"+String(Math.floor(x%60)).padStart(2,"0");
+
+async function localApi(p,o={}){
+  const m=(o.method||"GET").toUpperCase();
+  const body=typeof o.body==="string"?JSON.parse(o.body):null;
+  if(p==="/api/health"){
+    return {ok:true,binaries:{ffmpeg:false,ffprobe:false,streamlink:false,yt_dlp:false},python_modules:{faster_whisper:false,cv2:false,anthropic:false,googleapiclient:false},anthropic_configured:false,youtube_secret_exists:false,youtube_token_exists:false,broll_files:memDb.brolls,settings:appSettings};
+  }
+  if(p==="/api/lives"&&m==="GET") return memDb.lives;
+  if(p==="/api/lives"&&m==="POST"){
+    const chan=(body.link||"").split("/").filter(Boolean).pop()||"live";
+    const obj={id:"lv_"+Date.now(),name:body.name||chan,link:body.link,platform:body.link.includes("kick")?"KICK":(body.link.includes("youtu")?"YOUTUBE":"TWITCH"),min:body.min||6,max:body.max||3,recorded:12,status:"assistindo ao vivo",log:["["+new Date().toTimeString().slice(0,8)+"] Conectado em "+body.link,"["+new Date().toTimeString().slice(0,8)+"] Monitorando chat, fala e B-roll..."],clips:[
+      {id:"cn_"+Date.now(),titulo:"Momento viral de "+chan,headline:(body.hint||"MOMENTO VIRAL AO VIVO!").toUpperCase().slice(0,44),ini:12,fim:44,nota:9,motivo:"Pico detectado no chat e reação forte.",descricao:"Corte automático de @"+chan,molde:appSettings.molde,url:sampleClipUrl}
+    ]};
+    memDb.lives.unshift(obj);
+    return obj;
+  }
+  if(p==="/api/lives/upload-video"&&m==="POST"){
+    const fileUrl=o._fileUrl||sampleClipUrl;
+    const obj={id:"upv_"+Date.now(),name:(o.headers&&o.headers["X-Filename"])||"video.mp4",link:fileUrl,platform:"LOCAL",min:6,max:3,recorded:32,status:"finalizado",log:["[upload] Vídeo carregado direto no navegador."],clips:[
+      {id:"cu_"+Date.now(),titulo:"Corte automático do vídeo",headline:"CLUTCH INSANO EM GTA!",ini:0,fim:18,nota:9,motivo:"Análise automática local",descricao:"Corte local",molde:appSettings.molde,url:fileUrl}
+    ]};
+    memDb.lives.unshift(obj);
+    return obj;
+  }
+  if(p.startsWith("/api/lives/")&&p.endsWith("/stop")){
+    const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(l)l.status="finalizado";return {ok:true};
+  }
+  if(p.startsWith("/api/lives/")&&p.endsWith("/manual-cut")){
+    const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(!l)throw new Error("Live não encontrada");
+    const c={id:"cm_"+Date.now(),titulo:body.headline||"Corte manual",headline:(body.headline||"CORTE MANUAL").toUpperCase(),ini:body.start_sec||0,fim:body.end_sec||25,nota:9,motivo:"Corte manual",descricao:"Corte manual "+body.start_sec+"s–"+body.end_sec+"s",molde:body.molde||appSettings.molde,url:l.link.startsWith("blob:")?l.link:sampleClipUrl};
+    l.clips.push(c);return c;
+  }
+  if(p.startsWith("/api/lives/")){
+    const id=p.split("/")[3];const l=memDb.lives.find(x=>x.id===id);if(!l)throw new Error("Live não encontrada");
+    if(l.status==="assistindo ao vivo") l.recorded+=2;
+    return l;
+  }
+  if(p.startsWith("/api/clips/")&&p.endsWith("/adjust")){
+    const parts=p.split("/");const lid=parts[3],cid=parts[4];
+    const l=memDb.lives.find(x=>x.id===lid);const c=l&&l.clips.find(x=>x.id===cid);
+    if(!c)throw new Error("Corte não encontrado");
+    if(body.headline)c.headline=body.headline.toUpperCase();
+    if(body.titulo)c.titulo=body.titulo;
+    if(body.descricao)c.descricao=body.descricao;
+    return c;
+  }
+  if(p==="/api/moldes") return {moldes:memDb.moldes,settings:appSettings};
+  if(p==="/api/settings"){Object.assign(appSettings,body||{});return appSettings;}
+  if(p==="/api/ideas"&&m==="GET") return memDb.ideas;
+  if(p==="/api/ideas"&&m==="POST"){const item={id:"id_"+Date.now(),tag:body.tag,min:body.min,hint:body.hint};memDb.ideas.unshift(item);return item;}
+  if(p==="/api/uploads"&&m==="GET") return memDb.uploads;
+  if(p==="/api/uploads/queue"){const l=memDb.lives.find(x=>x.id===body.live_id);const c=l&&l.clips.find(x=>x.id===body.clip_id);const u={id:"uq_"+Date.now(),titulo:(c&&c.titulo)||"Corte",descricao:(c&&c.descricao)||"",status:"PENDENTE",error:null};memDb.uploads.unshift(u);return u;}
+  if(p.startsWith("/api/uploads/")&&p.endsWith("/publish")){const id=p.split("/")[3];const u=memDb.uploads.find(x=>x.id===id);if(u){u.status="ERRO OAUTH";u.error="Conecte o servidor Python na aba IA com client_secret.json para publicar no YouTube.";}return u;}
+  if(p==="/api/brolls/upload"){const n=(o.headers&&o.headers["X-Filename"])||"broll.mp4";memDb.brolls.push(n);return {name:n};}
+  return {};
+}
+
+function resolveMediaUrl(u){
+  if(!u) return sampleClipUrl;
+  if(serverMode && u.startsWith("/")) return serverBase + u;
+  return u;
+}
+
+async function api(p,o){
+  if(serverMode){
+    const r=await fetch(serverBase + p,o);
+    const txt=await r.text();
+    let data=null;try{data=JSON.parse(txt)}catch(_){data=txt}
+    if(!r.ok)throw new Error((data&&data.detail)||("HTTP "+r.status));
+    return data;
+  }
+  return localApi(p,o);
+}
+
+async function detectBackend(customUrl){
+  const saved=(customUrl!==undefined?customUrl:(localStorage.getItem("cortes_backend_url")||"")).trim().replace(/\/+$/,"");
+  if(saved){
+    try{
+      const r=await fetch(saved+"/api/health");
+      if(r.ok){
+        serverBase=saved;
+        serverMode=true;
+        localStorage.setItem("cortes_backend_url",saved);
+        $("backendUrlInput").value=saved;
+        $("modeBadge").textContent="Servidor Conectado";
+        $("modeBadge").className="pill";
+        await refreshLives();
+        return true;
+      }
+    }catch(_){}
+  }
+  serverMode=false;
+  $("modeBadge").textContent="Site Web Ativo";
+  $("modeBadge").className="pill warn";
+  await refreshLives();
+  return false;
+}
+
+$("connectBackendBtn").onclick=async()=>{
+  const u=$("backendUrlInput").value.trim().replace(/\/+$/,"");
+  if(!u){localStorage.removeItem("cortes_backend_url");await detectBackend("");notify("Voltando ao modo navegador.");return;}
+  const ok=await detectBackend(u);
+  if(ok){notify("Conectado ao servidor Python!");void loadHealth();}
+  else{notify("Não foi possível conectar em "+u);}
+};
+
+async function refreshLives(){
+  allLives=await api("/api/lives");
+  const box=$("lives");
+  if(!allLives.length){box.innerHTML='<div class="mut">Nenhuma live ainda.</div>';return;}
+  box.innerHTML=allLives.map(l=>`<div class="lv" data-id="${l.id}"><b>${l.name}</b><span>${l.clips.length}/${l.max} vídeos</span></div>`).join("");
+  box.querySelectorAll(".lv").forEach(el=>el.onclick=()=>watchLive(el.dataset.id));
+  renderVideosTab();
+}
+
+async function startLive(link,name){
+  if(!link){notify("Informe o link da live ou vídeo.");return;}
+  const payload={
+    link,name:name||"",
+    min:+$("mn").value||6,max:+$("mx").value||3,
+    hint:$("hint").value,names:$("names").value,
+    director_broll:$("dirBroll").checked,youtube_broll:$("ytBroll").checked,
+    autopost:$("auto").value==="yes",videos_per_day:+$("vpd").value||3,
+    molde:appSettings.molde,subtitle_style:appSettings.subtitle_style
+  };
+  const created=await api("/api/lives",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+  await refreshLives();
+  watchLive(created.id);
+}
+
+function watchLive(id){
+  curLiveId=id;shownCount=0;
+  $("cl").innerHTML="";
+  $("fm").classList.add("hide");
+  $("lv").classList.remove("hide");
+  $("ed").classList.add("hide");
+  showTab("CORTES");
+  clearInterval(pollTimer);
+  pollTimer=setInterval(pollLive,1800);
+  void pollLive();
+}
+
+async function pollLive(){
+  if(!curLiveId)return;
+  let l;
+  try{l=await api("/api/lives/"+curLiveId)}catch(_){return;}
+  $("ln").textContent=l.name;
+  $("ll").textContent=l.link;$("ll").href=l.link;
+  $("st").textContent=`${l.status} · ${hms(l.recorded)} · ${l.clips.length}/${l.max} cortes`;
+  $("prevTxt").textContent=l.status==="finalizado"?"finalizado":(l.status==="analisando"?"analisando com IA…":"ouvindo…");
+  $("lvDot").style.display=(l.status==="finalizado"||l.status==="erro")?"none":"inline-block";
+  $("log").innerHTML=l.log.map(x=>`<div>${x}</div>`).join("");
+  while(shownCount<l.clips.length){
+    const idx=shownCount;
+    const c=l.clips[shownCount++];
+    const mediaUrl=resolveMediaUrl(c.url);
+    const card=document.createElement("div");
+    card.className="clip";
+    card.innerHTML=`
+      <div class="vid"><video src="${mediaUrl}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video></div>
+      <b>${c.titulo}</b>
+      <span class="mut">${hms(Math.round(c.ini))}–${hms(Math.round(c.fim))} · nota ${c.nota}</span>
+      <div class="mut">${c.motivo}</div>
+      <button class="btn g sm" type="button" style="margin-top:8px">Abrir no estúdio</button>
+    `;
+    card.querySelector("button").onclick=()=>openEd(idx,c,l.id);
+    $("cl").appendChild(card);
+  }
+  if(["finalizado","erro","interrompido"].includes(l.status)){
+    clearInterval(pollTimer);
+    void refreshLives();
+  }
+}
+
+const stageMsgs=["cortes prontos!","headline colocada ✓","câmera enquadrada ✓","legenda sincronizada ✓"];
+const stageTags=["corte","headline","câmera","legenda"];
+function openEd(idx,clip,liveId){
+  selectedClipIdx=idx;activeClipObj=clip;activeClipLiveId=liveId||curLiveId;
+  const total=$("cl").children.length||1;
+  const mediaUrl=resolveMediaUrl(clip.url);
+  $("et").textContent=`VÍDEO ${idx+1} DE ${total}`;
+  $("srcThumbLbl").textContent=`VÍDEO ${idx+1}`;
+  $("hl").textContent=clip.headline||clip.titulo;
+  $("dt").textContent=clip.descricao;
+  $("dlClip").href=mediaUrl;
+  $("phoneVideoBox").innerHTML=`<video src="${mediaUrl}" controls autoplay loop playsinline></video>`;
+  const dur=Math.max(5,Math.round((clip.fim||30)-(clip.ini||0)));
+  $("mk1").textContent=hms(Math.round(dur*0.2));
+  $("mk2").textContent=hms(Math.round(dur*0.52));
+  $("mk3").textContent=hms(Math.round(dur*0.85));
+  $("ed").classList.remove("hide");
+  $("ed").scrollIntoView({behavior:"smooth"});
+
+  $("roteiroEmpty").classList.add("hide");
+  $("roteiroForm").classList.remove("hide");
+  $("rotHeadline").value=clip.headline||"";
+  $("rotTitle").value=clip.titulo||"";
+  $("rotDesc").value=clip.descricao||"";
+
+  let k=0;clearInterval(showStageTimer);
+  $("bb").textContent=stageMsgs[0];$("masTag").textContent=stageTags[0];
+  showStageTimer=setInterval(()=>{
+    k=(k+1)%stageMsgs.length;
+    $("bb").textContent=stageMsgs[k];
+    $("masTag").textContent=stageTags[k];
+  },2000);
+}
+
+$("ver").onclick=()=>{const v=$("phoneVideoBox").querySelector("video");if(v)v.play();};
+$("prox").onclick=()=>{
+  const btns=[...$("cl").querySelectorAll("button")];
+  if(!btns.length)return;
+  const nextIdx=(selectedClipIdx+1)%btns.length;
+  btns[nextIdx].click();
+};
+$("som").onclick=e=>{
+  const v=$("phoneVideoBox").querySelector("video");
+  if(!v)return;
+  v.muted=!v.muted;
+  e.target.textContent=v.muted?"🔇 Som":"🔊 Som";
+};
+$("fe").onclick=()=>{$("ed").classList.add("hide");clearInterval(showStageTimer);};
+$("editRoteiroBtn").onclick=()=>showTab("ROTEIRO");
+$("queueYtBtn").onclick=async()=>{
+  if(!activeClipLiveId||!activeClipObj)return;
+  try{
+    await api("/api/uploads/queue",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({live_id:activeClipLiveId,clip_id:activeClipObj.id})});
+    notify("Corte adicionado na fila de upload do YouTube!");
+  }catch(e){notify("Erro: "+e.message);}
+};
+
+$("go").onclick=()=>startLive($("lk").value.trim(),"").catch(e=>notify(e.message));
+$("mk").onclick=()=>startLive($("nl").value.trim(),$("nn").value.trim()).catch(e=>notify(e.message));
+$("stop").onclick=async()=>{
+  if(!curLiveId)return;
+  await api(`/api/lives/${curLiveId}/stop`,{method:"POST"});
+  clearInterval(pollTimer);
+  $("st").textContent="finalizado pelo usuário";
+  $("prevTxt").textContent="pausado";
+  $("lvDot").style.display="none";
+  void refreshLives();
+};
+$("newBtn").onclick=()=>{
+  clearInterval(pollTimer);
+  $("fm").classList.remove("hide");
+  $("lv").classList.add("hide");
+  $("ed").classList.add("hide");
+  showTab("CORTES");
+};
+
+function renderVideosTab(){
+  const sel=$("manualLiveSelect");
+  sel.innerHTML=allLives.map(l=>`<option value="${l.id}">${l.name} (${l.clips.length} cortes)</option>`).join("")||'<option value="">Nenhuma live carregada</option>';
+  const gal=$("videosGallery");
+  gal.innerHTML=allLives.map(l=>`
+    <div class="item-card">
+      <div style="display:flex;justify-content:space-between;gap:6px">
+        <b>${l.name}</b>
+        <span class="pill">${l.platform||"LIVE"}</span>
+      </div>
+      <div class="mut" style="margin-top:4px">${l.status} · ${l.clips.length} corte(s)</div>
+      <button class="btn g sm" type="button" style="margin-top:8px" data-open-live="${l.id}">Abrir Live</button>
+    </div>
+  `).join("")||'<div class="mut">Nenhuma live ou vídeo salvo ainda.</div>';
+  gal.querySelectorAll("[data-open-live]").forEach(b=>b.onclick=()=>watchLive(b.dataset.openLive));
+}
+
+$("uploadVideoBtn").onclick=async()=>{
+  const file=$("uploadVideoInput").files[0];
+  if(!file){notify("Selecione um vídeo MP4 primeiro.");return;}
+  try{
+    notify("Enviando vídeo...");
+    const fileUrl=URL.createObjectURL(file);
+    const created=await api("/api/lives/upload-video",{method:"POST",headers:{"X-Filename":file.name},body:file,_fileUrl:fileUrl});
+    await refreshLives();
+    watchLive(created.id);
+    notify("Vídeo carregado!");
+  }catch(e){notify("Falha no upload: "+e.message);}
+};
+
+$("manCutBtn").onclick=async()=>{
+  const liveId=$("manualLiveSelect").value;
+  if(!liveId){notify("Crie ou envie uma live/vídeo primeiro.");return;}
+  try{
+    const clip=await api(`/api/lives/${liveId}/manual-cut`,{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({start_sec:+$("manStart").value||0,end_sec:+$("manEnd").value||25,headline:$("manHeadline").value,molde:$("manualMoldeSelect").value})
+    });
+    watchLive(liveId);
+    notify("Corte manual gerado: "+clip.titulo);
+  }catch(e){notify("Erro no corte manual: "+e.message);}
+};
+
+async function loadMoldes(){
+  const data=await api("/api/moldes");
+  appSettings=data.settings;
+  $("subStyleSelect").value=appSettings.subtitle_style||"HORMOZI_YELLOW";
+  $("moldesContainer").innerHTML=data.moldes.map(m=>`
+    <div class="item-card ${appSettings.molde===m.id?"active":""}" data-molde="${m.id}" style="cursor:pointer">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b>${m.nome}</b>
+        <span class="pill ${appSettings.molde===m.id?"":"warn"}">${appSettings.molde===m.id?"ATIVO":"Usar"}</span>
+      </div>
+      <p class="mut" style="margin:6px 0 0">${m.descricao}</p>
+    </div>
+  `).join("");
+  $("moldesContainer").querySelectorAll("[data-molde]").forEach(c=>{
+    c.onclick=()=>{appSettings.molde=c.dataset.molde;void saveSettings({molde:appSettings.molde});};
+  });
+  const h=await api("/api/health");
+  $("brollFilesReadout").textContent="B-rolls no banco local: "+(h.broll_files.length?h.broll_files.join(", "):"nenhum (usará busca YouTube se ativada)");
+}
+
+async function saveSettings(patch){
+  appSettings=await api("/api/settings",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(patch)});
+  if(activeTab==="MOLDES") await loadMoldes();
+  notify("Configurações salvas!");
+}
+$("saveMoldeSettingsBtn").onclick=()=>saveSettings({molde:appSettings.molde,subtitle_style:$("subStyleSelect").value});
+
+$("uploadBrollBtn").onclick=async()=>{
+  const f=$("uploadBrollInput").files[0];
+  if(!f){notify("Escolha um MP4 para B-roll.");return;}
+  await api("/api/brolls/upload",{method:"POST",headers:{"X-Filename":f.name},body:f});
+  await loadMoldes();
+  notify("B-roll salvo no banco local!");
+};
+
+async function loadIdeas(){
+  const list=await api("/api/ideas");
+  $("ideasContainer").innerHTML=list.map(i=>`
+    <div class="item-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b>${i.tag}</b><span class="pill">Nota ${i.min}+</span>
+      </div>
+      <p style="margin:6px 0">${i.hint}</p>
+      <button class="btn g sm" type="button" data-hint="${i.hint.replace(/"/g,"&quot;")}" data-min="${i.min}">Usar no formulário</button>
+    </div>
+  `).join("");
+  $("ideasContainer").querySelectorAll("button").forEach(b=>{
+    b.onclick=()=>{$("hint").value=b.dataset.hint;$("mn").value=b.dataset.min;showTab("CORTES");notify("Gatilho aplicado!");};
+  });
+}
+$("addIdeaBtn").onclick=async()=>{
+  const hint=$("ideaHint").value.trim();
+  if(!hint){notify("Escreva o gatilho da ideia.");return;}
+  await api("/api/ideas",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tag:$("ideaTag").value,min:+$("ideaMin").value||7,hint})});
+  $("ideaHint").value="";
+  await loadIdeas();
+  notify("Ideia salva!");
+};
+
+$("applyRoteiroBtn").onclick=async()=>{
+  if(!activeClipLiveId||!activeClipObj){notify("Abra um corte no estúdio primeiro.");return;}
+  const updated=await api(`/api/clips/${activeClipLiveId}/${activeClipObj.id}/adjust`,{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({instruction:$("rotInstruction").value,headline:$("rotHeadline").value,titulo:$("rotTitle").value,descricao:$("rotDesc").value,rerender:true})
+  });
+  activeClipObj=updated;
+  openEd(selectedClipIdx,updated,activeClipLiveId);
+  showTab("CORTES");
+  notify("Corte atualizado!");
+};
+
+async function loadUploads(){
+  const list=await api("/api/uploads");
+  $("uploadsList").innerHTML=list.map(u=>`
+    <div class="item-card">
+      <div style="display:flex;justify-content:space-between;gap:6px">
+        <b>${u.titulo}</b>
+        <span class="pill ${u.status.includes("ERRO")?"err":(u.status==="PENDENTE"?"warn":"")}">${u.status}</span>
+      </div>
+      <div class="mut" style="margin-top:4px">${u.error||u.descricao}</div>
+      <button class="btn sm" type="button" style="margin-top:8px" data-pub="${u.id}">Publicar no YouTube</button>
+    </div>
+  `).join("")||'<div class="mut">Nenhum vídeo na fila ainda.</div>';
+  $("uploadsList").querySelectorAll("[data-pub]").forEach(b=>{
+    b.onclick=async()=>{
+      const res=await api(`/api/uploads/${b.dataset.pub}/publish`,{method:"POST"});
+      await loadUploads();
+      notify(res.error?("YouTube: "+res.error):"Upload concluído!");
+    };
+  });
+}
+
+async function loadHealth(){
+  const h=await api("/api/health");
+  appSettings=h.settings;
+  $("cfgEncoder").value=appSettings.encoder||"libx264";
+  $("cfgWhisper").value=appSettings.whisper_model||"small";
+  $("cfgWindow").value=appSettings.window_seconds||180;
+  const checks=[
+    ["FFmpeg + FFprobe",h.binaries.ffmpeg&&h.binaries.ffprobe,"Renderização 1080×1920"],
+    ["Streamlink + yt-dlp",h.binaries.streamlink||h.binaries.yt_dlp,"Captura Live e VOD"],
+    ["Whisper (faster-whisper)",h.python_modules.faster_whisper,"Transcrição PT-BR palavra a palavra"],
+    ["OpenCV Facecam",h.python_modules.cv2,"Detecção automática de rosto"],
+    ["Claude AI Key",h.anthropic_configured,"Curadoria semântica + notas"],
+    ["YouTube OAuth",h.youtube_secret_exists,"Publicação privada automática"]
+  ];
+  $("healthCards").innerHTML=checks.map(([name,ok,desc])=>`
+    <div class="item-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b>${name}</b>
+        <span class="pill ${ok?"":"warn"}">${ok?"PRONTO":"CONECTAR SERVIDOR"}</span>
+      </div>
+      <p class="mut" style="margin:6px 0 0">${desc}</p>
+    </div>
+  `).join("");
+}
+
+$("saveIaCfgBtn").onclick=()=>saveSettings({
+  encoder:$("cfgEncoder").value,whisper_model:$("cfgWhisper").value,window_seconds:+$("cfgWindow").value||180
+});
+
+showTab("CORTES");
+void detectBackend();
+</script>
+</body>
+</html>
