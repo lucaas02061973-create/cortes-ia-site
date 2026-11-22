@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cidade Alta · Magia Cortes IA</title>
+<title>Magia Cortes IA · Estúdio 9:16</title>
 <link rel="icon" type="image/png" href="./images/logos/logo-valley.png">
 <style>
 @font-face{
@@ -94,8 +94,8 @@ body{
   font:400 15px/1.45 "Europa Grotesk",system-ui,-apple-system,sans-serif;
   overflow-x:hidden;
 }
-/* BARRA TOPO NPROGRESS OFICIAL CIDADEALTA.GG */
-.cda-top-stripe{
+/* BARRA TOPO NPROGRESS OFICIAL CORTES·IA STUDIO */
+.mc-top-stripe{
   position:fixed;
   top:0;left:0;right:0;
   height:5px;
@@ -103,7 +103,7 @@ body{
   box-shadow:0 0 10px #52B6FF,0 0 5px #52B6FF;
   z-index:1031;
 }
-/* HEADER OFICIAL CIDADEALTA.GG (90PX, BLUR 10PX, SEPARADORES #262B41, SUBLINHADO GRAFFITI #FFC046) */
+/* HEADER OFICIAL CORTES·IA STUDIO (90PX, BLUR 10PX, SEPARADORES #262B41, SUBLINHADO GRAFFITI #FFC046) */
 header{
   width:100%;
   min-height:90px;
@@ -114,7 +114,7 @@ header{
   z-index:100;
   border-bottom:1px solid rgba(38,43,65,.55);
 }
-.cda-header-inner{
+.mc-header-inner{
   max-width:1410px;
   min-height:90px;
   margin:0 auto;
@@ -201,7 +201,7 @@ nav button.on::after{
   gap:10px;
   flex-wrap:wrap;
 }
-.cda-login-btn{
+.mc-login-btn{
   width:134px;
   height:34px;
   background:url("./images/button-bg-01.svg") no-repeat center / contain;
@@ -216,13 +216,13 @@ nav button.on::after{
   justify-content:center;
   transition:transform .2s ease,filter .2s ease;
 }
-.cda-login-btn:hover{
+.mc-login-btn:hover{
   transform:scale(1.04);
   filter:drop-shadow(0 0 10px rgba(255,192,70,.4));
 }
 
-/* HERO OFICIAL CIDADEALTA.GG (HERO-BG.PNG + H1 + SÍMBOLOS GRAFFITI + BOTÃO ENTRAR #FFC046) */
-.cda-hero{
+/* HERO OFICIAL CORTES·IA STUDIO (HERO-BG.PNG + H1 + SÍMBOLOS GRAFFITI + BOTÃO ENTRAR #FFC046) */
+.mc-hero{
   width:100%;
   max-width:1650px;
   min-height:790px;
@@ -232,7 +232,7 @@ nav button.on::after{
   position:relative;
   overflow:hidden;
 }
-.cda-hero::after{
+.mc-hero::after{
   content:"";
   position:absolute;
   left:0;right:0;bottom:0;
@@ -241,12 +241,12 @@ nav button.on::after{
   pointer-events:none;
 }
 @media(max-width:650px){
-  .cda-hero{
+  .mc-hero{
     min-height:660px;
     background-image:url("./images/hero-bg-mobile.png");
   }
 }
-.cda-hero-banner-inner{
+.mc-hero-banner-inner{
   max-width:1410px;
   margin:0 auto;
   padding:355px 20px 56px;
@@ -257,9 +257,9 @@ nav button.on::after{
   z-index:2;
 }
 @media(max-width:650px){
-  .cda-hero-banner-inner{padding:260px 16px 40px}
+  .mc-hero-banner-inner{padding:260px 16px 40px}
 }
-.cda-main-h1{
+.mc-main-h1{
   margin:0;
   color:#ffffff;
   font:700 78px/1.04 "Europa Grotesk",sans-serif;
@@ -269,16 +269,16 @@ nav button.on::after{
   text-shadow:0 7px 17px rgba(0,0,0,.92);
 }
 @media(max-width:960px){
-  .cda-main-h1{font-size:46px}
+  .mc-main-h1{font-size:46px}
 }
 @media(max-width:560px){
-  .cda-main-h1{font-size:30px}
+  .mc-main-h1{font-size:30px}
 }
-.cda-h1-o{
+.mc-h1-o{
   position:relative;
   display:inline-block;
 }
-.cda-h1-o::before{
+.mc-h1-o::before{
   content:"";
   position:absolute;
   width:76px;
@@ -288,11 +288,11 @@ nav button.on::after{
   background:url("./images/symbols/o.svg") no-repeat center / contain;
   pointer-events:none;
 }
-.cda-h1-crown{
+.mc-h1-crown{
   position:relative;
   display:inline-block;
 }
-.cda-h1-crown::after{
+.mc-h1-crown::after{
   content:"";
   position:absolute;
   width:72px;
@@ -302,12 +302,12 @@ nav button.on::after{
   background:url("./images/symbols/crown.svg") no-repeat center / contain;
   pointer-events:none;
 }
-.cda-h1-arrow{
+.mc-h1-arrow{
   font-style:normal;
   position:relative;
   display:inline-block;
 }
-.cda-h1-arrow::before{
+.mc-h1-arrow::before{
   content:"";
   position:absolute;
   width:155px;
@@ -318,9 +318,9 @@ nav button.on::after{
   pointer-events:none;
 }
 @media(max-width:760px){
-  .cda-h1-o::before,.cda-h1-crown::after,.cda-h1-arrow::before{transform:scale(.55)}
+  .mc-h1-o::before,.mc-h1-crown::after,.mc-h1-arrow::before{transform:scale(.55)}
 }
-.cda-entrar-btn{
+.mc-entrar-btn{
   max-width:405px;
   width:100%;
   height:45px;
@@ -340,12 +340,12 @@ nav button.on::after{
   box-shadow:0 10px 28px rgba(0,0,0,.55);
   transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
 }
-.cda-entrar-btn:hover{
+.mc-entrar-btn:hover{
   background:#ffd06b;
   transform:translateY(-2px);
   box-shadow:0 12px 32px rgba(255,192,70,.4);
 }
-.cda-social-box{
+.mc-social-box{
   max-width:405px;
   width:100%;
   border:1px solid #ffc046;
@@ -358,7 +358,7 @@ nav button.on::after{
   background:rgba(17,19,29,.45);
   backdrop-filter:blur(6px);
 }
-.cda-social-box a,.cda-social-box button{
+.mc-social-box a,.mc-social-box button{
   background:transparent;
   border:0;
   color:#ffffff;
@@ -369,11 +369,11 @@ nav button.on::after{
   justify-content:center;
   transition:transform .2s ease,color .2s ease;
 }
-.cda-social-box a:hover,.cda-social-box button:hover{
+.mc-social-box a:hover,.mc-social-box button:hover{
   color:#ffc046;
   transform:scale(1.15);
 }
-.cda-social-caption{
+.mc-social-caption{
   margin:24px 0 0;
   color:#E3E3E6;
   font:400 11.5px "Europa Grotesk",sans-serif;
@@ -383,11 +383,11 @@ nav button.on::after{
   text-align:center;
 }
 @media(max-width:600px){
-  .cda-social-caption{letter-spacing:.45em;text-indent:.45em;font-size:10px}
+  .mc-social-caption{letter-spacing:.45em;text-indent:.45em;font-size:10px}
 }
 
-/* SEÇÃO STARTER PACK / PERSONAGENS & LEGENDAS CIDADE ALTA */
-.cda-starter-wrap{
+/* SEÇÃO STARTER PACK / PERSONAGENS & LEGENDAS MAGIA CORTES */
+.mc-starter-wrap{
   max-width:1410px;
   margin:10px auto 0;
   padding:32px 24px 26px;
@@ -397,12 +397,12 @@ nav button.on::after{
   position:relative;
   z-index:3;
 }
-.cda-section-head{
+.mc-section-head{
   text-align:center;
   margin-bottom:24px;
   position:relative;
 }
-.cda-section-title{
+.mc-section-title{
   margin:0;
   font:700 64px/1.05 "Europa Grotesk",sans-serif;
   color:#e3e3e6;
@@ -412,29 +412,29 @@ nav button.on::after{
   position:relative;
 }
 @media(max-width:780px){
-  .cda-section-title{font-size:36px}
+  .mc-section-title{font-size:36px}
 }
-.cda-section-title .sym-up{
+.mc-section-title .sym-up{
   position:relative;
 }
-.cda-section-title .sym-up::before{
+.mc-section-title .sym-up::before{
   content:"";
   position:absolute;
   width:42px;height:68px;
   left:-32px;top:-22px;
   background:url("./images/symbols/big-arrow-up.svg") no-repeat center / contain;
 }
-.cda-section-title .sym-box{
+.mc-section-title .sym-box{
   position:relative;
 }
-.cda-section-title .sym-box::after{
+.mc-section-title .sym-box::after{
   content:"";
   position:absolute;
   width:52px;height:52px;
   right:-44px;bottom:-8px;
   background:url("./images/symbols/box.svg") no-repeat center / contain;
 }
-.cda-section-sub{
+.mc-section-sub{
   margin:8px 0 0;
   color:#e3e3e6;
   font:400 12px "Europa Grotesk",sans-serif;
@@ -442,9 +442,9 @@ nav button.on::after{
   text-transform:uppercase;
 }
 @media(max-width:780px){
-  .cda-section-sub{letter-spacing:.2em;font-size:10.5px}
+  .mc-section-sub{letter-spacing:.2em;font-size:10.5px}
 }
-.cda-graffiti-script{
+.mc-graffiti-script{
   font-family:"Skylight Graffiti",cursive;
   color:#ffc046;
   font-weight:400;
@@ -452,7 +452,7 @@ nav button.on::after{
   text-transform:none!important;
 }
 
-.cda-hero-top{
+.mc-hero-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -460,7 +460,7 @@ nav button.on::after{
   flex-wrap:wrap;
   margin-bottom:16px;
 }
-.cda-tag-crown{
+.mc-tag-crown{
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -472,16 +472,16 @@ nav button.on::after{
   letter-spacing:.15em;
   text-transform:uppercase;
 }
-.cda-stage-grid{
+.mc-stage-grid{
   display:grid;
   grid-template-columns:320px 1fr;
   gap:18px;
   align-items:stretch;
 }
 @media(max-width:960px){
-  .cda-stage-grid{grid-template-columns:1fr}
+  .mc-stage-grid{grid-template-columns:1fr}
 }
-.cda-spotlight{
+.mc-spotlight{
   border-radius:8px;
   padding:18px;
   border:1px solid #ffc046;
@@ -495,7 +495,7 @@ nav button.on::after{
   text-align:center;
   box-shadow:0 16px 40px rgba(0,0,0,.55);
 }
-.cda-spotlight-art{
+.mc-spotlight-art{
   width:190px;
   height:185px;
   display:flex;
@@ -503,22 +503,22 @@ nav button.on::after{
   justify-content:center;
   transition:transform .35s cubic-bezier(.22,1,.36,1);
 }
-.cda-spotlight-art img,.cda-spotlight-art svg{
+.mc-spotlight-art img,.mc-spotlight-art svg{
   width:100%;
   height:100%;
   object-fit:contain;
   filter:drop-shadow(0 12px 24px rgba(0,0,0,.75));
 }
-.cda-spotlight:hover .cda-spotlight-art{transform:scale(1.06) translateY(-4px)}
-.cda-char-roster{
+.mc-spotlight:hover .mc-spotlight-art{transform:scale(1.06) translateY(-4px)}
+.mc-char-roster{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:14px;
 }
 @media(max-width:680px){
-  .cda-char-roster{grid-template-columns:repeat(2,1fr)}
+  .mc-char-roster{grid-template-columns:repeat(2,1fr)}
 }
-.cda-char-card{
+.mc-char-card{
   border-radius:8px;
   padding:14px 12px;
   border:1px solid #262b41;
@@ -535,16 +535,16 @@ nav button.on::after{
   text-align:center;
   gap:6px;
 }
-.cda-char-card:hover{
+.mc-char-card:hover{
   transform:translateY(-5px);
   border-color:#ffc046;
   box-shadow:0 14px 32px rgba(0,0,0,.6);
 }
-.cda-char-card.on{
+.mc-char-card.on{
   border:2px solid #ffc046;
   box-shadow:0 0 28px rgba(255,192,70,.28);
 }
-.cda-char-svg{
+.mc-char-svg{
   width:110px;
   height:96px;
   display:flex;
@@ -552,21 +552,21 @@ nav button.on::after{
   justify-content:center;
   transition:transform .26s ease;
 }
-.cda-char-svg img,.cda-char-svg svg{
+.mc-char-svg img,.mc-char-svg svg{
   width:100%;
   height:100%;
   object-fit:contain;
   filter:drop-shadow(0 8px 16px rgba(0,0,0,.65));
 }
-.cda-char-card:hover .cda-char-svg{transform:scale(1.08)}
-.cda-char-tier{
+.mc-char-card:hover .mc-char-svg{transform:scale(1.08)}
+.mc-char-tier{
   font-family:"Skylight Graffiti",cursive;
   font-size:24px;
   color:#ffc046;
   line-height:1;
   margin-top:2px;
 }
-.cda-sub-bar{
+.mc-sub-bar{
   margin-top:18px;
   padding:14px 18px;
   border-radius:6px;
@@ -578,7 +578,7 @@ nav button.on::after{
   gap:12px;
   flex-wrap:wrap;
 }
-.cda-karaoke-line{
+.mc-karaoke-line{
   font:700 15.5px/1.35 "Europa Grotesk",system-ui,sans-serif;
   text-transform:uppercase;
   letter-spacing:.08em;
@@ -588,20 +588,20 @@ nav button.on::after{
   gap:6px;
   align-items:center;
 }
-.cda-kw{
+.mc-kw{
   display:inline-block;
   padding:2px 7px;
   border-radius:4px;
   transition:all .16s cubic-bezier(.22,1,.36,1);
 }
-.cda-kw.on{
+.mc-kw.on{
   background:#ffc046;
   color:#000000;
   transform:scale(1.1);
   box-shadow:0 4px 14px rgba(255,192,70,.5);
 }
 
-/* CONTAINER PRINCIPAL FULL-WIDTH ESTILO .DASH-CONTAINER CIDADEALTA.GG (SEM SIDEBAR ESPREMENDO) */
+/* CONTAINER PRINCIPAL FULL-WIDTH ESTILO .DASH-CONTAINER CORTES·IA STUDIO (SEM SIDEBAR ESPREMENDO) */
 main{
   display:block;
   max-width:1410px;
@@ -615,14 +615,14 @@ main{
   border:1px solid #262b41;
   border-radius:8px;
 }
-.cda-quick-grid{
+.mc-quick-grid{
   display:grid;
   grid-template-columns:1.2fr 1.6fr 1fr;
   gap:18px;
   align-items:start;
 }
 @media(max-width:980px){
-  .cda-quick-grid{grid-template-columns:1fr}
+  .mc-quick-grid{grid-template-columns:1fr}
 }
 .card{
   background:#161926;
@@ -906,7 +906,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 .chat-row.funny{border-left-color:#4ac5f3}
 .quick-lives{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
 .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#161926;color:#fff;padding:12px 22px;border-radius:5px;border:2px solid #ffc046;font:700 13px "Europa Grotesk",sans-serif;letter-spacing:.06em;z-index:200;box-shadow:0 12px 36px rgba(0,0,0,.7)}
-.cda-live-sub-hud{
+.mc-live-sub-hud{
   padding:10px 14px;
   border-radius:0 0 6px 6px;
   border:1px solid #ffc046;
@@ -926,7 +926,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   background:rgba(13,14,20,.88);border:1px solid #ffc046;
   font:700 11px/1.25 "Europa Grotesk",sans-serif;text-transform:uppercase;color:#fff;
 }
-.cda-step-badge{
+.mc-step-badge{
   width:52px;height:52px;
   background:url("./images/symbols/step-border.svg") no-repeat center / contain;
   display:inline-flex;align-items:center;justify-content:center;
@@ -934,14 +934,14 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   color:#ffc046;
   flex-shrink:0;
 }
-.cda-footer{
+.mc-footer{
   width:100%;
   background:#151723;
   border-top:1px solid #262b41;
   padding:32px 24px;
   margin-top:40px;
 }
-.cda-footer-inner{
+.mc-footer-inner{
   max-width:1410px;
   margin:0 auto;
   display:flex;
@@ -950,23 +950,23 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   gap:20px;
   flex-wrap:wrap;
 }
-.cda-wipe-overlay{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
-.cda-wipe-blade{
+.mc-wipe-overlay{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
+.mc-wipe-blade{
   position:absolute;top:-20%;bottom:-20%;width:140%;left:-160%;
   background:linear-gradient(90deg,transparent 0%,rgba(255,192,70,.92) 35%,#11131d 55%,rgba(74,197,243,.88) 78%,transparent 100%);
   transform:skewX(-22deg);
 }
-.cda-wipe-blade.play{animation:cdaSlashWipe .48s cubic-bezier(.22,1,.36,1) forwards}
-@keyframes cdaSlashWipe{
+.mc-wipe-blade.play{animation:mcSlashWipe .48s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes mcSlashWipe{
   0%{left:-150%;opacity:1}
   55%{left:15%;opacity:1}
   100%{left:140%;opacity:0}
 }
-@keyframes cdaPanelIn{
+@keyframes mcPanelIn{
   from{opacity:0;transform:translateY(10px)}
   to{opacity:1;transform:translateY(0)}
 }
-.tab-panel:not(.hide){animation:cdaPanelIn .32s cubic-bezier(.22,1,.36,1)}
+.tab-panel:not(.hide){animation:mcPanelIn .32s cubic-bezier(.22,1,.36,1)}
 .fx-flash{animation:fxFlashAnim .45s ease-out}
 @keyframes fxFlashAnim{0%{filter:brightness(3.2) contrast(1.4)}100%{filter:none}}
 .fx-zoom{animation:fxZoomAnim .45s cubic-bezier(.22,1,.36,1)}
@@ -980,37 +980,37 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 </style>
 </head>
 <body>
-<div class="cda-top-stripe"></div>
-<div class="cda-wipe-overlay" id="cdaWipeOverlay"><div class="cda-wipe-blade" id="cdaWipeBlade"></div></div>
+<div class="mc-top-stripe"></div>
+<div class="mc-wipe-overlay" id="mcWipeOverlay"><div class="mc-wipe-blade" id="mcWipeBlade"></div></div>
 
-<!-- HEADER OFICIAL CIDADEALTA.GG -->
+<!-- HEADER OFICIAL CORTES·IA STUDIO -->
 <header>
-  <div class="cda-header-inner">
+  <div class="mc-header-inner">
     <div class="hdr-left">
       <div class="logo">
-        <img src="./images/logos/logo-valley.png" alt="Cidade Alta">
+        <img src="./images/logos/logo-valley.png" alt="Magia IA">
         <div>
-          CIDADE ALTA
+          MAGIA CORTES
           <span class="logo-sub">CORTES·IA STUDIO</span>
         </div>
       </div>
     </div>
     <nav id="nav"></nav>
     <div class="hdr-right">
-      <button class="cda-login-btn" id="themeBtn" type="button">LOGIN</button>
+      <button class="mc-login-btn" id="themeBtn" type="button">LOGIN</button>
     </div>
   </div>
 </header>
 
-<!-- HERO FULL-WIDTH OFICIAL CIDADEALTA.GG (HERO-BG.PNG + O SERVIDOR REFERÊNCIA EM GTA RP NO BRASIL) -->
-<section class="cda-hero" id="cdaHeroBanner">
-  <div class="cda-hero-banner-inner">
-    <h1 class="cda-main-h1">
-      <span class="cda-h1-o">O</span> <span class="cda-h1-crown">SERVIDOR REFERÊNCIA</span><br>
-      <span>EM GTA RP <i class="cda-h1-arrow">NO</i> BRASIL</span>
+<!-- HERO FULL-WIDTH OFICIAL CORTES·IA STUDIO (HERO-BG.PNG + O SERVIDOR REFERÊNCIA EM GTA RP NO BRASIL) -->
+<section class="mc-hero" id="mcHeroBanner">
+  <div class="mc-hero-banner-inner">
+    <h1 class="mc-main-h1">
+      <span class="mc-h1-o">O</span> <span class="mc-h1-crown">SERVIDOR REFERÊNCIA</span><br>
+      <span>EM GTA RP <i class="mc-h1-arrow">NO</i> BRASIL</span>
     </h1>
-    <button type="button" class="cda-entrar-btn" id="cdaHeroEntrarBtn" onclick="document.getElementById('fm').scrollIntoView({behavior:'smooth'})">ENTRAR</button>
-    <div class="cda-social-box">
+    <button type="button" class="mc-entrar-btn" id="mcHeroEntrarBtn" onclick="document.getElementById('fm').scrollIntoView({behavior:'smooth'})">ENTRAR</button>
+    <div class="mc-social-box">
       <button type="button" title="Kick TV Ao Vivo" onclick="document.getElementById('goAoVivoBtn').click()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4v7l6-7h5l-7 8 7 10h-5l-6-8v8H4V3z"/></svg>
       </button>
@@ -1020,87 +1020,87 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       <button type="button" title="Twitch Live" onclick="document.getElementById('goAoVivoBtn').click()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2L2 6v14h5v2h3l2-2h4l6-6V2H4zm16 11l-3 3h-4l-2 2v-2H7V4h13v9z"/></svg>
       </button>
-      <button type="button" title="Transição Cidade Alta" onclick="document.getElementById('cdaTriggerWipeBtn').click()">
+      <button type="button" title="Transição Estúdio" onclick="document.getElementById('mcTriggerWipeBtn').click()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
       </button>
-      <a href="https://cidadealta.gg/" target="_blank" rel="noopener" title="Cidade Alta Oficial">
+      <a href="#fm" target="_blank" rel="noopener" title="Magia IA Oficial">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 17.9V18h-2v1.9A8 8 0 0 1 4.1 13H6v-2H4.1A8 8 0 0 1 11 4.1V6h2V4.1A8 8 0 0 1 19.9 11H18v2h1.9A8 8 0 0 1 13 19.9z"/></svg>
       </a>
     </div>
-    <p class="cda-social-caption">SIGA NAS REDES SOCIAIS</p>
+    <p class="mc-social-caption">SIGA NAS REDES SOCIAIS</p>
   </div>
 </section>
 
-<!-- STARTER PACK · ELENCO DE PERSONAGENS, TRANSIÇÕES & LEGENDAS CIDADE ALTA -->
-<section class="cda-starter-wrap">
-  <div class="cda-section-head">
-    <h2 class="cda-section-title"><span class="sym-up">S</span>TARTER PAC<span class="sym-box">K</span> · <span class="cda-graffiti-script">Cidade Alta</span></h2>
-    <p class="cda-section-sub">O PONTA PÉ INICIAL QUE SUA HISTÓRIA MERECE!</p>
+<!-- STARTER PACK · ELENCO DE PERSONAGENS, TRANSIÇÕES & LEGENDAS MAGIA CORTES -->
+<section class="mc-starter-wrap">
+  <div class="mc-section-head">
+    <h2 class="mc-section-title"><span class="sym-up">S</span>TARTER PAC<span class="sym-box">K</span> · <span class="mc-graffiti-script">Magia IA</span></h2>
+    <p class="mc-section-sub">O PONTA PÉ INICIAL QUE SUA HISTÓRIA MERECE!</p>
   </div>
 
-  <div class="cda-hero-top">
+  <div class="mc-hero-top">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <span class="cda-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> CIDADE ALTA RP</span>
-      <span class="pill warn" id="cdaActiveCharHeaderBadge">👑 Diretor: Gold · Coringa</span>
+      <span class="mc-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> MAGIA CORTES RP</span>
+      <span class="pill warn" id="mcActiveCharHeaderBadge">👑 Diretor: Gold · Coringa</span>
       <span class="pill cy" id="swarmBadge">20 IAs · Zero API Key</span>
       <span class="pill warn hide" id="modeBadge">Modo Web · Zero API</span>
     </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap" id="cdaSubStyleBtns">
-      <button type="button" class="plat-btn on" data-sub-preset="HORMOZI_YELLOW">👑 Legenda Gold CDA</button>
+    <div style="display:flex;gap:6px;flex-wrap:wrap" id="mcSubStyleBtns">
+      <button type="button" class="plat-btn on" data-sub-preset="HORMOZI_YELLOW">👑 Legenda Gold VIP</button>
       <button type="button" class="plat-btn" data-sub-preset="NEON_GREEN">💎 Diamond Neon</button>
       <button type="button" class="plat-btn" data-sub-preset="IRONY_PURPLE">🤡 Sarcasmo 99%</button>
       <button type="button" class="plat-btn" data-sub-preset="QTH_RADIO">🚓 Rádio QTH</button>
     </div>
   </div>
 
-  <div class="cda-stage-grid">
-    <div class="cda-spotlight" id="cdaActiveCharStage">
-      <span class="pill warn" id="cdaCharFactionBadge">👑 FACÇÃO CDA · CASSINO & FUGAS</span>
-      <div class="cda-spotlight-art" id="cdaSpotlightSvgBox"></div>
+  <div class="mc-stage-grid">
+    <div class="mc-spotlight" id="mcActiveCharStage">
+      <span class="pill warn" id="mcCharFactionBadge">👑 FACÇÃO VIP · CASSINO & FUGAS</span>
+      <div class="mc-spotlight-art" id="mcSpotlightSvgBox"></div>
       <div>
-        <span class="cda-graffiti-script" style="font-size:28px;display:block" id="cdaCharNameLbl">Gold · Rei da Rua CDA</span>
-        <span class="mut" style="font-size:12px" id="cdaCharRoleLbl">Especialista em Ironia Sarcástica, Clutches & Fugas 9:16</span>
+        <span class="mc-graffiti-script" style="font-size:28px;display:block" id="mcCharNameLbl">Gold · Rei da Rua VIP</span>
+        <span class="mut" style="font-size:12px" id="mcCharRoleLbl">Especialista em Ironia Sarcástica, Clutches & Fugas 9:16</span>
       </div>
     </div>
-    <div class="cda-char-roster" id="cdaCharRosterGrid"></div>
+    <div class="mc-char-roster" id="mcCharRosterGrid"></div>
   </div>
 
-  <div class="cda-sub-bar" id="cdaHeroSubBar">
+  <div class="mc-sub-bar" id="mcHeroSubBar">
     <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
       <span class="pill warn" style="flex-shrink:0">💬 LEGENDA AO VIVO</span>
-      <div class="cda-karaoke-line" id="cdaCharSubtitleStream"></div>
+      <div class="mc-karaoke-line" id="mcCharSubtitleStream"></div>
     </div>
-    <button type="button" class="btn cy sm" id="cdaTriggerWipeBtn">⚡ Transição Cidade Alta</button>
+    <button type="button" class="btn cy sm" id="mcTriggerWipeBtn">⚡ Transição Estúdio</button>
   </div>
 </section>
 
 <main>
-  <!-- BARRA HORIZONTAL ESTILO DIAMANTES CIDADEALTA.GG (ACESSO RÁPIDO SEM SIDEBAR ESPREMENDO) -->
+  <!-- BARRA HORIZONTAL ESTILO DIAMANTES CORTES·IA STUDIO (ACESSO RÁPIDO SEM SIDEBAR ESPREMENDO) -->
   <aside class="card side">
-    <div class="cda-quick-grid">
+    <div class="mc-quick-grid">
       <div>
-        <h4><span class="cda-graffiti-script" style="font-size:24px;margin-right:6px">Fama</span> ACESSO RÁPIDO & TRANSIÇÕES</h4>
+        <h4><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Fama</span> ACESSO RÁPIDO & TRANSIÇÕES</h4>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
           <button class="btn" id="newBtn" type="button" style="flex:1">+ Novo Corte</button>
           <button class="btn cy" id="goAoVivoBtn" type="button" style="flex:1">📡 Radar AO VIVO</button>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap" id="sideQuickTransBtns">
-          <button type="button" class="plat-btn on" data-quick-fx="CDA_SLASH">⚡ Wipe CDA</button>
+          <button type="button" class="plat-btn on" data-quick-fx="MC_SLASH">⚡ Wipe Slash</button>
           <button type="button" class="plat-btn" data-quick-fx="FLASH">💥 Flash</button>
           <button type="button" class="plat-btn" data-quick-fx="ZOOM_IN">🔍 Zoom</button>
           <button type="button" class="plat-btn" data-quick-fx="GLITCH">👾 Glitch</button>
         </div>
       </div>
       <div>
-        <h4><span class="cda-graffiti-script" style="font-size:24px;margin-right:6px">Valley</span> MONITORAR LIVE INSTANTÂNEA</h4>
+        <h4><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Valley</span> MONITORAR LIVE INSTANTÂNEA</h4>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input type="text" id="nn" placeholder="Nome (ex.: cda-coringa-rp)" style="flex:1;margin-top:0">
+          <input type="text" id="nn" placeholder="Nome (ex.: live-coringa-rp)" style="flex:1;margin-top:0">
           <input type="text" id="nl" placeholder="Link Twitch, Kick, YouTube ou .m3u8" style="flex:1.4;margin-top:0">
           <button class="btn" id="mk" type="button">Assistir & Cortar</button>
         </div>
       </div>
       <div>
-        <h4><span class="cda-graffiti-script" style="font-size:24px;margin-right:6px">Alta</span> LIVES & COFRE ATIVO</h4>
+        <h4><span class="mc-graffiti-script" style="font-size:24px;margin-right:6px">Prime</span> LIVES & COFRE ATIVO</h4>
         <div id="lives" style="max-height:92px;overflow-y:auto"><div class="mut">Carregando...</div></div>
       </div>
     </div>
@@ -1111,9 +1111,9 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
     <div id="tab-CORTES" class="tab-panel">
       <div class="card" id="fm">
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
-          <span class="cda-step-badge">1</span>
+          <span class="mc-step-badge">1</span>
           <div>
-            <h3 style="margin:0">COMO CORTAR NO <span class="cda-graffiti-script" style="font-size:32px;text-transform:none">Cidade Alta?</span></h3>
+            <h3 style="margin:0">COMO CORTAR NO <span class="mc-graffiti-script" style="font-size:32px;text-transform:none">Magia IA?</span></h3>
             <p class="mut" style="margin:2px 0 0">Cole o link ou escolha uma live abaixo da <b>Kick TV, YouTube Live, Twitch, .m3u8 ou .mp4</b> para assistir à <b>prévia ao vivo com som</b> e monitorar o <b>chat em tempo real + Termômetro de Ironia</b>.</p>
           </div>
         </div>
@@ -1185,12 +1185,12 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
           </div>
         </div>
         <div class="prev" id="livePlayerBox"></div>
-        <div class="cda-live-sub-hud" id="cdaLiveSubHud">
+        <div class="mc-live-sub-hud" id="mcLiveSubHud">
           <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
-            <span class="pill warn" id="cdaLiveSubBadge">👑 LEGENDA CIDADE ALTA</span>
-            <div class="cda-karaoke-line" id="cdaLivePlayerSubStream" style="font-size:13.5px"></div>
+            <span class="pill warn" id="mcLiveSubBadge">👑 LEGENDA AO VIVO</span>
+            <div class="mc-karaoke-line" id="mcLivePlayerSubStream" style="font-size:13.5px"></div>
           </div>
-          <span class="mut" style="font-size:11px" id="cdaLiveSubSpeakerLbl">🎙 Sincronizado c/ Chat & Áudio</span>
+          <span class="mut" style="font-size:11px" id="mcLiveSubSpeakerLbl">🎙 Sincronizado c/ Chat & Áudio</span>
         </div>
 
         <!-- GRAVADOR & COFRE DA LIVE — SALVAR TUDO O QUE PASSA NA LIVE -->
@@ -1312,7 +1312,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
           <div class="phone" id="phoneFrameBox">
             <div class="cap" id="hl">HEADLINE DO CORTE</div>
             <div class="phone-video-box" id="phoneVideoBox"></div>
-            <div class="phone-sub-overlay" id="phoneSubOverlay">👑 LEGENDA CIDADE ALTA 9:16</div>
+            <div class="phone-sub-overlay" id="phoneSubOverlay">👑 LEGENDA AO VIVO 9:16</div>
           </div>
           <div class="lk"></div>
           <div class="mas">
@@ -1719,19 +1719,19 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   </section>
 </main>
 
-<footer class="cda-footer">
-  <div class="cda-footer-inner">
+<footer class="mc-footer">
+  <div class="mc-footer-inner">
     <div style="display:flex;align-items:center;gap:14px">
-      <img src="./images/logos/logo-valley.png" alt="Cidade Alta" style="width:48px;height:48px;object-fit:contain">
+      <img src="./images/logos/logo-valley.png" alt="Magia IA" style="width:48px;height:48px;object-fit:contain">
       <div>
-        <b style="color:#ffffff;letter-spacing:.18em;font-size:16px;display:block">CIDADE ALTA</b>
+        <b style="color:#ffffff;letter-spacing:.18em;font-size:16px;display:block">MAGIA CORTES</b>
         <span style="font-size:11px;color:#ffc046;letter-spacing:.2em">CORTES·IA · GTA RP BRASIL</span>
       </div>
     </div>
-    <p style="margin:0;color:#BCBCBB;font-size:13px;text-align:center">Copyright © 2020-2026, Cidade Alta, All rights reserved</p>
+    <p style="margin:0;color:#BCBCBB;font-size:13px;text-align:center">Copyright © 2020-2026, Magia IA, All rights reserved</p>
     <div style="display:flex;gap:16px;align-items:center">
-      <a href="https://cidadealta.gg/" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">CIDADEALTA.GG</a>
-      <button type="button" class="cda-login-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOPO ↑</button>
+      <a href="#fm" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">CORTES·IA STUDIO</a>
+      <button type="button" class="mc-login-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOPO ↑</button>
     </div>
   </div>
 </footer>
@@ -1928,7 +1928,7 @@ function mkSentimentSeries(durationSec,seed){
 
 function normalizeCatBrowser(rawCat,title){
   const b=(String(rawCat||"")+" "+String(title||"")).toLowerCase();
-  if(/gta|grand theft auto|fivem|roleplay|cidade alta|vice city/.test(b))return"Grand Theft Auto VI";
+  if(/gta|grand theft auto|fivem|roleplay|gta rp|vice city/.test(b))return"Grand Theft Auto VI";
   if(/valorant|cs2|counter-strike|free fire|warzone|call of duty|fortnite|fps/.test(b))return"FPS & Shooter";
   if(/league of legends|dota|cblol|moba/.test(b))return"MOBA & Esports";
   if(/just chatting|irl|notícias|noticias|cnn|sbt|canção nova|globo|podcast|resenha|youtube live/.test(b))return"Just Chatting & Ao Vivo";
@@ -1940,7 +1940,7 @@ const memDemoDiscovery=[
   {id:"kk_ayellol",platform:"KICK",login:"ayellol",display_name:"Ayellol",title:"KICK TV AO VIVO · GAMEPLAY & CHAT SARCÁSTICO",category:"Grand Theft Auto VI",viewer_count:3238,is_brazil:true,language:"pt",url:"https://kick.com/ayellol"},
   {id:"kk_daniels",platform:"KICK",login:"daniels",display_name:"daniels",title:"KICK BRASIL AO VIVO · ALTAS RISADAS E RAGE",category:"Grand Theft Auto VI",viewer_count:2704,is_brazil:true,language:"pt",url:"https://kick.com/daniels"},
   {id:"kk_denissnider",platform:"KICK",login:"denissnider",display_name:"DenisSnider",title:"KICK TV AO VIVO · GAMEPLAY BRASIL",category:"Grand Theft Auto VI",viewer_count:2289,is_brazil:true,language:"pt",url:"https://kick.com/denissnider"},
-  {id:"kk_coringa",platform:"KICK",login:"loud_coringa",display_name:"LOUD Coringa (Kick)",title:"CORINGA NA KICK TV · GTA RP CIDADE ALTA",category:"Grand Theft Auto VI",viewer_count:18400,is_brazil:true,language:"pt",url:"https://kick.com/loud_coringa"},
+  {id:"kk_coringa",platform:"KICK",login:"loud_coringa",display_name:"LOUD Coringa (Kick)",title:"CORINGA NA KICK TV · GTA RP MAGIA CORTES",category:"Grand Theft Auto VI",viewer_count:18400,is_brazil:true,language:"pt",url:"https://kick.com/loud_coringa"},
   {id:"kk_jonvlogs",platform:"KICK",login:"jonvlogs",display_name:"JonVlogs",title:"IRL BRASIL AO VIVO NA KICK · RESENHA",category:"Just Chatting & Ao Vivo",viewer_count:6900,is_brazil:true,language:"pt",url:"https://kick.com/jonvlogs"},
   {id:"yt_cnn_live",platform:"YOUTUBE",login:"cnnbrasil_live",display_name:"CNN Brasil",title:"CNN BRASIL AO VIVO · COBERTURA EM TEMPO REAL",category:"Just Chatting & Ao Vivo",viewer_count:9649,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=FjivCxRWjvM"},
   {id:"yt_flacko",platform:"YOUTUBE",login:"flackojoshy",display_name:"FLACKO JOSHY",title:"AO VIVO AGORA HD · TRANSMISSÃO BRASIL",category:"Just Chatting & Ao Vivo",viewer_count:5220,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=rdvwH-YakRs"},
@@ -1948,7 +1948,7 @@ const memDemoDiscovery=[
   {id:"yt_djnene",platform:"YOUTUBE",login:"djnene",display_name:"Dj Nenê",title:"DJ NENÊ AO VIVO · MÚSICA & CHAT",category:"Just Chatting & Ao Vivo",viewer_count:3347,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=X2U4Blbbpj8"},
   {id:"yt_cnn_news",platform:"YOUTUBE",login:"cnnnewsroom",display_name:"CNN Newsroom BR",title:"AO VIVO: CNN NEWSROOM BRASIL",category:"Just Chatting & Ao Vivo",viewer_count:4120,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=kVj3PEECYks"},
   {id:"yt_sbtbr",platform:"YOUTUBE",login:"sbtnews",display_name:"SBT News",title:"SBT NEWS AO VIVO BRASIL 24H",category:"Just Chatting & Ao Vivo",viewer_count:2850,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=XmN3ClDzQiI"},
-  {id:"tw_paulinho",platform:"TWITCH",login:"paulinhooloko",display_name:"Paulinho o LOKO",title:"GTA RP CIDADE ALTA AO VIVO · FUGA ABSURDA",category:"Grand Theft Auto VI",viewer_count:32400,is_brazil:true,language:"pt",url:"https://www.twitch.tv/paulinhooloko"},
+  {id:"tw_paulinho",platform:"TWITCH",login:"paulinhooloko",display_name:"Paulinho o LOKO",title:"GTA RP MAGIA CORTES AO VIVO · FUGA ABSURDA",category:"Grand Theft Auto VI",viewer_count:32400,is_brazil:true,language:"pt",url:"https://www.twitch.tv/paulinhooloko"},
   {id:"tw_loud",platform:"TWITCH",login:"loud_coringa",display_name:"LOUD Coringa",title:"CORINGA AO VIVO NO GTA RP E RESENHA COM OS CRIA",category:"Grand Theft Auto VI",viewer_count:24900,is_brazil:true,language:"pt",url:"https://www.twitch.tv/loud_coringa"},
   {id:"tw_alanzoka",platform:"TWITCH",login:"alanzoka",display_name:"alanzoka",title:"JOGOS DE TERROR E REAÇÃO AO VIVO (SUSTO GARANTIDO)",category:"Just Chatting & Ao Vivo",viewer_count:19800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/alanzoka"},
   {id:"tw_ricfazeres",platform:"TWITCH",login:"ricfazeres",display_name:"RicFazeres",title:"GAMEPLAY AO VIVO PORTUGAL/BRASIL",category:"Grand Theft Auto VI",viewer_count:3088,is_brazil:true,language:"pt",url:"https://www.twitch.tv/ricfazeres"},
@@ -2060,7 +2060,7 @@ $("themeBtn").onclick=()=>{
 };
 
 // ============================================================================
-// ELENCO DE PERSONAGENS CIDADE ALTA (CIDADEALTA.GG), TRANSIÇÕES & LEGENDAS KARAOKE
+// ELENCO DE PERSONAGENS MAGIA CORTES (CORTES·IA STUDIO), TRANSIÇÕES & LEGENDAS KARAOKE
 // ============================================================================
 let lastChartSeries=[];
 let lastChartClips=[];
@@ -2068,10 +2068,10 @@ let lastThermoOverride=null;
 let chartClipHits=[];
 let liveChatMessages=[];
 
-const CDA_CHARACTER_CAST=[
+const MC_CHARACTER_CAST=[
   {
     id:"coringa",
-    name:"Gold · Rei da Rua CDA",
+    name:"Gold · Rei da Rua VIP",
     short:"Gold · Coringa",
     tier:"Gold",
     faction:"👑 STARTER PACK GOLD · CASSINO & FUGAS",
@@ -2081,11 +2081,11 @@ const CDA_CHARACTER_CAST=[
     subPreset:"HORMOZI_YELLOW",
     hint:"ironia sarcástica, fugas insanas, clutches, engraçados e picos do chat",
     line:"ESQUECE! O CHAT MANDOU JOGA MUITO SÓ QUE NÃO 🤡 E JÁ SALVEI OS 30 SEGUNDOS EM 9:16!",
-    svg:`<img src="./images/starter-pack-bg/gold-img.png" alt="Starter Pack Gold Cidade Alta">`
+    svg:`<img src="./images/starter-pack-bg/gold-img.png" alt="Starter Pack Gold Magia IA">`
   },
   {
     id:"tatico",
-    name:"Diamond · Tático CDA",
+    name:"Diamond · Tático VIP",
     short:"Diamond · ROTA",
     tier:"Diamond",
     faction:"💎 STARTER PACK DIAMOND · QTH PRIORIDADE",
@@ -2095,91 +2095,91 @@ const CDA_CHARACTER_CAST=[
     subPreset:"QTH_RADIO",
     hint:"perseguição policial, ação intensa, hype máximo, gritos e reação forte",
     line:"PRIORIDADE MÁXIMA NA QTH! VIATURA NA COLA E CORTE VERTICAL 9:16 PRONTO PRA AÇÃO!",
-    svg:`<img src="./images/starter-pack-bg/diamond-img.png" alt="Starter Pack Diamond Cidade Alta">`
+    svg:`<img src="./images/starter-pack-bg/diamond-img.png" alt="Starter Pack Diamond Magia IA">`
   },
   {
     id:"paulinho",
     name:"Silver · Piloto Drift",
     short:"Silver · Drift",
     tier:"Silver",
-    faction:"🏎️ STARTER PACK SILVER · CORRIDAS CDA",
+    faction:"🏎️ STARTER PACK SILVER · CORRIDAS VIP",
     role:"Especialista em Momentos Engraçados, Trollagens & Memes",
     color:"#e3e3e6",
     bg:"./images/starter-pack-bg/silver-bg.png",
     subPreset:"NEON_GREEN",
     hint:"momentos engraçados, risadas, drift, capotamento, trollagem e chat spamando kkk",
     line:"200 QI CONFIA KKKK! CAPOTEI NA CURVA DA PRAÇA MAS A RISADA DO CHAT JÁ VIROU CORTE!",
-    svg:`<img src="./images/starter-pack-bg/silver-img.png" alt="Starter Pack Silver Cidade Alta">`
+    svg:`<img src="./images/starter-pack-bg/silver-img.png" alt="Starter Pack Silver Magia IA">`
   },
   {
     id:"magnata",
     name:"Vip · Passe da Fama",
     short:"VIP · Magnata",
     tier:"Vip",
-    faction:"🔥 PASSE DA FAMA · ALTO COMANDO CDA",
+    faction:"🔥 PASSE DA FAMA · ALTO COMANDO VIP",
     role:"Caçador de Raiva Extrema, Tilt, Treta & Xingamentos",
     color:"#ffc046",
     bg:"./images/vip-card-bg/gold-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"raiva extrema, tilt, xingamentos, frustrações e microfone estourado",
     line:"TILTOU AO VIVO! MICROFONE ESTOUROU EM -6dB COM XINGAMENTO E AS 20 IAS JÁ CORTARAM!",
-    svg:`<img src="./images/vip-pricing-image-mobile.png" alt="Personagem VIP Cidade Alta">`
+    svg:`<img src="./images/vip-pricing-image-mobile.png" alt="Personagem VIP Magia IA">`
   },
   {
     id:"palhaco",
     name:"Valley · Mestre da Ironia",
     short:"Valley · Ironia 🤡",
     tier:"Valley",
-    faction:"🎭 PATCH NOTES CDA · TERMÔMETRO DE IRONIA",
+    faction:"🎭 PATCH NOTES VIP · TERMÔMETRO DE IRONIA",
     role:"Guardião do Termômetro de Ironia 🤡 (Sarcasmo vs Raiva)",
     color:"#4ac5f3",
     bg:"./images/vip-card-bg/diamond-bg.png",
     subPreset:"IRONY_PURPLE",
     hint:"ironia, sarcasmo, só que não, confia, 200 QI, humor ácido e chat rindo da falha",
     line:"PARABÉNS AOS ENVOLVIDOS SQN KKKK 🤡! TERMÔMETRO DE IRONIA DIFERENCIOU SARCASMO DE RAIVA!",
-    svg:`<img src="./images/patchnote_1.png" alt="Personagem Patch Notes Cidade Alta">`
+    svg:`<img src="./images/patchnote_1.png" alt="Personagem Patch Notes Magia IA">`
   },
   {
     id:"diretor",
-    name:"Alta · Rainha do RP",
-    short:"Alta · Diretora",
-    tier:"Alta",
-    faction:"🎬 CIDADE ALTA OFICIAL · TIME-SHIFT 9:16",
+    name:"Prime · Rainha do RP",
+    short:"Prime · Diretora",
+    tier:"Prime",
+    faction:"🎬 MAGIA CORTES OFICIAL · TIME-SHIFT 9:16",
     role:"Varredura Dupla Time-Shift 00:00 ← Ao Vivo → Fim",
     color:"#ffc046",
     bg:"./images/vip-card-bg/silver-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"melhores momentos gerais, time-shift 00:00 ao vivo, cortes verticais 9:16 com legenda",
     line:"VARREDURA DUPLA ATIVA: OLHANDO DO AO VIVO ATÉ O INÍCIO DA LIVE E SALVANDO TUDO EM 9:16!",
-    svg:`<img src="./images/hero-bg-mobile.png" alt="Personagem Oficial Cidade Alta" style="border-radius:6px;object-fit:cover">`
+    svg:`<img src="./images/hero-bg-mobile.png" alt="Personagem Oficial Magia IA" style="border-radius:6px;object-fit:cover">`
   }
 ];
 
-let activeCdaChar=CDA_CHARACTER_CAST[0];
+let activeMcChar=MC_CHARACTER_CAST[0];
 let activeSubPreset="HORMOZI_YELLOW";
-let currentKaraokeText=activeCdaChar.line;
+let currentKaraokeText=activeMcChar.line;
 let karaokeWordIdx=0;
 
-function triggerCdaTransition(fxType="CDA_SLASH",silent=false){
-  const blade=$("cdaWipeBlade");
+function triggerMcTransition(fxType="MC_SLASH",silent=false){
+  const blade=$("mcWipeBlade");
   if(blade){
     blade.classList.remove("play");
     void blade.offsetWidth;
     blade.classList.add("play");
   }
-  const targets=[$("livePlayerBox"),$("phoneVideoBox"),$("cdaActiveCharStage")].filter(Boolean);
+  const targets=[$("livePlayerBox"),$("phoneVideoBox"),$("mcActiveCharStage")].filter(Boolean);
   const cls=fxType==="FLASH"?"fx-flash":(fxType==="ZOOM_IN"?"fx-zoom":(fxType==="GLITCH"?"fx-glitch":"fx-zoom"));
   targets.forEach(el=>{
     el.classList.remove("fx-flash","fx-zoom","fx-glitch");
     void el.offsetWidth;
     el.classList.add(cls);
   });
-  if(fxType&&fxType!=="CDA_SLASH"){
+  if(fxType&&fxType!=="MC_SLASH"){
     appSettings.transition=fxType;
     if($("rotTrans"))$("rotTrans").value=fxType;
   }
   if(!silent){
-    notify(`⚡ Transição Cidade Alta (${fxType}) aplicada com fluidez!`);
+    notify(`⚡ Transição Estúdio (${fxType}) aplicada com fluidez!`);
   }
 }
 
@@ -2192,7 +2192,7 @@ function renderKaraokeWordsInto(container,rawText,highlightIdx,accentColor){
   container.innerHTML=words.map((w,i)=>{
     const isOn=(i===hi||i===hi+1);
     const st=isOn?`background:${col};color:#000000;box-shadow:0 4px 14px ${col}88;`:"";
-    return `<span class="cda-kw ${isOn?"on":""}" style="${st}">${esc(w)}</span>`;
+    return `<span class="mc-kw ${isOn?"on":""}" style="${st}">${esc(w)}</span>`;
   }).join(" ");
 }
 
@@ -2203,16 +2203,16 @@ function getSubPresetColor(preset){
   return "#ffc046";
 }
 
-function stepCdaKaraokeSubtitles(){
+function stepMcKaraokeSubtitles(){
   karaokeWordIdx++;
   const col=getSubPresetColor(activeSubPreset);
-  renderKaraokeWordsInto($("cdaCharSubtitleStream"),activeCdaChar.line,karaokeWordIdx,activeCdaChar.color||col);
+  renderKaraokeWordsInto($("mcCharSubtitleStream"),activeMcChar.line,karaokeWordIdx,activeMcChar.color||col);
 
   const lastChat=liveChatMessages.length?liveChatMessages[liveChatMessages.length-1]:null;
   const liveLine=lastChat
     ?`@${lastChat.author}: ${lastChat.text.toUpperCase()} (${lastChat.is_irony?"🤡 IRONIA "+lastChat.ironia+"%":lastChat.emotion.toUpperCase()})`
     :currentKaraokeText;
-  renderKaraokeWordsInto($("cdaLivePlayerSubStream"),liveLine,karaokeWordIdx,col);
+  renderKaraokeWordsInto($("mcLivePlayerSubStream"),liveLine,karaokeWordIdx,col);
 
   const phoneSub=$("phoneSubOverlay");
   if(phoneSub){
@@ -2221,90 +2221,90 @@ function stepCdaKaraokeSubtitles(){
   }
 }
 
-function selectCdaCharacter(charId,withTransition=true){
-  const found=CDA_CHARACTER_CAST.find(c=>c.id===charId)||CDA_CHARACTER_CAST[0];
-  activeCdaChar=found;
+function selectMcCharacter(charId,withTransition=true){
+  const found=MC_CHARACTER_CAST.find(c=>c.id===charId)||MC_CHARACTER_CAST[0];
+  activeMcChar=found;
   activeSubPreset=found.subPreset||"HORMOZI_YELLOW";
   currentKaraokeText=found.line;
   karaokeWordIdx=0;
 
-  if(withTransition)triggerCdaTransition("CDA_SLASH",true);
+  if(withTransition)triggerMcTransition("MC_SLASH",true);
 
-  if($("cdaCharFactionBadge"))$("cdaCharFactionBadge").textContent=found.faction;
-  if($("cdaActiveCharStage")&&found.bg){
-    $("cdaActiveCharStage").style.backgroundImage=`url("${found.bg}")`;
+  if($("mcCharFactionBadge"))$("mcCharFactionBadge").textContent=found.faction;
+  if($("mcActiveCharStage")&&found.bg){
+    $("mcActiveCharStage").style.backgroundImage=`url("${found.bg}")`;
   }
-  if($("cdaSpotlightSvgBox"))$("cdaSpotlightSvgBox").innerHTML=found.svg;
-  if($("cdaCharNameLbl")){$("cdaCharNameLbl").textContent=found.name;$("cdaCharNameLbl").style.color=found.color;}
-  if($("cdaCharRoleLbl"))$("cdaCharRoleLbl").textContent=found.role;
-  if($("cdaActiveCharHeaderBadge"))$("cdaActiveCharHeaderBadge").textContent=`👑 Diretor: ${found.short}`;
+  if($("mcSpotlightSvgBox"))$("mcSpotlightSvgBox").innerHTML=found.svg;
+  if($("mcCharNameLbl")){$("mcCharNameLbl").textContent=found.name;$("mcCharNameLbl").style.color=found.color;}
+  if($("mcCharRoleLbl"))$("mcCharRoleLbl").textContent=found.role;
+  if($("mcActiveCharHeaderBadge"))$("mcActiveCharHeaderBadge").textContent=`👑 Diretor: ${found.short}`;
   if($("masLeftSvgBox"))$("masLeftSvgBox").innerHTML=found.svg;
-  const partnerChar=CDA_CHARACTER_CAST[(CDA_CHARACTER_CAST.indexOf(found)+1)%CDA_CHARACTER_CAST.length];
+  const partnerChar=MC_CHARACTER_CAST[(MC_CHARACTER_CAST.indexOf(found)+1)%MC_CHARACTER_CAST.length];
   if($("masRightSvgBox"))$("masRightSvgBox").innerHTML=partnerChar.svg;
   if($("hint")&&withTransition)$("hint").value=found.hint;
 
-  $("cdaSubStyleBtns").querySelectorAll("[data-sub-preset]").forEach(b=>{
+  $("mcSubStyleBtns").querySelectorAll("[data-sub-preset]").forEach(b=>{
     b.classList.toggle("on",b.dataset.subPreset===activeSubPreset);
   });
-  renderCdaCharacterRoster();
-  stepCdaKaraokeSubtitles();
+  renderMcCharacterRoster();
+  stepMcKaraokeSubtitles();
 }
 
-function renderCdaCharacterRoster(){
-  const grid=$("cdaCharRosterGrid");
+function renderMcCharacterRoster(){
+  const grid=$("mcCharRosterGrid");
   if(!grid)return;
-  grid.innerHTML=CDA_CHARACTER_CAST.map(c=>`
-    <div class="cda-char-card ${c.id===activeCdaChar.id?"on":""}" data-cda-char="${esc(c.id)}" style="background-image:url('${esc(c.bg)}')">
-      <div class="cda-char-svg">${c.svg}</div>
-      <span class="cda-char-tier" style="color:${esc(c.color)}">${esc(c.tier||c.short)}</span>
+  grid.innerHTML=MC_CHARACTER_CAST.map(c=>`
+    <div class="mc-char-card ${c.id===activeMcChar.id?"on":""}" data-mc-char="${esc(c.id)}" style="background-image:url('${esc(c.bg)}')">
+      <div class="mc-char-svg">${c.svg}</div>
+      <span class="mc-char-tier" style="color:${esc(c.color)}">${esc(c.tier||c.short)}</span>
       <b style="font-size:12px;color:#fff;letter-spacing:.08em;text-transform:uppercase">${esc(c.short)}</b>
       <span class="mut" style="font-size:11px;line-height:1.25">${esc(c.role.slice(0,48))}…</span>
     </div>
   `).join("");
-  grid.querySelectorAll("[data-cda-char]").forEach(card=>{
+  grid.querySelectorAll("[data-mc-char]").forEach(card=>{
     card.onclick=()=>{
-      selectCdaCharacter(card.dataset.cdaChar,true);
-      notify(`👑 Personagem "${activeCdaChar.name}" assumiu a direção de cortes & legendas!`);
+      selectMcCharacter(card.dataset.mcChar,true);
+      notify(`👑 Personagem "${activeMcChar.name}" assumiu a direção de cortes & legendas!`);
     };
   });
 }
 
-$("cdaSubStyleBtns").querySelectorAll("[data-sub-preset]").forEach(btn=>{
+$("mcSubStyleBtns").querySelectorAll("[data-sub-preset]").forEach(btn=>{
   btn.onclick=()=>{
     activeSubPreset=btn.dataset.subPreset||"HORMOZI_YELLOW";
     appSettings.subtitle_style=activeSubPreset;
-    $("cdaSubStyleBtns").querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
-    if($("cdaLiveSubBadge"))$("cdaLiveSubBadge").textContent=btn.textContent;
-    stepCdaKaraokeSubtitles();
+    $("mcSubStyleBtns").querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
+    if($("mcLiveSubBadge"))$("mcLiveSubBadge").textContent=btn.textContent;
+    stepMcKaraokeSubtitles();
     notify(`💬 Estilo de legenda alterado para ${btn.textContent}!`);
   };
 });
 
-$("cdaTriggerWipeBtn").onclick=()=>triggerCdaTransition("CDA_SLASH",false);
+$("mcTriggerWipeBtn").onclick=()=>triggerMcTransition("MC_SLASH",false);
 $("sideQuickTransBtns").querySelectorAll("[data-quick-fx]").forEach(btn=>{
   btn.onclick=()=>{
-    const fx=btn.dataset.quickFx||"CDA_SLASH";
+    const fx=btn.dataset.quickFx||"MC_SLASH";
     $("sideQuickTransBtns").querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
-    triggerCdaTransition(fx,false);
+    triggerMcTransition(fx,false);
   };
 });
 
-// Paralaxe 3D suave no banner Cidade Alta
-$("cdaHeroBanner").addEventListener("mousemove",e=>{
-  const box=$("cdaSpotlightSvgBox");
+// Paralaxe 3D suave no banner Magia IA
+$("mcHeroBanner").addEventListener("mousemove",e=>{
+  const box=$("mcSpotlightSvgBox");
   if(!box)return;
-  const r=$("cdaHeroBanner").getBoundingClientRect();
+  const r=$("mcHeroBanner").getBoundingClientRect();
   const dx=((e.clientX-r.left)/Math.max(1,r.width)-0.5)*14;
   const dy=((e.clientY-r.top)/Math.max(1,r.height)-0.5)*10;
   box.style.transform=`translate3d(${dx.toFixed(1)}px,${dy.toFixed(1)}px,0) scale(1.04)`;
 });
-$("cdaHeroBanner").addEventListener("mouseleave",()=>{
-  const box=$("cdaSpotlightSvgBox");
+$("mcHeroBanner").addEventListener("mouseleave",()=>{
+  const box=$("mcSpotlightSvgBox");
   if(box)box.style.transform="";
 });
 
-selectCdaCharacter("coringa",false);
-setInterval(stepCdaKaraokeSubtitles,380);
+selectMcCharacter("coringa",false);
+setInterval(stepMcKaraokeSubtitles,380);
 
 tabs.forEach(t=>{
   const b=document.createElement("button");
@@ -2314,7 +2314,7 @@ tabs.forEach(t=>{
 });
 
 function showTab(t,withWipe=false){
-  if(withWipe&&t!==activeTab)triggerCdaTransition("CDA_SLASH",true);
+  if(withWipe&&t!==activeTab)triggerMcTransition("MC_SLASH",true);
   activeTab=t;
   [...$("nav").children].forEach(b=>b.classList.toggle("on",b.dataset.t===t));
   document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hide",p.id!=="tab-"+t));
@@ -2348,7 +2348,7 @@ function classifyBrBrowser(s){
   if(top.includes(lg))return true;
   if((s.language||"").toLowerCase().startsWith("pt"))return true;
   const txt=((s.title||"")+" "+(s.display_name||"")).toLowerCase();
-  return /[ãõçêâôáéíóú]|\b(ao vivo|brasil|br|gta rp|cidade alta|complexo|canção nova|cnn brasil|sbt)\b/i.test(txt);
+  return /[ãõçêâôáéíóú]|\b(ao vivo|brasil|br|gta rp|gta rp|complexo|canção nova|cnn brasil|sbt)\b/i.test(txt);
 }
 
 async function browserDiscoverStreams(plat,cat,reg,q){
@@ -4288,14 +4288,14 @@ async function pollLive(){
   }
 }
 
-const stageMsgs=["👑 corte Cidade Alta pronto!","headline dourada ✓","molde 9:16 aplicado ✓","legenda karaoke sincronizada ✓"];
+const stageMsgs=["👑 corte Magia IA pronto!","headline dourada ✓","molde 9:16 aplicado ✓","legenda karaoke sincronizada ✓"];
 const stageTags=["corte","headline","molde","legenda"];
 function openEd(idx,clip,liveId){
   selectedClipIdx=idx;activeClipObj=clip;activeClipLiveId=liveId||curLiveId;
-  triggerCdaTransition(clip.transition||"CDA_SLASH",true);
+  triggerMcTransition(clip.transition||"MC_SLASH",true);
   const total=$("cl").children.length||1;
   const mediaUrl=resolveMediaUrl(clip.url);
-  $("et").textContent=`ESTÚDIO 9:16 · VÍDEO ${idx+1} DE ${total} · ${activeCdaChar.short.toUpperCase()}`;
+  $("et").textContent=`ESTÚDIO 9:16 · VÍDEO ${idx+1} DE ${total} · ${activeMcChar.short.toUpperCase()}`;
   $("srcThumbLbl").textContent=`VÍDEO ${idx+1}`;
   $("hl").textContent=clip.headline||clip.titulo;
   $("edHeadlineInput").value=clip.headline||clip.titulo||"";
@@ -4305,7 +4305,7 @@ function openEd(idx,clip,liveId){
   $("dt").textContent=clip.descricao;
   $("dlClip").href=mediaUrl;
   $("phoneVideoBox").innerHTML=`<video src="${mediaUrl}" controls autoplay loop playsinline></video>`;
-  stepCdaKaraokeSubtitles();
+  stepMcKaraokeSubtitles();
   const dur=Math.max(5,Math.min(30,Math.round((clip.fim||30)-(clip.ini||0))));
   $("mk1").textContent=hms(Math.round(dur*0.2));
   $("mk2").textContent=hms(Math.round(dur*0.52));
