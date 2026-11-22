@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Magia Cortes IA · Estúdio GTA 6</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff2e93'/%3E%3Cstop offset='1' stop-color='%2300e5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%2307070d'/%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2307070d'/%3E%3C/svg%3E">
+<title>Cidade Alta · Magia Cortes IA</title>
+<link rel="icon" type="image/png" href="./images/logos/logo-valley.png">
 <style>
 @font-face{
   font-family:"CortesPixel";
@@ -12,322 +12,965 @@
   font-weight:400 700;
   font-display:swap;
 }
+@font-face{
+  font-family:"Europa Grotesk";
+  src:url("./fonts/EuropaGroteskSH-Reg.otf") format("opentype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Europa Grotesk";
+  src:url("./fonts/EuropaGroteskSH-Med.otf") format("opentype");
+  font-weight:500;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Europa Grotesk";
+  src:url("./fonts/EuropaGroteskSH-Bol.otf") format("opentype");
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Skylight Graffiti";
+  src:url("./fonts/Skylight-Graffiti.otf") format("opentype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Articulat CF";
+  src:url("./fonts/ArticulatCF-Heavy.woff") format("woff");
+  font-weight:900;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Articulat CF";
+  src:url("./fonts/ArticulatCF-Medium.woff") format("woff");
+  font-weight:500;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Articulat CF";
+  src:url("./fonts/ArticulatCF-Regular.woff") format("woff");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
 :root{
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#08090e;--panel:#11131d;--in:#0c0e16;--line:#2c2617;--tx:#f9f8ff;--mut:#a5a1b8;
-  --acc:#ffb800;--cy:#00e5ff;--y:#ffb800;--pu:#c084fc;--gr:#00e676;--pk:#ff5500;
-  --cda-gold:#ffb800;--cda-Gold2:#ffd600;--cda-dark:#08090e;--cda-flame:#ff5500;
-  --px:"CortesPixel",ui-monospace,Menlo,monospace;
-}
-@media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]){
-    --bg:#08090e;--panel:#11131d;--in:#0c0e16;--line:#2c2617;--tx:#f9f8ff;--mut:#a5a1b8;
-  }
+  --bg:#11131d;
+  --panel:#161926;
+  --in:#121521;
+  --line:#262b41;
+  --tx:#ffffff;
+  --mut:#BCBCBB;
+  --acc:#ffc046;
+  --cy:#4ac5f3;
+  --y:#ffc046;
+  --pu:#4a25d1;
+  --gr:#00e676;
+  --pk:#ff5500;
+  --px:"Europa Grotesk","CortesPixel",system-ui,sans-serif;
+  --graffiti:"Skylight Graffiti",cursive;
 }
 :root[data-theme="light"]{
-  --bg:#f5f2e8;--panel:#ffffff;--in:#faf7ee;--line:#e2d5b5;--tx:#14120e;--mut:#665e4d;
+  --bg:#151824;--panel:#1c2030;--in:#121521;--line:#2e344e;--tx:#ffffff;--mut:#d0d0d5;
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+html{scroll-padding-top:100px;scroll-behavior:smooth}
 *{box-sizing:border-box}
+::-webkit-scrollbar{width:5px;height:5px;background:rgba(13,14,20,.3)}
+::-webkit-scrollbar-thumb{background:#52B6FF;border-radius:36px}
 body{
   margin:0;
-  background:
-    radial-gradient(980px 460px at 88% -6%,rgba(255,184,0,.18),transparent 62%),
-    radial-gradient(820px 420px at 10% 0%,rgba(255,85,0,.12),transparent 60%),
-    radial-gradient(700px 400px at 50% 100%,rgba(0,229,255,.07),transparent 65%),
-    repeating-linear-gradient(135deg,rgba(255,184,0,.018) 0 2px,transparent 2px 18px),
-    var(--bg);
-  color:var(--tx);
-  font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:#11131d;
+  color:var(--mut);
+  font:400 15px/1.45 "Europa Grotesk",system-ui,-apple-system,sans-serif;
   overflow-x:hidden;
 }
-/* BARRA TÁTICA DIAGONAL ESTILO CIDADEALTA.GG */
+/* BARRA TOPO NPROGRESS OFICIAL CIDADEALTA.GG */
 .cda-top-stripe{
+  position:fixed;
+  top:0;left:0;right:0;
   height:5px;
-  width:100%;
-  background:repeating-linear-gradient(-45deg,#ffb800 0 14px,#08090e 14px 28px,#ff5500 28px 34px,#08090e 34px 48px);
-  background-size:68px 100%;
-  animation:cdaStripeMove 14s linear infinite;
+  background:#52B6FF;
+  box-shadow:0 0 10px #52B6FF,0 0 5px #52B6FF;
+  z-index:1031;
 }
-@keyframes cdaStripeMove{to{background-position:-68px 0}}
+/* HEADER OFICIAL CIDADEALTA.GG (90PX, BLUR 10PX, SEPARADORES #262B41, SUBLINHADO GRAFFITI #FFC046) */
 header{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;
-  border-bottom:1px solid rgba(255,184,0,.28);
-  background:linear-gradient(90deg,rgba(17,19,29,.96),rgba(28,22,12,.92),rgba(17,19,29,.96));
-  backdrop-filter:blur(12px);
-  position:sticky;top:0;z-index:45;
+  width:100%;
+  min-height:90px;
+  background:rgba(13,14,20,.45);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid rgba(38,43,65,.55);
+}
+.cda-header-inner{
+  max-width:1410px;
+  min-height:90px;
+  margin:0 auto;
+  padding:10px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
   flex-wrap:wrap;
-  box-shadow:0 8px 28px rgba(0,0,0,.45);
 }
-.hdr-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0;max-width:100%}
+.hdr-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
 .logo{
-  display:flex;align-items:center;gap:10px;font-family:var(--px);font-size:12px;
-  background:linear-gradient(90deg,#ffb800,#ffd600,#ff5500);
-  -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;
-  letter-spacing:.6px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#ffffff;
+  font-family:"Europa Grotesk",sans-serif;
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:.12em;
+  text-decoration:none;
+  white-space:nowrap;
 }
-.logo b{
-  width:28px;height:28px;border-radius:7px;
-  background:linear-gradient(135deg,#ffb800,#ff5500);
-  box-shadow:0 0 16px rgba(255,184,0,.55);
-  display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
-  color:#08090e;font-size:15px;font-family:system-ui;font-weight:900;
-  transform:skewX(-6deg);
+.logo img{
+  width:56px;
+  height:56px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.6));
 }
-.logo b::after{content:"👑"}
-nav{display:flex;gap:5px;overflow-x:auto;max-width:100%;scrollbar-width:none}
+.logo-sub{
+  font-size:10px;
+  color:#ffc046;
+  letter-spacing:.22em;
+  display:block;
+  font-weight:500;
+}
+nav{
+  display:flex;
+  align-items:center;
+  gap:0;
+  overflow-x:auto;
+  max-width:100%;
+  scrollbar-width:none;
+}
 nav::-webkit-scrollbar{display:none}
 nav button{
-  background:rgba(255,255,255,.02);border:1px solid rgba(255,184,0,.14);color:var(--mut);
-  padding:9px 12px;font:9px var(--px);cursor:pointer;border-radius:8px;white-space:nowrap;
-  transition:all .24s cubic-bezier(.22,1,.36,1);
-  transform:skewX(-5deg);
+  background:transparent;
+  border:0;
+  border-right:1px solid #262b41;
+  color:#BCBCBB;
+  padding:8px 18px;
+  font:500 13.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+  white-space:nowrap;
+  position:relative;
+  transition:color .2s ease;
 }
-nav button:hover{color:#fff;background:rgba(255,184,0,.12);border-color:rgba(255,184,0,.45);transform:skewX(-5deg) translateY(-1px)}
+nav button:last-child{border-right:0}
+nav button:hover{color:#ffffff}
 nav button.on{
-  color:#08090e;
-  background:linear-gradient(135deg,#ffb800,#ffd600);
-  border-color:#ffb800;
-  box-shadow:0 0 18px rgba(255,184,0,.42);
+  color:#ffffff;
   font-weight:700;
 }
-main{display:grid;grid-template-columns:260px 1fr;gap:14px;padding:14px;max-width:1260px;margin:auto}
-@media(max-width:780px){main{grid-template-columns:1fr}main>section{order:-1}nav{flex-wrap:wrap;overflow:visible}nav button{padding:7px 9px}}
-.card{
-  background:linear-gradient(180deg,rgba(20,23,35,.95),rgba(13,15,23,.98));
-  border:1px solid rgba(255,184,0,.22);
-  border-radius:14px;padding:16px;
-  box-shadow:0 12px 34px rgba(0,0,0,.38);
-  transition:transform .25s cubic-bezier(.22,1,.36,1),border-color .25s,box-shadow .25s;
+nav button.on::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-4px;
+  transform:translateX(-50%);
+  width:50px;
+  height:11px;
+  background:url("data:image/svg+xml,%3Csvg width='53' height='12' viewBox='0 0 53 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M51.1636 1.5C35.091 1.72947 18.8878 3.21431 3.00018 5.65624C-0.556226 6.20286 3.55159 6.08532 5.42537 6.07786C15.9682 5.95027 26.5073 6.23537 37.0439 6.53564C39.261 6.59882 46.8492 6.80992 43.2259 7.36797C35.0398 8.62877 26.7438 9.24705 18.481 9.93948' stroke='%23FFC046' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
-.card:hover{border-color:rgba(255,184,0,.42)}
-.hide{display:none!important}
-.btn{
-  background:linear-gradient(135deg,#ffb800,#ff7700);
-  color:#08090e;border:0;border-radius:9px;padding:11px 14px;
-  font:800 13px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
-  gap:6px;text-decoration:none;
-  box-shadow:0 4px 16px rgba(255,184,0,.25);
-  transition:all .22s cubic-bezier(.22,1,.36,1);
+.hdr-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
-.btn:hover{filter:brightness(1.1);transform:translateY(-1.5px);box-shadow:0 8px 22px rgba(255,184,0,.42)}
-.btn:active{transform:translateY(0)}
-.btn.g{background:var(--in);color:var(--tx);border:1px solid rgba(255,184,0,.25);box-shadow:none;font-weight:700}
-.btn.g:hover{border-color:#ffb800;background:rgba(255,184,0,.1)}
-.btn.cy{background:linear-gradient(135deg,#00e5ff,#00e676);color:#06060d;box-shadow:0 4px 15px rgba(0,229,255,.25)}
-.btn.sm{padding:7px 11px;font-size:12px}
-.btn.w{width:100%}
-.side h4,.card h3{font:10px var(--px);margin:16px 0 8px;color:var(--y)}
-.card h3{color:var(--y);margin:0 0 10px;font-size:11px;line-height:1.6;text-shadow:0 0 14px rgba(255,184,0,.22)}
-input[type=text],input[type=number],input[type=url],input[type=range],select,textarea{
-  width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,184,0,.24);
-  background:var(--in);color:var(--tx);font:inherit;margin-top:6px;
-  transition:border-color .2s,box-shadow .2s;
+.cda-login-btn{
+  width:134px;
+  height:34px;
+  background:url("./images/button-bg-01.svg") no-repeat center / contain;
+  border:0;
+  color:#ffc046;
+  font:700 13px "Europa Grotesk",sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .2s ease,filter .2s ease;
 }
-input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,select:focus,textarea:focus{
-  outline:none;border-color:#ffb800;box-shadow:0 0 0 2px rgba(255,184,0,.2);
+.cda-login-btn:hover{
+  transform:scale(1.04);
+  filter:drop-shadow(0 0 10px rgba(255,192,70,.4));
 }
-input[type=range]{padding:4px 0;accent-color:#ffb800}
-label{display:block;font-size:12px;color:var(--mut);margin-top:12px}
-.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:130px}
-.chk{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px;cursor:pointer}
-.chk input{width:16px;height:16px;accent-color:#ffb800}
-.lv{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:9px 6px;border-bottom:1px solid rgba(255,184,0,.15);font-size:12.5px;cursor:pointer;border-radius:6px;transition:background .18s}
-.lv:hover{background:rgba(255,184,0,.12)}
-.lv span{color:var(--mut)}
-.mut{color:var(--mut);font-size:12.5px}
-.head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.dot{width:10px;height:10px;border-radius:50%;background:#ff5500;box-shadow:0 0 10px #ff5500;animation:bl 1.2s infinite}
-@keyframes bl{50%{opacity:.3}}
-.prev-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px;padding:8px 10px;border-radius:10px 10px 0 0;border:1px solid rgba(255,184,0,.3);border-bottom:0;background:linear-gradient(90deg,#0c0e16,#19150b)}
-.prev{margin:0;aspect-ratio:16/9;min-height:230px;max-height:460px;width:100%;border-radius:0;position:relative;overflow:hidden;background:#07070b linear-gradient(180deg,#1c1608,#090910);border:1px solid rgba(255,184,0,.3);display:flex;align-items:center;justify-content:center}
-.prev-player{width:100%;height:100%;border:0;display:block;background:#000}
-.prev-badge{background:linear-gradient(135deg,#ffb800,#ff5500);color:#08090e;font:700 8px var(--px);padding:4px 8px;border-radius:4px}
-.prev-txt{font:9px var(--px);color:var(--y)}
-.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px;margin-top:10px}
-.clip{cursor:pointer;transition:transform .24s cubic-bezier(.22,1,.36,1)}
-.clip:hover{transform:translateY(-4px)}
-.vid{aspect-ratio:9/16;border-radius:10px;position:relative;overflow:hidden;background:#111;border:1px solid rgba(255,184,0,.35);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.cap{background:linear-gradient(90deg,#ffb800,#ff6b00);color:#08090e;font:900 11.5px system-ui;padding:6px 8px;text-align:center;text-transform:uppercase;border-bottom:3px solid #fff;letter-spacing:.4px}
-.clip b{display:block;margin-top:8px;color:#fff}
-details{margin-top:12px;color:var(--mut)}summary{cursor:pointer;color:var(--y);font-weight:700}
-#log{margin-top:8px;max-height:140px;overflow:auto;font:12px ui-monospace,Menlo,monospace;background:var(--in);padding:8px;border-radius:8px;border:1px solid var(--line)}
-.film{height:54px;border-radius:8px;border:2px dashed #ffb800;background:repeating-linear-gradient(-45deg,#ffb800 0 28px,#11131d 28px 56px,#ff5500 56px 70px,#11131d 70px 88px);animation:sl 6s linear infinite;background-size:124px 100%}
-@keyframes sl{to{background-position:-124px 0}}
-.stage{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:20px 0}
-.mas{text-align:center;max-width:140px}.mas svg{width:58px;height:66px;animation:bo 1.4s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(255,184,0,.35))}
-@keyframes bo{50%{transform:translateY(-6px)}}
-.bub{background:linear-gradient(135deg,#ffb800,#ffd600);color:#08090e;font:800 10.5px system-ui;padding:8px 10px;border-radius:8px;margin-top:6px;min-height:32px;border:1px solid #fff;box-shadow:0 6px 16px rgba(255,184,0,.28)}
-.tag{font:700 8px var(--px);background:#ff5500;color:#fff;padding:5px 7px;border-radius:4px;display:inline-block;margin-top:6px}
-.thumb{width:150px;height:96px;border:2px solid #ffb800;border-radius:8px;background:linear-gradient(135deg,#2b1f06,#121420);position:relative;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(255,184,0,.18)}
-.thumb s{position:absolute;bottom:4px;left:6px;font:7px var(--px);text-decoration:none;color:var(--y)}
-.lk{width:30px;border-top:2px dashed var(--y)}
-.phone{width:186px;aspect-ratio:9/16;border:3px solid #ffb800;border-radius:20px;background:#090a10;padding:6px;display:flex;flex-direction:column;gap:6px;overflow:hidden;box-shadow:0 0 28px rgba(255,184,0,.26);position:relative}
-.phone-video-box{flex:1;position:relative;border-radius:12px;overflow:hidden;background:#161622;display:flex;align-items:center;justify-content:center}
-.phone-video-box video{width:100%;height:100%;object-fit:cover;display:block}
-.wave{position:relative;display:flex;align-items:center;gap:2px;height:66px;margin-top:8px}
-.wave i{flex:1;background:linear-gradient(180deg,#ffb800,#ff5500);border-radius:2px;min-width:2px;transition:height .18s}
-.pbar-wrap{height:8px;border-radius:4px;background:var(--in);border:1px solid var(--line);margin-top:6px;overflow:hidden}
-.pbar{height:100%;border-radius:4px;background:linear-gradient(90deg,#ffb800,#ff5500);width:0%;transition:width .15s}
-.mk{position:absolute;top:0;font:7px var(--px);background:var(--y);color:#111;padding:3px 5px;border-radius:3px;z-index:2}
-.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px}
-.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:12px;margin-top:12px}
-.swarm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;margin-top:10px}
-.item-card{padding:12px;border:1px solid rgba(255,184,0,.2);border-radius:10px;background:var(--in);transition:transform .22s cubic-bezier(.22,1,.36,1),border-color .22s,box-shadow .22s}
-.item-card:hover{transform:translateY(-3px);border-color:rgba(255,184,0,.55);box-shadow:0 8px 22px rgba(255,184,0,.12)}
-.item-card.active{border-color:#ffb800;box-shadow:0 0 0 1px #ffb800}
-.agent-card{padding:8px 10px;border:1px solid rgba(255,184,0,.18);border-radius:9px;background:var(--in);font-size:11.5px;transition:transform .18s}
-.agent-card:hover{transform:translateY(-2px);border-color:#ffb800}
-.agent-card.running{border-color:#ffb800;box-shadow:inset 0 0 10px rgba(255,184,0,.12)}
-.agent-card.done{border-color:var(--gr)}
-.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:800;background:rgba(0,230,118,.16);color:var(--gr)}
-.pill.warn{background:rgba(255,184,0,.2);color:#ffc700;border:1px solid rgba(255,184,0,.35)}
-.pill.err{background:rgba(255,85,0,.22);color:#ff854d;border:1px solid rgba(255,85,0,.35)}
-.pill.pu{background:rgba(192,132,252,.22);color:#e9d5ff}
-.pill.cy{background:rgba(0,229,255,.18);color:#5eead4}
-.pill.br{background:rgba(0,230,118,.22);color:#4ade80}
-.pill.intl{background:rgba(143,143,160,.2);color:var(--mut)}
-.plat-btn{padding:6px 11px;border-radius:8px;border:1px solid rgba(255,184,0,.22);background:var(--in);color:var(--mut);font:700 12px system-ui;cursor:pointer;transition:all .2s cubic-bezier(.22,1,.36,1)}
-.plat-btn:hover{color:#fff;border-color:#ffb800;transform:translateY(-1px)}
-.plat-btn.on{background:linear-gradient(135deg,#ffb800,#ff7700);color:#08090e;border-color:#ffb800;font-weight:800;box-shadow:0 4px 12px rgba(255,184,0,.28)}
-.sent-wrap{margin:10px 0 14px;padding:12px;border-radius:12px;border:1px solid rgba(255,184,0,.24);background:var(--in)}
-.sent-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.sent-leg{display:flex;gap:12px;font-size:11.5px;flex-wrap:wrap}
-.sent-leg span{display:inline-flex;align-items:center;gap:5px}
-.sent-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
-#sentimentChart{width:100%;height:170px;display:block;cursor:pointer}
-.ts-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
-@media(max-width:600px){.ts-row{grid-template-columns:1fr}}
-.ts-box{padding:8px 10px;border-radius:9px;border:1px solid rgba(255,184,0,.22);background:var(--in);font-size:11.5px}
-.clip-card-lib{position:relative;display:flex;flex-direction:column;gap:6px}
-.clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(11,11,16,.88);padding:4px 8px;border-radius:8px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid rgba(255,184,0,.45)}
-.clip-chk-label input{width:16px;height:16px;accent-color:#ffb800;margin:0}
-.studio-quick{margin-top:12px;padding:12px;border-radius:10px;border:1px solid rgba(255,184,0,.28);background:var(--in)}
-.irony-box{margin:8px 0 10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(192,132,252,.45);background:linear-gradient(90deg,rgba(139,92,246,.14),rgba(255,184,0,.09))}
-.irony-bar-wrap{height:10px;border-radius:999px;background:#090812;border:1px solid rgba(192,132,252,.35);margin-top:6px;overflow:hidden}
-.irony-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#ffb800,#c084fc,#ff5500);width:18%;transition:width .25s}
-.chat-mon{margin:10px 0 14px;padding:12px;border-radius:12px;border:1px solid rgba(255,184,0,.24);background:var(--in)}
-.chat-feed{margin-top:8px;max-height:210px;overflow-y:auto;padding:8px;border-radius:9px;background:#07070e;border:1px solid rgba(255,184,0,.2);font-size:12px;display:flex;flex-direction:column;gap:5px}
-.chat-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:4px 6px;border-radius:6px;background:rgba(255,255,255,.02);border-left:3px solid transparent}
-.chat-row.irony{border-left-color:#c084fc;background:rgba(192,132,252,.11)}
-.chat-row.rage{border-left-color:#ff5500;background:rgba(255,85,0,.08)}
-.chat-row.funny{border-left-color:#00e676}
-.quick-lives{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#14120b;color:#fff;padding:10px 18px;border-radius:10px;border:2px solid #ffb800;font-size:12.5px;font-weight:700;z-index:99;box-shadow:0 10px 32px rgba(255,184,0,.35)}
 
-/* VITRINE DE PERSONAGENS CIDADE ALTA (CIDADEALTA.GG) + TRANSIÇÕES + LEGENDAS KARAOKE */
+/* HERO OFICIAL CIDADEALTA.GG (HERO-BG.PNG + H1 + SÍMBOLOS GRAFFITI + BOTÃO ENTRAR #FFC046) */
 .cda-hero{
-  margin-bottom:14px;padding:16px;border-radius:16px;
-  border:1px solid rgba(255,184,0,.42);
-  background:
-    radial-gradient(540px 240px at 85% 20%,rgba(255,184,0,.22),transparent 70%),
-    radial-gradient(420px 220px at 12% 80%,rgba(255,85,0,.15),transparent 70%),
-    linear-gradient(135deg,#0d0f18 0%,#18140a 52%,#0c0e17 100%);
-  box-shadow:0 14px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,214,0,.25);
-  position:relative;overflow:hidden;
+  width:100%;
+  max-width:1650px;
+  min-height:790px;
+  margin:-90px auto 0;
+  padding-top:90px;
+  background:url("./images/hero-bg.png") no-repeat top center / cover;
+  position:relative;
+  overflow:hidden;
 }
-.cda-hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cda-hero::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:170px;
+  background:linear-gradient(180deg,transparent,#11131d);
+  pointer-events:none;
+}
+@media(max-width:650px){
+  .cda-hero{
+    min-height:660px;
+    background-image:url("./images/hero-bg-mobile.png");
+  }
+}
+.cda-hero-banner-inner{
+  max-width:1410px;
+  margin:0 auto;
+  padding:355px 20px 56px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  z-index:2;
+}
+@media(max-width:650px){
+  .cda-hero-banner-inner{padding:260px 16px 40px}
+}
+.cda-main-h1{
+  margin:0;
+  color:#ffffff;
+  font:700 78px/1.04 "Europa Grotesk",sans-serif;
+  text-align:center;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  text-shadow:0 7px 17px rgba(0,0,0,.92);
+}
+@media(max-width:960px){
+  .cda-main-h1{font-size:46px}
+}
+@media(max-width:560px){
+  .cda-main-h1{font-size:30px}
+}
+.cda-h1-o{
+  position:relative;
+  display:inline-block;
+}
+.cda-h1-o::before{
+  content:"";
+  position:absolute;
+  width:76px;
+  height:76px;
+  left:-16px;
+  top:-6px;
+  background:url("./images/symbols/o.svg") no-repeat center / contain;
+  pointer-events:none;
+}
+.cda-h1-crown{
+  position:relative;
+  display:inline-block;
+}
+.cda-h1-crown::after{
+  content:"";
+  position:absolute;
+  width:72px;
+  height:72px;
+  right:-54px;
+  top:-42px;
+  background:url("./images/symbols/crown.svg") no-repeat center / contain;
+  pointer-events:none;
+}
+.cda-h1-arrow{
+  font-style:normal;
+  position:relative;
+  display:inline-block;
+}
+.cda-h1-arrow::before{
+  content:"";
+  position:absolute;
+  width:155px;
+  height:48px;
+  left:-24px;
+  top:14px;
+  background:url("./images/symbols/arrow-right.svg") no-repeat center / contain;
+  pointer-events:none;
+}
+@media(max-width:760px){
+  .cda-h1-o::before,.cda-h1-crown::after,.cda-h1-arrow::before{transform:scale(.55)}
+}
+.cda-entrar-btn{
+  max-width:405px;
+  width:100%;
+  height:45px;
+  margin:28px auto 16px;
+  background:#ffc046;
+  color:#000000;
+  border:0;
+  border-radius:4px;
+  font:700 14px "Europa Grotesk",sans-serif;
+  letter-spacing:.8em;
+  text-indent:.8em;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.55);
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+}
+.cda-entrar-btn:hover{
+  background:#ffd06b;
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(255,192,70,.4);
+}
+.cda-social-box{
+  max-width:405px;
+  width:100%;
+  border:1px solid #ffc046;
+  border-radius:5px;
+  padding:11px 18px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  background:rgba(17,19,29,.45);
+  backdrop-filter:blur(6px);
+}
+.cda-social-box a,.cda-social-box button{
+  background:transparent;
+  border:0;
+  color:#ffffff;
+  cursor:pointer;
+  padding:4px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .2s ease,color .2s ease;
+}
+.cda-social-box a:hover,.cda-social-box button:hover{
+  color:#ffc046;
+  transform:scale(1.15);
+}
+.cda-social-caption{
+  margin:24px 0 0;
+  color:#E3E3E6;
+  font:400 11.5px "Europa Grotesk",sans-serif;
+  letter-spacing:1.15em;
+  text-indent:1.15em;
+  text-transform:uppercase;
+  text-align:center;
+}
+@media(max-width:600px){
+  .cda-social-caption{letter-spacing:.45em;text-indent:.45em;font-size:10px}
+}
+
+/* SEÇÃO STARTER PACK / PERSONAGENS & LEGENDAS CIDADE ALTA */
+.cda-starter-wrap{
+  max-width:1410px;
+  margin:10px auto 0;
+  padding:32px 24px 26px;
+  border-radius:10px;
+  background:url("./images/starter-pack-bg.png") no-repeat center / cover;
+  border:1px solid #262b41;
+  position:relative;
+  z-index:3;
+}
+.cda-section-head{
+  text-align:center;
+  margin-bottom:24px;
+  position:relative;
+}
+.cda-section-title{
+  margin:0;
+  font:700 64px/1.05 "Europa Grotesk",sans-serif;
+  color:#e3e3e6;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  display:inline-block;
+  position:relative;
+}
+@media(max-width:780px){
+  .cda-section-title{font-size:36px}
+}
+.cda-section-title .sym-up{
+  position:relative;
+}
+.cda-section-title .sym-up::before{
+  content:"";
+  position:absolute;
+  width:42px;height:68px;
+  left:-32px;top:-22px;
+  background:url("./images/symbols/big-arrow-up.svg") no-repeat center / contain;
+}
+.cda-section-title .sym-box{
+  position:relative;
+}
+.cda-section-title .sym-box::after{
+  content:"";
+  position:absolute;
+  width:52px;height:52px;
+  right:-44px;bottom:-8px;
+  background:url("./images/symbols/box.svg") no-repeat center / contain;
+}
+.cda-section-sub{
+  margin:8px 0 0;
+  color:#e3e3e6;
+  font:400 12px "Europa Grotesk",sans-serif;
+  letter-spacing:.55em;
+  text-transform:uppercase;
+}
+@media(max-width:780px){
+  .cda-section-sub{letter-spacing:.2em;font-size:10.5px}
+}
+.cda-graffiti-script{
+  font-family:"Skylight Graffiti",cursive;
+  color:#ffc046;
+  font-weight:400;
+  letter-spacing:.04em;
+  text-transform:none!important;
+}
+
+.cda-hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
 .cda-tag-crown{
-  display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;
-  background:linear-gradient(135deg,#ffb800,#ff6b00);color:#08090e;
-  font:800 9.5px var(--px);transform:skewX(-8deg);
-  box-shadow:0 4px 14px rgba(255,184,0,.35);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  border-radius:4px;
+  background:#ffc046;
+  color:#000000;
+  font:700 12px "Europa Grotesk",sans-serif;
+  letter-spacing:.15em;
+  text-transform:uppercase;
 }
-.cda-stage-grid{display:grid;grid-template-columns:280px 1fr;gap:14px;margin-top:12px;align-items:stretch}
-@media(max-width:860px){.cda-stage-grid{grid-template-columns:1fr}}
+.cda-stage-grid{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
+  align-items:stretch;
+}
+@media(max-width:960px){
+  .cda-stage-grid{grid-template-columns:1fr}
+}
 .cda-spotlight{
-  border-radius:14px;padding:12px;border:1px solid rgba(255,184,0,.45);
-  background:linear-gradient(180deg,rgba(255,184,0,.14),rgba(10,12,20,.96));
-  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-  position:relative;overflow:hidden;text-align:center;
-  transition:all .35s cubic-bezier(.22,1,.36,1);
+  border-radius:8px;
+  padding:18px;
+  border:1px solid #ffc046;
+  background:url("./images/starter-pack-bg/gold-bg.png") no-repeat center / cover,#161926;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  box-shadow:0 16px 40px rgba(0,0,0,.55);
 }
-.cda-spotlight-art{width:140px;height:145px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 10px 22px rgba(255,184,0,.38));transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.cda-spotlight-art{
+  width:190px;
+  height:185px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.cda-spotlight-art img,.cda-spotlight-art svg{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.75));
+}
 .cda-spotlight:hover .cda-spotlight-art{transform:scale(1.06) translateY(-4px)}
-.cda-char-roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px}
+.cda-char-roster{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+@media(max-width:680px){
+  .cda-char-roster{grid-template-columns:repeat(2,1fr)}
+}
 .cda-char-card{
-  border-radius:12px;padding:10px;border:1px solid rgba(255,184,0,.22);
-  background:rgba(12,14,22,.88);cursor:pointer;position:relative;overflow:hidden;
+  border-radius:8px;
+  padding:14px 12px;
+  border:1px solid #262b41;
+  background-color:#161926;
+  background-size:cover;
+  background-position:center;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
   transition:all .26s cubic-bezier(.22,1,.36,1);
-  display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:6px;
 }
 .cda-char-card:hover{
-  transform:translateY(-5px) scale(1.02);
-  border-color:#ffb800;
-  box-shadow:0 10px 26px rgba(255,184,0,.24);
+  transform:translateY(-5px);
+  border-color:#ffc046;
+  box-shadow:0 14px 32px rgba(0,0,0,.6);
 }
 .cda-char-card.on{
-  border:2px solid #ffb800;
-  background:linear-gradient(180deg,rgba(255,184,0,.22),rgba(16,18,28,.96));
-  box-shadow:0 0 24px rgba(255,184,0,.32);
+  border:2px solid #ffc046;
+  box-shadow:0 0 28px rgba(255,192,70,.28);
 }
-.cda-char-svg{width:68px;height:72px;transition:transform .26s cubic-bezier(.22,1,.36,1)}
-.cda-char-card:hover .cda-char-svg{transform:scale(1.1) rotate(-2deg)}
+.cda-char-svg{
+  width:110px;
+  height:96px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .26s ease;
+}
+.cda-char-svg img,.cda-char-svg svg{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.65));
+}
+.cda-char-card:hover .cda-char-svg{transform:scale(1.08)}
+.cda-char-tier{
+  font-family:"Skylight Graffiti",cursive;
+  font-size:24px;
+  color:#ffc046;
+  line-height:1;
+  margin-top:2px;
+}
 .cda-sub-bar{
-  margin-top:12px;padding:10px 14px;border-radius:12px;
-  border:1px solid rgba(255,184,0,.45);
-  background:linear-gradient(90deg,rgba(8,9,14,.96),rgba(26,20,8,.95),rgba(8,9,14,.96));
-  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
-  box-shadow:inset 0 0 18px rgba(255,184,0,.1);
+  margin-top:18px;
+  padding:14px 18px;
+  border-radius:6px;
+  border:1px solid #ffc046;
+  background:rgba(17,19,29,.92);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
 }
 .cda-karaoke-line{
-  font:900 15px/1.35 system-ui,-apple-system,sans-serif;
-  text-transform:uppercase;letter-spacing:.5px;color:#fff;
-  text-shadow:0 2px 0 #000,0 -1px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 4px 14px rgba(0,0,0,.85);
-  display:flex;flex-wrap:wrap;gap:5px;align-items:center;
+  font:700 15.5px/1.35 "Europa Grotesk",system-ui,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#ffffff;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
 }
 .cda-kw{
-  display:inline-block;padding:1px 5px;border-radius:5px;
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:4px;
   transition:all .16s cubic-bezier(.22,1,.36,1);
 }
 .cda-kw.on{
-  background:#ffb800;color:#08090e;
-  text-shadow:none;transform:scale(1.13) rotate(-1deg);
-  box-shadow:0 4px 14px rgba(255,184,0,.55);
+  background:#ffc046;
+  color:#000000;
+  transform:scale(1.1);
+  box-shadow:0 4px 14px rgba(255,192,70,.5);
 }
+
+/* CONTAINER PRINCIPAL FULL-WIDTH ESTILO .DASH-CONTAINER CIDADEALTA.GG (SEM SIDEBAR ESPREMENDO) */
+main{
+  display:block;
+  max-width:1410px;
+  margin:0 auto;
+  padding:20px 24px 64px;
+}
+.side{
+  margin-bottom:28px;
+  padding:20px 24px;
+  background:#161926;
+  border:1px solid #262b41;
+  border-radius:8px;
+}
+.cda-quick-grid{
+  display:grid;
+  grid-template-columns:1.2fr 1.6fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+@media(max-width:980px){
+  .cda-quick-grid{grid-template-columns:1fr}
+}
+.card{
+  background:#161926;
+  border:1px solid #262b41;
+  border-radius:8px;
+  padding:24px;
+  box-shadow:0 14px 36px rgba(0,0,0,.35);
+  transition:border-color .25s ease;
+}
+.card:hover{border-color:rgba(255,192,70,.45)}
+.hide{display:none!important}
+.btn{
+  background:#ffc046;
+  color:#000000;
+  border:0;
+  border-radius:4px;
+  padding:12px 18px;
+  font:700 13px "Europa Grotesk",sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-decoration:none;
+  transition:all .2s ease;
+}
+.btn:hover{
+  background:#ffd06b;
+  transform:translateY(-1.5px);
+  box-shadow:0 8px 22px rgba(255,192,70,.35);
+}
+.btn.g{
+  background:#11131d;
+  color:#ffffff;
+  border:1px solid #262b41;
+  box-shadow:none;
+}
+.btn.g:hover{
+  border-color:#ffc046;
+  color:#ffc046;
+}
+.btn.cy{
+  background:#4ac5f3;
+  color:#11131d;
+  border:1px solid #ddff82;
+  box-shadow:0 4px 16px rgba(74,197,243,.25);
+}
+.btn.cy:hover{
+  background:#6ad0f7;
+  box-shadow:0 8px 22px rgba(74,197,243,.4);
+}
+.btn.sm{padding:8px 13px;font-size:12px;letter-spacing:.08em}
+.btn.w{width:100%}
+.side h4{
+  font:700 11.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin:0 0 10px;
+  color:#ffc046;
+}
+.card h3{
+  font:700 22px/1.25 "Europa Grotesk",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#e3e3e6;
+  margin:0 0 12px;
+}
+input[type=text],input[type=number],input[type=url],input[type=range],select,textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:5px;
+  border:1px solid #262b41;
+  background:#11131d;
+  color:#d5dcff;
+  font:400 14px "Europa Grotesk",sans-serif;
+  margin-top:6px;
+  transition:border-color .2s;
+}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:#ffc046;
+}
+input[type=range]{padding:4px 0;accent-color:#ffc046}
+label{
+  display:block;
+  font:700 11.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#8d96be;
+  margin-top:14px;
+}
+.row{display:flex;gap:14px;flex-wrap:wrap}.row>*{flex:1;min-width:150px}
+.chk{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:12px;
+  font:500 13.5px "Europa Grotesk",sans-serif;
+  letter-spacing:.03em;
+  text-transform:none;
+  color:#e3e3e6;
+  cursor:pointer;
+}
+.chk input{width:17px;height:17px;accent-color:#ffc046}
+.lv{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border:1px solid #262b41;
+  background:#11131d;
+  margin-bottom:6px;
+  font-size:13px;
+  cursor:pointer;
+  border-radius:5px;
+  transition:border-color .18s,background .18s;
+}
+.lv:hover{border-color:#ffc046;background:#1a1e2e}
+.lv span{color:#ffc046;font-family:"Skylight Graffiti",cursive;font-size:16px}
+.mut{color:#BCBCBB;font-size:13.5px}
+.head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dot{width:10px;height:10px;border-radius:50%;background:#ffc046;box-shadow:0 0 10px #ffc046;animation:bl 1.2s infinite}
+@keyframes bl{50%{opacity:.3}}
+.prev-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  padding:10px 14px;
+  border-radius:6px 6px 0 0;
+  border:1px solid #262b41;
+  border-bottom:0;
+  background:#11131d;
+}
+.prev{
+  margin:0;
+  aspect-ratio:16/9;
+  min-height:260px;
+  max-height:520px;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+  background:#090b10;
+  border:1px solid #262b41;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.prev-player{width:100%;height:100%;border:0;display:block;background:#000}
+.prev-badge{
+  background:#ffc046;
+  color:#000;
+  font:700 11px "Europa Grotesk",sans-serif;
+  letter-spacing:.12em;
+  padding:4px 10px;
+  border-radius:3px;
+}
+.prev-txt{font:500 12px "Europa Grotesk",sans-serif;letter-spacing:.08em;color:#ffc046;text-transform:uppercase}
+.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:14px}
+.clip{cursor:pointer;transition:transform .24s ease}
+.clip:hover{transform:translateY(-4px)}
+.vid{
+  aspect-ratio:9/16;
+  border-radius:8px;
+  position:relative;
+  overflow:hidden;
+  background:#11131d;
+  border:1px solid #ffc046;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.5);
+}
+.cap{
+  background:#ffc046;
+  color:#000000;
+  font:700 12px "Europa Grotesk",sans-serif;
+  padding:7px 10px;
+  text-align:center;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.clip b{display:block;margin-top:8px;color:#fff}
+details{margin-top:14px;color:var(--mut)}
+summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+#log{margin-top:8px;max-height:140px;overflow:auto;font:12px ui-monospace,Menlo,monospace;background:#11131d;padding:10px;border-radius:6px;border:1px solid #262b41}
+.film{height:44px;border-radius:6px;border:1px solid #ffc046;background:repeating-linear-gradient(-45deg,#ffc046 0 24px,#11131d 24px 48px,#4ac5f3 48px 60px,#11131d 60px 80px);animation:sl 6s linear infinite;background-size:112px 100%}
+@keyframes sl{to{background-position:-112px 0}}
+.stage{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:22px 0}
+.mas{text-align:center;max-width:150px}
+.mas img,.mas svg{width:84px;height:84px;object-fit:contain;animation:bo 1.8s ease-in-out infinite;filter:drop-shadow(0 8px 18px rgba(0,0,0,.6))}
+@keyframes bo{50%{transform:translateY(-6px)}}
+.bub{background:#ffc046;color:#000;font:700 11px "Europa Grotesk",sans-serif;letter-spacing:.06em;padding:8px 10px;border-radius:5px;margin-top:6px;min-height:32px}
+.tag{font:400 18px "Skylight Graffiti",cursive;color:#ffc046;display:inline-block;margin-top:6px}
+.thumb{width:160px;height:104px;border:1px solid #ffc046;border-radius:6px;background:url("./images/patchnote_1.png") no-repeat center / cover,#11131d;position:relative;display:flex;align-items:center;justify-content:center;font-size:32px}
+.thumb s{position:absolute;bottom:4px;left:6px;font:700 10px "Europa Grotesk",sans-serif;text-decoration:none;color:#ffc046;background:rgba(17,19,29,.85);padding:2px 6px;border-radius:3px}
+.lk{width:30px;border-top:2px dashed #ffc046}
+.phone{width:196px;aspect-ratio:9/16;border:2px solid #ffc046;border-radius:18px;background:#0d0e14;padding:6px;display:flex;flex-direction:column;gap:6px;overflow:hidden;box-shadow:0 0 32px rgba(255,192,70,.22);position:relative}
+.phone-video-box{flex:1;position:relative;border-radius:12px;overflow:hidden;background:#161926;display:flex;align-items:center;justify-content:center}
+.phone-video-box video{width:100%;height:100%;object-fit:cover;display:block}
+.wave{position:relative;display:flex;align-items:center;gap:2px;height:66px;margin-top:8px}
+.wave i{flex:1;background:linear-gradient(180deg,#ffc046,#4ac5f3);border-radius:2px;min-width:2px;transition:height .18s}
+.pbar-wrap{height:8px;border-radius:4px;background:#11131d;border:1px solid #262b41;margin-top:6px;overflow:hidden}
+.pbar{height:100%;border-radius:4px;background:linear-gradient(90deg,#ffc046,#4ac5f3);width:0%;transition:width .15s}
+.mk{position:absolute;top:0;font:700 10px "Europa Grotesk",sans-serif;background:#ffc046;color:#000;padding:2px 6px;border-radius:3px;z-index:2}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:14px}
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:16px;margin-top:16px}
+.swarm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
+.item-card{
+  padding:16px;
+  border:1px solid #262b41;
+  border-radius:6px;
+  background:#11131d;
+  transition:transform .22s ease,border-color .22s ease;
+}
+.item-card:hover{transform:translateY(-3px);border-color:#ffc046}
+.item-card.active{border-color:#ffc046;box-shadow:0 0 0 1px #ffc046}
+.agent-card{padding:10px 12px;border:1px solid #262b41;border-radius:6px;background:#11131d;font-size:12px}
+.agent-card.running{border-color:#ffc046}
+.agent-card.done{border-color:#4ac5f3}
+.pill{
+  display:inline-block;
+  padding:3px 10px;
+  border-radius:4px;
+  font:700 11px "Europa Grotesk",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:rgba(74,197,243,.16);
+  color:#4ac5f3;
+}
+.pill.warn{background:rgba(255,192,70,.18);color:#ffc046;border:1px solid rgba(255,192,70,.4)}
+.pill.err{background:rgba(255,85,0,.22);color:#ff854d;border:1px solid rgba(255,85,0,.35)}
+.pill.pu{background:rgba(74,37,209,.35);color:#d5dcff;border:1px solid rgba(139,92,246,.4)}
+.pill.cy{background:rgba(74,197,243,.2);color:#4ac5f3}
+.pill.br{background:rgba(0,230,118,.18);color:#4ade80}
+.pill.intl{background:rgba(188,188,187,.15);color:#BCBCBB}
+.plat-btn{
+  padding:7px 13px;
+  border-radius:4px;
+  border:1px solid #262b41;
+  background:#11131d;
+  color:#BCBCBB;
+  font:700 12px "Europa Grotesk",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.plat-btn:hover{color:#fff;border-color:#ffc046}
+.plat-btn.on{
+  background:#ffc046;
+  color:#000000;
+  border-color:#ffc046;
+}
+.sent-wrap{margin:14px 0;padding:16px;border-radius:6px;border:1px solid #262b41;background:#11131d}
+.sent-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.sent-leg{display:flex;gap:14px;font-size:12px;flex-wrap:wrap}
+.sent-leg span{display:inline-flex;align-items:center;gap:6px}
+.sent-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
+#sentimentChart{width:100%;height:175px;display:block;cursor:pointer}
+.ts-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:600px){.ts-row{grid-template-columns:1fr}}
+.ts-box{padding:10px 14px;border-radius:6px;border:1px solid #262b41;background:#11131d;font-size:12px}
+.clip-card-lib{position:relative;display:flex;flex-direction:column;gap:6px}
+.clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(17,19,29,.9);padding:4px 8px;border-radius:4px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid #ffc046}
+.clip-chk-label input{width:16px;height:16px;accent-color:#ffc046;margin:0}
+.studio-quick{margin-top:14px;padding:16px;border-radius:6px;border:1px solid #262b41;background:#11131d}
+.irony-box{margin:10px 0;padding:12px 14px;border-radius:6px;border:1px solid #4a25d1;background:linear-gradient(90deg,rgba(74,37,209,.25),rgba(255,192,70,.08))}
+.irony-bar-wrap{height:10px;border-radius:999px;background:#0d0e14;border:1px solid #4a25d1;margin-top:6px;overflow:hidden}
+.irony-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#ffc046,#4ac5f3,#4a25d1);width:18%;transition:width .25s}
+.chat-mon{margin:14px 0;padding:16px;border-radius:6px;border:1px solid #262b41;background:#11131d}
+.chat-feed{margin-top:10px;max-height:210px;overflow-y:auto;padding:10px;border-radius:5px;background:#0d0e14;border:1px solid #262b41;font-size:12.5px;display:flex;flex-direction:column;gap:6px}
+.chat-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:5px 8px;border-radius:4px;background:rgba(255,255,255,.02);border-left:3px solid transparent}
+.chat-row.irony{border-left-color:#ffc046;background:rgba(255,192,70,.1)}
+.chat-row.rage{border-left-color:#ff5500;background:rgba(255,85,0,.08)}
+.chat-row.funny{border-left-color:#4ac5f3}
+.quick-lives{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#161926;color:#fff;padding:12px 22px;border-radius:5px;border:2px solid #ffc046;font:700 13px "Europa Grotesk",sans-serif;letter-spacing:.06em;z-index:200;box-shadow:0 12px 36px rgba(0,0,0,.7)}
 .cda-live-sub-hud{
-  padding:8px 12px;border-radius:0 0 12px 12px;
-  border:1px solid rgba(255,184,0,.35);border-top:0;
-  background:linear-gradient(90deg,#08090e,#171307,#08090e);
-  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
-  margin-bottom:10px;
+  padding:10px 14px;
+  border-radius:0 0 6px 6px;
+  border:1px solid #ffc046;
+  border-top:0;
+  background:#11131d;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
 }
 .phone-sub-overlay{
   position:absolute;bottom:14px;left:6px;right:6px;z-index:8;
   pointer-events:none;text-align:center;
-  padding:5px 6px;border-radius:8px;
-  background:rgba(8,9,14,.78);border:1px solid rgba(255,184,0,.55);
-  font:900 10.5px/1.25 system-ui;text-transform:uppercase;color:#fff;
-  text-shadow:0 1px 3px #000;
+  padding:6px;border-radius:5px;
+  background:rgba(13,14,20,.88);border:1px solid #ffc046;
+  font:700 11px/1.25 "Europa Grotesk",sans-serif;text-transform:uppercase;color:#fff;
 }
-.cda-wipe-overlay{
-  position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden;
+.cda-step-badge{
+  width:52px;height:52px;
+  background:url("./images/symbols/step-border.svg") no-repeat center / contain;
+  display:inline-flex;align-items:center;justify-content:center;
+  font:400 28px "Skylight Graffiti",cursive;
+  color:#ffc046;
+  flex-shrink:0;
 }
+.cda-footer{
+  width:100%;
+  background:#151723;
+  border-top:1px solid #262b41;
+  padding:32px 24px;
+  margin-top:40px;
+}
+.cda-footer-inner{
+  max-width:1410px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.cda-wipe-overlay{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
 .cda-wipe-blade{
   position:absolute;top:-20%;bottom:-20%;width:140%;left:-160%;
-  background:linear-gradient(90deg,transparent 0%,rgba(255,184,0,.92) 35%,#08090e 55%,rgba(255,85,0,.88) 78%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,rgba(255,192,70,.92) 35%,#11131d 55%,rgba(74,197,243,.88) 78%,transparent 100%);
   transform:skewX(-22deg);
-  transition:none;
 }
-.cda-wipe-blade.play{
-  animation:cdaSlashWipe .48s cubic-bezier(.22,1,.36,1) forwards;
-}
+.cda-wipe-blade.play{animation:cdaSlashWipe .48s cubic-bezier(.22,1,.36,1) forwards}
 @keyframes cdaSlashWipe{
   0%{left:-150%;opacity:1}
   55%{left:15%;opacity:1}
   100%{left:140%;opacity:0}
 }
 @keyframes cdaPanelIn{
-  from{opacity:0;transform:translateY(10px) scale(.99)}
-  to{opacity:1;transform:translateY(0) scale(1)}
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
 }
 .tab-panel:not(.hide){animation:cdaPanelIn .32s cubic-bezier(.22,1,.36,1)}
 .fx-flash{animation:fxFlashAnim .45s ease-out}
 @keyframes fxFlashAnim{0%{filter:brightness(3.2) contrast(1.4)}100%{filter:none}}
 .fx-zoom{animation:fxZoomAnim .45s cubic-bezier(.22,1,.36,1)}
-@keyframes fxZoomAnim{0%{transform:scale(1.24)}100%{transform:scale(1)}}
+@keyframes fxZoomAnim{0%{transform:scale(1.18)}100%{transform:scale(1)}}
 .fx-glitch{animation:fxGlitchAnim .45s steps(4)}
 @keyframes fxGlitchAnim{
   0%{transform:translate(-6px,2px);filter:hue-rotate(90deg)}
@@ -339,80 +982,141 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer;color:var(--y);f
 <body>
 <div class="cda-top-stripe"></div>
 <div class="cda-wipe-overlay" id="cdaWipeOverlay"><div class="cda-wipe-blade" id="cdaWipeBlade"></div></div>
+
+<!-- HEADER OFICIAL CIDADEALTA.GG -->
 <header>
-  <div class="hdr-left">
-    <div class="logo"><b></b>CIDADE ALTA · CORTES·IA</div>
+  <div class="cda-header-inner">
+    <div class="hdr-left">
+      <div class="logo">
+        <img src="./images/logos/logo-valley.png" alt="Cidade Alta">
+        <div>
+          CIDADE ALTA
+          <span class="logo-sub">CORTES·IA STUDIO</span>
+        </div>
+      </div>
+    </div>
     <nav id="nav"></nav>
-  </div>
-  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <span class="pill warn" id="cdaActiveCharHeaderBadge">👑 Diretor: Coringa CDA</span>
-    <span class="pill" id="swarmBadge">20 IAs · Zero API Key</span>
-    <span class="pill warn" id="modeBadge">Modo Web · Zero API</span>
-    <button class="btn g sm" id="themeBtn" type="button">Tema</button>
+    <div class="hdr-right">
+      <button class="cda-login-btn" id="themeBtn" type="button">LOGIN</button>
+    </div>
   </div>
 </header>
 
-<main>
-  <aside class="card side">
-    <button class="btn w" id="newBtn" type="button">👑 + Novo Corte CIDADE ALTA</button>
-    <button class="btn g w" id="goAoVivoBtn" type="button" style="margin-top:8px;border-color:#ffb800;color:#ffb800">📡 Radar AO VIVO (Kick · YT · Twitch)</button>
-    <h4>PERSONAGEM & TRANSIÇÃO RÁPIDA</h4>
-    <div style="display:flex;gap:5px;flex-wrap:wrap" id="sideQuickTransBtns">
-      <button type="button" class="plat-btn on" data-quick-fx="CDA_SLASH">⚡ Wipe CDA</button>
-      <button type="button" class="plat-btn" data-quick-fx="FLASH">💥 Flash</button>
-      <button type="button" class="plat-btn" data-quick-fx="ZOOM_IN">🔍 Zoom</button>
-      <button type="button" class="plat-btn" data-quick-fx="GLITCH">👾 Glitch</button>
+<!-- HERO FULL-WIDTH OFICIAL CIDADEALTA.GG (HERO-BG.PNG + O SERVIDOR REFERÊNCIA EM GTA RP NO BRASIL) -->
+<section class="cda-hero" id="cdaHeroBanner">
+  <div class="cda-hero-banner-inner">
+    <h1 class="cda-main-h1">
+      <span class="cda-h1-o">O</span> <span class="cda-h1-crown">SERVIDOR REFERÊNCIA</span><br>
+      <span>EM GTA RP <i class="cda-h1-arrow">NO</i> BRASIL</span>
+    </h1>
+    <button type="button" class="cda-entrar-btn" id="cdaHeroEntrarBtn" onclick="document.getElementById('fm').scrollIntoView({behavior:'smooth'})">ENTRAR</button>
+    <div class="cda-social-box">
+      <button type="button" title="Kick TV Ao Vivo" onclick="document.getElementById('goAoVivoBtn').click()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4v7l6-7h5l-7 8 7 10h-5l-6-8v8H4V3z"/></svg>
+      </button>
+      <button type="button" title="YouTube Live" onclick="document.getElementById('fm').scrollIntoView({behavior:'smooth'})">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+      </button>
+      <button type="button" title="Twitch Live" onclick="document.getElementById('goAoVivoBtn').click()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2L2 6v14h5v2h3l2-2h4l6-6V2H4zm16 11l-3 3h-4l-2 2v-2H7V4h13v9z"/></svg>
+      </button>
+      <button type="button" title="Transição Cidade Alta" onclick="document.getElementById('cdaTriggerWipeBtn').click()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+      </button>
+      <a href="https://cidadealta.gg/" target="_blank" rel="noopener" title="Cidade Alta Oficial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 17.9V18h-2v1.9A8 8 0 0 1 4.1 13H6v-2H4.1A8 8 0 0 1 11 4.1V6h2V4.1A8 8 0 0 1 19.9 11H18v2h1.9A8 8 0 0 1 13 19.9z"/></svg>
+      </a>
     </div>
-    <h4>MONITORAMENTO RÁPIDO</h4>
-    <input type="text" id="nn" placeholder="nome (ex.: cda-coringa-rp)">
-    <input type="text" id="nl" placeholder="Twitch, Kick, YouTube ou .m3u8">
-    <button class="btn w" id="mk" type="button" style="margin-top:10px">Assistir & Cortar</button>
-    <h4>LIVES & COFRE SALVO</h4>
-    <div id="lives"><div class="mut">Carregando...</div></div>
+    <p class="cda-social-caption">SIGA NAS REDES SOCIAIS</p>
+  </div>
+</section>
+
+<!-- STARTER PACK · ELENCO DE PERSONAGENS, TRANSIÇÕES & LEGENDAS CIDADE ALTA -->
+<section class="cda-starter-wrap">
+  <div class="cda-section-head">
+    <h2 class="cda-section-title"><span class="sym-up">S</span>TARTER PAC<span class="sym-box">K</span> · <span class="cda-graffiti-script">Cidade Alta</span></h2>
+    <p class="cda-section-sub">O PONTA PÉ INICIAL QUE SUA HISTÓRIA MERECE!</p>
+  </div>
+
+  <div class="cda-hero-top">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="cda-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> CIDADE ALTA RP</span>
+      <span class="pill warn" id="cdaActiveCharHeaderBadge">👑 Diretor: Gold · Coringa</span>
+      <span class="pill cy" id="swarmBadge">20 IAs · Zero API Key</span>
+      <span class="pill warn hide" id="modeBadge">Modo Web · Zero API</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap" id="cdaSubStyleBtns">
+      <button type="button" class="plat-btn on" data-sub-preset="HORMOZI_YELLOW">👑 Legenda Gold CDA</button>
+      <button type="button" class="plat-btn" data-sub-preset="NEON_GREEN">💎 Diamond Neon</button>
+      <button type="button" class="plat-btn" data-sub-preset="IRONY_PURPLE">🤡 Sarcasmo 99%</button>
+      <button type="button" class="plat-btn" data-sub-preset="QTH_RADIO">🚓 Rádio QTH</button>
+    </div>
+  </div>
+
+  <div class="cda-stage-grid">
+    <div class="cda-spotlight" id="cdaActiveCharStage">
+      <span class="pill warn" id="cdaCharFactionBadge">👑 FACÇÃO CDA · CASSINO & FUGAS</span>
+      <div class="cda-spotlight-art" id="cdaSpotlightSvgBox"></div>
+      <div>
+        <span class="cda-graffiti-script" style="font-size:28px;display:block" id="cdaCharNameLbl">Gold · Rei da Rua CDA</span>
+        <span class="mut" style="font-size:12px" id="cdaCharRoleLbl">Especialista em Ironia Sarcástica, Clutches & Fugas 9:16</span>
+      </div>
+    </div>
+    <div class="cda-char-roster" id="cdaCharRosterGrid"></div>
+  </div>
+
+  <div class="cda-sub-bar" id="cdaHeroSubBar">
+    <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+      <span class="pill warn" style="flex-shrink:0">💬 LEGENDA AO VIVO</span>
+      <div class="cda-karaoke-line" id="cdaCharSubtitleStream"></div>
+    </div>
+    <button type="button" class="btn cy sm" id="cdaTriggerWipeBtn">⚡ Transição Cidade Alta</button>
+  </div>
+</section>
+
+<main>
+  <!-- BARRA HORIZONTAL ESTILO DIAMANTES CIDADEALTA.GG (ACESSO RÁPIDO SEM SIDEBAR ESPREMENDO) -->
+  <aside class="card side">
+    <div class="cda-quick-grid">
+      <div>
+        <h4><span class="cda-graffiti-script" style="font-size:24px;margin-right:6px">Fama</span> ACESSO RÁPIDO & TRANSIÇÕES</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <button class="btn" id="newBtn" type="button" style="flex:1">+ Novo Corte</button>
+          <button class="btn cy" id="goAoVivoBtn" type="button" style="flex:1">📡 Radar AO VIVO</button>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap" id="sideQuickTransBtns">
+          <button type="button" class="plat-btn on" data-quick-fx="CDA_SLASH">⚡ Wipe CDA</button>
+          <button type="button" class="plat-btn" data-quick-fx="FLASH">💥 Flash</button>
+          <button type="button" class="plat-btn" data-quick-fx="ZOOM_IN">🔍 Zoom</button>
+          <button type="button" class="plat-btn" data-quick-fx="GLITCH">👾 Glitch</button>
+        </div>
+      </div>
+      <div>
+        <h4><span class="cda-graffiti-script" style="font-size:24px;margin-right:6px">Valley</span> MONITORAR LIVE INSTANTÂNEA</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="text" id="nn" placeholder="Nome (ex.: cda-coringa-rp)" style="flex:1;margin-top:0">
+          <input type="text" id="nl" placeholder="Link Twitch, Kick, YouTube ou .m3u8" style="flex:1.4;margin-top:0">
+          <button class="btn" id="mk" type="button">Assistir & Cortar</button>
+        </div>
+      </div>
+      <div>
+        <h4><span class="cda-graffiti-script" style="font-size:24px;margin-right:6px">Alta</span> LIVES & COFRE ATIVO</h4>
+        <div id="lives" style="max-height:92px;overflow-y:auto"><div class="mut">Carregando...</div></div>
+      </div>
+    </div>
   </aside>
 
   <section style="min-width:0">
-    <!-- VITRINE OFICIAL DE PERSONAGENS, TRANSIÇÕES & LEGENDAS ESTILO CIDADEALTA.GG -->
-    <div class="cda-hero" id="cdaHeroBanner">
-      <div class="cda-hero-top">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <span class="cda-tag-crown">👑 CIDADEALTA.GG EDITION</span>
-          <b style="font-size:14px;color:#fff;letter-spacing:.3px">ELENCO DE PERSONAGENS, TRANSIÇÕES & LEGENDAS AO VIVO</b>
-        </div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap" id="cdaSubStyleBtns">
-          <button type="button" class="plat-btn on" data-sub-preset="HORMOZI_YELLOW">👑 Legenda Ouro CDA</button>
-          <button type="button" class="plat-btn" data-sub-preset="NEON_GREEN">🟢 Nitro Drift</button>
-          <button type="button" class="plat-btn" data-sub-preset="IRONY_PURPLE">🤡 Sarcasmo 99%</button>
-          <button type="button" class="plat-btn" data-sub-preset="QTH_RADIO">🚓 Rádio QTH</button>
-        </div>
-      </div>
-
-      <div class="cda-stage-grid">
-        <div class="cda-spotlight" id="cdaActiveCharStage">
-          <span class="pill warn" id="cdaCharFactionBadge">👑 FACÇÃO CDA · CASSINO & FUGAS</span>
-          <div class="cda-spotlight-art" id="cdaSpotlightSvgBox"></div>
-          <div>
-            <b style="font-size:15px;color:#ffb800;display:block" id="cdaCharNameLbl">CORINGA · REI DA RUA</b>
-            <span class="mut" style="font-size:11.5px" id="cdaCharRoleLbl">Especialista em Ironia Sarcástica, Clutches & Fugas 9:16</span>
-          </div>
-        </div>
-        <div class="cda-char-roster" id="cdaCharRosterGrid"></div>
-      </div>
-
-      <div class="cda-sub-bar" id="cdaHeroSubBar">
-        <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
-          <span class="pill warn" style="flex-shrink:0">💬 LEGENDA AO VIVO</span>
-          <div class="cda-karaoke-line" id="cdaCharSubtitleStream"></div>
-        </div>
-        <button type="button" class="btn sm" id="cdaTriggerWipeBtn">⚡ Testar Transição Cidade Alta</button>
-      </div>
-    </div>
-
     <!-- 1. ABA CORTES -->
     <div id="tab-CORTES" class="tab-panel">
       <div class="card" id="fm">
-        <h3>■ MONITORAR LIVE & GERAR CORTES 9:16 (KICK TV · YOUTUBE · TWITCH)</h3>
-        <p class="mut" style="margin:0">Cole o link ou escolha uma live abaixo da <b>Kick TV, YouTube Live, Twitch, .m3u8 ou .mp4</b> para assistir à <b>prévia ao vivo com som</b> e monitorar o <b>chat em tempo real + Termômetro de Ironia</b>.</p>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
+          <span class="cda-step-badge">1</span>
+          <div>
+            <h3 style="margin:0">COMO CORTAR NO <span class="cda-graffiti-script" style="font-size:32px;text-transform:none">Cidade Alta?</span></h3>
+            <p class="mut" style="margin:2px 0 0">Cole o link ou escolha uma live abaixo da <b>Kick TV, YouTube Live, Twitch, .m3u8 ou .mp4</b> para assistir à <b>prévia ao vivo com som</b> e monitorar o <b>chat em tempo real + Termômetro de Ironia</b>.</p>
+          </div>
+        </div>
         <label>Link da live ou vídeo (.m3u8 / .mp4 / Kick TV / YouTube / Twitch)
           <input type="text" id="lk" value="https://kick.com/surskity" placeholder="Cole aqui o link da Kick, YouTube, Twitch ou .m3u8…">
         </label>
@@ -1015,6 +1719,23 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer;color:var(--y);f
   </section>
 </main>
 
+<footer class="cda-footer">
+  <div class="cda-footer-inner">
+    <div style="display:flex;align-items:center;gap:14px">
+      <img src="./images/logos/logo-valley.png" alt="Cidade Alta" style="width:48px;height:48px;object-fit:contain">
+      <div>
+        <b style="color:#ffffff;letter-spacing:.18em;font-size:16px;display:block">CIDADE ALTA</b>
+        <span style="font-size:11px;color:#ffc046;letter-spacing:.2em">CORTES·IA · GTA RP BRASIL</span>
+      </div>
+    </div>
+    <p style="margin:0;color:#BCBCBB;font-size:13px;text-align:center">Copyright © 2020-2026, Cidade Alta, All rights reserved</p>
+    <div style="display:flex;gap:16px;align-items:center">
+      <a href="https://cidadealta.gg/" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">CIDADEALTA.GG</a>
+      <button type="button" class="cda-login-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOPO ↑</button>
+    </div>
+  </div>
+</footer>
+
 <div class="toast hide" id="toast"></div>
 
 <script>
@@ -1350,133 +2071,87 @@ let liveChatMessages=[];
 const CDA_CHARACTER_CAST=[
   {
     id:"coringa",
-    name:"CORINGA · REI DA RUA",
-    short:"Coringa CDA",
-    faction:"👑 FACÇÃO CDA · CASSINO & FUGAS",
+    name:"Gold · Rei da Rua CDA",
+    short:"Gold · Coringa",
+    tier:"Gold",
+    faction:"👑 STARTER PACK GOLD · CASSINO & FUGAS",
     role:"Especialista em Ironia Sarcástica, Clutches & Fugas 9:16",
-    color:"#ffb800",
+    color:"#ffc046",
+    bg:"./images/starter-pack-bg/gold-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"ironia sarcástica, fugas insanas, clutches, engraçados e picos do chat",
     line:"ESQUECE! O CHAT MANDOU JOGA MUITO SÓ QUE NÃO 🤡 E JÁ SALVEI OS 30 SEGUNDOS EM 9:16!",
-    svg:`<svg viewBox="0 0 120 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="cg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb800"/><stop offset="1" stop-color="#ff5500"/></linearGradient>
-      </defs>
-      <circle cx="60" cy="66" r="50" fill="rgba(255,184,0,0.14)" stroke="#ffb800" stroke-width="2.5"/>
-      <path d="M34 26 L44 12 L60 22 L76 12 L86 26 Z" fill="url(#cg1)" stroke="#fff" stroke-width="1.5"/>
-      <path d="M24 118 C24 88 96 88 96 118 Z" fill="url(#cg1)"/>
-      <path d="M38 92 L60 114 L82 92" fill="#08090e"/>
-      <rect x="38" y="34" width="44" height="48" rx="16" fill="#f2c29b" stroke="#08090e" stroke-width="2"/>
-      <path d="M36 42 C36 24 84 24 84 42 Z" fill="#18121e"/>
-      <rect x="41" y="47" width="17" height="11" rx="3" fill="#08090e" stroke="#ffb800" stroke-width="2"/>
-      <rect x="62" y="47" width="17" height="11" rx="3" fill="#08090e" stroke="#ffb800" stroke-width="2"/>
-      <line x1="58" y1="52" x2="62" y2="52" stroke="#ffb800" stroke-width="2"/>
-      <path d="M47 69 Q60 79 73 69" fill="none" stroke="#ff2e63" stroke-width="3.5" stroke-linecap="round"/>
-    </svg>`
+    svg:`<img src="./images/starter-pack-bg/gold-img.png" alt="Starter Pack Gold Cidade Alta">`
   },
   {
     id:"tatico",
-    name:"CAPITÃO ROTA · TÁTICO CDA",
-    short:"Capitão ROTA",
-    faction:"🚓 POLÍCIA CDA · QTH PRIORIDADE",
+    name:"Diamond · Tático CDA",
+    short:"Diamond · ROTA",
+    tier:"Diamond",
+    faction:"💎 STARTER PACK DIAMOND · QTH PRIORIDADE",
     role:"Caçador de Perseguições, Tiroteio, Adrenalina & Hype",
-    color:"#00e5ff",
+    color:"#4ac5f3",
+    bg:"./images/starter-pack-bg/diamond-bg.png",
     subPreset:"QTH_RADIO",
     hint:"perseguição policial, ação intensa, hype máximo, gritos e reação forte",
     line:"PRIORIDADE MÁXIMA NA QTH! VIATURA NA COLA E CORTE VERTICAL 9:16 PRONTO PRA AÇÃO!",
-    svg:`<svg viewBox="0 0 120 128" width="100%" height="100%">
-      <circle cx="60" cy="66" r="50" fill="rgba(0,229,255,0.14)" stroke="#00e5ff" stroke-width="2.5"/>
-      <path d="M22 118 C22 86 98 86 98 118 Z" fill="#102536" stroke="#00e5ff" stroke-width="2"/>
-      <rect x="44" y="96" width="32" height="14" rx="3" fill="#08090e" stroke="#ffb800" stroke-width="1.5"/>
-      <text x="60" y="106" fill="#ffb800" font-size="8" font-weight="900" text-anchor="middle">POLÍCIA</text>
-      <rect x="38" y="36" width="44" height="46" rx="14" fill="#d9a982"/>
-      <path d="M32 48 C32 22 88 22 88 48 L84 54 L36 54 Z" fill="#0b1520" stroke="#00e5ff" stroke-width="2"/>
-      <rect x="40" y="47" width="40" height="13" rx="5" fill="#00e5ff" opacity="0.88"/>
-      <rect x="44" y="65" width="32" height="14" rx="4" fill="#151922"/>
-    </svg>`
+    svg:`<img src="./images/starter-pack-bg/diamond-img.png" alt="Starter Pack Diamond Cidade Alta">`
   },
   {
     id:"paulinho",
-    name:"PAULINHO DRIFT · PILOTO RP",
-    short:"Paulinho Drift",
-    faction:"🏎️ CORRIDAS ILEGAIS · MECÂNICA CDA",
+    name:"Silver · Piloto Drift",
+    short:"Silver · Drift",
+    tier:"Silver",
+    faction:"🏎️ STARTER PACK SILVER · CORRIDAS CDA",
     role:"Especialista em Momentos Engraçados, Trollagens & Memes",
-    color:"#00e676",
+    color:"#e3e3e6",
+    bg:"./images/starter-pack-bg/silver-bg.png",
     subPreset:"NEON_GREEN",
     hint:"momentos engraçados, risadas, drift, capotamento, trollagem e chat spamando kkk",
     line:"200 QI CONFIA KKKK! CAPOTEI NA CURVA DA PRAÇA MAS A RISADA DO CHAT JÁ VIROU CORTE!",
-    svg:`<svg viewBox="0 0 120 128" width="100%" height="100%">
-      <circle cx="60" cy="66" r="50" fill="rgba(0,230,118,0.14)" stroke="#00e676" stroke-width="2.5"/>
-      <path d="M24 118 C24 88 96 88 96 118 Z" fill="#00b85c"/>
-      <rect x="38" y="36" width="44" height="46" rx="15" fill="#f0be95"/>
-      <path d="M34 42 C34 22 86 22 86 42 Z" fill="#ffb800"/>
-      <path d="M78 36 L98 40 L84 45 Z" fill="#ff5500"/>
-      <circle cx="49" cy="53" r="4" fill="#08090e"/>
-      <circle cx="71" cy="53" r="4" fill="#08090e"/>
-      <path d="M46 67 Q60 80 74 67 Z" fill="#fff" stroke="#08090e" stroke-width="2"/>
-    </svg>`
+    svg:`<img src="./images/starter-pack-bg/silver-img.png" alt="Starter Pack Silver Cidade Alta">`
   },
   {
     id:"magnata",
-    name:"CHEFE MAGNATA · COBERTURA VIP",
-    short:"Magnata VIP",
-    faction:"🔥 ALTO COMANDO · PENTHOUSE CDA",
+    name:"Vip · Passe da Fama",
+    short:"VIP · Magnata",
+    tier:"Vip",
+    faction:"🔥 PASSE DA FAMA · ALTO COMANDO CDA",
     role:"Caçador de Raiva Extrema, Tilt, Treta & Xingamentos",
-    color:"#ff5500",
+    color:"#ffc046",
+    bg:"./images/vip-card-bg/gold-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"raiva extrema, tilt, xingamentos, frustrações e microfone estourado",
     line:"TILTOU AO VIVO! MICROFONE ESTOUROU EM -6dB COM XINGAMENTO E AS 20 IAS JÁ CORTARAM!",
-    svg:`<svg viewBox="0 0 120 128" width="100%" height="100%">
-      <circle cx="60" cy="66" r="50" fill="rgba(255,85,0,0.16)" stroke="#ff5500" stroke-width="2.5"/>
-      <path d="M22 118 C22 86 98 86 98 118 Z" fill="#16141c" stroke="#ffb800" stroke-width="2"/>
-      <path d="M44 92 Q60 108 76 92" fill="none" stroke="#ffb800" stroke-width="4"/>
-      <rect x="38" y="35" width="44" height="47" rx="14" fill="#d8a27a"/>
-      <path d="M44 47 L55 52 M76 47 L65 52" stroke="#08090e" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="49" cy="54" r="3.5" fill="#ff2200"/>
-      <circle cx="71" cy="54" r="3.5" fill="#ff2200"/>
-      <rect x="48" y="68" width="24" height="6" rx="2" fill="#08090e"/>
-    </svg>`
+    svg:`<img src="./images/vip-pricing-image-mobile.png" alt="Personagem VIP Cidade Alta">`
   },
   {
     id:"palhaco",
-    name:"MESTRE DO CAOS · PALHAÇO RP",
-    short:"Palhaço Caos",
-    faction:"🎭 SARCASMO & TROTE · PRAÇA CDA",
+    name:"Valley · Mestre da Ironia",
+    short:"Valley · Ironia 🤡",
+    tier:"Valley",
+    faction:"🎭 PATCH NOTES CDA · TERMÔMETRO DE IRONIA",
     role:"Guardião do Termômetro de Ironia 🤡 (Sarcasmo vs Raiva)",
-    color:"#c084fc",
+    color:"#4ac5f3",
+    bg:"./images/vip-card-bg/diamond-bg.png",
     subPreset:"IRONY_PURPLE",
     hint:"ironia, sarcasmo, só que não, confia, 200 QI, humor ácido e chat rindo da falha",
     line:"PARABÉNS AOS ENVOLVIDOS SQN KKKK 🤡! TERMÔMETRO DE IRONIA DIFERENCIOU SARCASMO DE RAIVA!",
-    svg:`<svg viewBox="0 0 120 128" width="100%" height="100%">
-      <circle cx="60" cy="66" r="50" fill="rgba(192,132,252,0.16)" stroke="#c084fc" stroke-width="2.5"/>
-      <path d="M24 118 C24 88 96 88 96 118 Z" fill="#4c1d95" stroke="#ffb800" stroke-width="2"/>
-      <circle cx="34" cy="38" r="11" fill="#c084fc"/>
-      <circle cx="86" cy="38" r="11" fill="#ff5500"/>
-      <rect x="38" y="34" width="44" height="48" rx="18" fill="#f7f5ff" stroke="#c084fc" stroke-width="2"/>
-      <polygon points="49,47 44,56 54,56" fill="#c084fc"/>
-      <polygon points="71,47 66,56 76,56" fill="#ff5500"/>
-      <circle cx="60" cy="60" r="5.5" fill="#ff2e63"/>
-      <path d="M44 68 Q60 82 76 68" fill="none" stroke="#ff2e63" stroke-width="4" stroke-linecap="round"/>
-    </svg>`
+    svg:`<img src="./images/patchnote_1.png" alt="Personagem Patch Notes Cidade Alta">`
   },
   {
     id:"diretor",
-    name:"DIRETOR OUTPLAY · ESTÚDIO 9:16",
-    short:"Diretor CDA",
-    faction:"🎬 PRODUÇÃO OFICIAL CIDADE ALTA",
+    name:"Alta · Rainha do RP",
+    short:"Alta · Diretora",
+    tier:"Alta",
+    faction:"🎬 CIDADE ALTA OFICIAL · TIME-SHIFT 9:16",
     role:"Varredura Dupla Time-Shift 00:00 ← Ao Vivo → Fim",
-    color:"#ffd600",
+    color:"#ffc046",
+    bg:"./images/vip-card-bg/silver-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"melhores momentos gerais, time-shift 00:00 ao vivo, cortes verticais 9:16 com legenda",
     line:"VARREDURA DUPLA ATIVA: OLHANDO DO AO VIVO ATÉ O INÍCIO DA LIVE E SALVANDO TUDO EM 9:16!",
-    svg:`<svg viewBox="0 0 120 128" width="100%" height="100%">
-      <circle cx="60" cy="66" r="50" fill="rgba(255,214,0,0.15)" stroke="#ffd600" stroke-width="2.5"/>
-      <path d="M24 118 C24 88 96 88 96 118 Z" fill="#1f1a0c" stroke="#ffb800" stroke-width="2"/>
-      <rect x="38" y="36" width="44" height="46" rx="14" fill="#eac09e"/>
-      <rect x="34" y="24" width="52" height="14" rx="3" fill="#ffb800" stroke="#08090e" stroke-width="2"/>
-      <rect x="40" y="48" width="40" height="11" rx="4" fill="#08090e" stroke="#00e5ff" stroke-width="2"/>
-      <path d="M48 69 L72 69" stroke="#08090e" stroke-width="3" stroke-linecap="round"/>
-    </svg>`
+    svg:`<img src="./images/hero-bg-mobile.png" alt="Personagem Oficial Cidade Alta" style="border-radius:6px;object-fit:cover">`
   }
 ];
 
@@ -1513,19 +2188,19 @@ function renderKaraokeWordsInto(container,rawText,highlightIdx,accentColor){
   const words=String(rawText||"").trim().split(/\s+/).filter(Boolean);
   if(!words.length){container.innerHTML="";return;}
   const hi=highlightIdx%words.length;
-  const col=accentColor||"#ffb800";
+  const col=accentColor||"#ffc046";
   container.innerHTML=words.map((w,i)=>{
     const isOn=(i===hi||i===hi+1);
-    const st=isOn?`background:${col};color:#08090e;box-shadow:0 4px 14px ${col}88;`:"";
+    const st=isOn?`background:${col};color:#000000;box-shadow:0 4px 14px ${col}88;`:"";
     return `<span class="cda-kw ${isOn?"on":""}" style="${st}">${esc(w)}</span>`;
   }).join(" ");
 }
 
 function getSubPresetColor(preset){
-  if(preset==="NEON_GREEN")return "#00e676";
-  if(preset==="IRONY_PURPLE")return "#c084fc";
-  if(preset==="QTH_RADIO")return "#00e5ff";
-  return "#ffb800";
+  if(preset==="NEON_GREEN")return "#4ac5f3";
+  if(preset==="IRONY_PURPLE")return "#ffc046";
+  if(preset==="QTH_RADIO")return "#4ac5f3";
+  return "#ffc046";
 }
 
 function stepCdaKaraokeSubtitles(){
@@ -1556,6 +2231,9 @@ function selectCdaCharacter(charId,withTransition=true){
   if(withTransition)triggerCdaTransition("CDA_SLASH",true);
 
   if($("cdaCharFactionBadge"))$("cdaCharFactionBadge").textContent=found.faction;
+  if($("cdaActiveCharStage")&&found.bg){
+    $("cdaActiveCharStage").style.backgroundImage=`url("${found.bg}")`;
+  }
   if($("cdaSpotlightSvgBox"))$("cdaSpotlightSvgBox").innerHTML=found.svg;
   if($("cdaCharNameLbl")){$("cdaCharNameLbl").textContent=found.name;$("cdaCharNameLbl").style.color=found.color;}
   if($("cdaCharRoleLbl"))$("cdaCharRoleLbl").textContent=found.role;
@@ -1576,10 +2254,11 @@ function renderCdaCharacterRoster(){
   const grid=$("cdaCharRosterGrid");
   if(!grid)return;
   grid.innerHTML=CDA_CHARACTER_CAST.map(c=>`
-    <div class="cda-char-card ${c.id===activeCdaChar.id?"on":""}" data-cda-char="${esc(c.id)}">
+    <div class="cda-char-card ${c.id===activeCdaChar.id?"on":""}" data-cda-char="${esc(c.id)}" style="background-image:url('${esc(c.bg)}')">
       <div class="cda-char-svg">${c.svg}</div>
-      <b style="font-size:11.5px;color:${esc(c.color)}">${esc(c.short)}</b>
-      <span class="mut" style="font-size:10px;line-height:1.25">${esc(c.role.slice(0,44))}…</span>
+      <span class="cda-char-tier" style="color:${esc(c.color)}">${esc(c.tier||c.short)}</span>
+      <b style="font-size:12px;color:#fff;letter-spacing:.08em;text-transform:uppercase">${esc(c.short)}</b>
+      <span class="mut" style="font-size:11px;line-height:1.25">${esc(c.role.slice(0,48))}…</span>
     </div>
   `).join("");
   grid.querySelectorAll("[data-cda-char]").forEach(card=>{
