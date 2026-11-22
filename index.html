@@ -146,6 +146,16 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 .clip-chk-label{position:absolute;top:10px;left:10px;z-index:5;background:rgba(11,11,16,.84);padding:4px 8px;border-radius:8px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.22)}
 .clip-chk-label input{width:16px;height:16px;accent-color:var(--acc);margin:0}
 .studio-quick{margin-top:12px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--in)}
+.irony-box{margin:8px 0 10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(192,132,252,.45);background:linear-gradient(90deg,rgba(139,92,246,.14),rgba(255,46,147,.08))}
+.irony-bar-wrap{height:10px;border-radius:999px;background:#090812;border:1px solid rgba(192,132,252,.35);margin-top:6px;overflow:hidden}
+.irony-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#8b5cf6,#c084fc,#ff2e93);width:18%;transition:width .25s}
+.chat-mon{margin:10px 0 14px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--in)}
+.chat-feed{margin-top:8px;max-height:210px;overflow-y:auto;padding:8px;border-radius:9px;background:#07070e;border:1px solid var(--line);font-size:12px;display:flex;flex-direction:column;gap:5px}
+.chat-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:4px 6px;border-radius:6px;background:rgba(255,255,255,.02);border-left:3px solid transparent}
+.chat-row.irony{border-left-color:#c084fc;background:rgba(192,132,252,.11)}
+.chat-row.rage{border-left-color:#ff2e93;background:rgba(255,46,147,.08)}
+.chat-row.funny{border-left-color:#22e07a}
+.quick-lives{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
 .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#161224;color:#fff;padding:10px 16px;border-radius:10px;border:1px solid var(--acc);font-size:12.5px;z-index:99;box-shadow:0 8px 28px rgba(0,0,0,.45)}
 </style>
 </head>
@@ -178,11 +188,22 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
     <!-- 1. ABA CORTES -->
     <div id="tab-CORTES" class="tab-panel">
       <div class="card" id="fm">
-        <h3>■ MONITORAR LIVE & GERAR CORTES 9:16 (TIME-SHIFT DUPLO)</h3>
-        <p class="mut" style="margin:0">Cole o link da <b>Kick, Twitch, YouTube, .m3u8 ou .mp4</b> para ver a <b>prévia ao vivo imediata com som</b>. Ao iniciar, <b>20 IAs sem API key</b> acompanham do ao vivo ao fim e varrem do ao vivo até 00:00 gerando cortes 9:16 com legenda.</p>
-        <label>Link da live ou vídeo (.m3u8 / .mp4 / Twitch / Kick / YouTube)
-          <input type="text" id="lk" value="https://www.twitch.tv/alanzoka" placeholder="Cole aqui para carregar a prévia instantânea com som…">
+        <h3>■ MONITORAR LIVE & GERAR CORTES 9:16 (KICK TV · YOUTUBE · TWITCH)</h3>
+        <p class="mut" style="margin:0">Cole o link ou escolha uma live abaixo da <b>Kick TV, YouTube Live, Twitch, .m3u8 ou .mp4</b> para assistir à <b>prévia ao vivo com som</b> e monitorar o <b>chat em tempo real + Termômetro de Ironia</b>.</p>
+        <label>Link da live ou vídeo (.m3u8 / .mp4 / Kick TV / YouTube / Twitch)
+          <input type="text" id="lk" value="https://kick.com/surskity" placeholder="Cole aqui o link da Kick, YouTube, Twitch ou .m3u8…">
         </label>
+        <div class="quick-lives" id="quickLivesBar">
+          <span class="mut" style="font-size:11.5px;font-weight:700">⚡ Testar Lives Ao Vivo Agora:</span>
+          <button type="button" class="plat-btn on" data-quick-url="https://kick.com/surskity" data-quick-name="surskity (Kick)">🟢 Kick TV: surskity</button>
+          <button type="button" class="plat-btn" data-quick-url="https://kick.com/ayellol" data-quick-name="Ayellol (Kick)">🟢 Kick TV: Ayellol</button>
+          <button type="button" class="plat-btn" data-quick-url="https://kick.com/daniels" data-quick-name="daniels (Kick)">🟢 Kick TV: daniels</button>
+          <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=FjivCxRWjvM" data-quick-name="CNN Brasil (YouTube)">🔴 YouTube: CNN Brasil</button>
+          <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=rFH6A49OI-8" data-quick-name="TV Canção Nova (YouTube)">🔴 YouTube: Canção Nova</button>
+          <button type="button" class="plat-btn" data-quick-url="https://www.youtube.com/watch?v=X2U4Blbbpj8" data-quick-name="Dj Nenê Ao Vivo (YouTube)">🔴 YouTube: Dj Nenê</button>
+          <button type="button" class="plat-btn" data-quick-url="https://www.twitch.tv/ricfazeres" data-quick-name="RicFazeres (Twitch)">🟣 Twitch: RicFazeres</button>
+          <button type="button" class="plat-btn" data-quick-url="https://www.twitch.tv/alanzoka" data-quick-name="alanzoka (Twitch)">🟣 Twitch: alanzoka</button>
+        </div>
         <div class="row">
           <label>Exigência mínima (1–10)
             <input type="number" id="mn" min="1" max="10" value="6">
@@ -192,7 +213,7 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
           </label>
         </div>
         <label>Foco dos agentes (opcional)
-          <input type="text" id="hint" value="engraçados, frustrações, raiva, xingamentos e picos do chat">
+          <input type="text" id="hint" value="ironia sarcástica, engraçados, frustrações, raiva, xingamentos e picos do chat">
         </label>
         <label>Nomes difíceis para legenda
           <input type="text" id="names" placeholder="ex.: Dava Jones, Paulinho, Vice City">
@@ -231,6 +252,7 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
             <span class="prev-txt" id="prevTxt">prévia pronta com som · reprodução simultânea</span>
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn g sm" id="toggleHlsModeBtn" type="button">🎬 Modo: Player Oficial</button>
             <button class="btn g sm" id="reloadPlayerBtn" type="button">🔄 Recarregar Player</button>
             <a class="btn g sm" id="openOrigPlayer" target="_blank" rel="noopener">↗ Abrir original</a>
           </div>
@@ -239,17 +261,59 @@ details{margin-top:12px;color:var(--mut)}summary{cursor:pointer}
 
         <div class="sent-wrap" id="sentimentBox">
           <div class="sent-head">
-            <b style="font-size:12.5px">📈 Sentimento do Chat em Tempo Real (Kick · Twitch · YouTube) & Marcadores Clicáveis</b>
+            <b style="font-size:12.5px">📈 Sentimento do Chat + Termômetro de Ironia (Kick · Twitch · YouTube)</b>
             <div class="sent-leg">
               <span><i style="background:#22e07a"></i>Positivo</span>
               <span><i style="background:#ff2e93"></i>Negativo (Raiva/Frustração/Xing.)</span>
-              <span><i style="background:#ffd23f"></i>Hype</span>
+              <span><i style="background:#ffd23f"></i>Hype Comum</span>
+              <span><i style="background:#c084fc;height:4px"></i>🤡 Ironia / Sarcasmo</span>
               <span><i style="background:#00e5ff"></i>✂ Corte Gerado</span>
             </div>
           </div>
-          <canvas id="sentimentChart" width="760" height="170"></canvas>
-          <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse para inspecionar o contexto do chat ou clique em um marcador ✂ azul para editar o corte no Estúdio.</div>
+
+          <div class="irony-box" id="ironyThermometerBox">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <b style="font-size:12.5px;color:#e9d5ff">🤡 Termômetro de Ironia (Humor Sarcástico vs Raiva/Hype)</b>
+                <span class="pill pu" id="ironyLevelBadge">Ironia: 68% · Pico Sarcástico</span>
+              </div>
+              <span class="mut" id="ironyPeakCountLbl" style="font-size:11.5px">2 picos sarcásticos destacados (◆)</span>
+            </div>
+            <div class="irony-bar-wrap"><div class="irony-bar-fill" id="ironyGaugeFill" style="width:68%"></div></div>
+            <div class="mut" id="ironyDiffText" style="margin-top:5px;font-size:11.5px">IA-12 & IA-16: diferencia elogios irônicos ("joga muito confia / 200 QI / só que não + kkk/🤡") durante falhas de picos reais de Raiva ou Hype comum.</div>
+          </div>
+
+          <canvas id="sentimentChart" width="760" height="180"></canvas>
+          <div class="mut" id="sentHover" style="margin-top:6px">Passe o mouse para ver Positivo, Negativo, Hype e o nível de Ironia/Sarcasmo ou clique em ✂ / 🤡 na linha do tempo.</div>
           <div id="sentPeaks" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
+        </div>
+
+        <!-- MONITOR DE CHAT EM TEMPO REAL -->
+        <div class="chat-mon" id="liveChatMonitor">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <b style="font-size:12.5px">💬 Monitor de Chat em Tempo Real (Kick TV · YouTube · Twitch)</b>
+              <span class="pill br" id="chatLiveStatusBadge">🟢 Monitorando Ao Vivo</span>
+              <span class="pill pu" id="chatMsgCountBadge">0 msgs</span>
+            </div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap" id="chatFilterBtns">
+              <button type="button" class="plat-btn on" data-chat-filter="ALL">Todos</button>
+              <button type="button" class="plat-btn" data-chat-filter="IRONIA">🤡 Só Ironia/Sarcasmo</button>
+              <button type="button" class="plat-btn" data-chat-filter="RAIVA">🤬 Raiva/Xing.</button>
+              <button type="button" class="plat-btn" data-chat-filter="HYPE">😂 Humor/Hype</button>
+            </div>
+          </div>
+          <div class="chat-feed" id="liveChatFeed"></div>
+          <div class="row" style="margin-top:8px;align-items:center">
+            <input type="text" id="chatTestInput" placeholder="Testar frase no chat (ex.: Joga muito confia kkkk 🤡, 200 QI só que não, Que roubo pqp)…" style="margin-top:0">
+            <button type="button" class="btn sm cy" id="chatTestSendBtn" style="flex:0 0 auto">💬 Testar no Termômetro de Ironia</button>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px" id="chatQuickPresets">
+            <button type="button" class="btn g sm" data-sample-chat="Joga muito esse pro player confia kkkkk 🤡">🤡 "Joga muito confia kkk 🤡"</button>
+            <button type="button" class="btn g sm" data-sample-chat="200 QI tudo calculado só que não hahaha">🤡 "200 QI só que não haha"</button>
+            <button type="button" class="btn g sm" data-sample-chat="QUE ROUBO ABSURDO ESSE JOGO LIXO PQP 🤬">🤬 "QUE ROUBO ABSURDO PQP"</button>
+            <button type="button" class="btn g sm" data-sample-chat="CLUTCH INSANO MITOU DEMAIS POGGERS 🔥">⚡ "CLUTCH INSANO MITOU 🔥"</button>
+          </div>
         </div>
 
         <div class="ts-row" id="tsRow">
@@ -765,34 +829,154 @@ function mkAgents(activePct){
   }));
 }
 
+function cleanChatTextBrowser(raw){
+  return String(raw||"").replace(/\[emote:\d+:([A-Za-z0-9_.-]+)\]/g,":$1:").replace(/\s+/g," ").trim();
+}
+
+function classifyChatBrowser(userOrText,textOpt,platform="KICK",tSec=0){
+  const hasTwoArgs=textOpt!==undefined;
+  const user=hasTwoArgs?userOrText:"viewer";
+  const text=hasTwoArgs?textOpt:userOrText;
+  const clean=cleanChatTextBrowser(text).slice(0,160);
+  const low=clean.toLowerCase();
+  const lex={
+    "Engraçado":["kkk","haha","hehe","rsrs","lmao","lol","tankei","intankavel","intankável","morri","rindo","meme","piada","zoeira","troll","quebrei"],
+    "Ironia":["confia","joga muito","pro player","so que nao","só que não","sqn","quase deu","facil demais","fácil demais","ta pago","tá pago","aula","professor","genio","gênio","200 qi","1000 qi","qi negativo","calculado","tudo calculado","foi querer","nunca critiquei","ironia","sarcasmo","kappa","🤡","kekw","aham","ata","parabens","parabéns","campeao","campeão"],
+    "Frustração":["aff","nao acredito","não acredito","perdi tudo","impossivel","impossível","bugou","que azar","desisto","lag","morri de novo","deu ruim","rip","fail"],
+    "Raiva":["raiva","odio","ódio","roubado","hack","lixo","injusto","tiltado","tilt","rage","cala a boca","absurdo","palhaçada","gritando","explodiu","furia","fúria"],
+    "Xingamentos":["caralho","porra","merda","puta","pqp","vsf","fdp","krl","wtf","shit","fuck","bosta","arromb","inferno","cacete"],
+    "Hype":["pog","poggers","omg","clutch","insano","mitou","lendario","lendário","caraca","eita","nossa","gg","god","monstro","meu deus","clipa","historico","histórico","🔥"]
+  };
+  const scores={Engraçado:0,Ironia:0,Frustração:0,Raiva:0,Xingamentos:0,Hype:0};
+  Object.keys(lex).forEach(k=>{
+    let hits=0;
+    lex[k].forEach(w=>{if(low.includes(w))hits++;});
+    if(hits)scores[k]=hits*18;
+  });
+  const praise=["joga muito","pro player","genio","gênio","aula","professor","parabens","parabéns","lenda","campeao","campeão","muito bom","otimo","ótimo","calculado","confia","200 qi","1000 qi","mira","facil","fácil","certinho"];
+  const contrast=["kkk","haha","hehe","rsrs","lmao","🤡","kappa","sqn","só que não","so que nao","morreu","errou","perdeu","fail","bugou","quase","ata","aham","confia","qi negativo"];
+  const hasPraise=praise.some(w=>low.includes(w));
+  const hasContrast=contrast.some(w=>low.includes(w));
+  if(hasPraise&&hasContrast){
+    scores.Ironia+=44;
+    scores.Hype=Math.max(0,scores.Hype-16);
+    scores.Raiva=Math.max(0,scores.Raiva-12);
+  }else if(scores.Ironia>=18&&(scores.Engraçado>0||low.includes("🤡")||low.includes("sqn"))){
+    scores.Ironia+=24;
+    scores.Hype=Math.max(0,scores.Hype-10);
+  }
+  if(clean.includes("!")&&scores.Ironia<30)scores.Hype+=(clean.split("!").length-1)*6;
+  if(clean===clean.toUpperCase()&&clean.length>=6){
+    if(scores.Ironia>=18)scores.Ironia+=14;
+    else{scores.Raiva+=12;scores.Hype+=10;}
+  }
+  const rageRaw=scores.Raiva+scores.Xingamentos+scores.Frustração*0.8;
+  const ironyScore=Math.min(99,Math.max(8,Math.round(12+scores.Ironia*1.35+(scores.Ironia>0?scores.Engraçado*0.35:0))));
+  const isIrony=Boolean(ironyScore>=45&&scores.Ironia>=18&&scores.Ironia>=rageRaw*0.7);
+  let dom="Hype";
+  if(isIrony)dom="Ironia";
+  else{
+    let bestV=0;
+    Object.keys(scores).forEach(k=>{if(scores[k]>bestV){bestV=scores[k];dom=k;}});
+  }
+  const positivo=Math.min(98,Math.max(12,Math.round(35+scores.Engraçado*1.1+scores.Hype*0.7+(isIrony?15:0))));
+  const negativo=Math.min(98,Math.max(8,Math.round(14+rageRaw*1.25-(isIrony?10:0))));
+  const hype=Math.min(99,Math.max(22,Math.round(32+scores.Hype*1.2+scores.Engraçado*0.6+ironyScore*0.35)));
+  const now=new Date();
+  return{
+    id:"m_"+Date.now()+"_"+Math.floor(Math.random()*999),
+    t:Math.round(tSec),
+    label:hms(tSec),
+    time:now.toTimeString().slice(0,8),
+    platform:String(platform||"KICK").toUpperCase(),
+    user:String(user||"viewer").replace(/^@/,"").slice(0,28)||"viewer",
+    text:clean,
+    emotion:dom,
+    ironia:ironyScore,
+    irony_score:ironyScore,
+    positivo,
+    negativo,
+    hype,
+    is_irony:isIrony
+  };
+}
+
+function summarizeIronyBrowser(msgs){
+  const list=(msgs||[]).slice(-40);
+  if(!list.length){
+    return{score:16,level:16,peak_irony:20,irony_peaks_count:0,sarcastic_count:0,total_messages:0,status:"Monitorando chat ao vivo…",differentiation:"Aguardando mensagens para diferenciar Ironia/Sarcasmo de Raiva ou Hype comum",explanation:"Aguardando mensagens para diferenciar Ironia/Sarcasmo de Raiva ou Hype comum"};
+  }
+  const scores=list.map(m=>Number(m.ironia||m.irony_score||12)).sort((a,b)=>b-a);
+  const topN=scores.slice(0,Math.max(1,Math.min(6,scores.length)));
+  const avgTop=Math.round(topN.reduce((a,b)=>a+b,0)/topN.length);
+  const sarc=list.filter(m=>m.is_irony||m.emotion==="Ironia"||Number(m.ironia||m.irony_score||0)>=48);
+  const rage=list.filter(m=>["Raiva","Xingamentos","Frustração"].includes(m.emotion));
+  const hype=list.filter(m=>["Hype","Engraçado"].includes(m.emotion)&&!m.is_irony);
+  const level=Math.min(99,Math.max(10,Math.round(avgTop*0.75+Math.min(25,sarc.length*7))));
+  let status="⚡ Reação Direta (Hype / Humor / Raiva — Sem Sarcasmo Dominante)";
+  let diff=`Chat literal (${rage.length} raiva/xing. · ${hype.length} hype/humor) sem contraste sarcástico dominante.`;
+  if(level>=55||sarc.length>=2){
+    status="🤡 Pico de Ironia / Humor Sarcástico Detectado!";
+    diff=`IA-12 & IA-16 detectaram ${sarc.length} msg(s) sarcástica(s) ('elogio irônico + kkk/🤡/sqn') vs ${rage.length} de raiva real e ${hype.length} de hype comum.`;
+  }else if(level>=35||sarc.length===1){
+    status="😏 Ironia Moderada no Chat";
+    diff=`1 ironia detectada (${sarc[0]?sarc[0].text.slice(0,36):""}) separada de ${rage.length} msg(s) de raiva.`;
+  }
+  return{score:level,level,peak_irony:scores[0]||16,irony_peaks_count:sarc.length,sarcastic_count:sarc.length,total_messages:(msgs||[]).length,status,differentiation:diff,explanation:diff};
+}
+
 function mkSentimentSeries(durationSec,seed){
   const total=Math.max(40,Number(durationSec)||120);
   const steps=16;
   const arr=[];
-  const emos=["Engraçado","Hype","Frustração","Raiva","Xingamentos","Engraçado","Raiva"];
+  const emos=["Engraçado","Hype","Frustração","Raiva","Xingamentos","Ironia","Raiva"];
   for(let i=0;i<=steps;i++){
     const t=Math.round((total/steps)*i);
     const wave=Math.sin(i*0.85+(seed||1))*22;
     const pos=Math.max(12,Math.min(96,Math.round(52+Math.cos(i*0.65+(seed||1))*28)));
     const neg=Math.max(10,Math.min(97,Math.round(38+Math.sin(i*0.95+(seed||2))*34)));
-    const hype=Math.max(22,Math.min(100,Math.round(Math.max(pos,neg)*0.82+Math.abs(wave)*0.55)));
-    const emotion=(neg>pos&&neg>68)?emos[(i+2)%5]:((pos>68)?"Engraçado":"Hype");
-    arr.push({t,label:hms(t),positivo:pos,negativo:neg,hype,emotion,msgs:12+((i*7)%38),db:-28+((i*5)%18)});
+    let hype=Math.max(22,Math.min(100,Math.round(Math.max(pos,neg)*0.82+Math.abs(wave)*0.55)));
+    const isSarcSpot=(i===4||i===11||((i+(seed||1))%6===0));
+    const ironia=isSarcSpot
+      ?Math.max(66,Math.min(96,Math.round(74+Math.sin(i*1.3+(seed||1))*18)))
+      :Math.max(12,Math.min(48,Math.round(22+Math.cos(i*0.9+(seed||2))*14)));
+    const is_irony_peak=Boolean(ironia>=58);
+    if(is_irony_peak)hype=Math.max(18,Math.round(hype*0.76));
+    const emotion=is_irony_peak?"Ironia":((neg>pos&&neg>68)?emos[(i+2)%5]:((pos>68)?"Engraçado":"Hype"));
+    arr.push({t,label:hms(t),positivo:pos,negativo:neg,hype,ironia,is_irony_peak,emotion,msgs:14+((i*7)%38),db:-28+((i*5)%18)});
   }
   return arr;
 }
 
+function normalizeCatBrowser(rawCat,title){
+  const b=(String(rawCat||"")+" "+String(title||"")).toLowerCase();
+  if(/gta|grand theft auto|fivem|roleplay|cidade alta|vice city/.test(b))return"Grand Theft Auto VI";
+  if(/valorant|cs2|counter-strike|free fire|warzone|call of duty|fortnite|fps/.test(b))return"FPS & Shooter";
+  if(/league of legends|dota|cblol|moba/.test(b))return"MOBA & Esports";
+  if(/just chatting|irl|notícias|noticias|cnn|sbt|canção nova|globo|podcast|resenha|youtube live/.test(b))return"Just Chatting & Ao Vivo";
+  return rawCat||"Ao Vivo";
+}
+
 const memDemoDiscovery=[
-  {id:"tw_paulinho",platform:"TWITCH",login:"paulinhooloko",display_name:"Paulinho o LOKO",title:"GTA RP CIDADE ALTA AO VIVO · FUGA ABSURDA",category:"Grand Theft Auto V",viewer_count:32400,is_brazil:true,language:"pt",url:"https://www.twitch.tv/paulinhooloko"},
-  {id:"tw_loud",platform:"TWITCH",login:"loud_coringa",display_name:"LOUD Coringa",title:"CORINGA AO VIVO NO GTA RP E RESENHA COM OS CRIA",category:"Grand Theft Auto V",viewer_count:24900,is_brazil:true,language:"pt",url:"https://www.twitch.tv/loud_coringa"},
-  {id:"tw_alanzoka",platform:"TWITCH",login:"alanzoka",display_name:"alanzoka",title:"JOGOS DE TERROR E REAÇÃO AO VIVO (SUSTO GARANTIDO)",category:"Just Chatting",viewer_count:19800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/alanzoka"},
-  {id:"kk_surskity",platform:"KICK",login:"surskity",display_name:"surskity",title:"KICK BRASIL AO VIVO · GAMEPLAY & RESENHA",category:"Grand Theft Auto V",viewer_count:5800,is_brazil:true,language:"pt",url:"https://kick.com/surskity"},
-  {id:"kk_jonvlogs",platform:"KICK",login:"jonvlogs",display_name:"JonVlogs",title:"IRL BRASIL AO VIVO · RESENHA NA RUA",category:"IRL",viewer_count:4900,is_brazil:true,language:"pt",url:"https://kick.com/jonvlogs"},
-  {id:"yt_cnnbr",platform:"YOUTUBE",login:"cnnbrasil",display_name:"CNN Brasil",title:"CNN BRASIL AO VIVO · NOTÍCIAS EM TEMPO REAL",category:"IRL",viewer_count:8600,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=kVj3PEECYks"},
-  {id:"yt_sbtbr",platform:"YOUTUBE",login:"sbtnews",display_name:"SBT News",title:"SBT NEWS AO VIVO BRASIL",category:"IRL",viewer_count:1300,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=XmN3ClDzQiI"},
-  {id:"tw_kaicenat",platform:"TWITCH",login:"kaicenat",display_name:"KaiCenat",title:"MARATHON STREAM LIVE · BIGGEST GUESTS",category:"Just Chatting",viewer_count:78500,is_brazil:false,language:"en",url:"https://www.twitch.tv/kaicenat"},
-  {id:"kk_westcol",platform:"KICK",login:"westcol",display_name:"Westcol",title:"KICK LIVE · IRL & GAMING",category:"IRL",viewer_count:41200,is_brazil:false,language:"es",url:"https://kick.com/westcol"},
-  {id:"yt_lofi",platform:"YOUTUBE",login:"lofigirl",display_name:"Lofi Girl",title:"lofi hip hop radio · 24/7 live stream",category:"IRL",viewer_count:28900,is_brazil:false,language:"en",url:"https://www.youtube.com/watch?v=jfKfPfyJRdk"}
+  {id:"kk_surskity",platform:"KICK",login:"surskity",display_name:"surskity",title:"KICK TV BRASIL AO VIVO · GTA VI & RESENHA INSANA",category:"Grand Theft Auto VI",viewer_count:5921,is_brazil:true,language:"pt",url:"https://kick.com/surskity"},
+  {id:"kk_ayellol",platform:"KICK",login:"ayellol",display_name:"Ayellol",title:"KICK TV AO VIVO · GAMEPLAY & CHAT SARCÁSTICO",category:"Grand Theft Auto VI",viewer_count:3238,is_brazil:true,language:"pt",url:"https://kick.com/ayellol"},
+  {id:"kk_daniels",platform:"KICK",login:"daniels",display_name:"daniels",title:"KICK BRASIL AO VIVO · ALTAS RISADAS E RAGE",category:"Grand Theft Auto VI",viewer_count:2704,is_brazil:true,language:"pt",url:"https://kick.com/daniels"},
+  {id:"kk_denissnider",platform:"KICK",login:"denissnider",display_name:"DenisSnider",title:"KICK TV AO VIVO · GAMEPLAY BRASIL",category:"Grand Theft Auto VI",viewer_count:2289,is_brazil:true,language:"pt",url:"https://kick.com/denissnider"},
+  {id:"kk_coringa",platform:"KICK",login:"loud_coringa",display_name:"LOUD Coringa (Kick)",title:"CORINGA NA KICK TV · GTA RP CIDADE ALTA",category:"Grand Theft Auto VI",viewer_count:18400,is_brazil:true,language:"pt",url:"https://kick.com/loud_coringa"},
+  {id:"kk_jonvlogs",platform:"KICK",login:"jonvlogs",display_name:"JonVlogs",title:"IRL BRASIL AO VIVO NA KICK · RESENHA",category:"Just Chatting & Ao Vivo",viewer_count:6900,is_brazil:true,language:"pt",url:"https://kick.com/jonvlogs"},
+  {id:"yt_cnn_live",platform:"YOUTUBE",login:"cnnbrasil_live",display_name:"CNN Brasil",title:"CNN BRASIL AO VIVO · COBERTURA EM TEMPO REAL",category:"Just Chatting & Ao Vivo",viewer_count:9649,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=FjivCxRWjvM"},
+  {id:"yt_flacko",platform:"YOUTUBE",login:"flackojoshy",display_name:"FLACKO JOSHY",title:"AO VIVO AGORA HD · TRANSMISSÃO BRASIL",category:"Just Chatting & Ao Vivo",viewer_count:5220,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=rdvwH-YakRs"},
+  {id:"yt_cancaonova",platform:"YOUTUBE",login:"tvcancaonova",display_name:"TV Canção Nova",title:"TV CANÇÃO NOVA - AO VIVO 24H",category:"Just Chatting & Ao Vivo",viewer_count:4795,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=rFH6A49OI-8"},
+  {id:"yt_djnene",platform:"YOUTUBE",login:"djnene",display_name:"Dj Nenê",title:"DJ NENÊ AO VIVO · MÚSICA & CHAT",category:"Just Chatting & Ao Vivo",viewer_count:3347,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=X2U4Blbbpj8"},
+  {id:"yt_cnn_news",platform:"YOUTUBE",login:"cnnnewsroom",display_name:"CNN Newsroom BR",title:"AO VIVO: CNN NEWSROOM BRASIL",category:"Just Chatting & Ao Vivo",viewer_count:4120,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=kVj3PEECYks"},
+  {id:"yt_sbtbr",platform:"YOUTUBE",login:"sbtnews",display_name:"SBT News",title:"SBT NEWS AO VIVO BRASIL 24H",category:"Just Chatting & Ao Vivo",viewer_count:2850,is_brazil:true,language:"pt",url:"https://www.youtube.com/watch?v=XmN3ClDzQiI"},
+  {id:"tw_paulinho",platform:"TWITCH",login:"paulinhooloko",display_name:"Paulinho o LOKO",title:"GTA RP CIDADE ALTA AO VIVO · FUGA ABSURDA",category:"Grand Theft Auto VI",viewer_count:32400,is_brazil:true,language:"pt",url:"https://www.twitch.tv/paulinhooloko"},
+  {id:"tw_loud",platform:"TWITCH",login:"loud_coringa",display_name:"LOUD Coringa",title:"CORINGA AO VIVO NO GTA RP E RESENHA COM OS CRIA",category:"Grand Theft Auto VI",viewer_count:24900,is_brazil:true,language:"pt",url:"https://www.twitch.tv/loud_coringa"},
+  {id:"tw_alanzoka",platform:"TWITCH",login:"alanzoka",display_name:"alanzoka",title:"JOGOS DE TERROR E REAÇÃO AO VIVO (SUSTO GARANTIDO)",category:"Just Chatting & Ao Vivo",viewer_count:19800,is_brazil:true,language:"pt",url:"https://www.twitch.tv/alanzoka"},
+  {id:"tw_ricfazeres",platform:"TWITCH",login:"ricfazeres",display_name:"RicFazeres",title:"GAMEPLAY AO VIVO PORTUGAL/BRASIL",category:"Grand Theft Auto VI",viewer_count:3088,is_brazil:true,language:"pt",url:"https://www.twitch.tv/ricfazeres"},
+  {id:"tw_rakin",platform:"TWITCH",login:"rakin",display_name:"Rakin",title:"RAKIN AO VIVO · GAMEPLAY & TILT DO CHAT",category:"Grand Theft Auto VI",viewer_count:1880,is_brazil:true,language:"pt",url:"https://www.twitch.tv/rakin"},
+  {id:"tw_kaicenat",platform:"TWITCH",login:"kaicenat",display_name:"KaiCenat",title:"MARATHON STREAM LIVE · BIGGEST GUESTS",category:"Just Chatting & Ao Vivo",viewer_count:78500,is_brazil:false,language:"en",url:"https://www.twitch.tv/kaicenat"},
+  {id:"kk_westcol",platform:"KICK",login:"westcol",display_name:"Westcol",title:"KICK LIVE · IRL & GAMING",category:"Just Chatting & Ao Vivo",viewer_count:41200,is_brazil:false,language:"es",url:"https://kick.com/westcol"}
 ];
 
 const nowTs=Math.floor(Date.now()/1000);
@@ -805,7 +989,7 @@ const memDb={
     {id:"FADE_CONTINUO",nome:"Fade Contínuo sem Borda",descricao:"Transição suave entre gameplay e facecam com título limpo centralizado."}
   ],
   ideas:[
-    {id:"idea1",tag:"Engraçado · Memes",min:7,hint:"risadas, momentos engraçados, trollagens e chat spamando kkk"},
+    {id:"idea1",tag:"Ironia & Humor Sarcástico",min:7,hint:"chat sendo irônico ('confia', '200 QI', 'joga muito sqn', 🤡) após falha do streamer"},
     {id:"idea2",tag:"Raiva & Xingamentos",min:7,hint:"raiva extrema, tilt, xingamentos, frustrações e microfone estourado"},
     {id:"idea3",tag:"GTA RP · Ação & Susto",min:6,hint:"perseguição policial, fuga, susto inesperado ou reação forte"},
     {id:"idea4",tag:"Curiosidades & Hype",min:7,hint:"clutch insano, easter egg secreto ou virada inacreditável"}
@@ -815,33 +999,33 @@ const memDb={
   ],
   lives:[
     {
-      id:"alanzoka-demo",
-      name:"alanzoka",
-      link:"https://www.twitch.tv/alanzoka",
-      platform:"TWITCH",
+      id:"surskity-kick-demo",
+      name:"surskity",
+      link:"https://kick.com/surskity",
+      platform:"KICK",
       min:6,
       max:4,
       recorded:849,
       status:"assistindo ao vivo",
-      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:78,live_pct:64,elapsed_sec:849},
-      agents:mkAgents(78),
+      timeline_coverage:{mode:"DUAL_TIMESHIFT",retro_pct:82,live_pct:68,elapsed_sec:849},
+      agents:mkAgents(82),
       handoffs:[
-        "[06:12:44] IA-05 -> IA-16: explosão de 'kkkk' + 'não tankei' aos 352s",
-        "[06:12:59] IA-08 -> IA-14/IA-15: pico acústico -11.8dB detectado aos 550s",
+        "[06:12:44] IA-06 -> IA-16: pico de Ironia/Sarcasmo ('joga muito confia kkk 🤡') aos 160s",
+        "[06:12:59] IA-08 -> IA-14/IA-15: pico acústico -11.8dB (Raiva) diferenciado de ironia aos 352s",
         "[06:13:05] IA-19 -> IA-20: cortes de até 30s aprovados sem chave de API"
       ],
       sentiment_series:mkSentimentSeries(600,1),
       created_ts:nowTs-120,
       created_at:new Date((nowTs-120)*1000).toISOString(),
       log:[
-        "[06:12:44] IA-03 Time-Shift varreu do ao vivo (14:09) até 00:00",
-        "[06:12:55] IA-05 & IA-08 detectaram picos de humor, susto e xingamento",
+        "[06:12:44] IA-03 Time-Shift varreu Kick TV do ao vivo (14:09) até 00:00",
+        "[06:12:55] IA-12 & IA-16 detectaram pico no Termômetro de Ironia (88%) vs Raiva",
         "[06:13:05] 20 agentes colaborando (zero API key) com 3 cortes ≤30s prontos"
       ],
       clips:[
-        {id:"c1",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Engraçado",titulo:"Cai no bait do chat",headline:"O CHAT ME ENGANOU DE NOVO 😂",ini:352,fim:374,nota:9,motivo:"Trollagem do chat com explosão de gargalhadas.",descricao:"O streamer cai numa trollagem do chat e riu sem parar.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-60,created_at:new Date((nowTs-60)*1000).toISOString()},
-        {id:"c2",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Frustração",titulo:"Bug bizarro na missão final",headline:"DEU TUDO ERRADO NA HORA H 😤",ini:214,fim:242,nota:8,motivo:"Frustração genuína após bug crítico na fase final.",descricao:"Bug bizarro estragou a run.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-180,created_at:new Date((nowTs-180)*1000).toISOString()},
-        {id:"c3",live_id:"alanzoka-demo",platform:"TWITCH",channel:"alanzoka",emotion:"Hype",titulo:"GTA 6 em primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA 🔥",ini:550,fim:579,nota:10,motivo:"Hype máximo ao analisar novidades de GTA 6.",descricao:"Novidades de GTA 6.\n\nCorte de @alanzoka",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-30,created_at:new Date((nowTs-30)*1000).toISOString()}
+        {id:"c1",live_id:"surskity-kick-demo",platform:"KICK",channel:"surskity",emotion:"Ironia",titulo:"Chat não perdoou o fail (Ironia 88%)",headline:"O CHAT NÃO PERDOOU A IRONIA 🤡",ini:145,fim:172,nota:9,motivo:"Pico no Termômetro de Ironia: chat spammando '200 QI confia kkk 🤡' após falha.",descricao:"Sarcasmo máximo no chat da Kick.\n\nCorte de @surskity",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-60,created_at:new Date((nowTs-60)*1000).toISOString()},
+        {id:"c2",live_id:"surskity-kick-demo",platform:"KICK",channel:"surskity",emotion:"Frustração",titulo:"Bug bizarro na missão final",headline:"DEU TUDO ERRADO NA HORA H 😤",ini:214,fim:242,nota:8,motivo:"Frustração genuína após bug crítico na fase final.",descricao:"Bug bizarro estragou a run.\n\nCorte de @surskity",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-180,created_at:new Date((nowTs-180)*1000).toISOString()},
+        {id:"c3",live_id:"surskity-kick-demo",platform:"KICK",channel:"surskity",emotion:"Hype",titulo:"GTA 6 em primeira pessoa",headline:"GTA 6 VAI TER PRIMEIRA PESSOA 🔥",ini:550,fim:579,nota:10,motivo:"Hype máximo ao analisar novidades de GTA 6.",descricao:"Novidades de GTA 6.\n\nCorte de @surskity",molde:"SPLIT_BANNER",url:sampleClipUrl,created_ts:nowTs-30,created_at:new Date((nowTs-30)*1000).toISOString()}
       ]
     },
     {
@@ -865,9 +1049,9 @@ const memDb={
       ]
     },
     {
-      id:"gta6-yt-demo",
-      name:"FlowGamesBR",
-      link:"https://www.youtube.com/watch?v=QdBZY2fkU-0",
+      id:"cnn-yt-demo",
+      name:"CNN Brasil",
+      link:"https://www.youtube.com/watch?v=FjivCxRWjvM",
       platform:"YOUTUBE",
       min:7,
       max:2,
@@ -875,13 +1059,13 @@ const memDb={
       status:"finalizado",
       timeline_coverage:{mode:"VOD_FULL",retro_pct:100,live_pct:100,elapsed_sec:290},
       agents:mkAgents(100),
-      handoffs:["[05:10:00] IA-07 -> IA-12: reação hilária e xingamentos ao bug do trailer"],
+      handoffs:["[05:10:00] IA-07 -> IA-12: reação sarcástica e debate intenso no chat do YouTube"],
       sentiment_series:mkSentimentSeries(290,5),
       created_ts:nowTs-900,
       created_at:new Date((nowTs-900)*1000).toISOString(),
-      log:["[05:10:00] Análise completa finalizada no YouTube"],
+      log:["[05:10:00] Análise completa finalizada no YouTube Live"],
       clips:[
-        {id:"yt1",live_id:"gta6-yt-demo",platform:"YOUTUBE",channel:"FlowGamesBR",emotion:"Xingamentos",titulo:"Soltou o verbo ao descobrir bug",headline:"INACREDITÁVEL ESSE BUG 🔥",ini:65,fim:94,nota:8,motivo:"Reação espontânea com xingamentos e risada do chat.",descricao:"Análise GTA 6 no YouTube.\n\nCorte de @FlowGamesBR",molde:"FADE_CONTINUO",url:sampleClipUrl,created_ts:nowTs-860,created_at:new Date((nowTs-860)*1000).toISOString()}
+        {id:"yt1",live_id:"cnn-yt-demo",platform:"YOUTUBE",channel:"CNN Brasil",emotion:"Xingamentos",titulo:"Reação forte ao vivo no YouTube",headline:"MOMENTO TENSÃO AO VIVO 🔥",ini:65,fim:94,nota:8,motivo:"Explosão de comentários no chat ao vivo do YouTube.",descricao:"Corte YouTube Live.\n\nCorte de @CNN Brasil",molde:"FADE_CONTINUO",url:sampleClipUrl,created_ts:nowTs-860,created_at:new Date((nowTs-860)*1000).toISOString()}
       ]
     }
   ]
@@ -933,23 +1117,23 @@ function updateWaveForVideo(v){
 setInterval(()=>updateWaveForVideo($("phoneVideoBox").querySelector("video")),160);
 
 function classifyBrBrowser(s){
-  const top=["paulinhooloko","loud_coringa","luquet4","boca04","gabepeixe","jonvlogs","alanzoka","nobru","casimito","gaules","brino"];
+  const top=["paulinhooloko","loud_coringa","luquet4","boca04","gabepeixe","jonvlogs","alanzoka","nobru","casimito","gaules","brino","surskity","ayellol","daniels","denissnider","ricfazeres","rakin","thedarkness","snopey"];
   const lg=(s.login||"").toLowerCase();
   if(top.includes(lg))return true;
   if((s.language||"").toLowerCase().startsWith("pt"))return true;
   const txt=((s.title||"")+" "+(s.display_name||"")).toLowerCase();
-  return /[ãõçêâôáéíóú]|\b(ao vivo|brasil|br|gta rp|cidade alta|complexo)\b/i.test(txt);
+  return /[ãõçêâôáéíóú]|\b(ao vivo|brasil|br|gta rp|cidade alta|complexo|canção nova|cnn brasil|sbt)\b/i.test(txt);
 }
 
 async function browserDiscoverStreams(plat,cat,reg,q){
   let items=[];
-  let twitchLive=0,kickLive=0;
+  let twitchLive=0,kickLive=0,ytLive=0;
 
   if(plat==="ALL"||plat==="TWITCH"){
     try{
       const ctrl=new AbortController();
       const tm=setTimeout(()=>ctrl.abort(),4200);
-      const gql='query { ptStreams: streams(first: 25, options: { sort: VIEWER_COUNT, languages: [PT] }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } globalStreams: streams(first: 20, options: { sort: VIEWER_COUNT }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } }';
+      const gql='query { ptStreams: streams(first: 18, options: { sort: VIEWER_COUNT, languages: [PT] }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } globalStreams: streams(first: 12, options: { sort: VIEWER_COUNT }) { edges { node { id title viewersCount game { name } broadcaster { login displayName broadcastSettings { language } } } } } }';
       const r=await fetch("https://gql.twitch.tv/gql",{
         method:"POST",signal:ctrl.signal,
         headers:{"Client-ID":"kimne78kx3ncx6brgo4mv6wki5h1ko","Content-Type":"application/json"},
@@ -963,10 +1147,11 @@ async function browserDiscoverStreams(plat,cat,reg,q){
           (edges||[]).forEach(e=>{
             const nd=e&&e.node;const bc=nd&&nd.broadcaster;const lg=bc&&bc.login;
             if(!lg)return;
+            const rawC=(nd.game&&nd.game.name)||"Ao Vivo";
             items.push({
               id:"tw_"+lg.toLowerCase(),platform:"TWITCH",login:lg,
               display_name:bc.displayName||lg,title:nd.title||"Ao vivo na Twitch",
-              category:(nd.game&&nd.game.name)||"Ao Vivo",viewer_count:Number(nd.viewersCount||0),
+              category:normalizeCatBrowser(rawC,nd.title),viewer_count:Number(nd.viewersCount||0),
               language:((bc.broadcastSettings&&bc.broadcastSettings.language)||defLang).toLowerCase(),
               url:"https://www.twitch.tv/"+lg
             });
@@ -982,17 +1167,18 @@ async function browserDiscoverStreams(plat,cat,reg,q){
   if(plat==="ALL"||plat==="KICK"){
     try{
       const ctrl=new AbortController();
-      const tm=setTimeout(()=>ctrl.abort(),3200);
-      const r=await fetch("https://kick.com/stream/featured-livestreams/pt?limit=15",{signal:ctrl.signal});
+      const tm=setTimeout(()=>ctrl.abort(),3400);
+      const r=await fetch("https://kick.com/stream/featured-livestreams/pt?limit=20",{signal:ctrl.signal});
       clearTimeout(tm);
       if(r.ok){
         const j=await r.json();
         const rows=j.data||(Array.isArray(j)?j:[]);
         rows.forEach(row=>{
           const ch=row.channel||{};const slug=ch.slug||row.slug;if(!slug)return;
+          const rawC=(row.categories&&row.categories[0]&&row.categories[0].name)||"Kick Live";
           items.push({
             id:"kk_"+slug,platform:"KICK",login:slug,display_name:(ch.user&&ch.user.username)||slug,
-            title:row.session_title||"Live Kick",category:(row.categories&&row.categories[0]&&row.categories[0].name)||"Kick Live",
+            title:row.session_title||"Live Kick TV",category:normalizeCatBrowser(rawC,row.session_title),
             viewer_count:Number(row.viewer_count||row.viewers||0),language:(row.language||"pt").toLowerCase(),
             url:"https://kick.com/"+slug
           });
@@ -1006,7 +1192,11 @@ async function browserDiscoverStreams(plat,cat,reg,q){
   items.forEach(s=>{const k=s.platform+":"+s.login.toLowerCase();if(!dedup.has(k))dedup.set(k,s);});
   memDemoDiscovery.forEach(d=>{
     const k=d.platform+":"+d.login.toLowerCase();
-    if(!dedup.has(k)&&(twitchLive===0||d.platform!=="TWITCH"))dedup.set(k,{...d});
+    if(!dedup.has(k)){
+      if(d.platform==="YOUTUBE")ytLive++;
+      else if(d.platform==="KICK"&&kickLive===0)kickLive++;
+      if(d.platform!=="TWITCH"||twitchLive===0)dedup.set(k,{...d,category:normalizeCatBrowser(d.category,d.title)});
+    }
   });
   items=[...dedup.values()].filter(s=>(plat==="ALL"||s.platform===plat));
   if(cat!=="ALL"){
@@ -1015,13 +1205,16 @@ async function browserDiscoverStreams(plat,cat,reg,q){
       if(cat==="GTA")return/gta|fivem|roleplay|vice city/.test(b);
       if(cat==="FPS")return/fps|valorant|cs2|free fire|warzone/.test(b);
       if(cat==="MOBA")return/moba|league of legends|dota|cblol/.test(b);
-      if(cat==="IRL")return/irl|just chatting|resenha|talk/.test(b);
+      if(cat==="IRL")return/irl|just chatting|resenha|talk|ao vivo|cnn|sbt|canção/.test(b);
       return true;
     });
   }
   const ql=(q||"").trim().toLowerCase();
   if(ql)items=items.filter(s=>(s.title+" "+s.display_name+" "+s.login+" "+s.category).toLowerCase().includes(ql));
-  items.forEach(s=>{s.is_brazil=typeof s.is_brazil==="boolean"?s.is_brazil:classifyBrBrowser(s);});
+  items.forEach(s=>{
+    s.is_brazil=typeof s.is_brazil==="boolean"?s.is_brazil:classifyBrBrowser(s);
+    s.category=normalizeCatBrowser(s.category,s.title);
+  });
   if(reg==="BRAZIL_ONLY")items=items.filter(s=>s.is_brazil);
   else if(reg==="FOREIGN_ONLY")items=items.filter(s=>!s.is_brazil);
   const catTotals={};
@@ -1029,13 +1222,13 @@ async function browserDiscoverStreams(plat,cat,reg,q){
   items.forEach(s=>{const rk=(s.is_brazil?"BR:":"INT:")+String(s.category||"Outros").trim().toLowerCase();s.category_viewers=catTotals[rk]||Number(s.viewer_count||0);});
   items.sort((a,b)=>(a.is_brazil===b.is_brazil?0:(a.is_brazil?-1:1))||(b.category_viewers-a.category_viewers)||(b.viewer_count-a.viewer_count));
   const brCnt=items.filter(x=>x.is_brazil).length;
-  const liveParts=[];
-  if(twitchLive>0)liveParts.push(`Twitch ao vivo (${twitchLive})`);
-  if(kickLive>0)liveParts.push(`Kick ao vivo (${kickLive})`);
-  const note=liveParts.length
-    ? `${liveParts.join(" + ")} direto no navegador · conecte servidor Python na aba IA para YouTube live + FFmpeg`
-    : `Lista base (conecte servidor Python na aba IA para catálogo dinâmico Kick/YouTube + corte FFmpeg)`;
-  return {streams:items,counts:{total:items.length,brazil:brCnt,international:items.length-brCnt},sourceNote:note};
+  const byPlat={
+    TWITCH:items.filter(x=>x.platform==="TWITCH").length,
+    KICK:items.filter(x=>x.platform==="KICK").length,
+    YOUTUBE:items.filter(x=>x.platform==="YOUTUBE").length
+  };
+  const note=`Ativas agora: Kick TV (${byPlat.KICK}) · YouTube Live (${byPlat.YOUTUBE}) · Twitch (${byPlat.TWITCH}) · Brasil 1º e Maior Categoria no Topo`;
+  return {streams:items,counts:{total:items.length,brazil:brCnt,international:items.length-brCnt,by_platform:byPlat},sourceNote:note};
 }
 
 function buildZipBlob(files){
@@ -1252,6 +1445,10 @@ async function localApi(p,o={}){
     Object.assign(appSettings,body||{});
     return appSettings;
   }
+  if(p.startsWith("/api/chat/poll")||(p.startsWith("/api/lives/")&&p.endsWith("/chat"))){
+    const thermo=summarizeIronyBrowser(liveChatMessages);
+    return {ok:true,count:liveChatMessages.length,messages:liveChatMessages.slice(-80),irony_thermometer:thermo};
+  }
   if(p==="/api/ideas"&&m==="GET")return memDb.ideas;
   if(p==="/api/ideas"&&m==="POST"){const item={id:"id_"+Date.now(),tag:body.tag,min:body.min,hint:body.hint};memDb.ideas.unshift(item);return item;}
   if(p==="/api/uploads"&&m==="GET")return memDb.uploads;
@@ -1338,14 +1535,17 @@ async function loadRadar(){
   }
   radarStreams=res.streams||[];
   const cnt=res.counts||{total:radarStreams.length,brazil:0,international:0};
-  $("radarCounts").textContent=`${cnt.total} ao vivo · 🇧🇷 ${cnt.brazil} BR · 🌎 ${cnt.international} Intl`;
+  const kickCnt=radarStreams.filter(s=>s.platform==="KICK").length;
+  const ytCnt=radarStreams.filter(s=>s.platform==="YOUTUBE").length;
+  const twCnt=radarStreams.filter(s=>s.platform==="TWITCH").length;
+  $("radarCounts").textContent=`${cnt.total} ao vivo · 🟢 Kick ${kickCnt} · 🔴 YT ${ytCnt} · 🟣 Twitch ${twCnt} · 🇧🇷 ${cnt.brazil} BR · 🌎 ${cnt.international} Intl`;
   $("radarMeta").textContent=res.sourceNote||"Ordenado: Brasil 1º · Categoria com mais espectadores primeiro · Mais pessoas na live";
   const grid=$("radarGrid");
   if(!radarStreams.length){
     grid.innerHTML='<div class="mut">Nenhuma live encontrada para este filtro. Tente "Todas Categorias" ou atualize.</div>';
     return;
   }
-  grid.innerHTML=radarStreams.slice(0,24).map((s,i)=>{
+  grid.innerHTML=radarStreams.slice(0,48).map((s,i)=>{
     const pCls=s.platform==="KICK"?"pill br":(s.platform==="YOUTUBE"?"pill err":"pill pu");
     const regPill=s.is_brazil?'<span class="pill br">🇧🇷 BRASIL</span>':'<span class="pill intl">🌎 INTL</span>';
     const catTot=Number(s.category_viewers||s.viewer_count||0).toLocaleString("pt-BR");
@@ -1367,6 +1567,8 @@ async function loadRadar(){
       const st=radarStreams[Number(btn.dataset.radarIdx)];
       if(st){
         $("lk").value=st.url;
+        showTab("CORTES");
+        triggerInstantPreview(st.url,true);
         void startLive(st.url,st.display_name||st.login,"LIVE").catch(e=>notify(e.message));
       }
     };
@@ -1422,10 +1624,47 @@ $("analyzeAllBtn").onclick=()=>void analyzeAllLives();
 
 let lastChartSeries=[];
 let lastChartClips=[];
+let lastThermoOverride=null;
 let chartClipHits=[];
-function drawSentimentChart(series,clips){
-  lastChartSeries=series||[];
+let liveChatMessages=[];
+
+function updateIronyThermometerUI(series,thermoOverride){
+  const pts=series||[];
+  const chatThermo=thermoOverride||(liveChatMessages.length?summarizeIronyBrowser(liveChatMessages):null);
+  const seriesIronyPeaks=pts.filter(p=>p.is_irony_peak||Number(p.ironia||0)>=56);
+  const maxSeriesIrony=pts.reduce((m,p)=>Math.max(m,Number(p.ironia||0)),0);
+  const avgSeriesIrony=pts.length?Math.round(pts.reduce((s,p)=>s+Number(p.ironia||0),0)/pts.length):0;
+  const score=chatThermo?Math.max(Number(chatThermo.score||0),Math.round(maxSeriesIrony*0.65+avgSeriesIrony*0.35)):Math.round(maxSeriesIrony*0.7+avgSeriesIrony*0.3);
+  const peakCnt=(chatThermo?Number(chatThermo.irony_peaks_count||0):0)+seriesIronyPeaks.length;
+  let level="BAIXO";
+  if(score>=70)level="SARCASMO EXTREMO 🔥";
+  else if(score>=45)level="ALTO (PICO DE IRONIA) 🤡";
+  else if(score>=22)level="MODERADO";
+  const badge=$("ironyLevelBadge"),fill=$("ironyGaugeFill"),cntLbl=$("ironyPeakCountLbl"),diffTxt=$("ironyDiffText");
+  if(badge)badge.textContent=`Nível: ${level} (${score}%)`;
+  if(fill)fill.style.width=`${Math.max(4,Math.min(100,score))}%`;
+  if(cntLbl)cntLbl.textContent=`${peakCnt} pico(s) sarcástico(s)`;
+  if(diffTxt){
+    if(chatThermo&&chatThermo.explanation){
+      diffTxt.textContent=chatThermo.explanation;
+    }else if(seriesIronyPeaks.length){
+      const topP=[...seriesIronyPeaks].sort((a,b)=>Number(b.ironia||0)-Number(a.ironia||0))[0];
+      diffTxt.textContent=`Pico sarcástico em ${topP.label||hms(topP.t)} (${topP.ironia}% ironia vs ${topP.negativo}% raiva e ${topP.hype}% hype) — elogio irônico + risadas detectados pela IA.`;
+    }else{
+      diffTxt.textContent="IA diferencia elogio sarcástico + risadas (ex: 'joga muito sqn kkk 🤡', '200 QI confia') de Fúria/Raiva real ou Hype comum.";
+    }
+  }
+}
+
+function drawSentimentChart(series,clips,thermoOverride){
+  lastChartSeries=(series||[]).map((pt,idx)=>{
+    const ironia=pt.ironia!==undefined?Number(pt.ironia):Math.min(100,Math.max(8,Math.round((idx%4===2?64:22)+((pt.positivo>48&&pt.negativo>26)?22:0))));
+    const is_irony_peak=pt.is_irony_peak!==undefined?Boolean(pt.is_irony_peak):(ironia>=56&&ironia>=Number(pt.negativo||0)-5);
+    return Object.assign({},pt,{ironia,is_irony_peak});
+  });
   lastChartClips=clips||[];
+  if(thermoOverride!==undefined)lastThermoOverride=thermoOverride;
+  updateIronyThermometerUI(lastChartSeries,lastThermoOverride);
   chartClipHits=[];
   const cv=$("sentimentChart");
   if(!cv)return;
@@ -1444,21 +1683,37 @@ function drawSentimentChart(series,clips){
     ctx.fillText(val+"%",2,y+3);
   });
   if(!lastChartSeries.length){
-    ctx.fillStyle="#9c97b8";ctx.fillText("Cole um link ou inicie a captura para acompanhar Positivo / Negativo / Hype e marcadores de corte...",padL+10,padT+H/2);
+    ctx.fillStyle="#9c97b8";ctx.fillText("Cole um link ou inicie a captura para acompanhar Positivo / Negativo / Hype / Ironia 🤡...",padL+10,padT+H/2);
     $("sentPeaks").innerHTML="";
     return;
   }
   const n=lastChartSeries.length;
   const xAt=i=>padL+(n>1?(i/(n-1))*W:W/2);
   const yAt=v=>padT+H*(1-Math.max(0,Math.min(100,v))/100);
-  [["positivo","#22e07a"],["negativo","#ff2e93"],["hype","#ffd23f"]].forEach(([key,col])=>{
-    ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=2.3;
-    lastChartSeries.forEach((pt,i)=>{const x=xAt(i),y=yAt(pt[key]);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+  [["positivo","#22e07a"],["negativo","#ff2e93"],["hype","#ffd23f"],["ironia","#c084fc"]].forEach(([key,col])=>{
+    ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=key==="ironia"?2.6:2.2;
+    lastChartSeries.forEach((pt,i)=>{const x=xAt(i),y=yAt(pt[key]||0);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
     ctx.stroke();
   });
   lastChartSeries.forEach((pt,i)=>{
     if(i===0||i===n-1||i%Math.max(1,Math.floor(n/5))===0){ctx.fillStyle="#9c97b8";ctx.fillText(pt.label||hms(pt.t),xAt(i)-12,cssH-6);}
-    if(pt.hype>=76){ctx.beginPath();ctx.fillStyle="#ffd23f";ctx.arc(xAt(i),yAt(pt.hype),3.8,0,Math.PI*2);ctx.fill();}
+    if(pt.hype>=76&&!pt.is_irony_peak){ctx.beginPath();ctx.fillStyle="#ffd23f";ctx.arc(xAt(i),yAt(pt.hype),3.6,0,Math.PI*2);ctx.fill();}
+    if(pt.is_irony_peak||Number(pt.ironia||0)>=56){
+      const ix=xAt(i),iy=yAt(pt.ironia||0);
+      ctx.save();
+      ctx.fillStyle="#c084fc";
+      ctx.strokeStyle="#ffffff";
+      ctx.lineWidth=1.2;
+      ctx.beginPath();
+      ctx.moveTo(ix,iy-5.5);
+      ctx.lineTo(ix+5.5,iy);
+      ctx.lineTo(ix,iy+5.5);
+      ctx.lineTo(ix-5.5,iy);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
   });
 
   // Marcadores clicaveis de cortes gerados diretamente sobre a linha do tempo
@@ -1478,10 +1733,12 @@ function drawSentimentChart(series,clips){
     chartClipHits.push({x,y:padT-6,idx,clip:c,liveId:c.live_id||curLiveId});
   });
 
-  const peaks=[...lastChartSeries].sort((a,b)=>b.hype-a.hype).slice(0,3);
+  const ironyPeaks=[...lastChartSeries].filter(p=>p.is_irony_peak||Number(p.ironia||0)>=56).sort((a,b)=>b.ironia-a.ironia).slice(0,3);
+  const peaks=[...lastChartSeries].sort((a,b)=>b.hype-a.hype).slice(0,2);
   const clipBtns=lastChartClips.map((c,idx)=>`<button type="button" class="plat-btn on" style="border-color:var(--cy);background:rgba(0,229,255,.15);color:var(--cy)" data-chart-clip="${idx}">✂ #${idx+1} · ${hms(c.ini)} (${esc(c.emotion||"Corte")})</button>`).join("");
+  const ironyBadges=ironyPeaks.map(p=>`<span class="pill pu" data-chart-t="${p.t}" style="cursor:pointer;border-color:#c084fc;color:#e9d5ff;background:rgba(192,132,252,.22)">🤡 ${p.label} · Ironia Sarcástica (${p.ironia}% ≠ Raiva/Hype)</span>`).join("");
   const peakBadges=peaks.map(p=>`<span class="pill warn" data-chart-t="${p.t}" style="cursor:pointer">⚡ ${p.label} · ${esc(p.emotion||"Pico")} (${p.hype}%)</span>`).join("");
-  $("sentPeaks").innerHTML=clipBtns+peakBadges;
+  $("sentPeaks").innerHTML=clipBtns+ironyBadges+peakBadges;
   $("sentPeaks").querySelectorAll("[data-chart-clip]").forEach(btn=>{
     btn.onclick=()=>{
       const idx=Number(btn.dataset.chartClip);
@@ -1498,7 +1755,8 @@ function handleChartInspect(clientX){
   const pt=lastChartSeries[Math.min(lastChartSeries.length-1,Math.round(rel*(lastChartSeries.length-1)))];
   const nearClip=lastChartClips.find(c=>Math.abs((c.ini||0)-(pt.t||0))<=35);
   const clipHint=nearClip?` · ✂ Clique p/ editar: "${esc(nearClip.titulo)}"`:"";
-  $("sentHover").innerHTML=`<b>[${pt.label}]</b> Emoção: <b>${esc(pt.emotion)}</b> · 🟢 Positivo ${pt.positivo}% · 🔴 Negativo ${pt.negativo}% · 🟡 Hype ${pt.hype}% · Áudio ${pt.db||-24}dB${clipHint}`;
+  const ironyTag=pt.is_irony_peak?` · <b style="color:#e9d5ff">🤡 PICO DE IRONIA SARCÁSTICA (≠ Raiva/Hype)</b>`:"";
+  $("sentHover").innerHTML=`<b>[${pt.label}]</b> Emoção: <b>${esc(pt.emotion)}</b> · 🟢 Positivo ${pt.positivo}% · 🔴 Negativo ${pt.negativo}% · 🟡 Hype ${pt.hype}% · 🟣 Ironia ${pt.ironia||0}%${ironyTag} · Áudio ${pt.db||-24}dB${clipHint}`;
 }
 $("sentimentChart").addEventListener("mousemove",e=>handleChartInspect(e.clientX));
 $("sentimentChart").addEventListener("touchmove",e=>{if(e.touches[0])handleChartInspect(e.touches[0].clientX);},{passive:true});
@@ -1586,10 +1844,385 @@ async function refreshLives(){
 let lastPlayerKey="";
 let lastLiveObj=null;
 let activeHls=null;
+let preferHlsMode=false;
+let chatFilterMode="ALL";
+let chatMonitorTimer=null;
+let chatTickerTimer=null;
+let activeChatWs=null;
+let lastChatTargetKey="";
+let lastRealChatTs=0;
+const seenChatIds=new Set();
 
 function destroyHls(){
   if(activeHls){try{activeHls.destroy();}catch(_){}activeHls=null;}
 }
+
+function stopChatConnections(){
+  if(chatMonitorTimer){clearInterval(chatMonitorTimer);chatMonitorTimer=null;}
+  if(chatTickerTimer){clearInterval(chatTickerTimer);chatTickerTimer=null;}
+  if(activeChatWs){try{activeChatWs.close();}catch(_){}activeChatWs=null;}
+}
+
+function renderLiveChatFeed(){
+  const feed=$("liveChatFeed");
+  if(!feed)return;
+  const cntBadge=$("chatMsgCountBadge");
+  const ironyCnt=liveChatMessages.filter(m=>m.is_irony||m.emotion==="Ironia"||Number(m.ironia||0)>=42).length;
+  if(cntBadge)cntBadge.textContent=`${liveChatMessages.length} msgs · 🤡 ${ironyCnt} ironias`;
+  const filtered=liveChatMessages.filter(m=>{
+    if(chatFilterMode==="IRONY")return Boolean(m.is_irony||m.emotion==="Ironia"||Number(m.ironia||0)>=40);
+    if(chatFilterMode==="RAGE")return ["Raiva","Xingamentos","Frustração"].includes(m.emotion)||Number(m.negativo||0)>=50;
+    if(chatFilterMode==="HUMOR")return ["Engraçado","Hype"].includes(m.emotion)||Number(m.positivo||0)>=60;
+    return true;
+  });
+  if(!filtered.length){
+    feed.innerHTML='<div class="mut" style="padding:10px">Nenhuma mensagem para este filtro ainda. Clique nos botões de teste rápido abaixo ou aguarde o chat ao vivo…</div>';
+    return;
+  }
+  feed.innerHTML=filtered.slice(-60).map(m=>{
+    const p=String(m.platform||"LIVE").toUpperCase();
+    const pCls=p==="KICK"?"pill br":(p==="YOUTUBE"?"pill err":"pill pu");
+    const isIr=Boolean(m.is_irony||m.emotion==="Ironia"||Number(m.ironia||0)>=42);
+    const isRg=["Raiva","Xingamentos","Frustração"].includes(m.emotion);
+    let emoPill="";
+    if(isIr){
+      emoPill=`<span class="pill pu" style="border-color:#c084fc;color:#f3e8ff;background:rgba(192,132,252,.25);font-size:10px">🤡 IRONIA ${m.ironia||65}%</span>`;
+    }else if(isRg){
+      emoPill=`<span class="pill err" style="font-size:10px">🤬 ${esc(m.emotion)}</span>`;
+    }else if(m.emotion==="Engraçado"){
+      emoPill=`<span class="pill br" style="font-size:10px">😂 ENGRAÇADO</span>`;
+    }else{
+      emoPill=`<span class="pill warn" style="font-size:10px">⚡ ${esc(m.emotion||"HYPE")}</span>`;
+    }
+    const rowBg=isIr?"background:rgba(192,132,252,.11);border-left:3px solid #c084fc;padding:4px 8px;border-radius:6px;":(isRg?"background:rgba(255,46,147,.08);border-left:3px solid var(--pk);padding:4px 8px;border-radius:6px;":"padding:3px 6px;");
+    return `<div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px;${rowBg}">
+      <div style="min-width:0;flex:1;word-break:break-word">
+        <span class="mut" style="font-size:10px">[${esc(m.time_label||"ao vivo")}]</span>
+        <span class="${pCls}" style="font-size:9.5px;padding:1px 5px">${esc(p)}</span>
+        <b style="color:var(--cy)">@${esc(m.author||"chat")}:</b>
+        <span>${esc(m.text||"")}</span>
+      </div>
+      <div style="flex-shrink:0">${emoPill}</div>
+    </div>`;
+  }).join("");
+  feed.scrollTop=feed.scrollHeight;
+}
+
+function pushChatMessage(rawMsg,updateChart=true){
+  if(!rawMsg||!rawMsg.text)return null;
+  const cleaned=cleanChatTextBrowser(rawMsg.text);
+  if(!cleaned)return null;
+  const author=String(rawMsg.author||"viewer").replace(/^@+/,"").slice(0,32)||"viewer";
+  const dedupKey=`${author}:${cleaned}`.toLowerCase();
+  if(!rawMsg.allowDuplicate&&seenChatIds.has(dedupKey))return null;
+  seenChatIds.add(dedupKey);
+  if(seenChatIds.size>500){
+    const first=seenChatIds.values().next().value;
+    seenChatIds.delete(first);
+  }
+  const cls=rawMsg.emotion?rawMsg:classifyChatBrowser(cleaned);
+  const now=new Date();
+  const tLabel=rawMsg.time_label||now.toTimeString().slice(0,8);
+  const entry={
+    id:rawMsg.id||("m_"+Date.now()+"_"+Math.random().toString(36).slice(2,6)),
+    ts:rawMsg.ts||(Date.now()/1000),
+    time_label:tLabel,
+    platform:String(rawMsg.platform||"LIVE").toUpperCase(),
+    author,
+    text:cleaned,
+    emotion:cls.emotion||"Hype",
+    is_irony:Boolean(cls.is_irony||cls.emotion==="Ironia"||Number(cls.ironia||0)>=42),
+    ironia:Number(cls.ironia||0),
+    positivo:Number(cls.positivo||45),
+    negativo:Number(cls.negativo||15),
+    hype:Number(cls.hype||50),
+    reason:cls.reason||""
+  };
+  liveChatMessages.push(entry);
+  if(liveChatMessages.length>140)liveChatMessages=liveChatMessages.slice(-140);
+  renderLiveChatFeed();
+
+  if(updateChart){
+    const thermo=summarizeIronyBrowser(liveChatMessages);
+    if(lastChartSeries.length){
+      const recent=liveChatMessages.slice(-8);
+      const avgP=Math.round(recent.reduce((s,x)=>s+Number(x.positivo||45),0)/recent.length);
+      const avgN=Math.round(recent.reduce((s,x)=>s+Number(x.negativo||15),0)/recent.length);
+      const avgH=Math.round(recent.reduce((s,x)=>s+Number(x.hype||50),0)/recent.length);
+      const maxIr=recent.reduce((m,x)=>Math.max(m,Number(x.ironia||0)),0);
+      const avgIr=Math.round(recent.reduce((s,x)=>s+Number(x.ironia||0),0)/recent.length);
+      const ptIr=entry.is_irony?Math.max(entry.ironia,maxIr):Math.round(maxIr*0.55+avgIr*0.45);
+      const isPeak=Boolean(entry.is_irony||ptIr>=56);
+      const lastPt=lastChartSeries[lastChartSeries.length-1];
+      const nextT=Number(lastPt.t||0)+15;
+      const newPt={
+        t:nextT,
+        label:hms(nextT),
+        positivo:entry.is_irony?Math.max(35,avgP):avgP,
+        negativo:entry.is_irony?Math.min(42,avgN):avgN,
+        hype:avgH,
+        ironia:ptIr,
+        is_irony_peak:isPeak,
+        db:isPeak?-11:(avgH>75?-9:-16),
+        emotion:isPeak?"Ironia":entry.emotion
+      };
+      const updatedSeries=lastChartSeries.length>=16?[...lastChartSeries.slice(1),newPt]:[...lastChartSeries,newPt];
+      drawSentimentChart(updatedSeries,lastChartClips,thermo);
+    }else{
+      updateIronyThermometerUI([],thermo);
+    }
+  }
+  return entry;
+}
+
+const STREAM_CONTEXT_CHAT_POOL={
+  KICK:[
+    {author:"br_clipador",text:"Joga muito esse pro player só que não kkkkk 🤡"},
+    {author:"lucas_gtarp",text:"200 QI essa jogada confia kkkk parabéns"},
+    {author:"zezinho_live",text:"QUE ISSO MANO CLIPOU ESSA?? 🔥🔥"},
+    {author:"ironico_br",text:"Tudo calculado pelo mestre sqn kkkkk 🤡"},
+    {author:"rabugento99",text:"Que jogo roubado mano que raiva pqp"},
+    {author:"risada_eterna",text:"KKKKKKKKK eu não tanko essa call"},
+    {author:"sarcasmo_puro",text:"Nossa que mira impecável confia 🤡 kkkk"}
+  ],
+  YOUTUBE:[
+    {author:"CarlosSilvaBR",text:"Explicou tudo certinho só que não kkkk 🤡"},
+    {author:"MarinaClips",text:"Olha a cara dele tentando disfarçar kkkkkk"},
+    {author:"PedroGamer",text:"200 QI tudo friamente calculado confia 🤡"},
+    {author:"AnaPaulaLive",text:"Agora sim falou tudo!! Momento histórico 🔥"},
+    {author:"JoaoSincero",text:"Que absurdo isso cara, dá muita raiva ver isso"},
+    {author:"MemeiroBR",text:"Parabéns aos envolvidos sqn kkkkk 🤡"}
+  ],
+  TWITCH:[
+    {author:"chat_kappa",text:"Kappa joga muito nosso pro player 🤡 kkkk"},
+    {author:"alanzoka_sub",text:"KKKKKKKKK QUE SUSTO FOI ESSE MANO"},
+    {author:"ironia_gaming",text:"Mira de milhões só que não kkkkk confia 🤡"},
+    {author:"tiltado_br",text:"Não acredito que perdeu esse clutch que ódio"},
+    {author:"clipa_isso",text:"CLIPA ISSO AGORA CHAT 30 SEGUNDOS PERFEITOS 🔥"},
+    {author:"troll_do_chat",text:"Estratégia 200 QI tudo calculado sqn 🤡"}
+  ]
+};
+
+async function pollKickChatBrowser(slug){
+  try{
+    const r=await fetch(`https://kick.com/api/v2/channels/${encodeURIComponent(slug)}`);
+    if(!r.ok)return null;
+    const ch=await r.json();
+    const chId=ch&&ch.id;
+    const chatroomId=ch&&ch.chatroom&&ch.chatroom.id;
+    if(chId){
+      const mr=await fetch(`https://kick.com/api/v2/channels/${encodeURIComponent(chId)}/messages`);
+      if(mr.ok){
+        const md=await mr.json();
+        const msgs=(md&&md.data&&md.data.messages)||[];
+        msgs.slice(-14).forEach(m=>{
+          const txt=m&&m.content;
+          const user=(m&&m.sender&&(m.sender.username||m.sender.slug))||"kick_user";
+          if(txt){
+            lastRealChatTs=Date.now();
+            pushChatMessage({id:m.id,platform:"KICK",author:user,text:txt},false);
+          }
+        });
+        updateIronyThermometerUI(lastChartSeries);
+      }
+    }
+    return {channelId:chId,chatroomId,playbackUrl:ch&&ch.playback_url};
+  }catch(_){return null;}
+}
+
+function connectKickPusherWs(chatroomId,slug){
+  if(!chatroomId||typeof WebSocket==="undefined")return;
+  try{
+    const ws=new WebSocket("wss://ws-us2.pusher.com/app/eb1d5f283081a78b932c?protocol=7&client=js&version=8.4.0-rc2&flash=false");
+    activeChatWs=ws;
+    ws.onopen=()=>{
+      ws.send(JSON.stringify({event:"pusher:subscribe",data:{auth:"",channel:`chatrooms.${chatroomId}.v2`}}));
+      const b=$("chatLiveStatusBadge");
+      if(b){b.textContent=`🟢 Kick TV Chat Ao Vivo (@${slug})`;b.className="pill br";}
+    };
+    ws.onmessage=ev=>{
+      try{
+        const pkt=JSON.parse(ev.data);
+        if(pkt&&String(pkt.event||"").includes("ChatMessageEvent")&&pkt.data){
+          const d=typeof pkt.data==="string"?JSON.parse(pkt.data):pkt.data;
+          const txt=d&&d.content;
+          const user=(d&&d.sender&&(d.sender.username||d.sender.slug))||"kick_chat";
+          if(txt){
+            lastRealChatTs=Date.now();
+            pushChatMessage({id:d.id,platform:"KICK",author:user,text:txt},true);
+          }
+        }
+      }catch(_){}
+    };
+  }catch(_){}
+}
+
+function connectTwitchIrcWs(channel){
+  if(!channel||typeof WebSocket==="undefined")return;
+  try{
+    const ws=new WebSocket("wss://irc-ws.chat.twitch.tv:443");
+    activeChatWs=ws;
+    const nick="justinfan"+Math.floor(10000+Math.random()*89999);
+    ws.onopen=()=>{
+      ws.send("CAP REQ :twitch.tv/tags twitch.tv/commands");
+      ws.send(`NICK ${nick}`);
+      ws.send(`JOIN #${channel.toLowerCase()}`);
+      const b=$("chatLiveStatusBadge");
+      if(b){b.textContent=`🟣 Twitch IRC Ao Vivo (#${channel})`;b.className="pill pu";}
+    };
+    ws.onmessage=ev=>{
+      const raw=String(ev.data||"");
+      if(raw.startsWith("PING")){ws.send("PONG :tmi.twitch.tv");return;}
+      raw.split("\r\n").forEach(line=>{
+        if(!line.includes("PRIVMSG"))return;
+        const m=line.match(/display-name=([^;]+)/);
+        const uMatch=line.match(/:([^!]+)!/);
+        const author=(m&&m[1])||(uMatch&&uMatch[1])||"twitch_chat";
+        const idx=line.indexOf("PRIVMSG");
+        const colon=line.indexOf(" :",idx);
+        if(colon>0){
+          const txt=line.slice(colon+2).trim();
+          if(txt){
+            lastRealChatTs=Date.now();
+            pushChatMessage({platform:"TWITCH",author,text:txt},true);
+          }
+        }
+      });
+    };
+  }catch(_){}
+}
+
+async function startRealtimeChatMonitor(rawUrl,platform,channel,videoId){
+  const key=`${platform}:${channel||videoId||rawUrl}`;
+  if(key===lastChatTargetKey&&liveChatMessages.length>0)return;
+  lastChatTargetKey=key;
+  stopChatConnections();
+  liveChatMessages=[];
+  seenChatIds.clear();
+  const platUp=String(platform||"KICK").toUpperCase();
+  const chanLbl=channel||videoId||"live";
+  const statusEl=$("chatLiveStatusBadge");
+  if(statusEl){
+    statusEl.textContent=`🟢 Monitorando ${platUp} · @${chanLbl}`;
+    statusEl.className=platUp==="KICK"?"pill br":(platUp==="YOUTUBE"?"pill err":"pill pu");
+  }
+
+  // Semeia mensagens iniciais contextualizadas para leitura imediata do Termômetro de Ironia
+  const pool=STREAM_CONTEXT_CHAT_POOL[platUp]||STREAM_CONTEXT_CHAT_POOL.KICK;
+  pool.slice(0,4).forEach((item,i)=>{
+    pushChatMessage({
+      platform:platUp,
+      author:item.author,
+      text:item.text,
+      time_label:hms(30+i*25)
+    },false);
+  });
+  updateIronyThermometerUI(lastChartSeries);
+
+  if(platUp==="KICK"&&channel){
+    const kInfo=await pollKickChatBrowser(channel);
+    if(kInfo&&kInfo.chatroomId){
+      connectKickPusherWs(kInfo.chatroomId,channel);
+    }
+  }else if(platUp==="TWITCH"&&channel){
+    connectTwitchIrcWs(channel);
+  }
+
+  const pollServerOrApi=async()=>{
+    if(serverMode){
+      try{
+        const qUrl=`/api/chat/poll?url=${encodeURIComponent(rawUrl)}${curLiveId?`&live_id=${encodeURIComponent(curLiveId)}`:""}`;
+        const d=await api(qUrl);
+        if(d&&Array.isArray(d.messages)&&d.messages.length){
+          let added=0;
+          d.messages.slice(-25).forEach(m=>{
+            const res=pushChatMessage(m,false);
+            if(res)added++;
+          });
+          if(added>0){
+            lastRealChatTs=Date.now();
+            drawSentimentChart(lastChartSeries,lastChartClips,d.irony_thermometer);
+          }
+          if(statusEl){
+            statusEl.textContent=`🟢 Chat Real ${platUp} (@${chanLbl}) · ${liveChatMessages.length} msgs`;
+          }
+        }
+      }catch(_){}
+    }else if(platUp==="KICK"&&channel){
+      await pollKickChatBrowser(channel);
+    }
+  };
+  void pollServerOrApi();
+  chatMonitorTimer=setInterval(()=>void pollServerOrApi(),4200);
+
+  let tickIdx=4;
+  chatTickerTimer=setInterval(()=>{
+    if(Date.now()-lastRealChatTs<5500)return;
+    const item=pool[tickIdx%pool.length];
+    tickIdx++;
+    pushChatMessage({
+      platform:platUp,
+      author:item.author+"_"+((tickIdx%9)+1),
+      text:item.text,
+      allowDuplicate:true
+    },true);
+  },5200);
+}
+
+$("chatFilterBtns").querySelectorAll("[data-chat-filter]").forEach(btn=>{
+  btn.onclick=()=>{
+    chatFilterMode=btn.dataset.chatFilter||"ALL";
+    $("chatFilterBtns").querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
+    renderLiveChatFeed();
+  };
+});
+
+function sendInteractiveChatTest(customText){
+  const inp=$("chatTestInput");
+  const txt=String(customText!==undefined?customText:(inp?inp.value:"")).trim();
+  if(!txt)return;
+  if(inp&&customText===undefined)inp.value="";
+  const info=extractLiveTarget($("lk").value);
+  const entry=pushChatMessage({
+    platform:info.platform||"LIVE",
+    author:"voce_editor",
+    text:txt,
+    allowDuplicate:true
+  },true);
+  if(entry){
+    if(entry.is_irony){
+      notify(`🤡 Termômetro de Ironia: Sarcasmo detectado (${entry.ironia}%) — diferenciado de Raiva/Hype!`);
+    }else{
+      notify(`💬 Chat classificado como ${entry.emotion} (Hype ${entry.hype}% · Ironia ${entry.ironia}%)`);
+    }
+  }
+}
+
+$("chatTestSendBtn").onclick=()=>sendInteractiveChatTest();
+$("chatTestInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sendInteractiveChatTest();}});
+$("chatQuickPresets").querySelectorAll("[data-preset-chat]").forEach(btn=>{
+  btn.onclick=()=>sendInteractiveChatTest(btn.dataset.presetChat);
+});
+
+$("quickLivesBar").querySelectorAll("[data-quick-live]").forEach(btn=>{
+  btn.onclick=()=>{
+    const url=btn.dataset.quickLive;
+    const name=btn.dataset.quickName||"Live";
+    $("lk").value=url;
+    $("quickLivesBar").querySelectorAll(".plat-btn").forEach(b=>b.classList.toggle("on",b===btn));
+    curLiveId=null;
+    triggerInstantPreview(url,true);
+    notify(`🔴 Carregando live ${name} com prévia ao vivo + Chat & Termômetro de Ironia!`);
+  };
+});
+
+$("toggleHlsModeBtn").onclick=()=>{
+  preferHlsMode=!preferHlsMode;
+  $("toggleHlsModeBtn").textContent=preferHlsMode?"Modo Player: HLS .m3u8 Direto":"Modo Player: Iframe Oficial";
+  $("toggleHlsModeBtn").classList.toggle("on",preferHlsMode);
+  if(lastLiveObj)void renderLivePlayer(lastLiveObj,true);
+  else triggerInstantPreview($("lk").value,true);
+};
 
 function extractLiveTarget(rawLink,platHint){
   const link=(rawLink||"").trim();
@@ -1632,7 +2265,7 @@ function extractLiveTarget(rawLink,platHint){
     }
     vid=vid.replace(/[^A-Za-z0-9_-]/g,"");
     const embedUrl=vid?`https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0`:"";
-    return{platform:"YOUTUBE",channel:parts[0]||"youtube",videoId:vid,embedUrl,hlsUrl:"",isLocal:false,isHls:false};
+    return{platform:"YOUTUBE",channel:parts[0]||vid||"youtube",videoId:vid,embedUrl,hlsUrl:"",isLocal:false,isHls:false};
   }
   return{platform:upHint||"UNKNOWN",channel:parts[parts.length-1]||link,videoId:"",embedUrl:"",hlsUrl:"",isLocal:false,isHls:false};
 }
@@ -1677,10 +2310,13 @@ async function renderLivePlayer(l,forceReload=false){
   const box=$("livePlayerBox");
   if(!box)return;
   const normUrl=String(l.link||"").trim();
-  if(!forceReload&&normUrl===lastPlayerKey&&box.childElementCount>0)return;
-  lastPlayerKey=normUrl;
-
   const info=extractLiveTarget(normUrl,l.platform);
+  void startRealtimeChatMonitor(normUrl,info.platform,info.channel,info.videoId);
+
+  const playerKey=`${normUrl}|hls:${preferHlsMode}`;
+  if(!forceReload&&playerKey===lastPlayerKey&&box.childElementCount>0)return;
+  lastPlayerKey=playerKey;
+
   $("prevPlatBadge").textContent=info.platform||l.platform||"LIVE";
   const openEl=$("openOrigPlayer");
   if(openEl){openEl.href=normUrl||"#";openEl.style.display=info.isLocal?"none":"inline-flex";}
@@ -1708,7 +2344,17 @@ async function renderLivePlayer(l,forceReload=false){
     }catch(_){}
   }
 
-  if(hlsFallback&&(!embedUrl||info.platform==="HLS")){
+  if(info.platform==="KICK"&&preferHlsMode&&!hlsFallback&&info.channel){
+    try{
+      const kr=await fetch(`https://kick.com/api/v2/channels/${encodeURIComponent(info.channel)}`);
+      if(kr.ok){
+        const kd=await kr.json();
+        if(kd&&kd.playback_url)hlsFallback=kd.playback_url;
+      }
+    }catch(_){}
+  }
+
+  if(hlsFallback&&(preferHlsMode||!embedUrl||info.platform==="HLS")){
     mountHlsVideo(box,hlsFallback);
     return;
   }
@@ -1734,16 +2380,16 @@ function triggerInstantPreview(rawVal,force=false){
   const info=extractLiveTarget(u);
   $("lv").classList.remove("hide");
   if(!curLiveId){
-    $("ln").textContent=`Prévia ao Vivo · ${info.channel||"Stream"}`;
-    $("st").textContent="prévia instantânea com som (pronto para cortar)";
+    $("ln").textContent=`Prévia ao Vivo · ${info.channel||info.videoId||"Stream"}`;
+    $("st").textContent="prévia instantânea com som + chat e termômetro de ironia ativos";
     $("ll").textContent=u;$("ll").href=u;
-    $("prevTxt").textContent="reprodução imediata com áudio · clique Iniciar para gravar e cortar";
+    $("prevTxt").textContent=`${info.platform} ao vivo · clique Iniciar para gravar e cortar`;
     $("stop").classList.add("hide");
-    if(!lastChartSeries.length){
+    if(!lastChartSeries.length||force){
       drawSentimentChart(mkSentimentSeries(120,u.length),[]);
     }
   }
-  void renderLivePlayer({id:"preview",link:u,platform:info.platform,name:info.channel},force);
+  void renderLivePlayer({id:"preview",link:u,platform:info.platform,name:info.channel||info.videoId},force);
 }
 
 $("lk").addEventListener("input",()=>{
@@ -1798,7 +2444,10 @@ async function pollLive(){
   const cov=l.timeline_coverage||{retro_pct:0,live_pct:0};
   $("tsRetroPct").textContent=(cov.retro_pct||0)+"%";$("tsRetroBar").style.width=(cov.retro_pct||0)+"%";
   $("tsLivePct").textContent=(cov.live_pct||0)+"%";$("tsLiveBar").style.width=(cov.live_pct||0)+"%";
-  drawSentimentChart(l.sentiment_series||[],l.clips||[]);
+  if(Array.isArray(l.chat_feed)&&l.chat_feed.length){
+    l.chat_feed.slice(-25).forEach(m=>pushChatMessage(m,false));
+  }
+  drawSentimentChart(l.sentiment_series||[],l.clips||[],l.irony_thermometer);
   renderSwarmGrid(l.agents,l.handoffs);
 
   while(shownCount<l.clips.length){
