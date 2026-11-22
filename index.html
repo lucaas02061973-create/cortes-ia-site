@@ -520,8 +520,8 @@ nav button.on::after{
   box-shadow:0 16px 40px rgba(0,0,0,.55);
 }
 .mc-spotlight-art{
-  width:190px;
-  height:185px;
+  width:210px;
+  height:210px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -530,10 +530,12 @@ nav button.on::after{
 .mc-spotlight-art img,.mc-spotlight-art svg{
   width:100%;
   height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 12px 24px rgba(0,0,0,.75));
+  object-fit:cover;
+  border-radius:16px;
+  border:1.5px solid rgba(255,192,70,.55);
+  filter:drop-shadow(0 14px 28px rgba(0,0,0,.8));
 }
-.mc-spotlight:hover .mc-spotlight-art{transform:scale(1.06) translateY(-4px)}
+.mc-spotlight:hover .mc-spotlight-art{transform:scale(1.05) translateY(-4px)}
 .mc-char-roster{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -543,7 +545,7 @@ nav button.on::after{
   .mc-char-roster{grid-template-columns:repeat(2,1fr)}
 }
 .mc-char-card{
-  border-radius:8px;
+  border-radius:10px;
   padding:14px 12px;
   border:1px solid #262b41;
   background-color:#161926;
@@ -552,7 +554,7 @@ nav button.on::after{
   cursor:pointer;
   position:relative;
   overflow:hidden;
-  transition:all .26s cubic-bezier(.22,1,.36,1);
+  transition:all .32s cubic-bezier(.22,1,.36,1);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -560,35 +562,37 @@ nav button.on::after{
   gap:6px;
 }
 .mc-char-card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-6px) scale(1.015);
   border-color:#ffc046;
-  box-shadow:0 14px 32px rgba(0,0,0,.6);
+  box-shadow:0 16px 36px rgba(0,0,0,.68);
 }
 .mc-char-card.on{
   border:2px solid #ffc046;
-  box-shadow:0 0 28px rgba(255,192,70,.28);
+  box-shadow:0 0 28px rgba(255,192,70,.32);
 }
 .mc-char-svg{
-  width:110px;
-  height:96px;
+  width:128px;
+  height:128px;
   display:flex;
   align-items:center;
   justify-content:center;
-  transition:transform .26s ease;
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
 }
 .mc-char-svg img,.mc-char-svg svg{
   width:100%;
   height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.65));
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,192,70,.38);
+  filter:drop-shadow(0 10px 20px rgba(0,0,0,.72));
 }
-.mc-char-card:hover .mc-char-svg{transform:scale(1.08)}
+.mc-char-card:hover .mc-char-svg{transform:scale(1.07)}
 .mc-char-tier{
   font-family:"Skylight Graffiti",cursive;
-  font-size:24px;
+  font-size:26px;
   color:#ffc046;
   line-height:1;
-  margin-top:2px;
+  margin-top:4px;
 }
 .mc-sub-bar{
   margin-top:18px;
@@ -987,10 +991,27 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   100%{left:140%;opacity:0}
 }
 @keyframes mcPanelIn{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
+  from{opacity:0;transform:translateY(-28px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
-.tab-panel:not(.hide){animation:mcPanelIn .32s cubic-bezier(.22,1,.36,1)}
+.tab-panel:not(.hide){animation:mcPanelIn .48s cubic-bezier(.22,1,.36,1)}
+/* TRANSIÇÕES FLUIDAS DE QUEDA (SCROLL CASCADE DROP) */
+.mc-fall-item{
+  opacity:0;
+  transform:translate3d(0,-44px,0) scale(.965);
+  filter:blur(4px);
+  transition:
+    opacity .68s cubic-bezier(.22,1,.36,1),
+    transform .68s cubic-bezier(.22,1,.36,1),
+    filter .52s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--fall-delay,0ms);
+  will-change:transform,opacity;
+}
+.mc-fall-item.mc-fall-in{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
 .fx-flash{animation:fxFlashAnim .45s ease-out}
 @keyframes fxFlashAnim{0%{filter:brightness(3.2) contrast(1.4)}100%{filter:none}}
 .fx-zoom{animation:fxZoomAnim .45s cubic-bezier(.22,1,.36,1)}
@@ -1007,15 +1028,15 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 <div class="mc-top-stripe"></div>
 <div class="mc-wipe-overlay" id="mcWipeOverlay"><div class="mc-wipe-blade" id="mcWipeBlade"></div></div>
 
-<!-- HEADER OFICIAL CORTES·IA STUDIO -->
+<!-- HEADER NOVA IDENTIDADE VISUAL MAGIA IA -->
 <header>
   <div class="mc-header-inner">
     <div class="hdr-left">
       <div class="logo">
-        <img src="./images/logos/logo-valley.png" alt="Magia IA">
+        <img src="./images/logos/magia-ia-logo.png" alt="Magia IA" style="border-radius:50%;box-shadow:0 0 18px rgba(74,197,243,.35)">
         <div>
-          MAGIA CORTES
-          <span class="logo-sub">CORTES·IA STUDIO</span>
+          <span style="background:linear-gradient(90deg,#ffffff,#ffc046,#4ac5f3);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:17px;letter-spacing:.16em">MAGIA IA</span>
+          <span class="logo-sub">MAGIA CORTES·IA</span>
         </div>
       </div>
     </div>
@@ -1047,7 +1068,7 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
       <button type="button" title="Transição Estúdio" onclick="document.getElementById('mcTriggerWipeBtn').click()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
       </button>
-      <a href="#fm" target="_blank" rel="noopener" title="Magia IA Oficial">
+      <a href="#fm" title="Magia IA Oficial">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 17.9V18h-2v1.9A8 8 0 0 1 4.1 13H6v-2H4.1A8 8 0 0 1 11 4.1V6h2V4.1A8 8 0 0 1 19.9 11H18v2h1.9A8 8 0 0 1 13 19.9z"/></svg>
       </a>
     </div>
@@ -1055,17 +1076,17 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
   </div>
 </section>
 
-<!-- STARTER PACK · ELENCO DE PERSONAGENS, TRANSIÇÕES & LEGENDAS MAGIA CORTES -->
+<!-- MAGIA CORTES IA · ELENCO DE PERSONAGENS GTA 6, TRANSIÇÕES & LEGENDAS -->
 <section class="mc-starter-wrap">
   <div class="mc-section-head">
-    <h2 class="mc-section-title"><span class="sym-up">S</span>TARTER PAC<span class="sym-box">K</span> · <span class="mc-graffiti-script">Magia IA</span></h2>
+    <h2 class="mc-section-title"><span class="sym-up">M</span>AGIA CORTES <span class="sym-box">IA</span></h2>
     <p class="mc-section-sub">O PONTA PÉ INICIAL QUE SUA HISTÓRIA MERECE!</p>
   </div>
 
   <div class="mc-hero-top">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <span class="mc-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> MAGIA CORTES RP</span>
-      <span class="pill warn" id="mcActiveCharHeaderBadge">👑 Diretor: Gold · Coringa</span>
+      <span class="mc-tag-crown"><img src="./images/symbols/3d-crown.png" alt="" style="width:18px;height:18px"> MAGIA CORTES IA</span>
+      <span class="pill warn" id="mcActiveCharHeaderBadge">👑 Diretora: Lucia · Vice Queen</span>
       <span class="pill cy" id="swarmBadge">20 IAs · Zero API Key</span>
       <span class="pill warn hide" id="modeBadge">Modo Web · Zero API</span>
     </div>
@@ -1079,10 +1100,10 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 
   <div class="mc-stage-grid">
     <div class="mc-spotlight" id="mcActiveCharStage">
-      <span class="pill warn" id="mcCharFactionBadge">👑 FACÇÃO VIP · CASSINO & FUGAS</span>
+      <span class="pill warn" id="mcCharFactionBadge">👑 GTA VI VICE CITY · CLUTCHES & FUGAS</span>
       <div class="mc-spotlight-art" id="mcSpotlightSvgBox"></div>
       <div>
-        <span class="mc-graffiti-script" style="font-size:28px;display:block" id="mcCharNameLbl">Gold · Rei da Rua VIP</span>
+        <span class="mc-graffiti-script" style="font-size:30px;display:block" id="mcCharNameLbl">Lucia · Vice Queen</span>
         <span class="mut" style="font-size:12px" id="mcCharRoleLbl">Especialista em Ironia Sarcástica, Clutches & Fugas 9:16</span>
       </div>
     </div>
@@ -1746,15 +1767,15 @@ summary{cursor:pointer;color:#ffc046;font-weight:700;letter-spacing:.06em;text-t
 <footer class="mc-footer">
   <div class="mc-footer-inner">
     <div style="display:flex;align-items:center;gap:14px">
-      <img src="./images/logos/logo-valley.png" alt="Magia IA" style="width:48px;height:48px;object-fit:contain">
+      <img src="./images/logos/magia-ia-logo.png" alt="Magia IA" style="width:52px;height:52px;object-fit:contain;border-radius:50%;box-shadow:0 0 18px rgba(74,197,243,.35)">
       <div>
-        <b style="color:#ffffff;letter-spacing:.18em;font-size:16px;display:block">MAGIA CORTES</b>
-        <span style="font-size:11px;color:#ffc046;letter-spacing:.2em">CORTES·IA · GTA RP BRASIL</span>
+        <b style="background:linear-gradient(90deg,#ffffff,#ffc046,#4ac5f3);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.18em;font-size:17px;display:block">MAGIA IA</b>
+        <span style="font-size:11px;color:#ffc046;letter-spacing:.2em">MAGIA CORTES·IA · ESTÚDIO AUTOMÁTICO 9:16</span>
       </div>
     </div>
-    <p style="margin:0;color:#BCBCBB;font-size:13px;text-align:center">Copyright © 2020-2026, Magia IA, All rights reserved</p>
+    <p style="margin:0;color:#BCBCBB;font-size:13px;text-align:center">Copyright © 2020-2026, Magia Cortes IA, All rights reserved</p>
     <div style="display:flex;gap:16px;align-items:center">
-      <a href="#fm" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">CORTES·IA STUDIO</a>
+      <a href="#fm" style="color:#ffffff;text-decoration:none;font-size:12px;letter-spacing:.12em">MAGIA CORTES·IA</a>
       <button type="button" class="mc-login-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOPO ↑</button>
     </div>
   </div>
@@ -2094,88 +2115,88 @@ let liveChatMessages=[];
 
 const MC_CHARACTER_CAST=[
   {
-    id:"coringa",
-    name:"Gold · Rei da Rua VIP",
-    short:"Gold · Coringa",
-    tier:"Gold",
-    faction:"👑 STARTER PACK GOLD · CASSINO & FUGAS",
+    id:"lucia",
+    name:"Lucia · Vice Queen",
+    short:"LUCIA · VICE QUEEN",
+    tier:"Lucia",
+    faction:"👑 GTA VI VICE CITY · CLUTCHES & FUGAS",
     role:"Especialista em Ironia Sarcástica, Clutches & Fugas 9:16",
     color:"#ffc046",
     bg:"./images/starter-pack-bg/gold-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"ironia sarcástica, fugas insanas, clutches, engraçados e picos do chat",
     line:"ESQUECE! O CHAT MANDOU JOGA MUITO SÓ QUE NÃO 🤡 E JÁ SALVEI OS 30 SEGUNDOS EM 9:16!",
-    svg:`<img src="./images/starter-pack-bg/gold-img.png" alt="Starter Pack Gold Magia IA">`
+    svg:`<img src="./images/gta6_lucia.png" alt="Lucia Vice Queen GTA 6">`
   },
   {
-    id:"tatico",
-    name:"Diamond · Tático VIP",
-    short:"Diamond · ROTA",
-    tier:"Diamond",
-    faction:"💎 STARTER PACK DIAMOND · QTH PRIORIDADE",
+    id:"viper",
+    name:"Viper · Caçador Leonida",
+    short:"VIPER · LEONIDA",
+    tier:"Viper",
+    faction:"💎 GTA VI LEONIDA · PERSEGUIÇÃO & AÇÃO",
     role:"Caçador de Perseguições, Tiroteio, Adrenalina & Hype",
     color:"#4ac5f3",
     bg:"./images/starter-pack-bg/diamond-bg.png",
     subPreset:"QTH_RADIO",
     hint:"perseguição policial, ação intensa, hype máximo, gritos e reação forte",
-    line:"PRIORIDADE MÁXIMA NA QTH! VIATURA NA COLA E CORTE VERTICAL 9:16 PRONTO PRA AÇÃO!",
-    svg:`<img src="./images/starter-pack-bg/diamond-img.png" alt="Starter Pack Diamond Magia IA">`
+    line:"PRIORIDADE MÁXIMA EM VICE CITY! VIATURA NA COLA E CORTE VERTICAL 9:16 PRONTO PRA AÇÃO!",
+    svg:`<img src="./images/gta6_jason.png" alt="Viper Leonida GTA 6">`
   },
   {
-    id:"paulinho",
-    name:"Silver · Piloto Drift",
-    short:"Silver · Drift",
-    tier:"Silver",
-    faction:"🏎️ STARTER PACK SILVER · CORRIDAS VIP",
+    id:"dexter",
+    name:"Dexter · Rei do Drift",
+    short:"DEXTER · STREET KING",
+    tier:"Dexter",
+    faction:"🏎️ GTA VI STREET RACING · DRIFT & HUMOR",
     role:"Especialista em Momentos Engraçados, Trollagens & Memes",
     color:"#e3e3e6",
     bg:"./images/starter-pack-bg/silver-bg.png",
     subPreset:"NEON_GREEN",
     hint:"momentos engraçados, risadas, drift, capotamento, trollagem e chat spamando kkk",
-    line:"200 QI CONFIA KKKK! CAPOTEI NA CURVA DA PRAÇA MAS A RISADA DO CHAT JÁ VIROU CORTE!",
-    svg:`<img src="./images/starter-pack-bg/silver-img.png" alt="Starter Pack Silver Magia IA">`
+    line:"200 QI CONFIA KKKK! CAPOTEI NA CURVA DE OCEAN DRIVE MAS A RISADA DO CHAT VIROU CORTE!",
+    svg:`<img src="./images/gta6_dexter.png" alt="Dexter Street King GTA 6">`
   },
   {
     id:"magnata",
-    name:"Vip · Passe da Fama",
-    short:"VIP · Magnata",
-    tier:"Vip",
-    faction:"🔥 PASSE DA FAMA · ALTO COMANDO VIP",
+    name:"Magnata · Chefe de Vice",
+    short:"MAGNATA · VICE BOSS",
+    tier:"Magnata",
+    faction:"🔥 GTA VI PENTHOUSE · RAGE & TRETA",
     role:"Caçador de Raiva Extrema, Tilt, Treta & Xingamentos",
     color:"#ffc046",
     bg:"./images/vip-card-bg/gold-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"raiva extrema, tilt, xingamentos, frustrações e microfone estourado",
     line:"TILTOU AO VIVO! MICROFONE ESTOUROU EM -6dB COM XINGAMENTO E AS 20 IAS JÁ CORTARAM!",
-    svg:`<img src="./images/vip-pricing-image-mobile.png" alt="Personagem VIP Magia IA">`
+    svg:`<img src="./images/gta6_tommy.png" alt="Magnata Vice Boss GTA 6">`
   },
   {
-    id:"palhaco",
-    name:"Valley · Mestre da Ironia",
-    short:"Valley · Ironia 🤡",
-    tier:"Valley",
-    faction:"🎭 PATCH NOTES VIP · TERMÔMETRO DE IRONIA",
+    id:"jester",
+    name:"Jester · Mestre da Ironia",
+    short:"JESTER · SARCASMO 🤡",
+    tier:"Jester",
+    faction:"🎭 GTA VI NEON HACKER · TERMÔMETRO DE IRONIA",
     role:"Guardião do Termômetro de Ironia 🤡 (Sarcasmo vs Raiva)",
     color:"#4ac5f3",
     bg:"./images/vip-card-bg/diamond-bg.png",
     subPreset:"IRONY_PURPLE",
     hint:"ironia, sarcasmo, só que não, confia, 200 QI, humor ácido e chat rindo da falha",
     line:"PARABÉNS AOS ENVOLVIDOS SQN KKKK 🤡! TERMÔMETRO DE IRONIA DIFERENCIOU SARCASMO DE RAIVA!",
-    svg:`<img src="./images/patchnote_1.png" alt="Personagem Patch Notes Magia IA">`
+    svg:`<img src="./images/gta6_jester.png" alt="Jester Sarcasmo GTA 6">`
   },
   {
-    id:"diretor",
-    name:"Prime · Rainha do RP",
-    short:"Prime · Diretora",
-    tier:"Prime",
-    faction:"🎬 MAGIA CORTES OFICIAL · TIME-SHIFT 9:16",
+    id:"athena",
+    name:"Athena · Diretora 9:16",
+    short:"ATHENA · DIRETORA",
+    tier:"Athena",
+    faction:"🎬 MAGIA CORTES IA · TIME-SHIFT 9:16",
     role:"Varredura Dupla Time-Shift 00:00 ← Ao Vivo → Fim",
     color:"#ffc046",
     bg:"./images/vip-card-bg/silver-bg.png",
     subPreset:"HORMOZI_YELLOW",
     hint:"melhores momentos gerais, time-shift 00:00 ao vivo, cortes verticais 9:16 com legenda",
     line:"VARREDURA DUPLA ATIVA: OLHANDO DO AO VIVO ATÉ O INÍCIO DA LIVE E SALVANDO TUDO EM 9:16!",
-    svg:`<img src="./images/hero-bg-mobile.png" alt="Personagem Oficial Magia IA" style="border-radius:6px;object-fit:cover">`
+    svg:`<img src="./images/gta6_athena.png" alt="Athena Diretora GTA 6">`
   }
 ];
 
@@ -2277,8 +2298,8 @@ function selectMcCharacter(charId,withTransition=true){
 function renderMcCharacterRoster(){
   const grid=$("mcCharRosterGrid");
   if(!grid)return;
-  grid.innerHTML=MC_CHARACTER_CAST.map(c=>`
-    <div class="mc-char-card ${c.id===activeMcChar.id?"on":""}" data-mc-char="${esc(c.id)}" style="background-image:url('${esc(c.bg)}')">
+  grid.innerHTML=MC_CHARACTER_CAST.map((c,idx)=>`
+    <div class="mc-char-card mc-fall-item mc-fall-in ${c.id===activeMcChar.id?"on":""}" data-mc-char="${esc(c.id)}" style="background-image:url('${esc(c.bg)}');--fall-delay:${idx*65}ms">
       <div class="mc-char-svg">${c.svg}</div>
       <span class="mc-char-tier" style="color:${esc(c.color)}">${esc(c.tier||c.short)}</span>
       <b style="font-size:12px;color:#fff;letter-spacing:.08em;text-transform:uppercase">${esc(c.short)}</b>
@@ -2327,7 +2348,57 @@ $("mcHeroBanner").addEventListener("mouseleave",()=>{
   if(box)box.style.transform="";
 });
 
-selectMcCharacter("coringa",false);
+// Transições Fluidas de Queda (Scroll Cascade & Drop Inertia)
+let mcFallObserver=null;
+function initFluidFallScroll(){
+  const selectors=".mc-hero-banner-inner > *, .mc-starter-wrap, .mc-section-head, .mc-hero-top, .mc-spotlight, .mc-char-card, .mc-sub-bar, aside.side, .card, .sent-wrap, .chat-mon, .ts-box, .item-card, .clip, .mc-footer-inner";
+  const nodes=document.querySelectorAll(selectors);
+  if(typeof IntersectionObserver!=="undefined"){
+    if(!mcFallObserver){
+      mcFallObserver=new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting){
+            en.target.classList.add("mc-fall-in");
+          }else if(en.boundingClientRect.top>window.innerHeight*0.92||en.boundingClientRect.bottom<-60){
+            en.target.classList.remove("mc-fall-in");
+          }
+        });
+      },{threshold:0.06,rootMargin:"0px 0px -24px 0px"});
+    }
+    nodes.forEach((el,i)=>{
+      if(!el.classList.contains("mc-fall-item")){
+        el.classList.add("mc-fall-item");
+        el.style.setProperty("--fall-delay",`${(i%5)*55}ms`);
+      }
+      const rect=el.getBoundingClientRect();
+      if(rect.top<window.innerHeight*0.96&&rect.bottom>-20){
+        el.classList.add("mc-fall-in");
+      }
+      mcFallObserver.observe(el);
+    });
+  }else{
+    nodes.forEach(el=>el.classList.add("mc-fall-item","mc-fall-in"));
+  }
+}
+
+let lastScrollY=window.scrollY||0;
+let scrollTicking=false;
+window.addEventListener("scroll",()=>{
+  if(scrollTicking)return;
+  scrollTicking=true;
+  requestAnimationFrame(()=>{
+    const y=window.scrollY||0;
+    const heroInner=document.querySelector(".mc-hero-banner-inner");
+    if(heroInner&&y<750){
+      heroInner.style.transform=`translate3d(0,${(y*0.16).toFixed(1)}px,0)`;
+    }
+    lastScrollY=y;
+    scrollTicking=false;
+  });
+},{passive:true});
+
+selectMcCharacter("lucia",false);
+setTimeout(initFluidFallScroll,40);
 setInterval(stepMcKaraokeSubtitles,380);
 
 tabs.forEach(t=>{
@@ -2349,6 +2420,7 @@ function showTab(t,withWipe=false){
   if(t==="IDEIAS") void loadIdeas();
   if(t==="UPLOADS") void loadUploads();
   if(t==="IA"){void syncCustomAgents();void loadHealth();}
+  setTimeout(initFluidFallScroll,45);
 }
 
 const wv=$("wv");
